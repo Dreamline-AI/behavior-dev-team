@@ -10,21 +10,25 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import { repeatPasswordValidator } from '../helpers/repeatPasswordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [repeatPassword, setRepeatPassword] = useState({ value: '', error: '' })
 
   const onSignUpPressed = () => {
     const nameError = nameValidator(name.value)
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
-    if (emailError || passwordError || nameError) {
+    const repeatPasswordError = repeatPasswordValidator(repeatPassword.value)
+    if (emailError || passwordError || repeatPasswordError|| nameError) {
       setName({ ...name, error: nameError })
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
+      setRepeatPassword({ ...repeatPassword, error: repeatPasswordError })
       return
     }
     navigation.reset({
@@ -39,6 +43,7 @@ export default function RegisterScreen({ navigation }) {
       <Logo />
       <Header>Create Account</Header>
       <TextInput
+        title="Name"
         label="Name"
         returnKeyType="next"
         value={name.value}
@@ -47,6 +52,7 @@ export default function RegisterScreen({ navigation }) {
         errorText={name.error}
       />
       <TextInput
+        title= "Email"
         label="Email"
         returnKeyType="next"
         value={email.value}
@@ -92,6 +98,8 @@ export default function RegisterScreen({ navigation }) {
     </Background>
   )
 }
+
+
 
 const styles = StyleSheet.create({
   row: {
