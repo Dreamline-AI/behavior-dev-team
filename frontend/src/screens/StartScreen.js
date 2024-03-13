@@ -3,7 +3,6 @@ import Background from '../components/Background'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
-import Paragraph from '../components/Paragraph'
 
 export default function StartScreen({ navigation }) {
   return (
@@ -13,7 +12,7 @@ export default function StartScreen({ navigation }) {
       <Button
         color="black"
         mode="contained"
-        onPress={() => navigation.navigate('LoginScreen')}
+        onPress={() => navigation.navigate('LoginGoogle')}
       >
         Login with Google
       </Button>
@@ -37,6 +36,13 @@ export default function StartScreen({ navigation }) {
         onPress={() => navigation.navigate('EmailSignUp')}
       >
         Sign Up with Email
+      </Button>
+      <Button
+        color="white"
+        mode="contained"
+        onPress={() => navigation.navigate('LoginScreen')}
+      >
+        Log in
       </Button>
     </Background>
   )

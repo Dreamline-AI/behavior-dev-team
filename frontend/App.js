@@ -6,11 +6,13 @@ import { theme } from './src/core/theme'
 import {
   StartScreen,
   LoginScreen,
+  LoginGoogle,
   EmailSignUp,
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
 } from './src/screens'
+import LoginWithEmail from './src/screens/LoginWithEmail'
 
 const Stack = createStackNavigator()
 
@@ -25,7 +27,9 @@ export default function App() {
           }}
         >
           <Stack.Screen name="StartScreen" component={StartScreen} />
+          <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="LoginWithEmail" component={LoginWithEmail} />
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />

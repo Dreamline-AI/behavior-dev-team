@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     width: 390,
     height: 262,
-    top: 542,
+    top: 0,
     gap: 13,
     maxWidth: 340,
     alignSelf: 'center',

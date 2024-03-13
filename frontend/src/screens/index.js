@@ -1,5 +1,7 @@
 export { default as StartScreen } from './StartScreen'
+export { default as LoginGoogle } from './LoginGoogle'
 export { default as LoginScreen } from './LoginScreen'
+export { default as LoginWithEmail } from './LoginWithEmail'
 export { default as EmailSignUp } from './EmailSignUp'
 export { default as RegisterScreen } from './RegisterScreen'
 export { default as ResetPasswordScreen } from './ResetPasswordScreen'
