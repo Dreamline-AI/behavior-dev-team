@@ -1,14 +1,26 @@
 import React from 'react'
 import Background from '../components/Background'
+import { View, StyleSheet } from 'react-native'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Paragraph from '../components/Paragraph'
 import Button from '../components/Button'
+import { Text } from 'react-native-paper'
+import {UserPic} from '../components/UserPic'
 
-export default function Dashboard({ navigation }) {
+
+export default function Dashboard({ route, navigation }) {
+  const { userName } = route.params;
+
+ 
+ 
   return (
     <Background>
       <Logo />
+       <View style={styles.userInfoContainer}> 
+        <UserPic name={userName} />
+        
+      </View>
       <Header>Dashboard</Header>
       <Paragraph>
         Please have fun
@@ -27,3 +39,18 @@ export default function Dashboard({ navigation }) {
     </Background>
   )
 }
+const styles = {
+  userName: {
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: 'left',
+  },
+  userInfoContainer: {
+    flexDirection: 'row',  // Arrange UserPic and userName horizontally
+    alignItems: 'center',  // Center items vertically
+    marginBottom: 16,  // Adjust margin as needed
+  },
+};
