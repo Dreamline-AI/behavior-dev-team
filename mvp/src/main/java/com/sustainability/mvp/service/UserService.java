@@ -6,8 +6,8 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
-import com.sustainability.mvp.entity.Product;
 import com.sustainability.mvp.entity.User;
+import com.sustainability.mvp.exception.UserException;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -25,7 +25,7 @@ public class UserService {
         userMap.put("email", user.getEmail());
         userMap.put("zipcode", user.getZipcode());
         userMap.put("userID", user.getUserID());
-        ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getEmail()).set(userMap);
+        ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getUserID()).set(userMap);
         return collectionApiFuture.get().getUpdateTime() + " User saved successfully";
     }
 
@@ -47,6 +47,24 @@ public class UserService {
 
         return userList;
     }
+
+    public User getUserByUserID(String userID) throws ExecutionException, InterruptedException{
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(userID);
+        ApiFuture<DocumentSnapshot> future = documentReference.get();
+        DocumentSnapshot document = future.get();
+
+        User user = null;
+        if(document.exists()){
+            user = document.toObject(User.class);
+            return user;
+        }else{
+            throw new UserException("User with ID " + userID + " not found.");
+        }
+    }
+
+    
+
 
 
 }

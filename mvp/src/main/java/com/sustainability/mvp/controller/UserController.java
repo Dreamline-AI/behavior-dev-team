@@ -24,4 +24,9 @@ public class UserController {
     public List<User> getAllUsers() throws ExecutionException, InterruptedException{
         return userService.getUserDetails();
     }
+
+    @GetMapping("/users/{userID}")
+    public User getUserbyUserID(@PathVariable String userID) throws ExecutionException, InterruptedException{
+        return userService.getUserByUserID(userID);
+    }
 }
