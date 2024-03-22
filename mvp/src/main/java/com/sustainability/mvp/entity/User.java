@@ -1,10 +1,19 @@
 package com.sustainability.mvp.entity;
 
 public class User {
+    private String UserID;
     private String firstName;
     private String lastName;
     private String email;
     private String zipcode;
+
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String userID) {
+        UserID = userID;
+    }
 
     public String getFirstName() {
         return firstName;
