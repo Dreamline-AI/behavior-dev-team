@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -29,4 +31,15 @@ public class UserController {
     public User getUserbyUserID(@PathVariable String userID) throws ExecutionException, InterruptedException{
         return userService.getUserByUserID(userID);
     }
+
+    @PutMapping("/users/{userID}")
+    public String updateUserByUserID(@PathVariable String userID, @RequestBody Map<String, Object> updates) throws ExecutionException, InterruptedException{
+        return userService.updateUserByUserID(userID, updates);
+    }
+
+    @DeleteMapping("/users/{userID}")
+    public String updateUserByUserID(@PathVariable String userID) throws ExecutionException, InterruptedException {
+        return userService.updateUserByUserID(userID);
+    }
+
 }

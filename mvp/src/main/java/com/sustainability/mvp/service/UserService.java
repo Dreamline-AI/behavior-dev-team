@@ -26,7 +26,7 @@ public class UserService {
         userMap.put("zipcode", user.getZipcode());
         userMap.put("userID", user.getUserID());
         ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getUserID()).set(userMap);
-        return collectionApiFuture.get().getUpdateTime() + " User saved successfully";
+        return "Saved successfully for user with ID:" + user.getUserID() + " at " + collectionApiFuture.get().getUpdateTime();
     }
 
     public List<User> getUserDetails() throws ExecutionException, InterruptedException {
@@ -44,7 +44,6 @@ public class UserService {
             userList.add(user);
 
         }
-
         return userList;
     }
 
@@ -59,11 +58,37 @@ public class UserService {
             user = document.toObject(User.class);
             return user;
         }else{
-            throw new UserException("User with ID " + userID + " not found.");
+            throw new UserException("No such user found with ID: " + userID);
         }
     }
 
-    
+    public String updateUserByUserID(String userID, Map<String, Object> updates) throws ExecutionException, InterruptedException{
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(userID);
+        try{
+            ApiFuture<WriteResult> collectionApiFuture = documentReference.update(updates);
+            return "User updated successfully at " + collectionApiFuture.get().getUpdateTime();
+        } catch (Exception e) {
+            if (e.getCause() instanceof UserException) {
+                return "No such user found with ID: " + userID;
+            } else {
+                return "Update failed for user with ID: " + userID;
+            }
+        }
+    }
+
+    public String getUserFirstNameById(String userID) throws ExecutionException, InterruptedException {
+        User user = getUserByUserID(userID);
+        return user.getFirstName();
+    }
+
+    public String updateUserByUserID(String userID) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(userID).delete();
+        return "Saved successfully for user with ID:" + userID + " at " + collectionApiFuture.get().getUpdateTime();
+    }
+
+
 
 
 
