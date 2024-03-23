@@ -8,26 +8,6 @@ public class Challenges {
     private String content;
     private String option;
 
-    public Challenges() {
-    }
-
-    public Challenges(String answer,
-                      String challengeGroup,
-                      String content,
-                      String option){}
-
-    public Challenges(String answer,
-                      String challengeGroup,
-                      String challengeID,
-                      String content,
-                      String option){
-        this.answer = answer;
-        this.challengeGroup = challengeGroup;
-        this.challengeID = challengeID;
-        this.content = content;
-        this.option = option;
-
-    }
 
     public String getAnswer() {
         return answer;
@@ -69,14 +49,4 @@ public class Challenges {
         this.option = option;
     }
 
-    @Override
-    public String toString() {
-        return "Challenges{" +
-                "answer='" + answer + '\'' +
-                ", challengeGroup='" + challengeGroup + '\'' +
-                ", challengeID=" + challengeID +
-                ", content='" + content + '\'' +
-                ", option='" + option + '\'' +
-                '}';
-    }
 }

@@ -8,9 +8,13 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import com.sustainability.mvp.entity.Challenges;
 
+
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -26,25 +30,31 @@ public class ChallengesService {
         return collectionApiFuture.get().getUpdateTime().toString();
     }
 
-    public Challenges getChallengeByGroup(String challengeGroup) throws ExecutionException, InterruptedException {
+    public List<Challenges> getChallengeINFO() throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(challengeGroup);
-        ApiFuture<DocumentSnapshot> future = documentReference.get();
-        DocumentSnapshot document = future.get();
-
+        Iterable<DocumentReference> documentReference = dbFirestore.collection(COLLECTION_NAME).listDocuments();
+        Iterator<DocumentReference> iterator = documentReference.iterator();
+        List<Challenges> challengesList = new ArrayList<>();
         Challenges challenge = null;
-        if (document.exists()) {
+
+        while (iterator.hasNext()) {
+            DocumentReference documentReference1 = iterator.next();
+            ApiFuture<DocumentSnapshot> future = documentReference1.get();
+            DocumentSnapshot document = future.get();
             challenge = document.toObject(Challenges.class);
-            return challenge;
+            challengesList.add(challenge);
+
         }
-        else {
-            return null;
-        }
+
+        return challengesList;
     }
 
-    public Challenges getChallengeById(String challengeID) throws ExecutionException, InterruptedException {
+
+
+
+    public Challenges getChallengeById(String challengeGroup) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
-        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(challengeID);
+        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(challengeGroup);
         ApiFuture<DocumentSnapshot> future = documentReference.get();
         DocumentSnapshot document = future.get();
         Challenges challenge = null;

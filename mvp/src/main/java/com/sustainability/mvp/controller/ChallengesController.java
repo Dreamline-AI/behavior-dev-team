@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -22,14 +23,14 @@ class ChallengesController {
         return challengesService.saveChallenge(challenge);
     }
 
-    @GetMapping("/challenges/{challengeGroup}")
-    public Challenges getChallengeByGroup(@PathVariable String challengeGroup) throws ExecutionException, InterruptedException {
-        return challengesService.getChallengeByGroup(challengeGroup);
+    @GetMapping("/challenges")
+    public List<Challenges> getAllChallenges() throws ExecutionException, InterruptedException {
+        return challengesService.getChallengeINFO();
     }
 
-    @GetMapping("/challenges/{challengeId}")
-    public Challenges getChallengeById(@PathVariable String challengeID) throws ExecutionException, InterruptedException {
-        return challengesService.getChallengeById(challengeID);
+    @GetMapping("/challenges/{challengeGroup}")
+    public Challenges getChallengeById(@PathVariable String challengeGroup) throws ExecutionException, InterruptedException {
+        return challengesService.getChallengeById(challengeGroup);
     }
 
     @PutMapping("/challenges")
