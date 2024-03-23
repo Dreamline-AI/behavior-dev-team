@@ -18,7 +18,7 @@ class ChallengesController {
 
 
 
-    @PostMapping("/challenges")
+    @PostMapping("/saveChallenge")
     public String saveChallenge(@RequestBody Challenges challenge) throws ExecutionException, InterruptedException {
         return challengesService.saveChallenge(challenge);
     }
@@ -34,8 +34,8 @@ class ChallengesController {
     }
 
     @PutMapping("/challenges")
-    public String update(@RequestBody Challenges challenge) throws ExecutionException, InterruptedException {
-        return challengesService.updateChallenge(challenge);
+    public String update(@RequestBody Challenges challengeID) throws ExecutionException, InterruptedException {
+        return challengesService.updateChallenge(challengeID);
     }
 
 
