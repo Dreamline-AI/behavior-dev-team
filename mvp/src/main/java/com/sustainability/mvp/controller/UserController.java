@@ -1,6 +1,6 @@
 package com.sustainability.mvp.controller;
 
-import com.sustainability.mvp.entity.Product;
+
 import com.sustainability.mvp.entity.User;
 import com.sustainability.mvp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{userID}")
-    public String updateUserByUserID(@PathVariable String userID) throws ExecutionException, InterruptedException {
-        return userService.updateUserByUserID(userID);
+    public String deleteUserByUserID(@PathVariable String userID) throws ExecutionException, InterruptedException {
+        return userService.deleteUserByUserID(userID);
     }
 
 }
