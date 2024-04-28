@@ -8,11 +8,14 @@ import {
   LoginScreen,
   LoginGoogle,
   EmailSignUp,
+  LoginWithEmail,
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
+  QuizScreen,
+  QuizEndingScreen,
 } from './src/screens'
-import LoginWithEmail from './src/screens/LoginWithEmail'
+
 
 const Stack = createStackNavigator()
 
@@ -33,6 +36,8 @@ export default function App() {
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="QuizScreen" component={QuizScreen} />
+          <Stack.Screen name="QuizEndingScreen" component={QuizEndingScreen} />
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}

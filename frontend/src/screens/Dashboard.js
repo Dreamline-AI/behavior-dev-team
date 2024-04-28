@@ -5,7 +5,6 @@ import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Paragraph from '../components/Paragraph'
 import Button from '../components/Button'
-import { Text } from 'react-native-paper'
 import {UserPic} from '../components/UserPic'
 
 
@@ -22,6 +21,12 @@ export default function Dashboard({ route, navigation }) {
         
       </View>
       <Header>Dashboard</Header>
+      <Button color= "#00000066"
+        mode="outlined"
+        onPress={() => navigation.navigate('QuizScreen')}
+      >
+        Login with Facebook
+      </Button>
       <Paragraph>
         Please have fun
       </Paragraph>
@@ -49,8 +54,8 @@ const styles = {
     textAlign: 'left',
   },
   userInfoContainer: {
-    flexDirection: 'row',  // Arrange UserPic and userName horizontally
-    alignItems: 'center',  // Center items vertically
-    marginBottom: 16,  // Adjust margin as needed
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginBottom: 16,  
   },
 };

@@ -3,12 +3,18 @@ import Background from '../components/Background'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
-
 export default function StartScreen({ navigation }) {
   return (
     <Background>
       <Logo />
       <Header>Welcome!</Header>
+      <Button
+        color="black"
+        mode="contained"
+        onPress={() => navigation.navigate('QuizScreen')}
+      >
+        Take Quiz
+      </Button>
       <Button
         color="black"
         mode="contained"
@@ -29,7 +35,7 @@ export default function StartScreen({ navigation }) {
         onPress={() => navigation.navigate('RegisterScreen')}
       >
         Login with Facebook
-      </Button>
+      </Button> 
       <Button
         color="white"
         mode="contained"
