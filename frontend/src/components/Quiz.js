@@ -11,6 +11,8 @@ const Quiz = ({navigation}) => {
     const [quizProgress, setQuizProgress] = useState(data.length);
     const translateY = useRef(new Animated.Value(0)).current;
     const fadeAnim = useRef(new Animated.Value(1)).current;
+    const [showMessage, setShowMessage] = useState(false); // New state for showing the message
+
 
     useEffect(() => {
         if (selectedOption !== null) {
@@ -29,6 +31,8 @@ const Quiz = ({navigation}) => {
             setIsCorrect(null);
             fadeAnim.setValue(1); 
             translateY.setValue(0); 
+            setShowMessage(false); // Hide the message when moving to the next question
+
         }
     };
 
@@ -39,13 +43,13 @@ const Quiz = ({navigation}) => {
                 duration: 200,
                 useNativeDriver: true,
             })
-        ]).start();
+        ]).start(() => setShowMessage(true));
     };
 
     const moveCardUp = (selectedOption) => {
         const currentQuestion = data[currentQuestionIndex];
         const correctOption = currentQuestion.options[0]; 
-        let toValue = selectedOption === correctOption ? -50 : -250;
+        let toValue = selectedOption === correctOption ? -80 : -280;
     
         Animated.parallel([
             Animated.timing(translateY, {
@@ -56,12 +60,16 @@ const Quiz = ({navigation}) => {
         ]).start();
     };
 
+   
+
     const handlePressedOption = (pressedOption) => {
         const isAnswerCorrect = data[currentQuestionIndex].correct_option === pressedOption;
         setIsCorrect(isAnswerCorrect);
         setSelectedOption(pressedOption);
         moveCardUp(pressedOption); 
+        fadeAnim(pressedOption);
        
+        
     };
 
    
@@ -77,6 +85,11 @@ const Quiz = ({navigation}) => {
             >
         <Text style={styles.question}>{data[currentQuestionIndex].question}</Text>
         </Animated.View>
+       <Animated.View
+                style={[styles.messageContainer, { opacity: fadeAnim }]}
+            >
+                
+            </Animated.View>
                 {data[currentQuestionIndex].options.map((option) => (
                 <Animated.View
                 key={option}
@@ -86,9 +99,11 @@ const Quiz = ({navigation}) => {
                     transform: selectedOption === option ? [{ translateY: translateY }]: null,
                   },
                 ]}
+                
               >
-
-
+                 <Text style={isCorrect ? styles.correctMessage : styles.wrongMessage}>
+                    {isCorrect !== null ? (isCorrect ? "Correct! " : "Wrong!") : ""}
+                </Text>
   <Pressable
     style={[
       styles.AnswerBox,
@@ -97,11 +112,16 @@ const Quiz = ({navigation}) => {
     onPress={() => handlePressedOption(option)}
     disabled={selectedOption}
     key={option}
+    
   >
     <Text style={styles.answerText}>{option}</Text>
+   
   </Pressable>
+  
   </Animated.View>
+  
 ))}
+
             <Button
                 color="black"
                 mode="contained"
@@ -150,6 +170,22 @@ const styles = StyleSheet.create({
     progressBarContainer: {
         width: '100%',
         height: 20,
+        marginBottom: 30,
+    },
+    messageContainer: {
+        marginTop: 10,
+        alignItems: 'center',
+    },
+    correctMessage: {
+        color: 'rgba(98, 218, 103, 1)',
+        fontSize: 24,
+        textAlign: 'center',
+        marginBottom: 30,
+    },
+    wrongMessage: {
+        color: 'rgba(255, 72, 15, 1)',
+        fontSize: 24,
+        textAlign: 'center',
         marginBottom: 30,
     },
 });
