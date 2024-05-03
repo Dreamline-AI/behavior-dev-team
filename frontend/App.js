@@ -15,7 +15,7 @@ import {
   IncentiveDetailPage,
   LoginWithEmail
 } from './src/screens'
-import LoginWithEmail from './src/screens/LoginWithEmail'
+// import LoginWithEmail from './src/screens/LoginWithEmail'
 
 const Stack = createStackNavigator()
 
