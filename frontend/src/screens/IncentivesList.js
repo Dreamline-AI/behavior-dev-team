@@ -112,9 +112,9 @@ export default function IncentivesList({ navigation }) {
     return (
       <Background>
         <SafeAreaView style={styles.safeArea}>
-          <View style={styles.headerContainer}>
-            <BackButton goBack={navigation.goBack} />
-            <Header>All incentives</Header>
+          <View style={styles.headerContainer} >
+            <BackButton style={styles.backButton} goBack={navigation.goBack} />
+            <Header style={styles.headerTitle}>All incentives</Header>
           </View>
           <ScrollView style={styles.listFrame}>
         {incentives.map((incentive, index) => (
@@ -153,20 +153,43 @@ export default function IncentivesList({ navigation }) {
         justifyContent: 'center',
       },
       safeArea: {
-        // flex: 1, 
+        flex: 1, 
       },
+    //   headerContainer: {
+    //     // flexDirection: 'row',
+    //     alignItems: 'center',
+    //     // justifyContent: 'flex-start',
+    //     width: '100%',
+    //   },
+    headerTitle:{
+        paddingTop:'8px',
+        paddingLeft:'130px',
+        fontWeight:600,
+        fontSize: '16px'
+    },
+    backButton:{
+        paddingLeft:'20px'
+    },
       headerContainer: {
-        // flexDirection: 'row',
+        flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'flex-start',
+        justifyContent: 'flex-start',
         width: '100%',
-      },
+        zindex: '1',
+        position: 'fixed',
+        paddingHorizontal: 16
+    },
       listFrame: {
         width: '100%',
+        // paddingTop: '80px',
+        height: '100px',
+        marginTop: '60px'
+        // height: '80%',
+        // flex: 1
       },
-      headerTitle: {
-        marginLeft: 36, 
-      },
+    //   headerTitle: {
+    //     marginLeft: 36, 
+    //   },
       card: {
         flexDirection: 'row',
         alignItems: 'center',
