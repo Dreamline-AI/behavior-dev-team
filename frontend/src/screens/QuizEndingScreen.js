@@ -4,7 +4,10 @@ import Button from '../components/Button';
 import Background from '../components/Background';
 import { Text } from 'react-native-paper';
 
-export default function QuizEndingScreen({ navigation }) {
+
+export default function QuizEndingScreen({ route, navigation }) {
+
+    const { userName } = route.params || {};
     return (
         <Background>
             
@@ -17,8 +20,7 @@ export default function QuizEndingScreen({ navigation }) {
                 <Button
                     color="rgba(98, 218, 103, 1)"
                     mode="contained"
-                    onPress={() => navigation.navigate('Dashboard')}
-                    labelStyle={{ color: 'white' , textTransform: 'none', fontSize: 16, }}
+                    onPress={() => navigation.navigate('QuizStreakScreen', { userName: userName })}                    labelStyle={{ color: 'white' , textTransform: 'none', fontSize: 16, }}
                     style={{ marginTop: 350}}
                     uppercase={false}
                 >
