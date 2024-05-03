@@ -11,6 +11,9 @@ import {
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
+  IncentivesList,
+  IncentiveDetailPage,
+  LoginWithEmail
 } from './src/screens'
 import LoginWithEmail from './src/screens/LoginWithEmail'
 
@@ -21,7 +24,7 @@ export default function App() {
     <Provider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="StartScreen"
+          initialRouteName="IncentivesList"
           screenOptions={{
             headerShown: false,
           }}
@@ -33,6 +36,8 @@ export default function App() {
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="IncentivesList" component={IncentivesList} />
+          <Stack.Screen name="IncentiveDetailPage" component={IncentiveDetailPage} />
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
