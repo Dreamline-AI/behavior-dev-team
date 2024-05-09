@@ -12,6 +12,7 @@ import {
   ResetPasswordScreen,
   EditProfileScreen,
   Dashboard,
+  ProfileScreen,
 } from './src/screens'
 import LoginWithEmail from './src/screens/LoginWithEmail'
 
@@ -35,6 +36,7 @@ export default function App() {
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="EditProfileScreen" component={EditProfileScreen}/>
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} /> 
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
