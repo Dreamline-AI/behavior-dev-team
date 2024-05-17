@@ -15,6 +15,8 @@ import {
   QuizScreen,
   QuizEndingScreen,
   QuizStreakScreen,
+  RedoQuestionsScreen,
+  IncorrectQuestionScreen,
 } from './src/screens'
 
 
@@ -39,6 +41,8 @@ export default function App() {
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="QuizScreen" component={QuizScreen} />
           <Stack.Screen name="QuizEndingScreen" component={QuizEndingScreen} />
+          <Stack.Screen name="RedoQuestionsScreen" component={RedoQuestionsScreen} />
+          <Stack.Screen name="IncorrectQuestionScreen" component={IncorrectQuestionScreen} />
           <Stack.Screen name="QuizStreakScreen" component={QuizStreakScreen} />
           <Stack.Screen
             name="ResetPasswordScreen"

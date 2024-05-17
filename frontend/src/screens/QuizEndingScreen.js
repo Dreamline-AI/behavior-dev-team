@@ -20,7 +20,8 @@ export default function QuizEndingScreen({ route, navigation }) {
                 <Button
                     color="rgba(98, 218, 103, 1)"
                     mode="contained"
-                    onPress={() => navigation.navigate('QuizStreakScreen', { userName: userName })}                    labelStyle={{ color: 'white' , textTransform: 'none', fontSize: 16, }}
+                    onPress={() => navigation.navigate('QuizStreakScreen', { userName: userName })}
+                    labelStyle={{ color: 'white' , textTransform: 'none', fontSize: 16, }}
                     style={{ marginTop: 350}}
                     uppercase={false}
                 >

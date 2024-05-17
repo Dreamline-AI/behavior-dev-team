@@ -1,10 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
+
+
+import React, { useState, useEffect, useRef } from "react";
 import { Text, View, StyleSheet, Animated, Pressable } from "react-native";
 import data from "../helpers/data";
 import Button from '../components/Button';
 import * as Progress from 'react-native-progress';
+import IncorrectQuiz from './IncorrectQuiz';
 
-const Quiz = ({ navigation }) => {
+const Quiz = ({ navigation, route }) => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [isCorrect, setIsCorrect] = useState(null);
     const [selectedOption, setSelectedOption] = useState(null);
@@ -13,6 +16,15 @@ const Quiz = ({ navigation }) => {
     const fadeAnim = useRef(new Animated.Value(1)).current;
     const [showMessage, setShowMessage] = useState(false);
     const [customMessage, setCustomMessage] = useState("");
+    const [incorrectIndices, setIncorrectIndices] = useState([]);
+    const [incorrectQuestions, setIncorrectQuestions] = useState([]); 
+
+    useEffect(() => {
+        if (route && route.params && route.params.incorrectIndices) {
+            const { incorrectIndices } = route.params;
+            setIncorrectQuestions(data.filter((_, index) => incorrectIndices.includes(index))); 
+        }
+    }, [route]);
 
     useEffect(() => {
         if (selectedOption !== null) {
@@ -24,7 +36,11 @@ const Quiz = ({ navigation }) => {
 
     const handleNext = () => {
         if (currentQuestionIndex === data.length - 1) {
-            navigation.navigate("QuizEndingScreen");
+            if (incorrectIndices.length > 0) {
+                navigation.navigate('RedoQuestionsScreen', { incorrectIndices: incorrectIndices, progress:progress });
+            } else {
+                navigation.navigate('QuizEndingScreen');
+            }
         } else {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
             setSelectedOption(null);
@@ -62,19 +78,36 @@ const Quiz = ({ navigation }) => {
 
     const handlePressedOption = (pressedOption) => {
         const currentQuestion = data[currentQuestionIndex];
-        const isAnswerCorrect = data[currentQuestionIndex].correct_option === pressedOption;
+        const isAnswerCorrect = currentQuestion.correct_option === pressedOption;
         setIsCorrect(isAnswerCorrect);
         setSelectedOption(pressedOption);
         moveCardUp(pressedOption);
         fadeOut();
-
-        if (isAnswerCorrect) {
-            setCustomMessage(currentQuestion.correct_message);
-        } else {
+    
+        if (!isAnswerCorrect) {
+            setIncorrectIndices([...incorrectIndices, currentQuestionIndex]); 
+            console.log("Incorrect Indices:", incorrectIndices); 
             setCustomMessage(currentQuestion.wrong_message);
+        } else {
+            setCustomMessage(currentQuestion.correct_message);
         }
     };
-
+    
+    if (incorrectQuestions.length > 0) {
+        return (
+            <View style={styles.container}>
+                <IncorrectQuiz
+                    incorrectQuestions={incorrectQuestions}
+                    navigation={navigation} 
+                    handleNext={handleNext}
+                    handlePressedOption={handlePressedOption}
+                    selectedOption={selectedOption}
+                    isCorrect={isCorrect}
+                    setIsCorrect={setIsCorrect}
+                />
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
@@ -126,6 +159,9 @@ const Quiz = ({ navigation }) => {
                 color="black"
                 mode="contained"
                 onPress={handleNext}
+                disabled={!selectedOption} 
+                style={!selectedOption ? styles.disabledButton : null} 
+                labelStyle={!selectedOption ? styles.disabledButtonText : null} 
             >
                 Continue
             </Button>
@@ -192,5 +228,11 @@ const styles = StyleSheet.create({
         width: '100%',
         textAlign: 'left', 
 
+    },
+    disabledButton: {
+        backgroundColor: 'black',
+    },
+    disabledButtonText: {
+        color: 'white', 
     },
 });

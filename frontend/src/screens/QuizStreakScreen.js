@@ -1,37 +1,39 @@
-import React from 'react'
-import Background from '../components/Background'
-import { View, StyleSheet } from 'react-native'
-import Logo from '../components/Logo'
-import Header from '../components/Header'
-import Paragraph from '../components/Paragraph'
-import Button from '../components/Button'
-import {UserPic} from '../components/UserPic'
-import Feather from 'react-native-vector-icons/Feather'
-
+import React from 'react';
+import Background from '../components/Background';
+import { View, StyleSheet, Text } from 'react-native';
+import Logo from '../components/Logo';
+import Header from '../components/Header';
+import Paragraph from '../components/Paragraph';
+import Button from '../components/Button';
+import { UserPic } from '../components/UserPic';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function QuizStreakScreen({ route, navigation }) {
   const { userName } = route.params;
 
- 
- 
+  const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
   return (
     <Background>
       <Logo />
-       <View style={styles.userInfoContainer}> 
+      <View style={styles.userInfoContainer}>
         <UserPic name={userName} />
       </View>
-      <Header>You started a streak!</Header>
-
-      <Feather name = 'zap'
-      size={30}
-      color={'rgba(255, 199, 0, 1)'}
+      <Header style={styles.header}>You started a streak!</Header>
+      <View style={styles.lightningContainer}>
+        {daysOfWeek.map((day, index) => (
+          <View key={index} style={styles.lightningDayContainer}>
+            <MaterialCommunityIcons
+              name="lightning-bolt"
+              size={30}
+              color={'rgba(217, 217, 217, 1)'}
+              style={styles.lightningIcon}
+            />
+            <Text style={styles.dayText}>{day}</Text>
+          </View>
+        ))}
+      </View>
      
-      
-      />
-     
-      <Paragraph>
-        Please have fun
-      </Paragraph>
       <Button
         mode="outlined"
         onPress={() =>
@@ -44,20 +46,35 @@ export default function QuizStreakScreen({ route, navigation }) {
         Logout
       </Button>
     </Background>
-  )
+  );
 }
-const styles = {
-  userName: {
-    fontFamily: 'Poppins',
-    fontSize: 16,
-    fontWeight: '500',
-    lineHeight: 24,
-    letterSpacing: 0,
-    textAlign: 'left',
-  },
+
+const styles = StyleSheet.create({
   userInfoContainer: {
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    marginBottom: 16,  
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
   },
-};
+  header: {
+    fontWeight: 'bold', // Added bold font weight to the header
+    fontSize: 22,
+  },
+  lightningContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  lightningDayContainer: {
+    alignItems: 'center',
+    marginHorizontal: 5,
+  },
+  lightningIcon: {
+    marginRight: 5,
+  },
+  dayText: {
+    color: 'black',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 5,
+  },
+});
