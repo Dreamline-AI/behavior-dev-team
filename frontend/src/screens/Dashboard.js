@@ -10,7 +10,7 @@ import {UserPic} from '../components/UserPic'
 
 
 export default function Dashboard({ route, navigation }) {
-  const { userName } = route.params;
+  const { userName } = route.params || '';
 
  
  

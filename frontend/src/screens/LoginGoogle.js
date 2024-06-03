@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TouchableOpacity, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
@@ -10,10 +10,25 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import * as WebBrowser from 'expo-web-browser'
+import { signInWithGooglePopup } from '../../firebaseConfig'
+
+WebBrowser.maybeCompleteAuthSession()
 
 export default function LoginGoogle({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+
+  const logGoogleUser = async () => {
+      const response = await signInWithGooglePopup();
+      console.log('response-->', response);
+
+      if (await response?.user?.getIdToken()) {
+        navigation.navigate('Dashboard');
+      } else {
+        // back to login or signup screen
+      }
+  }
 
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
@@ -62,7 +77,7 @@ export default function LoginGoogle({ navigation }) {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={onLoginPressed}>
+      <Button mode="contained" onPress={logGoogleUser}>
         Login
       </Button>
       <View style={styles.row}>
