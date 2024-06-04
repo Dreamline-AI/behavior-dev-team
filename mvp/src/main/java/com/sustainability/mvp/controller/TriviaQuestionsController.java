@@ -4,11 +4,11 @@ import com.sustainability.mvp.entity.Trivia;
 import com.sustainability.mvp.entity.TriviaQuestions;
 import com.sustainability.mvp.service.TriviaQuestionsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -26,7 +26,6 @@ public class TriviaQuestionsController {
 
         Trivia trivia = triviaController.getTriviaData(triviaId);
         if (questionId.isEmpty()) {
-            System.out.println("vbnm");
             return triviaQuestionsService.findQuestionById(trivia.getQuestionsId().get(0));
         }
         for (int i=0; i<trivia.getQuestionsId().size()-1; i++) {
@@ -36,6 +35,22 @@ public class TriviaQuestionsController {
         }
 
         return null;
+    }
+
+    @GetMapping("/checkAnswer")
+    public Map<String, String> checkAnswer(@RequestParam String answer, @RequestParam String questionId) throws ExecutionException, InterruptedException {
+
+        TriviaQuestions triviaQuestions = triviaQuestionsService.findQuestionById(questionId);
+        Map<String, String> response = new HashMap<>();
+        if (answer.equals(triviaQuestions.getAnswer())) {
+            response.put("result", "Yes");
+            response.put("description", "");
+        }
+        else {
+            response = triviaQuestionsService.findDescriptionAndAnswerById(questionId);
+        }
+
+        return ResponseEntity.ok(response).getBody();
     }
 
 

@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e73f32d1-7289-4212-88b8-e38b9652ecfe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/controller/TriviaController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/controller/TriviaQuestionsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/entity/Trivia.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/entity/TriviaQuestions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/service/TriviaQuestionsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/service/TriviaService.java" afterDir="false" />
+    <list default="true" id="e73f32d1-7289-4212-88b8-e38b9652ecfe" name="Changes" comment="Trivia_1st">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/controller/TriviaQuestionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/controller/TriviaQuestionsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/service/TriviaQuestionsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/service/TriviaQuestionsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +71,19 @@
       <option name="presentableId" value="Default" />
       <updated>1710704780214</updated>
     </task>
+    <task id="LOCAL-00001" summary="Trivia_1st">
+      <option name="closed" value="true" />
+      <created>1715556206392</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715556206393</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Trivia_1st" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trivia_1st" />
   </component>
 </project>
