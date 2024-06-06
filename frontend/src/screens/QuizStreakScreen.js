@@ -3,7 +3,6 @@ import Background from '../components/Background';
 import { View, StyleSheet, Text } from 'react-native';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
-import Paragraph from '../components/Paragraph';
 import Button from '../components/Button';
 import { UserPic } from '../components/UserPic';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   header: {
-    fontWeight: 'bold', // Added bold font weight to the header
+    fontWeight: 'bold',
     fontSize: 22,
   },
   lightningContainer: {

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Checkbox, Text } from 'react-native-paper'
 import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
@@ -51,44 +50,21 @@ export default function EmailSignUp({ navigation }) {
   
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Header>Sign Up with Email</Header>
+     
+      <Header>Tell us more about yourself</Header>
+    
       <TextInput
-        title="Email"
-        label="Enter your email"
+        title="First name"
+        label="Enter your first name"
         returnKeyType="next"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
+        value={name.value}
+        onChangeText={(text) => setName({ value: text, error: '' })}
         error={!!name.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
+        errorText={name.error}
       />
       <TextInput
-        title="Password"
-        label="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
-      <TextInput
-        title="Repeat your password"
-        label="Repeat Password"
-        returnKeyType="done"
-        value={repeatPassword.value}
-        onChangeText={(text) => setRepeatPassword({ value: text, error: '' })}
-        error={!!repeatPassword.error}
-        errorText={repeatPassword.error}
-        secureTextEntry
-      />
-      <TextInput
-        title="Your name"
-        label="Your name"
+        title="Last name"
+        label="Enter your last name"
         returnKeyType="next"
         value={name.value}
         onChangeText={(text) => setName({ value: text, error: '' })}
@@ -97,7 +73,7 @@ export default function EmailSignUp({ navigation }) {
       />
       <TextInput
         title="Your zipcode"
-        label="Enter zipcode"
+        label="Enter your zipcode"
         returnKeyType="next"
         keyboardType="numeric"
         maxLength={5}
@@ -122,12 +98,6 @@ export default function EmailSignUp({ navigation }) {
       >
         Sign Up
       </Button>
-      <View style={styles.row}>
-        <Text>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
-          <Text style={styles.link}>Login</Text>
-        </TouchableOpacity>
-      </View>
     </Background>
   
   )

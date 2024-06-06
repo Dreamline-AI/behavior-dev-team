@@ -33,7 +33,7 @@ export default function LoginGoogle({ navigation }) {
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
-      <Header>Welcome back!</Header>
+      <Header>Tell us more about yourself</Header>
       <TextInput
         label="Email"
         returnKeyType="next"
