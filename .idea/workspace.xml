@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e73f32d1-7289-4212-88b8-e38b9652ecfe" name="Changes" comment="Trivia_1st">
+    <list default="true" id="e73f32d1-7289-4212-88b8-e38b9652ecfe" name="Changes" comment="Trivia_2st">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/controller/TriviaQuestionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/controller/TriviaQuestionsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/service/TriviaQuestionsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mvp/src/main/java/com/sustainability/mvp/service/TriviaQuestionsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,11 +77,39 @@
       <option name="project" value="LOCAL" />
       <updated>1715556206393</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Trivia_1st">
+      <option name="closed" value="true" />
+      <created>1717461844497</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1717461844502</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Trivia_2st">
+      <option name="closed" value="true" />
+      <created>1717462075964</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717462075964</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Trivia_1st" />
-    <option name="LAST_COMMIT_MESSAGE" value="Trivia_1st" />
+    <MESSAGE value="Trivia_2st" />
+    <option name="LAST_COMMIT_MESSAGE" value="Trivia_2st" />
   </component>
 </project>
