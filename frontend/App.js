@@ -12,7 +12,8 @@ import {
   ResetPasswordScreen,
   Dashboard,
 } from './src/screens'
-import LoginWithEmail from './src/screens/LoginWithEmail';
+import LoginWithEmail from './src/screens/LoginWithEmail'
+import SignUpForm from './src/screens/SignUpForm.js'
 
 const Stack = createStackNavigator()
 
@@ -26,6 +27,7 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen name="SignUpForm" component={SignUpForm} />
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
