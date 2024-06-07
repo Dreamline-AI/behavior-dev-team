@@ -11,31 +11,24 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import * as WebBrowser from 'expo-web-browser'
-import { signInWithGooglePopup } from '../../firebaseConfig'
+import { signInWithFacebookPopup } from '../../firebaseConfig'
 
 WebBrowser.maybeCompleteAuthSession()
 
-export default function LoginGoogle({ navigation }) {
+export default function LoginFacebook({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-  const [isFirstTimeSignIn, setIsFirstTimeSignIn] = useState(true); // New state for tracking first-time sign-in
-  const logGoogleUser = async () => {
-      const response = await signInWithGooglePopup();
+
+  const logFBUser = async () => {
+      const response = await signInWithFacebookPopup();
       console.log('response-->', response);
 
       if (await response?.user?.getIdToken()) {
-        // Check if it's the first time sign-in
-      if (isFirstTimeSignIn) {
-        setIsFirstTimeSignIn(false); 
-        navigation.navigate('SignUpForm');
-      } else {
-        // Navigate to a different screen for returning users
         navigation.navigate('Dashboard');
+      } else {
+        // back to login or signup screen
       }
-    } else {
-      // Handle sign-in failure
-    }
-  };
+  }
 
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
@@ -47,7 +40,7 @@ export default function LoginGoogle({ navigation }) {
     }
     navigation.reset({
       index: 0,
-      routes: [{ name: 'SignUpForm' }],
+      routes: [{ name: 'Dashboard' }],
     })
   }
 
@@ -84,7 +77,7 @@ export default function LoginGoogle({ navigation }) {
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
-      <Button mode="contained" onPress={logGoogleUser}>
+      <Button mode="contained" onPress={logFBUser}>
         Login
       </Button>
       <View style={styles.row}>
