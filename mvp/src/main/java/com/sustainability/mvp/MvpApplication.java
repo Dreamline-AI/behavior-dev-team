@@ -31,7 +31,9 @@ public class MvpApplication {
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.build();
 
-			FirebaseApp.initializeApp(options);
+			if (FirebaseApp.getApps().isEmpty()) {
+				FirebaseApp.initializeApp(options);
+			}
 
 		}
 		catch (Exception e) {
