@@ -13,6 +13,7 @@ import {
   Dashboard,
 } from './src/screens'
 import LoginWithEmail from './src/screens/LoginWithEmail';
+import LoginFacebook from './src/screens/LoginFacebook'
 
 const Stack = createStackNavigator()
 
@@ -28,6 +29,7 @@ export default function App() {
         >
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
+          <Stack.Screen name="LoginFacebook" component={LoginFacebook} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="LoginWithEmail" component={LoginWithEmail} />
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />

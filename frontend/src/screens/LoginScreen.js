@@ -26,7 +26,7 @@ export default function LoginScreen({ navigation }) {
       <Button
         color= "#00000066"
         mode="contained"
-        onPress={() => navigation.navigate('RegisterScreen')}
+        onPress={() => navigation.navigate('LoginFacebook')}
       >
         Login with Facebook
       </Button>
