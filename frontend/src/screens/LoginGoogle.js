@@ -18,17 +18,24 @@ WebBrowser.maybeCompleteAuthSession()
 export default function LoginGoogle({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
-
+  const [isFirstTimeSignIn, setIsFirstTimeSignIn] = useState(true); // New state for tracking first-time sign-in
   const logGoogleUser = async () => {
       const response = await signInWithGooglePopup();
       console.log('response-->', response);
 
       if (await response?.user?.getIdToken()) {
-        navigation.navigate('Dashboard');
+        // Check if it's the first time sign-in
+      if (isFirstTimeSignIn) {
+        setIsFirstTimeSignIn(false); 
+        navigation.navigate('SignUpForm');
       } else {
-        // back to login or signup screen
+        // Navigate to a different screen for returning users
+        navigation.navigate('Dashboard');
       }
-  }
+    } else {
+      // Handle sign-in failure
+    }
+  };
 
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value)
@@ -40,7 +47,7 @@ export default function LoginGoogle({ navigation }) {
     }
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Dashboard' }],
+      routes: [{ name: 'SignUpForm' }],
     })
   }
 
