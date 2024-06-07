@@ -33,7 +33,7 @@ public class FirebaseInitialization {
             FirebaseApp.initializeApp(options);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Firebase initialization failed", e);
         }
 
 

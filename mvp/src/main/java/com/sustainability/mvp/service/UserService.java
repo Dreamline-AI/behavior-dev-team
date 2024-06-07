@@ -9,6 +9,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import com.sustainability.mvp.entity.User;
 import com.sustainability.mvp.exception.UserException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -25,6 +26,10 @@ public class UserService {
         userMap.put("email", user.getEmail());
         userMap.put("zipcode", user.getZipcode());
         userMap.put("userID", user.getUserID());
+//        userMap.put("avatar", user.getAvatar());
+//        userMap.put("rankProgress", String.valueOf(user.getRankProgress()));
+//        userMap.put("rank", user.getRank());
+//        userMap.put("streak", String.valueOf(user.getStreak()));
         ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getUserID()).set(userMap);
         return "Saved successfully for user with ID:" + user.getUserID() + " at " + collectionApiFuture.get().getUpdateTime();
     }
@@ -87,6 +92,7 @@ public class UserService {
         ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(userID).delete();
         return "Saved successfully for user with ID:" + userID + " at " + collectionApiFuture.get().getUpdateTime();
     }
+
 
 
 
