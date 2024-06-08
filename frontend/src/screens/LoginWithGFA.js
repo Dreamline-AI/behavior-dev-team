@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Checkbox, Text } from 'react-native-paper';
 import Background from '../components/Background';
@@ -7,32 +7,36 @@ import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
-import { emailValidator } from '../helpers/emailValidator';
-import { passwordValidator } from '../helpers/passwordValidator';
-import { repeatPasswordValidator } from '../helpers/repeatPasswordValidator';
 import { nameValidator } from '../helpers/nameValidator';
 import { zipcodeValidator } from '../helpers/zipcodeValidator';
 
-export default function EmailSignUp({ navigation }) {
+export default function LoginWithGFA({ navigation }) {
   const [firstName, setFirstName] = useState({ value: '', error: '' });
   const [lastName, setLastName] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
-  const [repeatPassword, setRepeatPassword] = useState({ value: '', error: '' });
   const [zipcode, setZipcode] = useState({ value: '', error: '' });
   const [isChecked, setIsChecked] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    const firstNameError = nameValidator(firstName.value);
+    const lastNameError = nameValidator(lastName.value);
+    const zipcodeError = zipcodeValidator(zipcode.value);
+
+    if (!firstNameError && !lastNameError && !zipcodeError && firstName.value && lastName.value && zipcode.value) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [firstName, lastName, zipcode]);
 
   const onSignUpPressed = () => {
     const firstNameError = nameValidator(firstName.value);
     const lastNameError = nameValidator(lastName.value);
-    const passwordError = passwordValidator(password.value);
-    const repeatPasswordError = repeatPasswordValidator(repeatPassword.value, password.value);
     const zipcodeError = zipcodeValidator(zipcode.value);
 
-    if ( passwordError || repeatPasswordError || firstNameError || lastNameError || zipcodeError) {
+    if (firstNameError || lastNameError || zipcodeError) {
       setFirstName({ ...firstName, error: firstNameError });
       setLastName({ ...lastName, error: lastNameError });
-      setPassword({ ...password, error: passwordError });
-      setRepeatPassword({ ...repeatPassword, error: repeatPasswordError });
       setZipcode({ ...zipcode, error: zipcodeError });
       return;
     }
@@ -52,28 +56,8 @@ export default function EmailSignUp({ navigation }) {
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Header>Sign up with Email</Header>
+      <Header>Tell us more about yourself</Header>
      
-      <TextInput
-        title="Password"
-        label="Enter your password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
-      <TextInput
-        title="Repeat password"
-        label="Repeat your password"
-        returnKeyType="done"
-        value={repeatPassword.value}
-        onChangeText={(text) => setRepeatPassword({ value: text, error: '' })}
-        error={!!repeatPassword.error}
-        errorText={repeatPassword.error}
-        secureTextEntry
-      />
       <TextInput
         title="First name"
         label="Enter your first name"
@@ -112,8 +96,9 @@ export default function EmailSignUp({ navigation }) {
       </View>
 
       <Button
-        color="black"
+        color={isFormValid ? "black" : "gray"}
         mode="contained"
+        disabled={!isFormValid}
         onPress={onSignUpPressed}
         style={{ marginTop: 24 }}
       >

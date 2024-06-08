@@ -8,7 +8,7 @@ import {
   LoginScreen,
   LoginGoogle,
   EmailSignUp,
-  LoginWithEmail,
+  LoginWithGFA,
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
@@ -33,9 +33,8 @@ export default function App() {
           }}
         >
           <Stack.Screen name="StartScreen" component={StartScreen} />
-          <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="LoginWithEmail" component={LoginWithEmail} />
+          <Stack.Screen name="LoginWithGFA" component={LoginWithGFA} />
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />

@@ -70,7 +70,7 @@ export default function StartScreen({ navigation }) {
       <Button
         color='white'
         mode="contained"
-        onPress={() => navigation.navigate('EmailSignUp')}
+        onPress={() => navigation.navigate('LoginWithGFA')}
         style={styles.buttonBorder}
         icon={() => <AntDesign name="google" size={20} color="black" style={styles.iconStyle} />}
       >
@@ -80,7 +80,7 @@ export default function StartScreen({ navigation }) {
       <Button
         color='white'
         mode="contained"
-        onPress={() => navigation.navigate('EmailSignUp')}
+        onPress={() => navigation.navigate('LoginWithGFA')}
         style={styles.buttonBorder}
         icon={() => <MaterialIcon name="facebook" size={20} color="black" style={styles.iconStyle} />}
       >
@@ -90,7 +90,7 @@ export default function StartScreen({ navigation }) {
       <Button
         color='white'
         mode="contained"
-        onPress={() => navigation.navigate('EmailSignUp')}
+        onPress={() => navigation.navigate('LoginWithGFA')}
         style={styles.buttonBorder}
         icon={() => <MaterialIcon name="apple" size={20} color="black" style={styles.iconStyle} />}
       >
