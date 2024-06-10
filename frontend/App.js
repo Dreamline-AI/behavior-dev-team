@@ -8,11 +8,17 @@ import {
   LoginScreen,
   LoginGoogle,
   EmailSignUp,
+  LoginWithGFA,
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
+  QuizScreen,
+  QuizEndingScreen,
+  QuizStreakScreen,
+  RedoQuestionsScreen,
+  IncorrectQuestionScreen,
 } from './src/screens'
-import LoginWithEmail from './src/screens/LoginWithEmail'
+// import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
 import LoginFacebook from './src/screens/LoginFacebook'
 
@@ -33,10 +39,15 @@ export default function App() {
           <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
           <Stack.Screen name="LoginFacebook" component={LoginFacebook} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="LoginWithEmail" component={LoginWithEmail} />
+          <Stack.Screen name="LoginWithGFA" component={LoginWithGFA} />
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="QuizScreen" component={QuizScreen} />
+          <Stack.Screen name="QuizEndingScreen" component={QuizEndingScreen} />
+          <Stack.Screen name="RedoQuestionsScreen" component={RedoQuestionsScreen} />
+          <Stack.Screen name="IncorrectQuestionScreen" component={IncorrectQuestionScreen} />
+          <Stack.Screen name="QuizStreakScreen" component={QuizStreakScreen} />
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
