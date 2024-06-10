@@ -1,22 +1,34 @@
 package com.sustainability.mvp.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
+import com.sustainability.mvp.entity.Task;
 import com.sustainability.mvp.entity.User;
 import com.sustainability.mvp.exception.UserException;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 @Service
 public class UserService {
+
     private static final String COLLECTION_NAME = "users";
+    private final TaskService taskService;
+
+    public UserService(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     public String saveUser(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -47,7 +59,6 @@ public class UserService {
             DocumentSnapshot document = future.get();
             user = document.toObject(User.class);
             userList.add(user);
-
         }
         return userList;
     }
@@ -82,20 +93,17 @@ public class UserService {
         }
     }
 
-    public String getUserFirstNameById(String userID) throws ExecutionException, InterruptedException {
-        User user = getUserByUserID(userID);
-        return user.getFirstName();
-    }
-
-    public String updateUserByUserID(String userID) throws ExecutionException, InterruptedException {
+    public String deleteUserByUserID(String userID) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(userID).delete();
-        return "Saved successfully for user with ID:" + userID + " at " + collectionApiFuture.get().getUpdateTime();
+        return "Deleted successfully for user with ID:" + userID + " at " + collectionApiFuture.get().getUpdateTime();
     }
 
-
-
-
-
-
+    public List<Task> getUserIncompleteTasks(String userID) throws ExecutionException, InterruptedException {
+        List<Task> tasks = taskService.getUnfinishedTasksByUser(userID);
+        return tasks.stream()
+                .filter(Task::isStatus)
+                .collect(Collectors.toList());
+    }
 }
+
