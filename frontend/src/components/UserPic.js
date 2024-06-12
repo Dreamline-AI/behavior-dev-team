@@ -1,10 +1,10 @@
 import React from 'react';
-import { Avatar } from 'react-native-paper';
-import { Text } from 'react-native-paper';
+import { Avatar, Text } from 'react-native-paper';
 
 
 
-export function UserPic({name, picSize}) {
+
+export function UserPic({name = 'User' , picSize}) {
   
   return (
     <>
@@ -12,6 +12,5 @@ export function UserPic({name, picSize}) {
    <Text > {name} </Text>
    </>
   )
+
 }
-
-
