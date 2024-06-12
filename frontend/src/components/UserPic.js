@@ -4,11 +4,12 @@ import { Text } from 'react-native-paper';
 
 
 
-export function UserPic({name}) {
+export function UserPic({name, picSize}) {
+  
   return (
     <>
-   <Avatar.Image size={32} source={require('../assets/avatarIMG.jpg')} />
-   <Text> {name} </Text>
+   <Avatar.Image size={picSize} source={require('../assets/avatarIMG.jpg')} />
+   <Text > {name} </Text>
    </>
   )
 }
