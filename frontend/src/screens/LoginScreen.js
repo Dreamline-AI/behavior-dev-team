@@ -3,12 +3,14 @@ import Background from '../components/Background'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
+import { ProgressBar } from 'react-native-paper'
 
 export default function LoginScreen({ navigation }) {
   return (
     <Background>
       <Logo />
       <Header>Welcome back!</Header>
+     
       <Button
         color="black"
         mode="contained"
@@ -30,6 +32,7 @@ export default function LoginScreen({ navigation }) {
       >
         Login with Facebook
       </Button>
+      <ProgressBar progress={0.5} color="black" />
       <Button
         color="white"
         mode="contained"
@@ -37,6 +40,8 @@ export default function LoginScreen({ navigation }) {
       >
         Log in with Email
       </Button>
+      <ProgressBar progress={0.5} color="black" />
+
     </Background>
   )
 }
