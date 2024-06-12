@@ -35,8 +35,8 @@ export default function App() {
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="EditProfileScreen" component={EditProfileScreen}/>
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} /> 
+          <Stack.Screen name="EditProfileScreen" component={EditProfileScreen}/>
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}

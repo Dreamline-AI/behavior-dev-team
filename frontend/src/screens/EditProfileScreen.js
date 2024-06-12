@@ -7,19 +7,21 @@ import TextInput from '../components/TextInput'
 import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 
-export default function EditProfileScreen({ navigation }){
-    const [firstName, setFirstName] = useState({value : '', error : ''})
-    const [lastName, setLastName] = useState({value : '', error :''})
+export default function EditProfileScreen({route, navigation }){
+    const { name } = route.params;
+    const [fn, ...ln] = name.split(' ');
+    const [firstName, setFirstName] = useState({value : fn, error : ''})
+    const [lastName, setLastName] = useState({value : ln.join(' '), error :''})
     const [zipcode, setZipcode] = useState({value : '', error : ''})
-
     const onSaveChangesPressed = () =>{
-        
     }
 
     return(
         <Background>
-            <BackButton goBack={navigation.goBack} />
-            <Header> Edit profile </Header>
+            <View style={styles.headerContainer}>
+                <BackButton goBack={navigation.goBack} />
+                <Header style={styles.header}> Edit profile </Header>
+            </View>
             <TextInput
                 title="Your firstName"
                 label="Your firstName"
@@ -60,5 +62,26 @@ export default function EditProfileScreen({ navigation }){
         </Background>
         
     )
-
 }
+
+const styles = StyleSheet.create({
+    headerContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingHorizontal: 8,
+        paddingTop: 16,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        
+        },
+    header: {
+        textAlign: 'center',
+        flex: 1,
+    
+    },
+});  
+
