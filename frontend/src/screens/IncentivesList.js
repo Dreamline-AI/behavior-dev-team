@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Background from '../components/Background';
 import Header from '../components/Header';
@@ -12,101 +12,37 @@ import EVSubsidiesIcon from '../assets/incentives/EVSubsidiesIcon.png';
 import UnlockGrantIcon from '../assets/incentives/UnlockGrantIcon.png';
 
 export default function IncentivesList({ navigation }) {
-    const incentives = [
-        {
-          title: 'Stay Cool and Save Money',
-          subtitle: 'Efficient AC Upgrade',
-          image: ACUpgradeIcon,
-        },
-        {
-          title: 'Solar Panels Installation',
-          subtitle: 'Free Solar Panel Installation',
-          image: SolarPanelIcon,
-        },
-        {
-          title: 'Utility Bill Discounts',
-          subtitle: 'Lower Bills, Happier Home',
-          image: BillDiscountIcon,
-        },
-        {
-          title: 'Water Conservation Rebates',
-          subtitle: 'High-Efficiency Fixtures',
-          image: WaterConservationIcon,
-        },
-        {
-          title: 'Transportation Incentives',
-          subtitle: 'Subsidies for Electric Vehicles (EVs)',
-          image: EVSubsidiesIcon,
-        },
-        {
-          title: 'Earn 250 more points to unlock',
-          subtitle: 'Grant',
-          image: UnlockGrantIcon,
-        },
-        {
-            title: 'Stay Cool and Save Money',
-            subtitle: 'Efficient AC Upgrade',
-            image: ACUpgradeIcon,
-          },
-          {
-            title: 'Solar Panels Installation',
-            subtitle: 'Free Solar Panel Installation',
-            image: SolarPanelIcon,
-          },
-          {
-            title: 'Utility Bill Discounts',
-            subtitle: 'Lower Bills, Happier Home',
-            image: BillDiscountIcon,
-          },
-          {
-            title: 'Water Conservation Rebates',
-            subtitle: 'High-Efficiency Fixtures',
-            image: WaterConservationIcon,
-          },
-          {
-            title: 'Transportation Incentives',
-            subtitle: 'Subsidies for Electric Vehicles (EVs)',
-            image: EVSubsidiesIcon,
-          },
-          {
-            title: 'Earn 250 more points to unlock',
-            subtitle: 'Grant',
-            image: UnlockGrantIcon,
-          },
-          {
-            title: 'Stay Cool and Save Money',
-            subtitle: 'Efficient AC Upgrade',
-            image: ACUpgradeIcon,
-          },
-          {
-            title: 'Solar Panels Installation',
-            subtitle: 'Free Solar Panel Installation',
-            image: SolarPanelIcon,
-          },
-          {
-            title: 'Utility Bill Discounts',
-            subtitle: 'Lower Bills, Happier Home',
-            image: BillDiscountIcon,
-          },
-          {
-            title: 'Water Conservation Rebates',
-            subtitle: 'High-Efficiency Fixtures',
-            image: WaterConservationIcon,
-          },
-          {
-            title: 'Transportation Incentives',
-            subtitle: 'Subsidies for Electric Vehicles (EVs)',
-            image: EVSubsidiesIcon,
-          },
-          {
-            title: 'Earn 250 more points to unlock',
-            subtitle: 'Grant',
-            image: UnlockGrantIcon,
-          },
-      ];
+  const [incentives, setIncentives] = useState([]);
+
+  useEffect(() => {
+    // Fetch incentives list from backend
+    fetch('http://localhost:8080/api/incentives')
+      .then(response => response.json())
+      .then(data => setIncentives(data))
+      .catch(error => console.error('Error fetching incentives:', error));
+  }, []);
 
       const goToDetail = (incentive) => {
         navigation.navigate('IncentiveDetailPage', { incentive });
+      };
+
+      const getImagePath = (type) => {
+        switch (type) {
+          case 'ACUpgradeIcon':
+            return ACUpgradeIcon;
+          case 'SolarPanelIcon':
+            return SolarPanelIcon;
+          case 'BillDiscountIcon':
+            return BillDiscountIcon;
+          case 'WaterConservationIcon':
+            return WaterConservationIcon;
+          case 'EVSubsidiesIcon':
+            return EVSubsidiesIcon;
+          case 'UnlockGrantIcon':
+            return UnlockGrantIcon;
+          default:
+            return null; // or some default icon
+        }
       };
   
     return (
@@ -118,11 +54,11 @@ export default function IncentivesList({ navigation }) {
           </View>
           <ScrollView style={styles.listFrame}>
         {incentives.map((incentive, index) => (
-          <TouchableOpacity key={index} style={styles.card} onPress={() => goToDetail(incentive)}>
-            <Image style={styles.image} source={incentive.image} />
+          <TouchableOpacity key={index} style={styles.card} onPress={() => goToDetail(incentive.id)}>
+            <Image style={styles.image} source={getImagePath(incentive.image)} />
             <View style={styles.textContainer}>
-              <Text style={styles.title}>{incentive.title}</Text>
-              <Text style={styles.subtitle}>{incentive.subtitle}</Text>
+              <Text style={styles.title}>{incentive.heading}</Text>
+              <Text style={styles.subtitle}>{incentive.title}</Text>
             </View>
           </TouchableOpacity>
         ))}

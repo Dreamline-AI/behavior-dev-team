@@ -1,35 +1,71 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import BackButton from '../components/BackButton';
 
-export default function IncentiveDetailPage({ navigation }) {
+export default function IncentiveDetailPage({ route, navigation }) {
+  const [incentive, setIncentive] = useState(null);
+  const incentiveId = route.params.incentive;
+
+  useEffect(() => {
+    // Fetch incentive details from backend
+    fetch(`http://localhost:8080/api/incentives/${incentiveId}`)
+      .then(response => response.json())
+      .then(data => setIncentive(data))
+      .catch(error => console.error('Error fetching incentive details:', error));
+  }, [incentiveId]);
+
+  if (!incentive) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
+    // <SafeAreaView style={styles.safeArea}>
+    //   <ScrollView style={styles.container}>
+    //     <View style={styles.headerContainer}>
+    //       <BackButton goBack={navigation.goBack} />
+    //       <Text style={styles.heading}>{incentive.heading}</Text>
+    //     </View>
+    //     <View style={styles.descriptionContainer}>
+    //       <Text style={styles.title}>{incentive.title}</Text>
+    //       {incentive.content.map((section, index) => (
+    //         <View key={index}>
+    //           <Text style={styles.heading}>{section.subtitle}</Text>
+    //           {section.description.map((desc, i) => (
+    //             <Text key={i} style={styles.content}>
+    //               {desc}
+    //             </Text>
+    //           ))}
+    //         </View>
+    //       ))}
+    //       <Text style={styles.content}>{incentive.apply_content}</Text>
+    //     </View>
+    //   </ScrollView>
+    // </SafeAreaView>
     <SafeAreaView style={styles.safeArea}>
-      <ScrollView style={styles.container}>
-      <View style={styles.headerContainer}>
-            <BackButton goBack={navigation.goBack} />
-            <Text style={styles.heading}>Solar Panel Installation</Text>
-        </View>
-        <View style={styles.descriptionContainer}>
-            <Text style={styles.title}>Sun-Powered Savings</Text>
-          <Text style={styles.heading}>What We Offer:</Text>
-          <Text style={styles.content}>
-            <Text style={styles.boldText}>Free Solar Panel Installation:</Text> Harness the sun's power without upfront costs.{'\n'}
-            <Text style={styles.boldText}>Reduce Energy Bills:</Text> Generate your own electricity and save every month.
-          </Text>
+    <ScrollView style={styles.container}>
+    <View style={styles.headerContainer}>
+          <BackButton goBack={navigation.goBack} />
+          <Text style={styles.heading}>{incentive.heading}</Text>
+      </View>
+      <View style={styles.descriptionContainer}>
+          <Text style={styles.title}>{incentive.title}</Text>
 
-          <Text style={styles.heading}>How It Works:</Text>
-          <Text style={styles.content}>
-            <Text style={styles.boldText}>Zero Hassle:</Text> We install, you save. It's that simple.{'\n'}
-            <Text style={styles.boldText}>Sustainable Living:</Text> Decrease your carbon footprint and increase your home’s value.
-          </Text>
-
-          <Text style={styles.content}>
-            <Text style={styles.boldText}>Apply Now:</Text> Light up your home with the sun and watch your energy bills plummet.
-          </Text>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          {incentive.content.map((section, index) => (
+            <View key={index}>
+              <Text style={styles.heading}>{section.subtitle}:</Text>
+              {section.description.map((desc, i) => (
+                <Text style={styles.content}>
+                  {desc}
+                </Text>
+              ))}
+            </View>
+          ))}
+        <Text style={styles.content}>
+          <Text style={styles.boldText}>Apply Now:</Text> {incentive.apply_content}
+        </Text>
+      </View>
+    </ScrollView>
+  </SafeAreaView>
   );
 }
 
