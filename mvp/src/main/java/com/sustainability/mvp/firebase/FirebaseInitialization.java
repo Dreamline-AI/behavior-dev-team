@@ -29,11 +29,12 @@ public class FirebaseInitialization {
             FirebaseOptions options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .build();
-
-            FirebaseApp.initializeApp(options);
+            if(FirebaseApp.getApps().isEmpty()) {
+                FirebaseApp.initializeApp(options);
+            }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            throw new IllegalStateException("Firebase initialization failed", e);
         }
 
 
