@@ -14,6 +14,8 @@ import {
 } from './src/screens'
 import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
+import TakeActionScreen from './src/screens/TakeActionScreen.js'
+import Triviatoactionconnect from './src/screens/Triviatoactionconnect'
 
 const Stack = createStackNavigator()
 
@@ -27,6 +29,8 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen name="Triviatoactionconnect" component={Triviatoactionconnect} />
+          <Stack.Screen name="TakeActionScreen" component={TakeActionScreen} />
           <Stack.Screen name="SignUpForm" component={SignUpForm} />
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginGoogle" component={LoginGoogle} />

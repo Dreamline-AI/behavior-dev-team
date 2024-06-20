@@ -28,6 +28,7 @@ export default function StartScreen({ navigation }) {
     <Background>
       <Logo />
       <Header>Welcome!</Header>
+
       <Button
         color="black"
         mode="contained"

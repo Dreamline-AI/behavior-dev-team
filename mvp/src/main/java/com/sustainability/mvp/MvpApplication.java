@@ -5,6 +5,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.core.io.ClassPathResource;
 
@@ -13,8 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class,DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class})
 public class MvpApplication {
 
 	public static void main(String[] args) throws IOException {
@@ -25,7 +26,7 @@ public class MvpApplication {
 
 		try {
 			FileInputStream serviceAccount =
-					new FileInputStream("path/to/serviceAccountKey.json");
+					new FileInputStream("/Users/Indu/Dreamlineai/behavior-dev-team/mvp/src/main/resources/serviceAccountKey.json");
 
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
