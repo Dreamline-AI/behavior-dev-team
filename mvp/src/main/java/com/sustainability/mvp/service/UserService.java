@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private static final String COLLECTION_NAME = "users";
-    private final TaskService taskService;
-
-    public UserService(TaskService taskService) {
-        this.taskService = taskService;
-    }
+//    private final TaskService taskService;
+//
+//    public UserService(TaskService taskService) {
+//        this.taskService = taskService;
+//    }
 
     public String saveUser(User user) throws ExecutionException, InterruptedException {
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -87,11 +87,11 @@ public class UserService {
         return "Deleted successfully for user with ID:" + userID + " at " + collectionApiFuture.get().getUpdateTime();
     }
 
-    public List<Task> getUserIncompleteTasks(String userID) throws ExecutionException, InterruptedException {
-        List<Task> tasks = taskService.getUnfinishedTasksByUser(userID);
-        return tasks.stream()
-                .filter(Task::isStatus)
-                .collect(Collectors.toList());
-    }
+//    public List<Task> getUserIncompleteTasks(String userID) throws ExecutionException, InterruptedException {
+//        List<Task> tasks = taskService.getUnfinishedTasksByUser(userID);
+//        return tasks.stream()
+//                .filter(Task::isStatus)
+//                .collect(Collectors.toList());
+//    }
 }
 
