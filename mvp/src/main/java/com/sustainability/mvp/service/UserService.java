@@ -35,7 +35,7 @@ public class UserService {
         Map<String, String> userMap = new HashMap<>();
         userMap.put("firstName", user.getFirstName());
         userMap.put("lastName", user.getLastName());
-        userMap.put("email", user.getEmail());
+        userMap.put("c", user.getEmail());
         userMap.put("zipcode", user.getZipcode());
         userMap.put("userID", user.getUserID());
 //        userMap.put("avatar", user.getAvatar());
