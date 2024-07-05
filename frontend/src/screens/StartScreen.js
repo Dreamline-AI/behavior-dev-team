@@ -44,7 +44,7 @@ export default function StartScreen({ navigation }) {
       // Check if it's the first time sign-in
     if (isFirstTimeSignIn) {
       setIsFirstTimeSignIn(false); 
-      navigation.navigate('SignUpForm');
+      navigation.navigate('LoginWithGFA');
     } else {
       // Navigate to a different screen for returning users
       navigation.navigate('Dashboard');
@@ -59,7 +59,7 @@ const logFBUser = async () => {
   console.log('response-->', response);
 
   if (await response?.user?.getIdToken()) {
-    navigation.navigate('SignUpForm');
+    navigation.navigate('LoginWithGFA');
   } else {
     // back to login or signup screen
   }
@@ -87,7 +87,7 @@ const logFBUser = async () => {
         color={isEmailValid ? "black" : "gray"}
         mode="contained"
         disabled={!isEmailValid}
-        onPress={() => navigation.navigate('LoginWithGFA')}
+        onPress={() => navigation.navigate('EmailSignUp')}
       >
         Continue
       </Button>
