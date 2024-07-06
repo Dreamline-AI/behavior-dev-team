@@ -137,12 +137,9 @@ export default function ProfileScreen ({ route, navigation }){
               <Text style={styles.buttonText}>See my impact</Text>
             </TouchableOpacity>
           </View>
-          
         </View>
         <BottomNavigationBar userName={userName}/>  
       </ScrollView>
-      
-      
     </Background>
     
   );
@@ -289,3 +286,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4
   },
 });
+

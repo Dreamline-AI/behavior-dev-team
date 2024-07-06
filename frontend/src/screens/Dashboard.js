@@ -1,7 +1,10 @@
 import React from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Background from '../components/Background';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Logo from '../components/Logo';
+import Header from '../components/Header';
+import Paragraph from '../components/Paragraph';
+import Button from '../components/Button';
 import { UserPic } from '../components/UserPic';
 import BottomNavigationBar from './BottomNavigationBar';
 
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: 30,
     paddingTop: 10,
-    paddingBottom: 10, 
+    paddingBottom: 10,
     alignItems: 'center',
     justifyContent: 'center',
     padding:1,
