@@ -69,7 +69,7 @@ export default function StartScreen({ navigation }) {
 
       <TextInput
         title="Email"
-        label="Enter your email"
+        placeholder="Enter your email"
         returnKeyType="next"
         value={email.value}
         onChangeText={(text) => setEmail({ value: text, error: '' })}
@@ -151,6 +151,11 @@ export default function StartScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 54,
+    lineHeight: 20,
+    fontWeight: '500',
+  },
   separatorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
