@@ -11,8 +11,8 @@ export default function TextInput({ title, errorText, description, ...props }) {
         style={styles.input}
         selectionColor={theme.colors.primary}
         underlineColor="transparent"
-        outlineColor="rgba(0, 0, 0, 0.1)" // Default border color
-        activeOutlineColor="rgba(0, 0, 0, 0.6)" // Border color when focused
+        outlineColor="rgba(0, 0, 0, 0.1)"
+        activeOutlineColor="rgba(0, 0, 0, 0.6)"
         mode="outlined"
         {...props}
       />
@@ -27,7 +27,7 @@ export default function TextInput({ title, errorText, description, ...props }) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginVertical: 12,
+    marginVertical: 7,
   },
   input: {
     backgroundColor: theme.colors.surface,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     fontSize: 14,
     marginTop: 4,
-    marginBottom: 4,
+    marginBottom: 2,
     color: 'black',
     fontWeight: '500',
     lineHeight: 20,

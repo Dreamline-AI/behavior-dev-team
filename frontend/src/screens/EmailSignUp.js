@@ -114,7 +114,8 @@ export default function EmailSignUp({ navigation }) {
         error={!!zipcode.error}
         errorText={zipcode.error}
       />
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+      <View style={styles.checkboxContainer}>
         <Checkbox
           status={isChecked ? 'checked' : 'unchecked'}
           onPress={() => setIsChecked(!isChecked)}
@@ -142,5 +143,10 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
     color: theme.colors.primary,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
   },
 })
