@@ -11,9 +11,7 @@ import {
   LoginWithGFA,
   RegisterScreen,
   ResetPasswordScreen,
-  EditProfileScreen,
   Dashboard,
-  ProfileScreen,
   QuizScreen,
   QuizEndingScreen,
   QuizStreakScreen,
@@ -23,6 +21,9 @@ import {
 // import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
 import LoginFacebook from './src/screens/LoginFacebook'
+import BottomNavigationBar from './src/screens/BottomNavigationBar';
+import ProfileScreen from './src/screens/ProfileScreen';
+import EditProfileScreen from './src/screens/EditProfileScreen';
 
 const Stack = createStackNavigator()
 
@@ -45,7 +46,8 @@ export default function App() {
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="ProfileScreen" component={ProfileScreen} /> 
+          <Stack.Screen name="BottomNavigationBar" component={BottomNavigationBar} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           <Stack.Screen name="EditProfileScreen" component={EditProfileScreen}/>
           <Stack.Screen name="QuizScreen" component={QuizScreen} />
           <Stack.Screen name="QuizEndingScreen" component={QuizEndingScreen} />

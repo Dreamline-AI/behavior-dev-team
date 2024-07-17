@@ -11,6 +11,7 @@ import Paragraph from '../components/Paragraph'
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import BottomNavigationBar from './BottomNavigationBar.js';
 
 export default function ProfileScreen ({ route, navigation }){
   const { userName } = route.params;
@@ -137,8 +138,10 @@ export default function ProfileScreen ({ route, navigation }){
             </TouchableOpacity>
           </View>
         </View>
+        <BottomNavigationBar userName={userName}/>  
       </ScrollView>
     </Background>
+    
   );
 };
 
@@ -281,6 +284,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: theme.colors.greet,
     paddingHorizontal: 4
-  },   
+  },
 });
- 
+
