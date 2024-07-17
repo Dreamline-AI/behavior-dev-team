@@ -69,7 +69,7 @@ export default function StartScreen({ navigation }) {
       } else if (source === 'auth') {
         navigation.reset({
           index: 0,
-          routes: [{ name: 'Dashboard',
+          routes: [{ name: 'WelcomeScreen',
           params: {
             userFirstName: user[0].firstName,
             userLastName: user[0].lastName,
@@ -207,7 +207,16 @@ export default function StartScreen({ navigation }) {
       <Button
         color='white'
         mode="contained"
-        onPress={() => navigation.navigate('Dashboard')}
+        onPress={() => navigation.reset({
+          index: 0,
+          routes: [{
+            name: 'Dashboard',
+            params: {
+              userFirstName: "test",
+              userLastName: "user",
+            },
+          }],
+        })}
         style={styles.buttonBorder}
         icon={() => <MaterialIcon name="apple" size={20} color="black" style={styles.iconStyle} />}
       >

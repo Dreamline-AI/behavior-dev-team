@@ -25,7 +25,7 @@ export default function SignIn({ navigation, route }) {
       navigation.reset({
         index: 0,
         routes: [{
-          name: 'Dashboard',
+          name: 'WelcomeScreen',
           params: {
             userFirstName: user.firstName,
             userLastName: user.lastName,

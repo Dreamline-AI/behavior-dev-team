@@ -64,7 +64,7 @@ export default function EmailSignUp({ navigation, route }) {
           navigation.reset({
             index: 0,
             routes: [{
-              name: 'Dashboard',
+              name: 'WelcomeScreen',
               params: {
                 userFirstName: firstName.value,
                 userLastName: lastName.value,
@@ -93,7 +93,7 @@ export default function EmailSignUp({ navigation, route }) {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      <BackButton  />
       <Header>Sign up with Email</Header>
      
       <TextInput
