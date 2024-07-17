@@ -24,6 +24,7 @@ import LoginFacebook from './src/screens/LoginFacebook'
 import BottomNavigationBar from './src/screens/BottomNavigationBar';
 import ProfileScreen from './src/screens/ProfileScreen';
 import EditProfileScreen from './src/screens/EditProfileScreen';
+import SignIn from './src/screens/SignIn.js'
 
 const Stack = createStackNavigator()
 
@@ -38,6 +39,7 @@ export default function App() {
           }}
         >
           <Stack.Screen name="SignUpForm" component={SignUpForm} />
+          <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
           <Stack.Screen name="LoginFacebook" component={LoginFacebook} />
