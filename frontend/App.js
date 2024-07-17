@@ -11,7 +11,9 @@ import {
   LoginWithGFA,
   RegisterScreen,
   ResetPasswordScreen,
+  EditProfileScreen,
   Dashboard,
+  ProfileScreen,
   QuizScreen,
   QuizEndingScreen,
   QuizStreakScreen,
@@ -43,11 +45,14 @@ export default function App() {
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="ProfileScreen" component={ProfileScreen} /> 
+          <Stack.Screen name="EditProfileScreen" component={EditProfileScreen}/>
           <Stack.Screen name="QuizScreen" component={QuizScreen} />
           <Stack.Screen name="QuizEndingScreen" component={QuizEndingScreen} />
           <Stack.Screen name="RedoQuestionsScreen" component={RedoQuestionsScreen} />
           <Stack.Screen name="IncorrectQuestionScreen" component={IncorrectQuestionScreen} />
           <Stack.Screen name="QuizStreakScreen" component={QuizStreakScreen} />
+
           <Stack.Screen
             name="ResetPasswordScreen"
             component={ResetPasswordScreen}
