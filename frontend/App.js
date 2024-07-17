@@ -23,6 +23,7 @@ import {
 // import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
 import LoginFacebook from './src/screens/LoginFacebook'
+import SignIn from './src/screens/SignIn.js'
 
 const Stack = createStackNavigator()
 
@@ -37,6 +38,7 @@ export default function App() {
           }}
         >
           <Stack.Screen name="SignUpForm" component={SignUpForm} />
+          <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="StartScreen" component={StartScreen} />
           <Stack.Screen name="LoginGoogle" component={LoginGoogle} />
           <Stack.Screen name="LoginFacebook" component={LoginFacebook} />
