@@ -3,6 +3,9 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import * as ImagePicker from 'expo-image-picker'
 import { useNavigation } from '@react-navigation/native'
+import { theme } from '../core/theme'
+import BulbIcon from '../assets/BulbIcon.png'
+import Circle from '../assets/Circle.png'
 
 const TakeActionScreen = () => {
   const navigation = useNavigation()
@@ -42,12 +45,17 @@ const TakeActionScreen = () => {
       aspect: [4, 3],
       quality: 1,
     })
-
+    console.log('result',result)
     if (!result.canceled) {
-      setPhotos((prevPhotos) => [...prevPhotos, result.uri])
+      // setPhotos((prevPhotos) => [...prevPhotos, result.uri])
+      setPhotos((prevPhotos) => {
+        const newPhotos = [...prevPhotos, result.assets[0].uri]
+        console.log('Photos after upload:', newPhotos)
+        return newPhotos
+      })
     }
   }
-
+  
   const handleDeletePhoto = (index) => {
     setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index))
   }
@@ -61,7 +69,12 @@ const TakeActionScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Take action</Text>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+          <Icon name="chevron-back" size={24} color={theme.colors.text} />
+        </TouchableOpacity>
+        <Text style={styles.header}>Take action</Text>
+      </View>
       <Text style={styles.subHeader}>Unplug for the day</Text>
       <Text style={styles.description}>
         Unplugging your electronics for a day not only reduces your personal
@@ -71,9 +84,12 @@ const TakeActionScreen = () => {
         (mitigate power outages and lower impact of energy production).
       </Text>
       <View style={styles.funFactContainer}>
-        <Icon name="bulb-outline" size={24} color="#000" style={styles.icon} />
+        <View style={styles.iconContainer}>
+          <Image source={Circle} style={styles.Circle} />
+          <Image source={BulbIcon} style={styles.BulbIcon} />
+        </View>
         <Text style={styles.funFactText}>
-          Fun fact: you can save up to $100 per year on your electricity bills
+          <b>Fun fact:</b> you can save up to $100 per year on your electricity bills
           by simply unplugging all of your electronics once a month!
         </Text>
       </View>
@@ -85,7 +101,7 @@ const TakeActionScreen = () => {
             style={styles.checkbox}
           >
             {checkedItems[item] && (
-              <Icon name="checkmark" size={20} color="black" />
+              <Icon name="checkmark" size={18} color="black" />
             )}
           </TouchableOpacity>
           <Text style={styles.checkboxLabel}>
@@ -106,7 +122,7 @@ const TakeActionScreen = () => {
             >
               <Icon name="close" size={16} color="white" />
             </TouchableOpacity>
-          </View>
+          </View> 
         ))}
         {photos.length < 4 && (
           <TouchableOpacity
@@ -135,61 +151,107 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#FFF',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    position: 'relative',
+  },
+  backButton: {
+    position: 'absolute',
+    left: 0,
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 16,
+    color: theme.colors.greet,
+    fontWeight: 500,
+    lineHeight: 22,
   },
   subHeader: {
-    fontSize: 20,
-    marginVertical: 10,
+    fontSize: 18,
+    fontWeight: 500,
+    lineHeight: 22,
+    marginBottom: 10,
   },
   description: {
     fontSize: 16,
-    marginVertical: 10,
+    fontWeight: 400,
+    lineHeight: 22,
+    letterSpacing: 0.16,
+    marginBottom: 20,
   },
   funFactContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     borderWidth: 1,
     borderColor: '#ccc',
-    padding: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
     marginBottom: 20,
     borderRadius: 5,
+    backgroundColor: '#F0F0F0',
   },
-  icon: {
-    marginRight: 10,
+  iconContainer: {
+    position: 'relative',
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderradius: 27,
+    gap: 16,
+    bottom:2,
+  },  
+  Circle: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain',
+  },
+  BulbIcon: {
+    position: 'absolute',
+    width: '50%',
+    height: '50%',
+    resizeMode: 'contain',
   },
   funFactText: {
     fontSize: 16,
+    fontWeight: 400,
+    lineHeight: 19,
+    marginLeft: 16,
     flexShrink: 1,
   },
   unplugText: {
+    color: '#000',
     fontSize: 16,
-    marginVertical: 10,
-    fontWeight: 'bold',
+    fontWeight: 600,
+    lineHeight: 19,
+    marginBottom: 20,
   },
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 5,
+    marginBottom: 16,
+    gap: 14,
   },
   checkbox: {
-    width: 20,
-    height: 20,
-    borderWidth: 1,
-    borderColor: '#ccc',
+    width: 16,
+    height: 16,
+    borderWidth: 2,
+    borderColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
   },
   checkboxLabel: {
     fontSize: 16,
+    fontWeight: 400,
+    lineHeight: 19,
   },
   photoLabel: {
     fontSize: 16,
-    marginVertical: 10,
+    marginBottom: 10,
     fontWeight: 'bold',
   },
   photoContainer: {
@@ -199,11 +261,12 @@ const styles = StyleSheet.create({
   },
   photoWrapper: {
     position: 'relative',
-    margin: 5,
+    margin: 5,  
   },
   photo: {
     width: 50,
     height: 50,
+    borderRadius: 5,
   },
   deleteButton: {
     position: 'absolute',
@@ -221,11 +284,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     margin: 5,
+    borderRadius: 5,
+    backgroundColor: '#F0F0F0',
   },
   completeButton: {
     marginTop: 20,
     padding: 15,
-    backgroundColor: '#000',
     borderRadius: 5,
     alignItems: 'center',
   },
@@ -235,4 +299,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default TakeActionScreen
+export default TakeActionScreen;

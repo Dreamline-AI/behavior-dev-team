@@ -18,7 +18,7 @@ import {
   RedoQuestionsScreen,
   IncorrectQuestionScreen,
 } from './src/screens'
-import LoginWithEmail from './src/screens/LoginWithEmail'
+// import LoginWithEmail from './src/screens/LoginWithEmail'
 // import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
 import LoginFacebook from './src/screens/LoginFacebook'

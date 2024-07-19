@@ -7,10 +7,13 @@ import Paragraph from '../components/Paragraph';
 import Button from '../components/Button';
 import { UserPic } from '../components/UserPic';
 import BottomNavigationBar from './BottomNavigationBar';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Dashboard({ route, navigation }) {
   const { userFirstName, userLastName } = route.params;
   const userName = `${userFirstName} ${userLastName}`;
+  // const navigation = useNavigation();
 
   return (
     <Background>
@@ -51,7 +54,10 @@ export default function Dashboard({ route, navigation }) {
             </View>
             <View style={styles.bottomContainer}>
               <Text style={styles.unplugText}>Unplug for a day</Text>
-              <TouchableOpacity style={styles.claimButton}>
+              <TouchableOpacity 
+                style={styles.claimButton} 
+                onPress={() => navigation.navigate('TakeActionScreen')}
+              >
                 <Text style={styles.claimButtonText}>Claim 500 coins</Text>
               </TouchableOpacity>
             </View>
