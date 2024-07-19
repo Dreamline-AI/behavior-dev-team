@@ -1,9 +1,5 @@
 package com.sustainability.mvp.firebase;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.stereotype.Service;
-
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;

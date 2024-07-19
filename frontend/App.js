@@ -19,9 +19,12 @@ import {
   IncorrectQuestionScreen,
 } from './src/screens'
 // import LoginWithEmail from './src/screens/LoginWithEmail'
+// import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
 import WelcomeScreen from './src/screens/WelcomeScreen.js'
 import LoginFacebook from './src/screens/LoginFacebook'
+import TakeActionScreen from './src/screens/TakeActionScreen.js'
+import Triviatoactionconnect from './src/screens/Triviatoactionconnect'
 import BottomNavigationBar from './src/screens/BottomNavigationBar';
 import ProfileScreen from './src/screens/ProfileScreen';
 import EditProfileScreen from './src/screens/EditProfileScreen';
@@ -39,6 +42,8 @@ export default function App() {
             headerShown: false,
           }}
         >
+          <Stack.Screen name="Triviatoactionconnect" component={Triviatoactionconnect} />
+          <Stack.Screen name="TakeActionScreen" component={TakeActionScreen} />
           <Stack.Screen name="SignUpForm" component={SignUpForm} />
           <Stack.Screen name="SignIn" component={SignIn} />
           <Stack.Screen name="StartScreen" component={StartScreen} />
