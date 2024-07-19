@@ -1,16 +1,13 @@
 import React from 'react';
-import Background from '../components/Background';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Background from '../components/Background';
 import Logo from '../components/Logo';
-import Header from '../components/Header';
-import Paragraph from '../components/Paragraph';
-import Button from '../components/Button';
 import { UserPic } from '../components/UserPic';
 import BottomNavigationBar from './BottomNavigationBar';
 
 export default function Dashboard({ route, navigation }) {
   const { userFirstName, userLastName } = route.params;
-  const userName = `${userFirstName} ${userLastName}`;
+  const userName = `${userFirstName} ${userLastName}`; 
 
   return (
     <Background>
@@ -28,14 +25,21 @@ export default function Dashboard({ route, navigation }) {
             </View>
   
           </View>
-          <Text style={styles.streak}>15 ⚡</Text>
+          <Text style={styles.streak}>15 </Text>
+          <Image source={require('../assets/zap.png')} style={styles.icon} />
         </View>
         
         <View style={styles.dailyChallengeBox}>
-          <Text style={styles.sectionTitle}>Daily Challenge</Text>
           <View style={styles.greyBox}>
-            <Text style={styles.challengeCategory}>Category 1</Text>
-            <Text style={styles.numOfQuestions}>20 questions</Text>
+            <View style={styles.iconContainer1}>
+            <Image source={require('../assets/dailychallenge.png')} style = {styles.headerImage}/>
+            </View>
+          </View>
+          <View style={styles.textContainer}>
+            <View style={styles.textInfo}>
+              <Text style={styles.challengeCategory}>Category 1</Text>
+              <Text style={styles.numOfQuestions}>20 questions</Text>
+            </View>
             <TouchableOpacity style={styles.startButton}>
               <Text style={styles.startButtonText}>Start!</Text>
             </TouchableOpacity>
@@ -86,7 +90,7 @@ export default function Dashboard({ route, navigation }) {
             </TouchableOpacity>
           </ScrollView>
         </View>
-        
+
         <View style={styles.revision}>
           <Text style={styles.sectionTitle}>Revisions</Text>
           <View style={styles.revisionContainer}>
@@ -100,7 +104,6 @@ export default function Dashboard({ route, navigation }) {
         </View>
         <BottomNavigationBar userName={userName} />
       </ScrollView>
-      
     </Background>
   );
 }
@@ -129,20 +132,20 @@ const styles = StyleSheet.create({
 
   },
   userPic: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     borderRadius: 20,
   },
   userDetails: {
     marginLeft: 10,
-    maxWidth: 180, // Adjust this value based on your design needs
+    maxWidth: 180, 
   },
   userName: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   userLevel: {
-    fontSize: 14,
+    fontSize: 11,
     color: '#666',
   },
   progressBarContainer: {
@@ -165,53 +168,94 @@ const styles = StyleSheet.create({
   dailyChallengeBox: {
     borderWidth: 1,
     borderColor: '#ddd',
-    padding: 10,
+    padding: 0,
     borderRadius: 8,
     backgroundColor: 'white',
-    marginBottom: 10,
+    marginBottom: 20,
     alignSelf: 'stretch',
     maxWidth: 300,
   },
-  sectionTitle: {
-    fontSize: 16,
+  sectionTitle1: {
+    fontSize: 10,
     marginBottom: 8,
+    fontWeight: 'bold',
+  },
+  headerImage:{
+    marginBottom:8,
+    width: 100,
+    height: 15,
+    padding:2,
+    marginRight: 2,
+    alignItems: 'flex-start',
+    marginTop: 4,
+  },
+  textContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
+  },
+  iconContainer1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#e8e8e8',
+    padding: 0,
+    height:23,
+    borderRadius: 6,
+    marginBottom: 4,
+    marginVertical: 0,
+    alignSelf: 'flex-start',
+  },
+
+  textInfo: {
+    flexDirection: 'column',
+  },
+  
+  sectionTitle: {
+    fontSize: 14,
+    marginBottom: 8,
+    fontWeight:'bold',
   },
   greyBox: {
     backgroundColor: '#f5f5f5',
-    padding: 12,
-    borderRadius: 8,
-    alignItems: 'center',
+    padding: 0,
+    borderRadius: 2,
+    marginBottom: 2,
+    alignItems: 'flex-start',
+    height: 100,
   },
   challengeCategory: {
+    marginTop:6,
     fontSize: 14,
-    color: '#666',
+    color: 'black',
   },
   numOfQuestions: {
     fontSize: 14,
-    color: '#666',
+    color: 'black',
     marginBottom: 8,
+    fontWeight: 'bold',
   },
   startButton: {
     backgroundColor: '#000',
     borderRadius: 8,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    alignSelf: 'center',
+    marginLeft: 1
   },
   startButtonText: {
     color: '#fff',
     fontSize: 14,
   },
   incompleteAction: {
-    marginBottom: 10,
+    marginBottom: 20,
     alignSelf: 'stretch',
     maxWidth: 300,
   },
   blackBox: {
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#ababab',
     borderRadius: 8,
-    padding: 12,
+    padding: 0,
     backgroundColor: 'transparent',
   },
   iconContainer: {
@@ -219,8 +263,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
     padding: 8,
-    borderRadius: 8,
+    borderRadius: 6,
     marginBottom: 8,
+    marginVertical: 0,
+    paddingTop: 3,
     alignSelf: 'flex-start',
   },
   icon: {
@@ -230,7 +276,7 @@ const styles = StyleSheet.create({
   },
   almostGoneText: {
     color: '#000',
-    fontSize: 14,
+    fontSize: 11,
     fontWeight: 'bold',
   },
   bottomContainer: {
@@ -241,22 +287,24 @@ const styles = StyleSheet.create({
   unplugText: {
     color: '#000',
     fontSize: 14,
+    marginLeft: 6,
   },
   claimButton: {
     borderWidth: 1,
     borderColor: '#000',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+    borderRadius: 2,
+    margin: 8,
     backgroundColor: 'transparent',
   },
   claimButtonText: {
     color: '#000',
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: 'bold',
   },
   availableIncentives: {
-    marginBottom: 10,
+    marginBottom: 20,
     alignSelf: 'stretch',
     maxWidth: 300,
   },
@@ -272,13 +320,14 @@ const styles = StyleSheet.create({
   incentivesContainer: {
     flexDirection: 'row',
     marginTop: 6,
+    
   },
   incentiveCard: {
     width: 70,
     height: 70,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eee',
+    backgroundColor: '#e8e8e8',
     borderRadius: 8,
     marginRight: 10,
   },
@@ -286,35 +335,43 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 8,
+    backgroundColor: '#f5f5f5',
   },
   revision: {
-    marginBottom: 10,
+    marginBottom: 15,
     alignSelf: 'stretch',
     maxWidth: 300,
   },
   revisionContainer: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    padding: 12,
-    borderRadius: 8,
-    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderWidth: 0,
+    borderColor: 'white',
+    padding: 0,
+    borderRadius: 1,
+    // backgroundColor: 'white',
     alignItems: 'center',
   },
   revisionText: {
-    fontSize: 14,
+    fontSize: 11,
     color: '#666',
-    textAlign: 'center',
-    marginBottom: 10,
+    textAlign: 'justify',
+    flex: 1,
+    marginRight: 10,
+    marginTop: 6,
+    marginBottom: 8,
   },
   roundButton: {
     backgroundColor: '#000',
-    borderRadius: 8,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    borderRadius: 10,
+    paddingHorizontal: 7,
+    paddingVertical: 6,
+    marginLeft:2,
+    paddingTop: 3,
   },
   roundButtonText: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: 11,
   },
 });
 
