@@ -42,17 +42,31 @@ const TakeActionScreen = () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
+      allowsMultipleSelection: true,
       aspect: [4, 3],
       quality: 1,
     })
-    console.log('result',result)
+    console.log('result', result)
     if (!result.canceled) {
-      // setPhotos((prevPhotos) => [...prevPhotos, result.uri])
-      setPhotos((prevPhotos) => {
-        const newPhotos = [...prevPhotos, result.assets[0].uri]
-        console.log('Photos after upload:', newPhotos)
-        return newPhotos
-      })
+      if (result.selected) {
+        setPhotos((prevPhotos) => {
+          const newPhotos = [...prevPhotos, ...result.selected.map((asset) => asset.uri)]
+          console.log('Photos after upload:', newPhotos)
+          return newPhotos
+        })
+      } else if (result.assets) {
+        setPhotos((prevPhotos) => {
+          const newPhotos = [...prevPhotos, ...result.assets.map((asset) => asset.uri)]
+          console.log('Photos after upload:', newPhotos)
+          return newPhotos
+        })
+      } else if (result.uri) {
+        setPhotos((prevPhotos) => {
+          const newPhotos = [...prevPhotos, result.uri]
+          console.log('Photos after upload:', newPhotos)
+          return newPhotos
+        })
+      }
     }
   }
   
