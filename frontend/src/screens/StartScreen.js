@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Background from '../components/Background';
@@ -41,23 +42,22 @@ export default function StartScreen({ navigation }) {
   }, [users]);
 
   useEffect(() => {
-    setIsEmailValid(!emailValidator(email.value));
-  }, [email.value]);
+    setIsEmailValid(!emailValidator(email.value))
+  }, [email.value])
 
   const onLoginPressed = () => {
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
+    const emailError = emailValidator(email.value)
+    const passwordError = passwordValidator(password.value)
     if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
+      setEmail({ ...email, error: emailError })
+      setPassword({ ...password, error: passwordError })
+      return
     }
     navigation.reset({
       index: 0,
       routes: [{ name: 'Dashboard' }],
-    });
-  };
-
+    })
+  }
   const isExistingUser = (userEmail, source) => {
     let user = users.filter(b => b.email === userEmail);
     if (user.length > 0) {
@@ -150,14 +150,14 @@ export default function StartScreen({ navigation }) {
       </Background>
     );
   }
-
+  
   return (
     <Background>
       <Header>Sign up or Sign in</Header>
 
       <TextInput
         title="Email"
-        label="Enter your email"
+        placeholder="Enter your email"
         returnKeyType="next"
         value={email.value}
         onChangeText={(text) => setEmail({ value: text, error: '' })}
@@ -170,9 +170,10 @@ export default function StartScreen({ navigation }) {
       />
 
       <Button
-        color={isEmailValid ? "black" : "gray"}
+        color={isEmailValid ? 'black' : 'gray'}
         mode="contained"
         disabled={!isEmailValid}
+
         onPress={onContinuePressed}
       >
         Continue
@@ -185,27 +186,41 @@ export default function StartScreen({ navigation }) {
       </View>
 
       <Button
-        color='white'
+        color="white"
         mode="contained"
         onPress={logGoogleUser}
         style={styles.buttonBorder}
-        icon={() => <AntDesign name="google" size={20} color="black" style={styles.iconStyle} />}
+        icon={() => (
+          <AntDesign
+            name="google"
+            size={20}
+            color="black"
+            style={styles.iconStyle}
+          />
+        )}
       >
         <Text style={styles.buttonText}>Continue with Google</Text>
       </Button>
-      
+
       <Button
-        color='white'
+        color="white"
         mode="contained"
         onPress={logFBUser}
         style={styles.buttonBorder}
-        icon={() => <MaterialIcon name="facebook" size={20} color="black" style={styles.iconStyle} />}
+        icon={() => (
+          <MaterialIcon
+            name="facebook"
+            size={20}
+            color="black"
+            style={styles.iconStyle}
+          />
+        )}
       >
         <Text style={styles.buttonText}>Continue with Facebook</Text>
       </Button>
-      
+
       <Button
-        color='white'
+        color="white"
         mode="contained"
         onPress={() => navigation.reset({
           index: 0,
@@ -218,16 +233,27 @@ export default function StartScreen({ navigation }) {
           }],
         })}
         style={styles.buttonBorder}
-        icon={() => <MaterialIcon name="apple" size={20} color="black" style={styles.iconStyle} />}
+        icon={() => (
+          <MaterialIcon
+            name="apple"
+            size={20}
+            color="black"
+            style={styles.iconStyle}
+          />
+        )}
       >
         <Text style={styles.buttonText}>Continue with Apple</Text>
       </Button>
-      
     </Background>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 54,
+    lineHeight: 20,
+    fontWeight: '500',
+  },
   separatorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -247,18 +273,17 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 8,
-    flexDirection: 'row', 
-    alignItems: 'center', 
+    flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 5,
   },
   iconStyle: {
-    marginRight: 10, 
+    marginRight: 10,
   },
   buttonText: {
     flex: 1,
     textAlign: 'center',
-    fontSize: 16, 
-    fontWeight: 'bold'
+    fontSize: 16,
+    fontWeight: 'bold',
   },
- 
-});
+})

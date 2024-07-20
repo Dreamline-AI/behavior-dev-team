@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Checkbox, Text } from 'react-native-paper';
@@ -22,7 +23,7 @@ export default function EmailSignUp({ navigation, route }) {
   const [password, setPassword] = useState({ value: '', error: '' });
   const [repeatPassword, setRepeatPassword] = useState({ value: '', error: '' });
   const [zipcode, setZipcode] = useState({ value: '', error: '' });
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false)
 
   const generateUserID = (firstName, lastName) => {
     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -30,20 +31,30 @@ export default function EmailSignUp({ navigation, route }) {
   };
 
   const onSignUpPressed = () => {
-    const firstNameError = nameValidator(firstName.value);
-    const lastNameError = nameValidator(lastName.value);
-    const passwordError = passwordValidator(password.value);
-    const repeatPasswordError = repeatPasswordValidator(repeatPassword.value, password.value);
-    const zipcodeError = zipcodeValidator(zipcode.value);
+    const firstNameError = nameValidator(firstName.value)
+    const lastNameError = nameValidator(lastName.value)
+    const passwordError = passwordValidator(password.value)
+    const repeatPasswordError = repeatPasswordValidator(
+      repeatPassword.value,
+      password.value
+    )
+    const zipcodeError = zipcodeValidator(zipcode.value)
 
-    if ( passwordError || repeatPasswordError || firstNameError || lastNameError || zipcodeError) {
-      setFirstName({ ...firstName, error: firstNameError });
-      setLastName({ ...lastName, error: lastNameError });
-      setPassword({ ...password, error: passwordError });
-      setRepeatPassword({ ...repeatPassword, error: repeatPasswordError });
-      setZipcode({ ...zipcode, error: zipcodeError });
-      return;
+    if (
+      passwordError ||
+      repeatPasswordError ||
+      firstNameError ||
+      lastNameError ||
+      zipcodeError
+    ) {
+      setFirstName({ ...firstName, error: firstNameError })
+      setLastName({ ...lastName, error: lastNameError })
+      setPassword({ ...password, error: passwordError })
+      setRepeatPassword({ ...repeatPassword, error: repeatPasswordError })
+      setZipcode({ ...zipcode, error: zipcodeError })
+      return
     }
+
 
     const userID = generateUserID(firstName.value, lastName.value);
 
@@ -80,7 +91,7 @@ export default function EmailSignUp({ navigation, route }) {
     } else {
       navigation.reset({
         index: 0,
-        routes: [{
+        routes: [
           name: 'Dashboard',
           params: {
             userFirstName: firstName.value,
@@ -91,14 +102,15 @@ export default function EmailSignUp({ navigation, route }) {
     }
   };
 
+
   return (
     <Background>
       <BackButton  />
       <Header>Sign up with Email</Header>
-     
+
       <TextInput
         title="Password"
-        label="Enter your password"
+        placeholder="Enter your password"
         returnKeyType="done"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -108,7 +120,7 @@ export default function EmailSignUp({ navigation, route }) {
       />
       <TextInput
         title="Repeat password"
-        label="Repeat your password"
+        placeholder="Repeat your password"
         returnKeyType="done"
         value={repeatPassword.value}
         onChangeText={(text) => setRepeatPassword({ value: text, error: '' })}
@@ -118,7 +130,7 @@ export default function EmailSignUp({ navigation, route }) {
       />
       <TextInput
         title="First name"
-        label="Enter your first name"
+        placeholder="Enter your first name"
         returnKeyType="next"
         value={firstName.value}
         onChangeText={(text) => setFirstName({ value: text, error: '' })}
@@ -127,7 +139,7 @@ export default function EmailSignUp({ navigation, route }) {
       />
       <TextInput
         title="Last name"
-        label="Enter your last name"
+        placeholder="Enter your last name"
         returnKeyType="next"
         value={lastName.value}
         onChangeText={(text) => setLastName({ value: text, error: '' })}
@@ -136,7 +148,7 @@ export default function EmailSignUp({ navigation, route }) {
       />
       <TextInput
         title="Your zipcode"
-        label="Enter your zipcode"
+        placeholder="Enter your zipcode"
         returnKeyType="next"
         keyboardType="numeric"
         maxLength={5}
@@ -145,7 +157,8 @@ export default function EmailSignUp({ navigation, route }) {
         error={!!zipcode.error}
         errorText={zipcode.error}
       />
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+      <View style={styles.checkboxContainer}>
         <Checkbox
           status={isChecked ? 'checked' : 'unchecked'}
           onPress={() => setIsChecked(!isChecked)}
@@ -162,7 +175,7 @@ export default function EmailSignUp({ navigation, route }) {
         Sign Up
       </Button>
     </Background>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -174,4 +187,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.primary,
   },
-});
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+})
