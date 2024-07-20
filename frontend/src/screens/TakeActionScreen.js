@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { theme } from '../core/theme'
 import BulbIcon from '../assets/BulbIcon.png'
 import Circle from '../assets/Circle.png'
+import CheckIcon from '../assets/check.png' // Import the custom check icon
 
 const TakeActionScreen = () => {
   const navigation = useNavigation()
@@ -39,37 +40,32 @@ const TakeActionScreen = () => {
       return
     }
 
+    if (photos.length >= 4) {
+      alert('You can only upload up to 4 photos.')
+      return
+    }
+
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      allowsMultipleSelection: true,
+      allowsMultipleSelection: true, 
       aspect: [4, 3],
       quality: 1,
     })
     console.log('result', result)
+
     if (!result.canceled) {
-      if (result.selected) {
-        setPhotos((prevPhotos) => {
-          const newPhotos = [...prevPhotos, ...result.selected.map((asset) => asset.uri)]
-          console.log('Photos after upload:', newPhotos)
-          return newPhotos
-        })
-      } else if (result.assets) {
-        setPhotos((prevPhotos) => {
-          const newPhotos = [...prevPhotos, ...result.assets.map((asset) => asset.uri)]
-          console.log('Photos after upload:', newPhotos)
-          return newPhotos
-        })
-      } else if (result.uri) {
-        setPhotos((prevPhotos) => {
-          const newPhotos = [...prevPhotos, result.uri]
-          console.log('Photos after upload:', newPhotos)
-          return newPhotos
-        })
-      }
+      const newPhotos = result.assets
+        ? result.assets.map((asset) => asset.uri)
+        : [result.uri]
+      setPhotos((prevPhotos) => {
+        const updatedPhotos = [...prevPhotos, ...newPhotos].slice(0, 4)
+        console.log('Photos after upload:', updatedPhotos)
+        return updatedPhotos
+      })
     }
   }
-  
+
   const handleDeletePhoto = (index) => {
     setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index))
   }
@@ -115,7 +111,7 @@ const TakeActionScreen = () => {
             style={styles.checkbox}
           >
             {checkedItems[item] && (
-              <Icon name="checkmark" size={18} color="black" />
+              <Image source={CheckIcon} style={styles.checkIcon} /> // Use the custom check icon
             )}
           </TouchableOpacity>
           <Text style={styles.checkboxLabel}>
@@ -257,6 +253,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
+  },
+  checkIcon: {
+    width: 16,
+    height: 16,
   },
   checkboxLabel: {
     fontSize: 16,
