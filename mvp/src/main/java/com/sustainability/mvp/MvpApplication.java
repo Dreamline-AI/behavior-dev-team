@@ -1,13 +1,15 @@
 package com.sustainability.mvp;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.core.io.ClassPathResource;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
@@ -16,24 +18,29 @@ import com.google.firebase.FirebaseOptions;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MvpApplication {
 
-    public static void main(String[] args) throws IOException {
-        try {
-            String googleApplicationCredentials = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
-            if (googleApplicationCredentials == null) {
-                throw new IllegalArgumentException("GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.");
-            }
+	public static void main(String[] args) throws IOException {
 
-            FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.getApplicationDefault())
-                    .build();
+		ClassLoader classLoader = MvpApplication.class.getClassLoader();
+		InputStream inputStream =  new ClassPathResource("/serviceAccountKey.json").getInputStream();
+		File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json")).getFile());
 
-            if (FirebaseApp.getApps().isEmpty()) {
-                FirebaseApp.initializeApp(options);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+		try {
+			FileInputStream serviceAccount =
+					new FileInputStream("/Users/nikit/DreamLine/behavior-dev-team-nik/mvp/src/main/resources/serviceAccountKey.json");
 
-        SpringApplication.run(MvpApplication.class, args);
-    }
+			FirebaseOptions options = new FirebaseOptions.Builder()
+					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+					.build();
+
+			if (FirebaseApp.getApps().isEmpty()) {
+				FirebaseApp.initializeApp(options);
+			}
+
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		SpringApplication.run(MvpApplication.class, args);
+	}
+
 }
