@@ -1,10 +1,7 @@
 package com.sustainability.mvp;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Objects;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,29 +15,26 @@ import com.google.firebase.FirebaseOptions;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class MvpApplication {
 
-	public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
+        try {
+            initializeFirebase();
+            SpringApplication.run(MvpApplication.class, args);
+        } catch (IOException e) {
+            System.err.println("Failed to initialize Firebase: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
-		ClassLoader classLoader = MvpApplication.class.getClassLoader();
-		InputStream inputStream =  new ClassPathResource("/serviceAccountKey.json").getInputStream();
-		File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json")).getFile());
+    private static void initializeFirebase() throws IOException {
+        ClassPathResource resource = new ClassPathResource("serviceAccountKey.json");
+        InputStream serviceAccount = resource.getInputStream();
 
-		try {
-			FileInputStream serviceAccount =
-					new FileInputStream("/Users/nikit/DreamLine/behavior-dev-team-nik/mvp/src/main/resources/serviceAccountKey.json");
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .build();
 
-			FirebaseOptions options = new FirebaseOptions.Builder()
-					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-					.build();
-
-			if (FirebaseApp.getApps().isEmpty()) {
-				FirebaseApp.initializeApp(options);
-			}
-
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		SpringApplication.run(MvpApplication.class, args);
-	}
-
+        if (FirebaseApp.getApps().isEmpty()) {
+            FirebaseApp.initializeApp(options);
+        }
+    }
 }
