@@ -1,34 +1,36 @@
-
-import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Checkbox, Text } from 'react-native-paper';
-import Background from '../components/Background';
-import Header from '../components/Header';
-import Button from '../components/Button';
-import TextInput from '../components/TextInput';
-import BackButton from '../components/BackButton';
-import { theme } from '../core/theme';
-import { emailValidator } from '../helpers/emailValidator';
-import { passwordValidator } from '../helpers/passwordValidator';
-import { repeatPasswordValidator } from '../helpers/repeatPasswordValidator';
-import { nameValidator } from '../helpers/nameValidator';
-import { zipcodeValidator } from '../helpers/zipcodeValidator';
-import axios from 'axios';
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
+import React, { useState } from 'react'
+import { View, StyleSheet } from 'react-native'
+import { Checkbox, Text } from 'react-native-paper'
+import axios from 'axios'
+import Background from '../components/Background'
+import Header from '../components/Header'
+import Button from '../components/Button'
+import TextInput from '../components/TextInput'
+import BackButton from '../components/BackButton'
+import { theme } from '../core/theme'
+import { emailValidator } from '../helpers/emailValidator'
+import { passwordValidator } from '../helpers/passwordValidator'
+import { repeatPasswordValidator } from '../helpers/repeatPasswordValidator'
+import { nameValidator } from '../helpers/nameValidator'
+import { zipcodeValidator } from '../helpers/zipcodeValidator'
 
 export default function EmailSignUp({ navigation, route }) {
-  const { email } = route.params; // Get the email from route parameters
+  const { email } = route.params // Get the email from route parameters
 
-  const [firstName, setFirstName] = useState({ value: '', error: '' });
-  const [lastName, setLastName] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
-  const [repeatPassword, setRepeatPassword] = useState({ value: '', error: '' });
-  const [zipcode, setZipcode] = useState({ value: '', error: '' });
+  const [firstName, setFirstName] = useState({ value: '', error: '' })
+  const [lastName, setLastName] = useState({ value: '', error: '' })
+  const [password, setPassword] = useState({ value: '', error: '' })
+  const [repeatPassword, setRepeatPassword] = useState({ value: '', error: '' })
+  const [zipcode, setZipcode] = useState({ value: '', error: '' })
   const [isChecked, setIsChecked] = useState(false)
 
   const generateUserID = (firstName, lastName) => {
-    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    return capitalize(firstName) + capitalize(lastName);
-  };
+    const capitalize = (str) =>
+      str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+    return capitalize(firstName) + capitalize(lastName)
+  }
 
   const onSignUpPressed = () => {
     const firstNameError = nameValidator(firstName.value)
@@ -55,57 +57,60 @@ export default function EmailSignUp({ navigation, route }) {
       return
     }
 
-
-    const userID = generateUserID(firstName.value, lastName.value);
+    const userID = generateUserID(firstName.value, lastName.value)
 
     if (isChecked) {
       // Call the save user API
       const userData = {
         firstName: firstName.value,
         lastName: lastName.value,
-        email: email,
+        email,
         zipcode: zipcode.value,
         password: password.value,
-        userID: userID,
-      };
+        userID,
+      }
 
-      axios.post('http://localhost:8080/api/users', userData)
-        .then(response => {
-          console.log('User saved:', response.data);
+      axios
+        .post('http://localhost:8080/api/users', userData)
+        .then((response) => {
+          console.log('User saved:', response.data)
           navigation.reset({
             index: 0,
-            routes: [{
-              name: 'WelcomeScreen',
-              params: {
-                userFirstName: firstName.value,
-                userLastName: lastName.value,
-                userEmail: email,
+            routes: [
+              {
+                name: 'WelcomeScreen',
+                params: {
+                  userFirstName: firstName.value,
+                  userLastName: lastName.value,
+                  userEmail: email,
+                },
               },
-            }],
-          });
+            ],
+          })
         })
-        .catch(error => {
-          console.error('Error saving user:', error);
+        .catch((error) => {
+          console.error('Error saving user:', error)
           // Handle the error (e.g., show a toast message)
-        });
+        })
     } else {
       navigation.reset({
         index: 0,
         routes: [
-          name: 'Dashboard',
-          params: {
-            userFirstName: firstName.value,
-            userLastName: lastName.value,
+          {
+            name: 'Dashboard',
+            params: {
+              userFirstName: firstName.value,
+              userLastName: lastName.value,
+            },
           },
-        }],
-      });
+        ],
+      })
     }
-  };
-
+  }
 
   return (
     <Background>
-      <BackButton  />
+      <BackButton />
       <Header>Sign up with Email</Header>
 
       <TextInput
