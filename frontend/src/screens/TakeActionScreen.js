@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native'
 import { theme } from '../core/theme'
 import BulbIcon from '../assets/BulbIcon.png'
 import Circle from '../assets/Circle.png'
-import CheckIcon from '../assets/check.png' // Import the custom check icon
+import CheckIcon from '../assets/check.png' 
 
 const TakeActionScreen = () => {
   const navigation = useNavigation()
@@ -111,7 +111,7 @@ const TakeActionScreen = () => {
             style={styles.checkbox}
           >
             {checkedItems[item] && (
-              <Image source={CheckIcon} style={styles.checkIcon} /> // Use the custom check icon
+              <Image source={CheckIcon} style={styles.checkIcon} /> 
             )}
           </TouchableOpacity>
           <Text style={styles.checkboxLabel}>
