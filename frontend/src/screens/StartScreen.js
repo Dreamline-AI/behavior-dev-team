@@ -1,21 +1,44 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Background from '../components/Background';
-import Logo from '../components/Logo';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
+import LoadScreen from './LoadScreen';
 import { emailValidator } from '../helpers/emailValidator';
-import { passwordValidator } from '../helpers/passwordValidator';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { signInWithGooglePopup } from '../../firebaseConfig'
-import { signInWithFacebookPopup } from '../../firebaseConfig'
+import { signInWithGooglePopup, signInWithFacebookPopup } from '../../firebaseConfig';
+import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function StartScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [authLoading, setAuthLoading] = useState(false); // Authentication loading state
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/users")
+      .then(response => {
+        console.log('Data:', response.data);
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        toast.error('Unable to fetch users. Please try again later.');
+      })
+      .finally(() => {
+        setLoading(false); // Set loading to false after API call is complete
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log('Updated Users:', users);
+  }, [users]);
 
   useEffect(() => {
     setIsEmailValid(!emailValidator(email.value));
@@ -35,35 +58,99 @@ export default function StartScreen({ navigation }) {
     });
   };
 
-  const [isFirstTimeSignIn, setIsFirstTimeSignIn] = useState(true);
-  const logGoogleUser = async () => {
-    const response = await signInWithGooglePopup();
-    console.log('response-->', response);
-
-    if (await response?.user?.getIdToken()) {
-      // Check if it's the first time sign-in
-    if (isFirstTimeSignIn) {
-      setIsFirstTimeSignIn(false); 
-      navigation.navigate('SignUpForm');
+  const isExistingUser = (userEmail, source) => {
+    let user = users.filter(b => b.email === userEmail);
+    if (user.length > 0) {
+      if (source === 'continue') {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'SignIn', params: { user: user[0] } }],
+        });
+      } else if (source === 'auth') {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'WelcomeScreen',
+          params: {
+            userFirstName: user[0].firstName,
+            userLastName: user[0].lastName,
+          },
+          }],
+        });
+      }
     } else {
-      // Navigate to a different screen for returning users
-      navigation.navigate('Dashboard');
+      if (source === 'continue') {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'EmailSignUp', params: { email: email.value } }],
+        });
+      } else if (source === 'auth') {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'LoginWithGFA', params: { email: userEmail } }],
+        });
+      }
     }
-  } else {
-    // Handle sign-in failure
-  }
-};
-const logFBUser = async () => {
+  };
 
-  const response = await signInWithFacebookPopup();
-  console.log('response-->', response);
+  const onContinuePressed = () => {
+    const emailError = emailValidator(email.value);
+    if (emailError) {
+      setEmail({ ...email, error: emailError });
+      return;
+    } else {
+      isExistingUser(email.value, 'continue');
+    }
+  };
 
-  if (await response?.user?.getIdToken()) {
-    navigation.navigate('SignUpForm');
-  } else {
-    // back to login or signup screen
+  const [isFirstTimeSignIn, setIsFirstTimeSignIn] = useState(true);
+
+  const logGoogleUser = async () => {
+    setAuthLoading(true); // Set auth loading to true
+    try {
+      const response = await signInWithGooglePopup();
+      console.log('response-->', response);
+
+      if (response?.user?.email) {
+        isExistingUser(response.user.email, 'auth');
+      } else {
+        toast.error('Google authentication failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Google authentication error:', error);
+      toast.error('Google authentication failed. Please try again.');
+    } finally {
+      setAuthLoading(false); // Set auth loading to false
+    }
+  };
+
+  const logFBUser = async () => {
+    setAuthLoading(true); // Set auth loading to true
+    try {
+      const response = await signInWithFacebookPopup();
+      console.log('response-->', response);
+
+      if (response?.user?.email) {
+        isExistingUser(response.user.email, 'auth');
+      } else {
+        toast.error('Facebook authentication failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Facebook authentication error:', error);
+      toast.error('Facebook authentication failed. Please try again.');
+    } finally {
+      setAuthLoading(false); // Set auth loading to false
+    }
+  };
+
+  if (loading || authLoading) {
+    // Show loading indicator while fetching data or authenticating
+    return (
+      <Background>
+        <LoadScreen />
+      </Background>
+    );
   }
-}
+
   return (
     <Background>
       <Header>Sign up or Sign in</Header>
@@ -80,14 +167,13 @@ const logFBUser = async () => {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
-       
       />
 
       <Button
         color={isEmailValid ? "black" : "gray"}
         mode="contained"
         disabled={!isEmailValid}
-        onPress={() => navigation.navigate('LoginWithGFA')}
+        onPress={onContinuePressed}
       >
         Continue
       </Button>
@@ -121,7 +207,16 @@ const logFBUser = async () => {
       <Button
         color='white'
         mode="contained"
-        onPress={() => navigation.navigate('LoginWithGFA')}
+        onPress={() => navigation.reset({
+          index: 0,
+          routes: [{
+            name: 'Dashboard',
+            params: {
+              userFirstName: "test",
+              userLastName: "user",
+            },
+          }],
+        })}
         style={styles.buttonBorder}
         icon={() => <MaterialIcon name="apple" size={20} color="black" style={styles.iconStyle} />}
       >
