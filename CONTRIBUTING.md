@@ -1,6 +1,5 @@
-# Project Development Workflow
 
-## Branch Protection Rules
+# Branch Protection Rules
 
 We have implemented the following branch protection rules for our main branch to ensure code quality and maintain a structured development process:
 
@@ -18,11 +17,11 @@ We have implemented the following branch protection rules for our main branch to
 
 To contribute to this project, please follow these steps:
 
-1. **Create a new branch**: 
+1. **Create a new branch**:
    - Start by creating a new branch from the latest version of the main branch.
    - Use a descriptive name for your branch, e.g., `feature/add-login` or `bugfix/fix-database-connection`.
 
-2. **Make your changes**: 
+2. **Make your changes**:
    - Commit your changes to your new branch.
    - Push your branch to the remote repository.
 
