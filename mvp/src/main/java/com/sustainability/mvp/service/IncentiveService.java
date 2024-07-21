@@ -22,7 +22,7 @@ public class IncentiveService {
 //        Saves an incentive to Firestore and if an incentive with the same ID exists, it updates the existing record.
         Firestore dbFirestore = FirestoreClient.getFirestore();
         ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME)
-                .document(incentive.getUserID()) // Assume there is a getIncentiveID method in Incentive class
+                .document() // Assume there is a getIncentiveID method in Incentive class
                 .set(incentive);
         return collectionApiFuture.get().getUpdateTime().toString();
     }
@@ -30,7 +30,7 @@ public class IncentiveService {
 //        Retrieves all incentive Information from Firestore.
         Firestore dbFirestore = FirestoreClient.getFirestore();
         List<Incentive> incentiveList = new ArrayList<>();
-        ApiFuture<QuerySnapshot> future = dbFirestore.collection(COLLECTION_NAME).get();
+        ApiFuture<QuerySnapshot> future = dbFirestore.collection("Incentives").get();
 
         for (QueryDocumentSnapshot document : future.get().getDocuments()) {
             incentiveList.add(document.toObject(Incentive.class));
@@ -38,34 +38,48 @@ public class IncentiveService {
         return incentiveList;
     }
 
-    public List<Incentive> getIncentivesByUser(@PathVariable String userID) throws ExecutionException, InterruptedException {
+    public Incentive getIncentiveById(@PathVariable String id) throws ExecutionException, InterruptedException {
         // This function fetches the specific incentive information associated with a specific user ID.
         Firestore dbFirestore = FirestoreClient.getFirestore();
         List<Incentive> incentives = new ArrayList<>();
-        ApiFuture<QuerySnapshot> querySnapshot = dbFirestore.collection(COLLECTION_NAME)
-                .whereEqualTo("userID", userID)
+        ApiFuture<QuerySnapshot> querySnapshot = dbFirestore.collection("Incentives")
+                .whereEqualTo("id", id)
                 .get();
 
         for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
             incentives.add(document.toObject(Incentive.class));
         }
-        return incentives;
+        return incentives.get(0);
     }
 
-    public List<Incentive> getIncentivesByTypeAndUser(@PathVariable String userID,@PathVariable String type) throws ExecutionException, InterruptedException {
-        //Retrieves all incentives of a specific type associated with a specific user ID and returns list of incentive objects
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        List<Incentive> incentives = new ArrayList<>();
-        ApiFuture<QuerySnapshot> querySnapshot = dbFirestore.collection(COLLECTION_NAME)
-                .whereEqualTo("userID", userID)
-                .whereEqualTo("type", type)
-                .get();
+//    public List<Incentive> getIncentivesByUser(@PathVariable String userID) throws ExecutionException, InterruptedException {
+//        // This function fetches the specific incentive information associated with a specific user ID.
+//        Firestore dbFirestore = FirestoreClient.getFirestore();
+//        List<Incentive> incentives = new ArrayList<>();
+//        ApiFuture<QuerySnapshot> querySnapshot = dbFirestore.collection(COLLECTION_NAME)
+//                .whereEqualTo("userID", userID)
+//                .get();
+//
+//        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+//            incentives.add(document.toObject(Incentive.class));
+//        }
+//        return incentives;
+//    }
 
-        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
-            incentives.add(document.toObject(Incentive.class));
-        }
-        return incentives;
-    }
+//    public List<Incentive> getIncentivesByTypeAndUser(@PathVariable String userID,@PathVariable String type) throws ExecutionException, InterruptedException {
+//        //Retrieves all incentives of a specific type associated with a specific user ID and returns list of incentive objects
+//        Firestore dbFirestore = FirestoreClient.getFirestore();
+//        List<Incentive> incentives = new ArrayList<>();
+//        ApiFuture<QuerySnapshot> querySnapshot = dbFirestore.collection(COLLECTION_NAME)
+//                .whereEqualTo("userID", userID)
+//                .whereEqualTo("type", type)
+//                .get();
+//
+//        for (DocumentSnapshot document : querySnapshot.get().getDocuments()) {
+//            incentives.add(document.toObject(Incentive.class));
+//        }
+//        return incentives;
+//    }
 //    public String updatePhoto(Incentive incentive) throws ExecutionException, InterruptedException {
 //
 //        Firestore dbFirestore = FirestoreClient.getFirestore();

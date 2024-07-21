@@ -1,53 +1,52 @@
 package com.sustainability.mvp.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Incentive {
-    public String type; //saves the specific type of incentive, like (cool,solar,utility, water,transportation, roof)
-    public String facts;
-    public String photo;
-    public List<String> actions; //saves the option of actions user decides to take, from the variety of tv ac, washer+drier, vacuum cleaner
-    public String dailyNote;
-    public String userID; //saves userid to reference from user profile
+    // New fields based on Firebase data
+    public String id;
+    public String heading;
+    public String image;
+    public String title;
+    public String apply_content;
+    public String unlock_content;
 
-    public String getUserID(){ return userID; }
-    public void setUserID(String userID){ this.userID = userID;}
+    public List<ContentSection> content;
 
-    public String getType() {
-        return type;
-    }
+    // Getters and setters for new fields
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-    public List<String> getActions() {
-        return actions;
-    }
+    public String getHeading() { return heading; }
+    public void setHeading(String heading) { this.heading = heading; }
 
-    public void setActions(List<String> actions) {
-        this.actions = actions;
-    }
-    public String getFacts() {
-        return facts;
-    }
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 
-    public void setFacts(String facts) {
-        this.facts = facts;
-    }
-    public String getPhoto(){
-        return photo;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-    public String getDailyNote() {
-        return dailyNote;
-    }
+    public String getApply_content() { return apply_content; }
+    public void setApply_content(String apply_content) { this.apply_content = apply_content; }
 
-    public void setDailyNote(String dailyNote) {
-        this.dailyNote = dailyNote;
+    public String getUnlock_content() { return unlock_content; }
+    public void setUnlock_content(String unlock_content) { this.unlock_content = unlock_content; }
+
+    public List<ContentSection> getContent() { return content; }
+    public void setContent(List<ContentSection> content) { this.content = content; }
+
+    // Inner class to represent content sections
+    public static class ContentSection {
+        public String subtitle;
+        public List<String> description;
+
+        public String getSubtitle() { return subtitle; }
+        public void setSubtitle(String subtitle) { this.subtitle = subtitle; }
+
+        public List<String> getDescription() { return description; }
+        public void setDescription(List<String> description) { this.description = description; }
     }
-
-
 }
+
