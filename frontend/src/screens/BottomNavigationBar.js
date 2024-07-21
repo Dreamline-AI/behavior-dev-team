@@ -19,7 +19,7 @@ export default function BottomNavigationBar({userName}) {
         navigation.navigate('RewardScreen'); // create the screen later
         break;
       case 'Shop':
-        navigation.navigate('ShopScreen'); // create the screen later
+        navigation.navigate('IncentivesList'); // create the screen later
         break;
       default:
         break;

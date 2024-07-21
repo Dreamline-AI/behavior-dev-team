@@ -3,6 +3,7 @@ import { SafeAreaView, ScrollView, View, Text, StyleSheet, TouchableOpacity } fr
 import BackButton from '../components/BackButton';
 import Header from '../components/Header';
 import Background from '../components/Background';
+import LoadScreen from './LoadScreen';
 
 export default function IncentiveDetailPage({ route, navigation }) {
   const [incentive, setIncentive] = useState(null);
@@ -17,7 +18,11 @@ export default function IncentiveDetailPage({ route, navigation }) {
   }, [incentiveId]);
 
   if (!incentive) {
-    return <Text>Loading...</Text>;
+    return (
+      <Background>
+        <LoadScreen />
+      </Background>
+    );
   }
 
   return (
