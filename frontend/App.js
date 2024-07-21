@@ -12,13 +12,14 @@ import {
   RegisterScreen,
   ResetPasswordScreen,
   Dashboard,
+  IncentivesList,
+  IncentiveDetailPage,
   QuizScreen,
   QuizEndingScreen,
   QuizStreakScreen,
   RedoQuestionsScreen,
   IncorrectQuestionScreen,
 } from './src/screens'
-// import LoginWithEmail from './src/screens/LoginWithEmail'
 // import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
 import WelcomeScreen from './src/screens/WelcomeScreen.js'
@@ -37,7 +38,7 @@ export default function App() {
     <Provider theme={theme}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="StartScreen"
+          initialRouteName="IncentivesList"
           screenOptions={{
             headerShown: false,
           }}
@@ -54,6 +55,8 @@ export default function App() {
           <Stack.Screen name="EmailSignUp" component={EmailSignUp} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="IncentivesList" component={IncentivesList} />
+          <Stack.Screen name="IncentiveDetailPage" component={IncentiveDetailPage} />
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="BottomNavigationBar" component={BottomNavigationBar} />
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
