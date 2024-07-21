@@ -19,15 +19,15 @@ class IncentiveController {
      * Create a new incentive.
      * @param incentive The Incentive object to be saved, passed in the request body.
      * @return A string indicating the update timestamp upon successful save.
- * */
+     * */
 //    @PostMapping("/incentives")
 //    public String saveIncentive(@RequestBody Incentive incentive) throws ExecutionException, InterruptedException {
 //        return incentiveService.saveIncentive(incentive);
 //    }
-/**
- * Retrieves incentive info saved in the firebase.
- * @return A list of all Incentive objects.
- * */
+    /**
+     * Retrieves incentive info saved in the firebase.
+     * @return A list of all Incentive objects.
+     * */
     @GetMapping("/incentives")
     public List<Incentive> getAllIncentives() throws ExecutionException, InterruptedException {
         return incentiveService.getIncentiveInfo();

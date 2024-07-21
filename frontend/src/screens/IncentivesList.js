@@ -73,24 +73,7 @@ export default function IncentivesList({ navigation }) {
   }
   
   const styles = StyleSheet.create({
-    topNavigation: {
-      width: 390,
-      height: 38,
-      paddingTop: 8,
-      paddingHorizontal: 0,
-    //   flexDirection: 'row', 
-      alignItems: 'center',
-    //   justifyContent: 'flex-start', 
-      // gap: 8,
-      opacity: 1, 
-      // position: 'initial',
-      top: 54,
-    },
-    container: {
-        // flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
+    
       // safeArea: {
       //   flex: 1, 
       //   height: '100%',
