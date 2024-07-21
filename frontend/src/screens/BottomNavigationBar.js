@@ -62,11 +62,11 @@ export default function BottomNavigationBar({ userName}) {
       {activeTab !== 'Rewards' && (
         <>
           {/* Green circle indicator */}
-          <View style={[styles.indicatorContainer, { left: `${tabWidth * tabIndex + tabWidth / 2 - 5}px` }]}>
+          <View style={[styles.indicatorContainer, { left: `${tabWidth * tabIndex + tabWidth / 2 - 7}px` }]}>
             <View style={styles.indicator} />
           </View>
           {/* Red bar */}
-          <View style={[styles.fixedRedBar, { left: `${tabWidth * 2 + tabWidth / 2 - 5}px` }]} />
+          <View style={[styles.fixedRedBar, { left: `${tabWidth * 2 + tabWidth / 2 - 14}px` }]} />
         </>
       )}
     </View>
