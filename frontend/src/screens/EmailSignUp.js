@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
+/* eslint-disable no-shadow */
 import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Checkbox, Text } from 'react-native-paper'
+import axios from 'axios'
 import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
@@ -14,61 +16,106 @@ import { repeatPasswordValidator } from '../helpers/repeatPasswordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 import { zipcodeValidator } from '../helpers/zipcodeValidator'
 
-export default function EmailSignUp({ navigation }) {
-  const [name, setName] = useState({ value: '', error: '' })
-  const [email, setEmail] = useState({ value: '', error: '' })
+export default function EmailSignUp({ navigation, route }) {
+  const { email } = route.params // Get the email from route parameters
+
+  const [firstName, setFirstName] = useState({ value: '', error: '' })
+  const [lastName, setLastName] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [repeatPassword, setRepeatPassword] = useState({ value: '', error: '' })
-  const [zipcode, setZipcode] = useState({value: '', error: '' })
+  const [zipcode, setZipcode] = useState({ value: '', error: '' })
   const [isChecked, setIsChecked] = useState(false)
 
+  const generateUserID = (firstName, lastName) => {
+    const capitalize = (str) =>
+      str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+    return capitalize(firstName) + capitalize(lastName)
+  }
+
   const onSignUpPressed = () => {
-    const nameError = nameValidator(name.value)
-    const emailError = emailValidator(email.value)
+    const firstNameError = nameValidator(firstName.value)
+    const lastNameError = nameValidator(lastName.value)
     const passwordError = passwordValidator(password.value)
-    const repeatPasswordError = repeatPasswordValidator(repeatPassword.value, password.value)
+    const repeatPasswordError = repeatPasswordValidator(
+      repeatPassword.value,
+      password.value
+    )
     const zipcodeError = zipcodeValidator(zipcode.value)
 
-    if (emailError || passwordError|| repeatPasswordError || nameError || zipcodeError) {
-      setName({ ...name, error: nameError })
-      setEmail({ ...email, error: emailError })
+    if (
+      passwordError ||
+      repeatPasswordError ||
+      firstNameError ||
+      lastNameError ||
+      zipcodeError
+    ) {
+      setFirstName({ ...firstName, error: firstNameError })
+      setLastName({ ...lastName, error: lastNameError })
       setPassword({ ...password, error: passwordError })
       setRepeatPassword({ ...repeatPassword, error: repeatPasswordError })
-      setZipcode({ ...zipcode, error: zipcodeError})
+      setZipcode({ ...zipcode, error: zipcodeError })
       return
     }
- 
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard',
-      params: {
-        userName: name.value,},
-     }],
-    })
+
+    const userID = generateUserID(firstName.value, lastName.value)
+
+    if (isChecked) {
+      // Call the save user API
+      const userData = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email,
+        zipcode: zipcode.value,
+        password: password.value,
+        userID,
+      }
+
+      axios
+        .post('http://localhost:8080/api/users', userData)
+        .then((response) => {
+          console.log('User saved:', response.data)
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'WelcomeScreen',
+                params: {
+                  userFirstName: firstName.value,
+                  userLastName: lastName.value,
+                  userEmail: email,
+                },
+              },
+            ],
+          })
+        })
+        .catch((error) => {
+          console.error('Error saving user:', error)
+          // Handle the error (e.g., show a toast message)
+        })
+    } else {
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: 'Dashboard',
+            params: {
+              userFirstName: firstName.value,
+              userLastName: lastName.value,
+            },
+          },
+        ],
+      })
+    }
   }
 
   return (
-  
     <Background>
-      <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Header>Sign Up with Email</Header>
-      <TextInput
-        title="Email"
-        label="Enter your email"
-        returnKeyType="next"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
-        error={!!name.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
+      <BackButton />
+      <Header>Sign up with Email</Header>
+
       <TextInput
         title="Password"
-        label="Password"
+        placeholder="Enter your password"
         returnKeyType="done"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -77,8 +124,8 @@ export default function EmailSignUp({ navigation }) {
         secureTextEntry
       />
       <TextInput
-        title="Repeat your password"
-        label="Repeat Password"
+        title="Repeat password"
+        placeholder="Repeat your password"
         returnKeyType="done"
         value={repeatPassword.value}
         onChangeText={(text) => setRepeatPassword({ value: text, error: '' })}
@@ -87,17 +134,26 @@ export default function EmailSignUp({ navigation }) {
         secureTextEntry
       />
       <TextInput
-        title="Your name"
-        label="Your name"
+        title="First name"
+        placeholder="Enter your first name"
         returnKeyType="next"
-        value={name.value}
-        onChangeText={(text) => setName({ value: text, error: '' })}
-        error={!!name.error}
-        errorText={name.error}
+        value={firstName.value}
+        onChangeText={(text) => setFirstName({ value: text, error: '' })}
+        error={!!firstName.error}
+        errorText={firstName.error}
+      />
+      <TextInput
+        title="Last name"
+        placeholder="Enter your last name"
+        returnKeyType="next"
+        value={lastName.value}
+        onChangeText={(text) => setLastName({ value: text, error: '' })}
+        error={!!lastName.error}
+        errorText={lastName.error}
       />
       <TextInput
         title="Your zipcode"
-        label="Enter zipcode"
+        placeholder="Enter your zipcode"
         returnKeyType="next"
         keyboardType="numeric"
         maxLength={5}
@@ -106,14 +162,15 @@ export default function EmailSignUp({ navigation }) {
         error={!!zipcode.error}
         errorText={zipcode.error}
       />
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+      <View style={styles.checkboxContainer}>
         <Checkbox
-        status={isChecked ? 'checked' : 'unchecked'}
-        onPress={() => setIsChecked(!isChecked)}
+          status={isChecked ? 'checked' : 'unchecked'}
+          onPress={() => setIsChecked(!isChecked)}
         />
-     <Text>Remember Me</Text>
-        </View>
-      
+        <Text>Remember Me</Text>
+      </View>
+
       <Button
         color="black"
         mode="contained"
@@ -122,16 +179,8 @@ export default function EmailSignUp({ navigation }) {
       >
         Sign Up
       </Button>
-      <View style={styles.row}>
-        <Text>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
-          <Text style={styles.link}>Login</Text>
-        </TouchableOpacity>
-      </View>
     </Background>
-  
   )
-  
 }
 
 const styles = StyleSheet.create({
@@ -142,5 +191,10 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
     color: theme.colors.primary,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
   },
 })

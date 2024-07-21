@@ -31,9 +31,10 @@ const styles = StyleSheet.create({
     height: 262,
     top: 0,
     // gap: 13,
+          // width: '100%',
+          // height: 'auto',
+          // gap: 13,
     maxWidth: 340,
     alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
