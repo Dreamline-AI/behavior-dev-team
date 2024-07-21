@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import BackButton from '../components/BackButton';
+import Header from '../components/Header';
+import Background from '../components/Background';
 
 export default function IncentiveDetailPage({ route, navigation }) {
   const [incentive, setIncentive] = useState(null);
@@ -41,31 +43,31 @@ export default function IncentiveDetailPage({ route, navigation }) {
     //     </View>
     //   </ScrollView>
     // </SafeAreaView>
-    <SafeAreaView style={styles.safeArea}>
-    <ScrollView style={styles.container}>
-    <View style={styles.headerContainer}>
-          <BackButton goBack={navigation.goBack} />
-          <Text style={styles.heading}>{incentive.heading}</Text>
-      </View>
-      <View style={styles.descriptionContainer}>
-          <Text style={styles.title}>{incentive.title}</Text>
+    <Background>
+      <ScrollView style={styles.container}>
+        <View style={styles.headerContainer} >
+          <BackButton style={styles.backButton} goBack={navigation.goBack} />
+          <Header style={styles.headerTitle}>{incentive.heading}</Header>
+        </View>
+        <View style={styles.descriptionContainer}>
+            <Text style={styles.title}>{incentive.title}</Text>
 
-          {incentive.content.map((section, index) => (
-            <View key={index}>
-              <Text style={styles.heading}>{section.subtitle}:</Text>
-              {section.description.map((desc, i) => (
-                <Text style={styles.content}>
-                  {desc}
-                </Text>
-              ))}
-            </View>
-          ))}
-        <Text style={styles.content}>
-          <Text style={styles.boldText}>Apply Now:</Text> {incentive.apply_content}
-        </Text>
-      </View>
-    </ScrollView>
-  </SafeAreaView>
+            {incentive.content.map((section, index) => (
+              <View key={index}>
+                <Text style={styles.heading}>{section.subtitle}:</Text>
+                {section.description.map((desc, i) => (
+                  <Text style={styles.content}>
+                    {desc}
+                  </Text>
+                ))}
+              </View>
+            ))}
+          <Text style={styles.content}>
+            <Text style={styles.boldText}>Apply Now:</Text> {incentive.apply_content}
+          </Text>
+        </View>
+      </ScrollView>
+    </Background>
   );
 }
 
@@ -75,28 +77,56 @@ const styles = StyleSheet.create({
     backgroundColor: 'white', 
   },
   container: {
-    padding: 16, 
+    // paddingTop: 20, 
   },
-  headerContainer: {
-    // flexDirection: 'row',
-    alignItems: 'center',
-    // justifyContent: 'flex-start',
-    width: '100%',
+  headerTitle:{
+    // height: 10 + getStatusBarHeight(),
+    color: '#000',
+    fontFamily: 'Poppins',
+    font: 'normal',
+    fontWeight: 400,
+    paddingTop:'8px',
+    alignContent: 'center',
+    alignSelf: 'center',
+    // textAlign: 
+    paddingLeft:'30px',
+    fontSize: '18px',
+  },
+  backButton:{
+      width: '24px',
+      height: '24px',
+      position: 'absolute',
+      left: '16px',
+      top: '7px'
+  },
+    headerContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      width: '100%',
+      zIndex: 1,
+      paddingHorizontal: 16
   },
   title: {
+    color: '#000',
+    style: 'normal',
     fontFamily: 'Poppins',
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: '500',
     lineHeight: 22,
-    color: '#000000', 
-    marginBottom: 16, 
-    width: 187, 
+    // marginBottom: 16, 
+    // width: 187, 
   },
   descriptionContainer: {
-    
+    display: 'flex',
+    width: '100%',
+    padding: '8px 16px',
+    paddingTop: '20px',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
   },
   heading: {
-    fontFamily: 'SFProText',
+    fontFamily: 'SFProText-Regular',
     fontSize: 16,
     fontWeight: '600',
     lineHeight: 22,
@@ -105,7 +135,7 @@ const styles = StyleSheet.create({
     marginBottom: 8, 
   },
   content: {
-    fontFamily: 'SFProText',
+    fontFamily: 'SFProText-Regular',
     fontSize: 16,
     fontWeight: '400',
     lineHeight: 22,

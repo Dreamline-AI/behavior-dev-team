@@ -3,13 +3,14 @@ import { SafeAreaView, ScrollView, View, Text, Image, StyleSheet, TouchableOpaci
 import Background from '../components/Background';
 import Header from '../components/Header';
 import BackButton from '../components/BackButton';
+import { getStatusBarHeight } from 'react-native-status-bar-height'
 
-import ACUpgradeIcon from '../assets/incentives/ACUpgradeIcon.png';
-import SolarPanelIcon from '../assets/incentives/SolarPanelIcon.png';
-import BillDiscountIcon from '../assets/incentives/BillDiscountIcon.png';
-import WaterConservationIcon from '../assets/incentives/WaterConservationIcon.png';
-import EVSubsidiesIcon from '../assets/incentives/EVSubsidiesIcon.png';
-import UnlockGrantIcon from '../assets/incentives/UnlockGrantIcon.png';
+import ACUpgradeIcon from '../assets/incentives/wind.svg';
+import SolarPanelIcon from '../assets/incentives/sun.svg';
+import BillDiscountIcon from '../assets/incentives/dollar-sign.svg';
+import WaterConservationIcon from '../assets/incentives/droplet.svg';
+import EVSubsidiesIcon from '../assets/incentives/truck.svg';
+import UnlockGrantIcon from '../assets/incentives/lock.svg';
 
 export default function IncentivesList({ navigation }) {
   const [incentives, setIncentives] = useState([]);
@@ -47,7 +48,7 @@ export default function IncentivesList({ navigation }) {
   
     return (
       <Background>
-        <SafeAreaView style={styles.safeArea}>
+        {/* <SafeAreaView style={styles.safeArea}> */}
           <View style={styles.headerContainer} >
             <BackButton style={styles.backButton} goBack={navigation.goBack} />
             <Header style={styles.headerTitle}>All incentives</Header>
@@ -55,7 +56,9 @@ export default function IncentivesList({ navigation }) {
           <ScrollView style={styles.listFrame}>
         {incentives.map((incentive, index) => (
           <TouchableOpacity key={index} style={styles.card} onPress={() => goToDetail(incentive.id)}>
-            <Image style={styles.image} source={getImagePath(incentive.image)} />
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={getImagePath(incentive.image)} />
+            </View>
             <View style={styles.textContainer}>
               <Text style={styles.title}>{incentive.heading}</Text>
               <Text style={styles.subtitle}>{incentive.title}</Text>
@@ -63,7 +66,7 @@ export default function IncentivesList({ navigation }) {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      </SafeAreaView>
+      {/* </SafeAreaView> */}
     {/* </View> */}
       </Background>
     );
@@ -78,9 +81,9 @@ export default function IncentivesList({ navigation }) {
     //   flexDirection: 'row', 
       alignItems: 'center',
     //   justifyContent: 'flex-start', 
-      gap: 8,
+      // gap: 8,
       opacity: 1, 
-      position: 'initial',
+      // position: 'initial',
       top: 54,
     },
     container: {
@@ -88,9 +91,11 @@ export default function IncentivesList({ navigation }) {
         alignItems: 'center',
         justifyContent: 'center',
       },
-      safeArea: {
-        flex: 1, 
-      },
+      // safeArea: {
+      //   flex: 1, 
+      //   height: '100%',
+      //   width: '100%'
+      // },
     //   headerContainer: {
     //     // flexDirection: 'row',
     //     alignItems: 'center',
@@ -98,30 +103,39 @@ export default function IncentivesList({ navigation }) {
     //     width: '100%',
     //   },
     headerTitle:{
-        paddingTop:'8px',
-        paddingLeft:'130px',
-        fontWeight:600,
-        fontSize: '16px'
+      // height: 10 + getStatusBarHeight(),
+      color: '#000',
+      fontFamily: 'Poppins',
+      font: 'normal',
+      fontWeight: 400,
+      paddingTop:'8px',
+      // textAlign: 
+      paddingLeft:'130px',
+      fontSize: '18px',
     },
     backButton:{
-        paddingLeft:'20px'
+        width: '24px',
+        height: '24px',
+        position: 'absolute',
+        left: '16px',
+        top: '7px'
     },
       headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: '100%',
-        zindex: '1',
-        position: 'fixed',
+        zIndex: 1,
         paddingHorizontal: 16
     },
       listFrame: {
+        display: 'flex',
         width: '100%',
-        // paddingTop: '80px',
-        height: '100px',
-        marginTop: '60px'
-        // height: '80%',
-        // flex: 1
+        padding: '16px 8px',
+        flexDirection: 'column',
+        // gap: '8px',
+        height: '100%'- getStatusBarHeight(),
+        marginTop: 35 + getStatusBarHeight(),
       },
     //   headerTitle: {
     //     marginLeft: 36, 
@@ -129,39 +143,64 @@ export default function IncentivesList({ navigation }) {
       card: {
         flexDirection: 'row',
         alignItems: 'center',
-        // backgroundColor: '#0000000D',
+        // // backgroundColor: '#0000000D',
+        // borderRadius: 6,
+        // borderWidth: 0.5,
+        // borderColor: '#0000001A',
+        width: '100%',
+        minHeight: '80px',
+        maxHeight: '20%',
+        marginVertical: '2%',
+        marginHorizontal: '0%',
+        // justifyContent: 'space-between',
         borderRadius: 6,
-        borderWidth: 0.5,
-        borderColor: '#0000001A',
-        width: 384,
-        height: 80,
-        marginVertical: 8,
-        marginHorizontal: 16,
+        border: '0.5px solid rgba(0, 0, 0, 0.10)',
       },
       image: {
-        width: 80,
-        height: 80,
+        borderRadius: '6px',
+        display: 'flex',
+        width: 24,
+        height: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
         borderRadius: 6,
-        marginLeft: 16,
-        backgroundColor: 'transparent', 
+        // marginLeft: 10,
+      },
+      imageContainer: {
+        height: '100%',
+        width: '25%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 6,
+        backgroundColor: '#0000000d',
       },
       textContainer: {
         // flex: 1,
         paddingHorizontal: 8,
-        justifyContent: 'center',
+        // justifyContent: 'center',
       },
       title: {
-        fontFamily: 'SFProDisplay-Regular', 
-        fontSize: 18,
-        fontWeight: '500',
-        lineHeight: 24,
+        // fontFamily: 'SFProDisplay-Regular', 
+        // fontSize: 18,
+        // fontWeight: '500',
+        // lineHeight: 24,
         textAlign: 'left',
+        // alignSelf: 'stretch',
+        color: '#000000',
+        fontFamily: "SF Pro Display",
+        fontSize: '18px',
+        fontWeight: '500',
+        fontStyle: 'normal',
+        // lineHeight: '24px', /* 133.333% */
       },
       subtitle: {
-        fontFamily: 'SFProText-Regular', 
+        alignSelf: 'stretch',
+        fontFamily: 'SF Pro Text', 
         fontSize: 12,
         fontWeight: '400',
+        fontStyle: 'normal',
         lineHeight: 16,
-        textAlign: 'left',
+        color: '#000000b3',
+        // textAlign: 'left',
       },
   });
