@@ -249,11 +249,6 @@ export default function StartScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 54,
-    lineHeight: 20,
-    fontWeight: '500',
-  },
   separatorContainer: {
     flexDirection: 'row',
     alignItems: 'center',

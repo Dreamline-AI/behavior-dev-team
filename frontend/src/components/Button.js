@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
   },
   text: {
-    fontFamily:'Poppins',
+    fontFamily: 'Poppins',
     fontWeight: '500',
     fontSize: 16,
     lineHeight: 22,
-    textTransform: 'none'
+    textTransform: 'none',
   },
 })
