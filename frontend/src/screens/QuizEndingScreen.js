@@ -22,7 +22,7 @@ export default function QuizEndingScreen({ route, navigation }) {
                     mode="contained"
                     onPress={() => navigation.navigate('QuizStreakScreen', { userName: userName })}
                     labelStyle={{ color: 'white' , textTransform: 'none', fontSize: 16, }}
-                    style={{ marginTop: 350}}
+                    style={[styles.button, marginTop= "350"]}
                     uppercase={false}
                 >
                     Finish
@@ -33,6 +33,9 @@ export default function QuizEndingScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "black",
+      },
  
     iconContainer: {
         alignItems: 'center',

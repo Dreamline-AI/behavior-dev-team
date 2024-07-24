@@ -175,7 +175,7 @@ export default function EmailSignUp({ navigation, route }) {
         color="black"
         mode="contained"
         onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
+        style={[ styles.button ]}
       >
         Sign Up
       </Button>
@@ -184,6 +184,10 @@ export default function EmailSignUp({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "black",
+    marginTop: 24,
+},
   row: {
     flexDirection: 'row',
     marginTop: 4,

@@ -55,7 +55,7 @@ export default function EditProfileScreen({route, navigation }){
                 color="black"
                 mode="contained"
                 onPress={onSaveChangesPressed}
-                style={{ marginTop: 24 }}
+                style={[styles.button]}
            >
             Save changes
             </Button>
@@ -65,6 +65,10 @@ export default function EditProfileScreen({route, navigation }){
 }
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "black",
+        marginTop: 24,
+    },
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',

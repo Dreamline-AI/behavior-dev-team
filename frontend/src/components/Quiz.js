@@ -160,7 +160,7 @@ const Quiz = ({ navigation, route }) => {
                 mode="contained"
                 onPress={handleNext}
                 disabled={!selectedOption} 
-                style={!selectedOption ? styles.disabledButton : null} 
+                style={[styles.button, !selectedOption ? styles.disabledButton : null]} 
                 labelStyle={!selectedOption ? styles.disabledButtonText : null} 
             >
                 Continue
@@ -172,6 +172,9 @@ const Quiz = ({ navigation, route }) => {
 export default Quiz;
 
 const styles = StyleSheet.create({
+    button: { 
+        backgroundColor: "black",
+    },
     AnswerBox: {
         width: 361,
         height: 214,
