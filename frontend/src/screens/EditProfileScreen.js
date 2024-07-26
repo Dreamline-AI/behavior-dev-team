@@ -18,74 +18,96 @@ export default function EditProfileScreen({route, navigation }){
 
     return(
         <Background>
+           
             <View style={styles.headerContainer}>
                 <BackButton goBack={navigation.goBack} />
                 <Header style={styles.header}> Edit profile </Header>
             </View>
-            <TextInput
-                title="Your firstName"
-                label="Your firstName"
-                returnKeyType="next"
-                value={firstName.value}
-                onChangeText={(text) => setFirstName({ value: text, error: ''})}
-                error={!!firstName.error}
-                errorText={firstName.error}
-            />
-            <TextInput
-                title="Your lastName"
-                label="Your lastName"
-                returnKeyType="next"
-                value={lastName.value}
-                onChangeText={(text) => setLastName({ value: text, error: ''})}
-                error={!!lastName.error}
-                errorText={lastName.error}
-            />
-            <TextInput
-                title="Your zipcode"
-                label="Enter zipcode"
-                returnKeyType="next"
-                keyboardType="numeric"
-                maxLength={5}
-                value={zipcode.value}
-                onChangeText={(text) => setZipcode({ value: text, error: '' })}
-                error={!!zipcode.error}
-                errorText={zipcode.error}
-            />
-            <Button
-                color="black"
-                mode="contained"
-                onPress={onSaveChangesPressed}
-                style={[styles.button]}
-           >
-            Save changes
-            </Button>
+            <View style={styles.container}>
+                <TextInput
+                    title="Your firstName"
+                    label="Your firstName"
+                    returnKeyType="next"
+                    value={firstName.value}
+                    onChangeText={(text) => setFirstName({ value: text, error: ''})}
+                    error={!!firstName.error}
+                    errorText={firstName.error}
+                />
+                <TextInput
+                    title="Your lastName"
+                    label="Your lastName"
+                    returnKeyType="next"
+                    value={lastName.value}
+                    onChangeText={(text) => setLastName({ value: text, error: ''})}
+                    error={!!lastName.error}
+                    errorText={lastName.error}
+                />
+                <TextInput
+                    title="Your zipcode"
+                    label="Enter zipcode"
+                    returnKeyType="next"
+                    keyboardType="numeric"
+                    maxLength={5}
+                    value={zipcode.value}
+                    onChangeText={(text) => setZipcode({ value: text, error: '' })}
+                    error={!!zipcode.error}
+                    errorText={zipcode.error}
+                />
+            </View>
+            <View style={styles.footer}>
+                <Button
+                    color="#D9D9D9"
+                    mode="contained"
+                    onPress={onSaveChangesPressed}
+                    style={styles.saveButton}
+                >
+                Save changes
+                </Button>
+            </View>
         </Background>
         
     )
 }
 
 const styles = StyleSheet.create({
-    button: {
-        backgroundColor: "black",
-        marginTop: 24,
-    },
+    
     headerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        display: 'flex',
         width: '100%',
-        paddingHorizontal: 8,
-        paddingTop: 16,
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
+        padding: '8px',
+        justifyContents: 'center',
+        alignItems: 'center',
+        gap: '8px',
         
         },
     header: {
-        textAlign: 'center',
-        flex: 1,
+        color: theme.colors.greet,
+        fontSize: 16,
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontweight: 510,
+        lineheight: 22, 
     
     },
+    container: {
+        flex: 1,
+        paddingHorizontal: 16,
+        //justifyContent: 'center',
+      },
+      footer: {
+        width: '100%',
+        paddingHorizontal: 16,
+        paddingBottom: 20,
+      },
+      saveButton: {
+        borderRadius: 8,
+        width: '100%',
+        color: '#FFF',
+        fontFamily: theme.colors.greet,
+        fontSize: 16,
+        fontStyle: 'normal',
+        fontWeight: 500,
+      },
+      
 });  
 
