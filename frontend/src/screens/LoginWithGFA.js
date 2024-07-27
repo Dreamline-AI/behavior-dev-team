@@ -137,11 +137,10 @@ export default function LoginWithGFA({ navigation, route }) {
       </View>
 
       <Button
-        color={isFormValid ? "black" : "gray"}
+        style={[styles.button, isFormValid ? styles.buttonEnabled : styles.buttonDisabled]}
         mode="contained"
         disabled={!isFormValid}
         onPress={onSignUpPressed}
-        style={[styles.button]}
       >
         Sign Up
       </Button>
@@ -151,8 +150,13 @@ export default function LoginWithGFA({ navigation, route }) {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "black",
     marginTop: 24,
+},
+buttonEnabled: {
+  backgroundColor: 'black',
+},
+buttonDisabled: {
+  backgroundColor: 'gray',
 },
   row: {
     flexDirection: 'row',
