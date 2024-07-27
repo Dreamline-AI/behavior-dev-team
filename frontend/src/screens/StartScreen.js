@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Background from '../components/Background';
@@ -170,13 +169,13 @@ export default function StartScreen({ navigation }) {
       />
 
       <Button
-        color={isEmailValid ? 'black' : 'gray'}
+        color="white"
         mode="contained"
         disabled={!isEmailValid}
-
         onPress={onContinuePressed}
+        style={[styles.continueButton, isEmailValid ? styles.continueButtonEnabled : styles.continueButtonDisabled]} // Conditionally apply styles
       >
-        Continue
+        <Text style={styles.continueButtonText}>Continue</Text>
       </Button>
 
       <View style={styles.separatorContainer}>
@@ -189,7 +188,7 @@ export default function StartScreen({ navigation }) {
         color="white"
         mode="contained"
         onPress={logGoogleUser}
-        style={styles.buttonBorder}
+        style={[styles.buttonBorder, styles.googleButton]} // Add style for Google button
         icon={() => (
           <AntDesign
             name="google"
@@ -206,7 +205,7 @@ export default function StartScreen({ navigation }) {
         color="white"
         mode="contained"
         onPress={logFBUser}
-        style={styles.buttonBorder}
+        style={[styles.buttonBorder, styles.facebookButton]} // Add style for Facebook button
         icon={() => (
           <MaterialIcon
             name="facebook"
@@ -232,7 +231,7 @@ export default function StartScreen({ navigation }) {
             },
           }],
         })}
-        style={styles.buttonBorder}
+        style={[styles.buttonBorder, styles.appleButton]} // Add style for Apple button
         icon={() => (
           <MaterialIcon
             name="apple"
@@ -285,5 +284,37 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
+    color: 'black',
   },
-})
+  continueButton: {
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 10,
+  },
+  continueButtonEnabled: {
+    backgroundColor: 'black',
+  },
+  continueButtonDisabled: {
+    backgroundColor: 'gray',
+  },
+  continueButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  googleButton: {
+    backgroundColor: '#ffffff',
+  },
+  facebookButton: {
+    backgroundColor: '#ffffff',
+  },
+  appleButton: {
+    backgroundColor: '#ffffff',
+  },
+  // Ensure the button styles apply to all states
+  button: {
+    backgroundColor: 'black', // Add this line to apply background color
+  },
+});

@@ -35,6 +35,7 @@ export default function QuizStreakScreen({ route, navigation }) {
      
       <Button
         mode="outlined"
+        style={[styles.button]}
         onPress={() =>
           navigation.reset({
             index: 0,
@@ -49,6 +50,9 @@ export default function QuizStreakScreen({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "black",
+  },
   userInfoContainer: {
     flexDirection: 'row',
     alignItems: 'center',

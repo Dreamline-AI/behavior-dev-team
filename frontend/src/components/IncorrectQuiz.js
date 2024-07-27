@@ -140,7 +140,7 @@ const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
                 mode="contained"
                 onPress={handleNext}
                 disabled={!selectedOption} 
-                style={!selectedOption ? styles.disabledButton : null} 
+                style={[styles.button, !selectedOption ? styles.disabledButton : null]} 
                 labelStyle={!selectedOption ? styles.disabledButtonText : null} 
             >
                 Continue
@@ -153,6 +153,9 @@ const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
 export default IncorrectQuiz;
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: 'black',
+    },
     AnswerBox: {
         width: 361,
         height: 214,

@@ -66,7 +66,7 @@ export default function SignIn({ navigation, route }) {
         mode="contained"
         disabled={!isFormValid}
         onPress={onSignInPressed}
-        style={{ marginTop: 24 }}
+        style={[ styles.button]}
       >
         Sign In
       </Button>
@@ -75,6 +75,10 @@ export default function SignIn({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: "black",
+    marginTop: 24,
+},
   row: {
     flexDirection: 'row',
     marginTop: 4,

@@ -29,6 +29,7 @@ export default function RedoQuestionsScreen({ navigation, route }) {
                 <Button
                     color="black"
                     mode="contained"
+                    style={[styles.button]}
                     onPress={handleContinue}
                 >
                     Continue
@@ -39,6 +40,9 @@ export default function RedoQuestionsScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
+    button: {
+        backgroundColor: "black",
+      },
     container: {
         flex: 1,
         justifyContent: 'center',
