@@ -1,6 +1,7 @@
 import { useNavigation, useNavigationState } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import styles from "../commonStyles"
 
 export default function BottomNavigationBar({ userName}) {
   const navigation = useNavigation();
@@ -52,8 +53,8 @@ export default function BottomNavigationBar({ userName}) {
   const tabWidth = 305 / 4;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.tabBar}>
+    <View style={styles.bottomNavigationBar.container}>
+      <View style={styles.bottomNavigationBar.tabBar}>
         <TabButton iconSource={require('../assets/home.png')} label="Home" tabName="Home" onPress={changeTab} activeTab={activeTab} />
         <TabButton iconSource={require('../assets/Profile.png')} label="Profile" tabName="Profile" onPress={changeTab} activeTab={activeTab} />
         <TabButton iconSource={require('../assets/Rewards.png')} label="Rewards" tabName="Rewards" onPress={changeTab} activeTab={activeTab} />
@@ -62,11 +63,11 @@ export default function BottomNavigationBar({ userName}) {
       {activeTab !== 'Rewards' && (
         <>
           {/* Green circle indicator */}
-          <View style={[styles.indicatorContainer, { left: `${tabWidth * tabIndex + tabWidth / 2 - 7}px` }]}>
-            <View style={styles.indicator} />
+          <View style={[styles.bottomNavigationBar.indicatorContainer, { left: `${tabWidth * tabIndex + tabWidth / 2 - 7}px` }]}>
+            <View style={styles.bottomNavigationBar.indicator} />
           </View>
           {/* Red bar */}
-          <View style={[styles.fixedRedBar, { left: `${tabWidth * 2 + tabWidth / 2 - 14}px` }]} />
+          <View style={[styles.bottomNavigationBar.fixedRedBar, { left: `${tabWidth * 2 + tabWidth / 2 - 14}px` }]} />
         </>
       )}
     </View>
@@ -75,60 +76,12 @@ export default function BottomNavigationBar({ userName}) {
 
 const TabButton = ({ iconSource, label, tabName, onPress, activeTab }) => (
   <TouchableOpacity
-    style={[styles.tabButton, activeTab === tabName && styles.activeTab]}
+    style={[styles.bottomNavigationBar.tabButton, activeTab === tabName && styles.bottomNavigationBar.activeTab]}
     onPress={() => onPress(tabName)}
   >
-    <Image source={iconSource} style={styles.icon} />
+    <Image source={iconSource} style={styles.bottomNavigationBar.icon} />
     <Text style={{ color: activeTab === tabName ? 'black' : 'grey', marginTop: 4, fontSize: 12 }}>{label}</Text>
   </TouchableOpacity>
 );
 
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'white',
-    borderTopWidth: 1,
-    borderTopColor: 'lightgray',
-    width: '100%',
-    marginBottom: 5,
-  },
-  tabBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 10,
-    width: '100%',
-  },
-  tabButton: {
-    alignItems: 'center',
-    paddingTop: 10,
-  },
-  icon: {
-    width: 30,
-    height: 30,
-  },
-  indicatorContainer: {
-    position: 'absolute',
-    bottom: 3,
-    width: 10,
-    height: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  indicator: {
-    width: 5,
-    height: 5,
-    backgroundColor: '#62ff90',
-    borderRadius: 10,
-  },
-  fixedRedBar: {
-    position: 'absolute',
-    bottom: 5,
-    height: 5,
-    width: 5,
-    backgroundColor: '#ff4252',
-    borderRadius: 10,
-  },
-});
+

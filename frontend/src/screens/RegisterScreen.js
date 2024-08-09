@@ -12,6 +12,7 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { repeatPasswordValidator } from '../helpers/repeatPasswordValidator'
 import { nameValidator } from '../helpers/nameValidator'
+import styles from "../commonStyles"
 
 export default function RegisterScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' })
@@ -89,10 +90,10 @@ export default function RegisterScreen({ navigation }) {
       >
         Sign Up
       </Button>
-      <View style={styles.row}>
+      <View style={styles.registerScreen.row}>
         <Text>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
-          <Text style={styles.link}>Login</Text>
+          <Text style={styles.registerScreen.link}>Login</Text>
         </TouchableOpacity>
       </View>
     </Background>
@@ -101,13 +102,4 @@ export default function RegisterScreen({ navigation }) {
 
 
 
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-})
+

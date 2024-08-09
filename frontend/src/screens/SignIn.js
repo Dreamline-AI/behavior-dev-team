@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
+import styles from "../commonStyles"
 
 export default function SignIn({ navigation, route }) {
   const { user } = route.params; // Retrieve the user details
@@ -66,7 +67,7 @@ export default function SignIn({ navigation, route }) {
         mode="contained"
         disabled={!isFormValid}
         onPress={onSignInPressed}
-        style={[ styles.button]}
+        style={[ styles.signIn.button]}
       >
         Sign In
       </Button>
@@ -74,17 +75,4 @@ export default function SignIn({ navigation, route }) {
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "black",
-    marginTop: 24,
-},
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-});
+

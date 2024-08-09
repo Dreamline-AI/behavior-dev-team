@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { View, StyleSheet, Animated } from 'react-native';
+import styles from "../commonStyles"
 
 const LoadScreen = () => {
   const dotOpacity1 = useRef(new Animated.Value(1)).current;
@@ -68,33 +69,16 @@ const LoadScreen = () => {
   }, [dotOpacity1, dotOpacity2, dotOpacity3, dotOpacity4, dotOpacity5]);
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={[styles.dot, { opacity: dotOpacity1 }]} />
-      <Animated.View style={[styles.dot, { opacity: dotOpacity2 }]} />
-      <Animated.View style={[styles.dot, { opacity: dotOpacity3 }]} />
-      <Animated.View style={[styles.dot, { opacity: dotOpacity4 }]} />
-      <Animated.View style={[styles.dot, { opacity: dotOpacity5 }]} />
+    <View style={styles.loadScreen.container}>
+      <Animated.View style={[styles.loadScreen.dot, { opacity: dotOpacity1 }]} />
+      <Animated.View style={[styles.loadScreen.dot, { opacity: dotOpacity2 }]} />
+      <Animated.View style={[styles.loadScreen.dot, { opacity: dotOpacity3 }]} />
+      <Animated.View style={[styles.loadScreen.dot, { opacity: dotOpacity4 }]} />
+      <Animated.View style={[styles.loadScreen.dot, { opacity: dotOpacity5 }]} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: [{ translateX: -48 }, { translateY: -4 }],
-    flexDirection: 'row',
-    width: 96,
-    height: 8,
-    justifyContent: 'space-between',
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: 'lightgrey',
-  },
-});
+
 
 export default LoadScreen;

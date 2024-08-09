@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import Background from '../components/Background';
 import IncorrectQuiz from '../components/IncorrectQuiz'; 
 import data from '../helpers/data'; 
+import styles from "../commonStyles"
 
 export default function IncorrectQuestionsScreen({ navigation, route }) {
     const [incorrectQuestions, setIncorrectQuestions] = useState([]);
@@ -18,7 +19,7 @@ export default function IncorrectQuestionsScreen({ navigation, route }) {
 
     return (
         <Background>
-            <View style={styles.container}>
+            <View style={styles.incorrectQuestionScreen.container}>
                 <IncorrectQuiz incorrectQuestions={incorrectQuestions} navigation={navigation} /> 
                 
             </View>
@@ -26,10 +27,3 @@ export default function IncorrectQuestionsScreen({ navigation, route }) {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});

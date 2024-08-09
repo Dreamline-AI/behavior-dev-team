@@ -10,6 +10,7 @@ import { theme } from '../core/theme';
 import { nameValidator } from '../helpers/nameValidator';
 import { zipcodeValidator } from '../helpers/zipcodeValidator';
 import axios from 'axios';
+import styles from "../commonStyles"
 
 export default function LoginWithGFA({ navigation, route }) {
   const { email } = route.params; // Get the email from route parameters
@@ -137,7 +138,7 @@ export default function LoginWithGFA({ navigation, route }) {
       </View>
 
       <Button
-        style={[styles.button, isFormValid ? styles.buttonEnabled : styles.buttonDisabled]}
+        style={[styles.loginWithGFA.button, isFormValid ? styles.loginWithGFA.buttonEnabled : styles.loginWithGFA.buttonDisabled]}
         mode="contained"
         disabled={!isFormValid}
         onPress={onSignUpPressed}
@@ -148,22 +149,3 @@ export default function LoginWithGFA({ navigation, route }) {
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    marginTop: 24,
-},
-buttonEnabled: {
-  backgroundColor: 'black',
-},
-buttonDisabled: {
-  backgroundColor: 'gray',
-},
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-});
