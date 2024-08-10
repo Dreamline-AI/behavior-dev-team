@@ -173,8 +173,8 @@ export default function StartScreen({ navigation }) {
         color="white"
         mode="contained"
         disabled={!isEmailValid}
-
         onPress={onContinuePressed}
+        style={[styles.startScreen.continueButton, isEmailValid ? styles.startScreen.continueButtonEnabled : styles.startScreen.continueButtonDisabled]} // Conditionally apply styles
       >
         <Text style={styles.startScreen.continueButtonText}>Continue</Text>
       </Button>
