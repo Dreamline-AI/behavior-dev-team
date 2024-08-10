@@ -34,7 +34,7 @@
     "react-native-vector-icons": "^10.1.0",
     "react-native-web": "~0.13.12",
     "react-spring": "^9.7.3",
-    "react-toastify": "^8.0.0",
+    "react-toastify": "^8.2.0",
     "url": "^0.11.3"
   },
   "devDependencies": {

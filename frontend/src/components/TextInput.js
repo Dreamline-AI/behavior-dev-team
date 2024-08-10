@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
   },
   title: {
-    fontFamily: 'Poppins',
+    fontFamily: 'SFPRODISPLAYREGULAR',
     fontSize: 14,
     marginTop: 4,
     marginBottom: 2,
