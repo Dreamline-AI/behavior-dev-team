@@ -7,6 +7,7 @@ import {
   Button,
   StyleSheet,
 } from 'react-native'
+import styles from "../commonStyles"
 // Tell me more about yourself Screen
 // Contains FirstName + LastName + Zipcode
 const SignUpForm = ({ navigation }) => {
@@ -21,12 +22,12 @@ const SignUpForm = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Tell us more about yourself</Text>
+    <View style={styles.signUpForm.container}>
+      <Text style={styles.signUpForm.header}>Tell us more about yourself</Text>
 
       <Text>First name</Text>
       <TextInput
-        style={styles.input}
+        style={styles.signUpForm.input}
         placeholder="Enter your first name"
         value={firstName}
         onChangeText={setFirstName}
@@ -34,7 +35,7 @@ const SignUpForm = ({ navigation }) => {
 
       <Text>Last Name</Text>
       <TextInput
-        style={styles.input}
+        style={styles.signUpForm.input}
         placeholder="Enter your last name"
         value={lastName}
         onChangeText={setLastName}
@@ -42,15 +43,15 @@ const SignUpForm = ({ navigation }) => {
 
       <Text>Your zipcode</Text>
       <TextInput
-        style={styles.input}
+        style={styles.signUpForm.input}
         placeholder="Enter your zipcode"
         value={zipcode}
         onChangeText={setZipcode}
       />
 
-      <View style={styles.checkboxContainer}>
+      <View style={styles.signUpForm.checkboxContainer}>
         <CheckBox value={rememberMe} onValueChange={setRememberMe} />
-        <Text style={styles.checkboxLabel}>Remember me</Text>
+        <Text style={styles.signUpForm.checkboxLabel}>Remember me</Text>
       </View>
 
       <Button
@@ -67,31 +68,6 @@ const SignUpForm = ({ navigation }) => {
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: 'white',
-  },
-  header: {
-    fontSize: 24,
-    marginBottom: 24,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 8,
-    marginVertical: 8,
-    borderRadius: 4,
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 16,
-  },
-  checkboxLabel: {
-    marginLeft: 8,
-  },
-})
+
 
 export default SignUpForm

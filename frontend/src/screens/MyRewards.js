@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, ScrollView, Sta
 import BackButton from '../components/BackButton';
 import Background from '../components/Background';
 import Header from '../components/Header';
+import styles from "../commonStyles"
 
 const rewards = [
   { date: '12/12/2024', description: 'Solar panel upgrade', id: 1 },
@@ -12,19 +13,19 @@ const rewards = [
 export default function MyRewards({ navigation }) {
   return (
     <Background>
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={styles.myRewards.safeArea}>
         <StatusBar barStyle="dark-content" />
-        <View style={styles.headerContainer}>
-          <BackButton style={styles.backButton} goBack={navigation.goBack} />
-          <Header style={styles.headerTitle}>My Rewards</Header>
+        <View style={styles.myRewards.headerContainer}>
+          <BackButton style={styles.myRewards.backButton} goBack={navigation.goBack} />
+          <Header style={styles.myRewards.headerTitle}>My Rewards</Header>
         </View>
-        <ScrollView style={styles.listFrame}>
+        <ScrollView style={styles.myRewards.listFrame}>
           {rewards.map((reward) => (
-            <View key={reward.id} style={styles.rewardItem}>
-              <Text style={styles.dateText}>{reward.date}</Text>
-              <Text style={styles.descriptionText}>{reward.description}</Text>
-              <TouchableOpacity style={styles.updateButton} onPress={() => console.log('Update pressed')}>
-                <Text style={styles.updateButtonText}>Update</Text>
+            <View key={reward.id} style={styles.myRewards.rewardItem}>
+              <Text style={styles.myRewards.dateText}>{reward.date}</Text>
+              <Text style={styles.myRewards.descriptionText}>{reward.description}</Text>
+              <TouchableOpacity style={styles.myRewards.updateButton} onPress={() => console.log('Update pressed')}>
+                <Text style={styles.myRewards.updateButtonText}>Update</Text>
               </TouchableOpacity>
             </View>
           ))}
@@ -34,60 +35,4 @@ export default function MyRewards({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    // alignItems: 'center',
-    // alignSelf: 'center',
-    // justifyContent: 'space-between',
-    // textAlign: 'center',
-    paddingTop: 10,
-    width: '100%',
-    backgroundColor: '#FFF',
-    zIndex: 1,
-  },
-  backButton: {
-    paddingLeft:'20px'
-  },
-  headerTitle: {
-    // alignSelf: 'center',
-    fontWeight: '600',
-    fontSize: 16,
-    color: '#000',
-  },
-  listFrame: {
-    marginTop: 60,
-  },
-  rewardItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    backgroundColor: '#FFF',
-    borderBottomWidth: 1,
-    borderColor: '#E0E0E0',
-  },
-  dateText: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#333',
-  },
-  descriptionText: {
-    fontSize: 14,
-    color: '#666',
-  },
-  updateButton: {
-    backgroundColor: 'rgba(0,0,0,0.75)',
-    borderRadius: 3,
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-  },
-  updateButtonText: {
-    color: '#FFF',
-    fontSize: 14,
-  },
-});
+
