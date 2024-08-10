@@ -2,13 +2,14 @@ import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { TextInput as Input } from 'react-native-paper'
 import { theme } from '../core/theme'
+import styles from "../commonStyles"
 
 export default function TextInput({ title, errorText, description, ...props }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+    <View style={styles.textInput.container}>
+      <Text style={styles.textInput.title}>{title}</Text>
       <Input
-        style={styles.input}
+        style={styles.textInput.input}
         selectionColor={theme.colors.primary}
         underlineColor="transparent"
         outlineColor="rgba(0, 0, 0, 0.1)"
@@ -17,41 +18,11 @@ export default function TextInput({ title, errorText, description, ...props }) {
         {...props}
       />
       {description && !errorText ? (
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.textInput.description}>{description}</Text>
       ) : null}
-      {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
+      {errorText ? <Text style={styles.textInput.error}>{errorText}</Text> : null}
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    marginVertical: 7,
-  },
-  input: {
-    backgroundColor: theme.colors.surface,
-  },
-  description: {
-    fontSize: 13,
-    color: theme.colors.secondary,
-    paddingTop: 8,
-  },
-  error: {
-    fontSize: 13,
-    color: theme.colors.error,
-    paddingTop: 8,
-  },
-  title: {
-    fontFamily: 'Poppins',
-    fontSize: 14,
-    marginTop: 4,
-    marginBottom: 2,
-    color: 'black',
-    fontWeight: '500',
-    lineHeight: 20,
-    letterSpacing: 0,
-    textAlign: 'left',
-    fontStyle: 'normal',
-  },
-})
+

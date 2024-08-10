@@ -9,8 +9,12 @@ import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
 import { nameValidator } from '../helpers/nameValidator';
 import { zipcodeValidator } from '../helpers/zipcodeValidator';
+import axios from 'axios';
+import styles from "../commonStyles"
 
-export default function LoginWithGFA({ navigation }) {
+export default function LoginWithGFA({ navigation, route }) {
+  const { email } = route.params; // Get the email from route parameters
+
   const [firstName, setFirstName] = useState({ value: '', error: '' });
   const [lastName, setLastName] = useState({ value: '', error: '' });
   const [zipcode, setZipcode] = useState({ value: '', error: '' });
@@ -29,6 +33,11 @@ export default function LoginWithGFA({ navigation }) {
     }
   }, [firstName, lastName, zipcode]);
 
+  const generateUserID = (firstName, lastName) => {
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    return capitalize(firstName) + capitalize(lastName);
+  };
+
   const onSignUpPressed = () => {
     const firstNameError = nameValidator(firstName.value);
     const lastNameError = nameValidator(lastName.value);
@@ -41,23 +50,56 @@ export default function LoginWithGFA({ navigation }) {
       return;
     }
 
-    navigation.reset({
-      index: 0,
-      routes: [{
-        name: 'Dashboard',
-        params: {
-          userFirstName: firstName.value,
-          userLastName: lastName.value,
-        },
-      }],
-    });
+    const userID = generateUserID(firstName.value, lastName.value);
+
+    if (isChecked) {
+      // Call the save user API
+      const userData = {
+        firstName: firstName.value,
+        lastName: lastName.value,
+        email: email,
+        zipcode: zipcode.value,
+        password: "", // Assuming password is empty for now
+        userID: userID,
+      };
+
+      axios.post('http://localhost:8080/api/users', userData)
+        .then(response => {
+          console.log('User saved:', response.data);
+          navigation.reset({
+            index: 0,
+            routes: [{
+              name: 'WelcomeScreen',
+              params: {
+                userFirstName: firstName.value,
+                userLastName: lastName.value,
+              },
+            }],
+          });
+        })
+        .catch(error => {
+          console.error('Error saving user:', error);
+          // Handle the error (e.g., show a toast message)
+        });
+    } else {
+      navigation.reset({
+        index: 0,
+        routes: [{
+          name: 'WelcomeScreen',
+          params: {
+            userFirstName: firstName.value,
+            userLastName: lastName.value,
+          },
+        }],
+      });
+    }
   };
 
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Header>Tell us more about yourself</Header>
-     
+
       <TextInput
         title="First name"
         label="Enter your first name"
@@ -96,11 +138,10 @@ export default function LoginWithGFA({ navigation }) {
       </View>
 
       <Button
-        color={isFormValid ? "black" : "gray"}
+        style={[styles.loginWithGFA.button, isFormValid ? styles.loginWithGFA.buttonEnabled : styles.loginWithGFA.buttonDisabled]}
         mode="contained"
         disabled={!isFormValid}
         onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
       >
         Sign Up
       </Button>
@@ -108,13 +149,3 @@ export default function LoginWithGFA({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-});

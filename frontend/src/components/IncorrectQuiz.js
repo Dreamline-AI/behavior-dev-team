@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Text, StyleSheet, Animated, Pressable} from "react-native";
 import * as Progress from 'react-native-progress';
 import Button from '../components/Button';
+import styles from "../commonStyles";
 
 
 const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
@@ -83,7 +84,7 @@ const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
 
     if (incorrectQuestions.length === 0) {
         return (
-            <View style={styles.container}>
+            <View style={styles.incorrectQuiz.container}>
                 <Button title="Continue" onPress={handleNext} />
             </View>
         );
@@ -94,16 +95,16 @@ const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={styles.incorrectQuiz.container}>
             
-            <View style={styles.progressBarContainer}>
+            <View style={styles.incorrectQuiz.progressBarContainer}>
                 <Progress.Bar progress={(currentIndex + 1) / incorrectQuestions.length} width={350} color='black' unfilledColor='rgba(217, 217, 217, 1)' borderWidth={0} height={8} />
             </View>
           
             <Animated.View
                 style={[{ opacity: selectedOption !== null? fadeAnim : 1 },]}
             >
-                <Text style={styles.question}>{question.question}</Text>
+                <Text style={styles.incorrectQuiz.question}>{question.question}</Text>
             </Animated.View>
     
             {question.options.map((option) => (
@@ -117,20 +118,20 @@ const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
                 ]}
                 >
             
-            <Text style={isCorrect ? styles.correctMessage : styles.wrongMessage}>
+            <Text style={isCorrect ? styles.incorrectQuiz.correctMessage : styles.incorrectQuiz.wrongMessage}>
                 {isCorrect !== null ? (isCorrect ? "Correct! " : "No") : ""}
             </Text>
                         
             <Pressable
             style={[
-                styles.AnswerBox,
-                selectedOption === option && (isCorrect ? styles.correctBox : styles.wrongBox),
+                styles.incorrectQuiz.AnswerBox,
+                selectedOption === option && (isCorrect ? styles.incorrectQuiz.correctBox : styles.incorrectQuiz.wrongBox),
             ]}
             onPress={() => handlePressedOption(option)}
             disabled={selectedOption}
             key={option}>   
             
-            <Text style={styles.answerText}>{option}</Text>
+            <Text style={styles.incorrectQuiz.answerText}>{option}</Text>
             </Pressable>
             </Animated.View>
         ))} 
@@ -140,8 +141,8 @@ const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
                 mode="contained"
                 onPress={handleNext}
                 disabled={!selectedOption} 
-                style={!selectedOption ? styles.disabledButton : null} 
-                labelStyle={!selectedOption ? styles.disabledButtonText : null} 
+                style={[styles.incorrectQuiz.button, !selectedOption ? styles.incorrectQuiz.disabledButton : null]} 
+                labelStyle={!selectedOption ? styles.incorrectQuiz.disabledButtonText : null} 
             >
                 Continue
             </Button>
@@ -152,68 +153,4 @@ const IncorrectQuiz = ({ incorrectQuestions, navigation }) => {
 
 export default IncorrectQuiz;
 
-const styles = StyleSheet.create({
-    AnswerBox: {
-        width: 361,
-        height: 214,
-        borderWidth: 3,
-        borderRadius: 6,
-        borderColor: 'rgba(0, 0, 0, 0.05)',
-        backgroundColor: 'rgba(0, 0, 0, 0.05)',
-        alignItems: 'center',
-        justifyContent: 'center', 
-    },
 
-    answerText: {
-        textAlign: 'center',
-        fontSize: 24,
-    },
-    question: {
-        marginBottom: 10,
-        fontSize: 18,
-    },
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    correctBox: {
-        borderColor: 'rgba(19, 212, 2, 1)',
-    },
-    wrongBox: {
-        borderColor: 'rgba(241, 58, 0, 1)',
-    },
-    progressBarContainer: {
-        width: '100%',
-        height: 20,
-        marginBottom: 30,
-    },
-
-    correctMessage: {
-        color: 'rgba(98, 218, 103, 1)',
-        fontSize: 24,
-        textAlign: 'center',
-        marginBottom: 30,
-    },
-    wrongMessage: {
-        color: 'rgba(255, 72, 15, 1)',
-        fontSize: 24,
-        textAlign: 'center',
-        marginBottom: 20,
-    },
-    customMessage: {
-        color: 'black',
-        fontSize: 16,
-        position: 'absolute',
-        top: 390, 
-        width: '100%',
-        textAlign: 'left', 
-
-    },
-    disabledButton: {
-        backgroundColor: 'black',
-    },
-    disabledButtonText: {
-        color: 'white', 
-    },
-});

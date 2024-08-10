@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import { UserPic } from '../components/UserPic';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from "../commonStyles"
 
 export default function QuizStreakScreen({ route, navigation }) {
   const { userName } = route.params;
@@ -15,26 +16,27 @@ export default function QuizStreakScreen({ route, navigation }) {
   return (
     <Background>
       <Logo />
-      <View style={styles.userInfoContainer}>
+      <View style={styles.quizStreakScreen.userInfoContainer}>
         <UserPic name={userName} />
       </View>
-      <Header style={styles.header}>You started a streak!</Header>
-      <View style={styles.lightningContainer}>
+      <Header style={styles.quizStreakScreen.header}>You started a streak!</Header>
+      <View style={styles.quizStreakScreen.lightningContainer}>
         {daysOfWeek.map((day, index) => (
-          <View key={index} style={styles.lightningDayContainer}>
+          <View key={index} style={styles.quizStreakScreen.lightningDayContainer}>
             <MaterialCommunityIcons
               name="lightning-bolt"
               size={30}
               color={'rgba(217, 217, 217, 1)'}
-              style={styles.lightningIcon}
+              style={styles.quizStreakScreen.lightningIcon}
             />
-            <Text style={styles.dayText}>{day}</Text>
+            <Text style={styles.quizStreakScreen.dayText}>{day}</Text>
           </View>
         ))}
       </View>
      
       <Button
         mode="outlined"
+        style={[styles.quizStreakScreen.button]}
         onPress={() =>
           navigation.reset({
             index: 0,
@@ -48,32 +50,4 @@ export default function QuizStreakScreen({ route, navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  userInfoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 22,
-  },
-  lightningContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-  lightningDayContainer: {
-    alignItems: 'center',
-    marginHorizontal: 5,
-  },
-  lightningIcon: {
-    marginRight: 5,
-  },
-  dayText: {
-    color: 'black',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginTop: 5,
-  },
-});
+

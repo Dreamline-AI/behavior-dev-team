@@ -38,10 +38,7 @@ public class UserService {
         userMap.put("email", user.getEmail());
         userMap.put("zipcode", user.getZipcode());
         userMap.put("userID", user.getUserID());
-//        userMap.put("avatar", user.getAvatar());
-//        userMap.put("rankProgress", String.valueOf(user.getRankProgress()));
-//        userMap.put("rank", user.getRank());
-//        userMap.put("streak", String.valueOf(user.getStreak()));
+        userMap.put("password", user.getPassword() != null ? user.getPassword() : ""); // Save password, empty string if null
         ApiFuture<WriteResult> collectionApiFuture = dbFirestore.collection(COLLECTION_NAME).document(user.getUserID()).set(userMap);
         return "Saved successfully for user with ID:" + user.getUserID() + " at " + collectionApiFuture.get().getUpdateTime();
     }
