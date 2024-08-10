@@ -23,12 +23,12 @@ export default function WelcomeScreen({ route, navigation }) {
   }, [navigation]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.welcomeScreen.container}>
       <Image
         source={require('../assets/welcome.png')} // make sure this path is correct
-        style={styles.image}
+        style={styles.welcomeScreen.image}
       />
-      <Text style={styles.welcomeScreen.ext}>Sustainable living starts here!</Text>
+      <Text style={styles.welcomeScreen.text}>Sustainable living starts here!</Text>
     </View>
   );
 }
