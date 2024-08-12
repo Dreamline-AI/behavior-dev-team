@@ -101,13 +101,10 @@ const styles = {
   }),
   dashboard: StyleSheet.create ({
     container: {
-      flexGrow: 1,
-      paddingHorizontal: 30,
-      paddingTop: 10,
-      paddingBottom: 10,
-      alignItems: 'center',
+      width: '100%',
       justifyContent: 'center',
-      padding:1,
+      alignItems: 'center',
+      marginTop: "auto",
     },
     header: {
       flexDirection: 'row',
@@ -155,6 +152,12 @@ const styles = {
     streak: {
       fontSize: 18,
       fontWeight: 'bold',
+    },
+    dashboardContainer: {
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      width: '100%',
+      paddingHorizontal: 23,
     },
     dailyChallengeBox: {
       borderWidth: 1,
