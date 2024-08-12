@@ -157,7 +157,7 @@ const styles = {
       alignItems: 'center',
       justifyContent: 'space-around',
       width: '100%',
-      paddingHorizontal: 23,
+      paddingHorizontal: 12,
     },
     dailyChallengeBox: {
       borderWidth: 1,
@@ -167,7 +167,7 @@ const styles = {
       backgroundColor: 'white',
       marginBottom: 20,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     sectionTitle1: {
       fontSize: 10,
@@ -243,7 +243,7 @@ const styles = {
     incompleteAction: {
       marginBottom: 20,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     blackBox: {
       borderWidth: 1,
@@ -300,7 +300,7 @@ const styles = {
     availableIncentives: {
       marginBottom: 20,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     sectionHeader: {
       flexDirection: 'row',
@@ -334,7 +334,7 @@ const styles = {
     revision: {
       marginBottom: 15,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     revisionContainer: {
       flexDirection: 'row',
