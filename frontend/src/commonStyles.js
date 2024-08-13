@@ -1,20 +1,27 @@
-import { StyleSheet } from 'react-native';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { theme } from './core/theme';
+import { StyleSheet } from 'react-native'
+import { getStatusBarHeight } from 'react-native-status-bar-height'
+import { theme } from './core/theme'
 
 const styles = {
-  backButton: StyleSheet.create ({
+  backButton: StyleSheet.create({
     container: {
       position: 'absolute',
-      top: 10 + getStatusBarHeight(),
+      top: 25 + getStatusBarHeight(),
       left: 16,
+      padding: 10,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 24 + 2 * 10,
+      height: 24 + 2 * 10,
     },
     image: {
-      width: 24,
-      height: 24,
+      width: '100%',
+      height: '100%',
+      resizeMode: 'contain',
     },
   }),
-  background: StyleSheet.create ({
+
+  background: StyleSheet.create({
     background: {
       flex: 1,
       width: '100%',
@@ -29,28 +36,28 @@ const styles = {
       height: 262,
       top: 0,
       // gap: 13,
-            // width: '100%',
-            // height: 'auto',
-            // gap: 13,
+      // width: '100%',
+      // height: 'auto',
+      // gap: 13,
       maxWidth: 340,
       alignSelf: 'center',
     },
   }),
-  button: StyleSheet.create ({
+  button: StyleSheet.create({
     button: {
       width: '100%',
       marginVertical: 10,
       paddingVertical: 2,
     },
     text: {
-      fontFamily:'Poppins',
+      fontFamily: 'Poppins',
       fontWeight: '500',
       fontSize: 16,
       lineHeight: 22,
-      textTransform: 'none'
+      textTransform: 'none',
     },
   }),
-  bottomNavigationBar: StyleSheet.create ({
+  bottomNavigationBar: StyleSheet.create({
     container: {
       position: 'relative',
       bottom: 0,
@@ -99,7 +106,7 @@ const styles = {
       borderRadius: 10,
     },
   }),
-  dashboard: StyleSheet.create ({
+  dashboard: StyleSheet.create({
     container: {
       flexGrow: 1,
       paddingHorizontal: 30,
@@ -107,7 +114,7 @@ const styles = {
       paddingBottom: 10,
       alignItems: 'center',
       justifyContent: 'center',
-      padding:1,
+      padding: 1,
     },
     header: {
       flexDirection: 'row',
@@ -120,7 +127,6 @@ const styles = {
       alignItems: 'center',
       width: 250,
       maxWidth: 300,
-  
     },
     userPic: {
       width: 35,
@@ -129,7 +135,7 @@ const styles = {
     },
     userDetails: {
       marginLeft: 10,
-      maxWidth: 180, 
+      maxWidth: 180,
     },
     userName: {
       fontSize: 16,
@@ -171,11 +177,11 @@ const styles = {
       marginBottom: 8,
       fontWeight: 'bold',
     },
-    headerImage:{
-      marginBottom:8,
+    headerImage: {
+      marginBottom: 8,
       width: 100,
       height: 15,
-      padding:2,
+      padding: 2,
       marginRight: 2,
       alignItems: 'flex-start',
       marginTop: 4,
@@ -191,21 +197,21 @@ const styles = {
       alignItems: 'center',
       backgroundColor: '#e8e8e8',
       padding: 0,
-      height:23,
+      height: 23,
       borderRadius: 6,
       marginBottom: 4,
       marginVertical: 0,
       alignSelf: 'flex-start',
     },
-  
+
     textInfo: {
       flexDirection: 'column',
     },
-    
+
     sectionTitle: {
       fontSize: 14,
       marginBottom: 8,
-      fontWeight:'bold',
+      fontWeight: 'bold',
     },
     greyBox: {
       backgroundColor: '#f5f5f5',
@@ -216,7 +222,7 @@ const styles = {
       height: 100,
     },
     challengeCategory: {
-      marginTop:6,
+      marginTop: 6,
       fontSize: 14,
       color: 'black',
     },
@@ -231,7 +237,7 @@ const styles = {
       borderRadius: 8,
       paddingHorizontal: 20,
       paddingVertical: 10,
-      marginLeft: 1
+      marginLeft: 1,
     },
     startButtonText: {
       color: '#fff',
@@ -311,7 +317,6 @@ const styles = {
     incentivesContainer: {
       flexDirection: 'row',
       marginTop: 6,
-      
     },
     incentiveCard: {
       width: 70,
@@ -357,7 +362,7 @@ const styles = {
       borderRadius: 10,
       paddingHorizontal: 7,
       paddingVertical: 6,
-      marginLeft:2,
+      marginLeft: 2,
       paddingTop: 3,
     },
     roundButtonText: {
@@ -365,8 +370,7 @@ const styles = {
       fontSize: 11,
     },
   }),
-  editProfileScreen: StyleSheet.create ({
-       
+  editProfileScreen: StyleSheet.create({
     headerContainer: {
       display: 'flex',
       width: '100%',
@@ -374,18 +378,16 @@ const styles = {
       justifyContents: 'center',
       alignItems: 'center',
       gap: '8px',
-      
-      },
-  header: {
+    },
+    header: {
       color: theme.colors.greet,
       fontSize: 16,
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontweight: 510,
-      lineheight: 22, 
-  
-  },
-  container: {
+      lineheight: 22,
+    },
+    container: {
       flex: 1,
       paddingHorizontal: 16,
       //justifyContent: 'center',
@@ -405,11 +407,11 @@ const styles = {
       fontWeight: 500,
     },
   }),
-  emailSignUp: StyleSheet.create ({
+  emailSignUp: StyleSheet.create({
     button: {
-      backgroundColor: "black",
+      backgroundColor: 'black',
       marginTop: 24,
-  },
+    },
     row: {
       flexDirection: 'row',
       marginTop: 4,
@@ -424,7 +426,7 @@ const styles = {
       marginBottom: 20,
     },
   }),
-  header: StyleSheet.create ({
+  header: StyleSheet.create({
     header: {
       fontSize: 21,
       color: theme.colors.greet,
@@ -437,46 +439,46 @@ const styles = {
       paddingBottom: 32,
       // paddingHorizontal: 20,
       // gap: 8,
-      alignSelf: 'center', 
+      alignSelf: 'center',
       alignItems: 'center',
       justifyContent: 'center',
-      },
+    },
   }),
   incentiveDetailPage: StyleSheet.create({
     safeArea: {
       flex: 1,
-      backgroundColor: 'white', 
+      backgroundColor: 'white',
     },
     container: {
-      // paddingTop: 20, 
+      // paddingTop: 20,
     },
-    headerTitle:{
+    headerTitle: {
       // height: 10 + getStatusBarHeight(),
       color: '#000',
       fontFamily: 'Poppins',
       font: 'normal',
       fontWeight: 400,
-      paddingTop:'8px',
+      paddingTop: '8px',
       alignContent: 'center',
       alignSelf: 'center',
-      // textAlign: 
-      paddingLeft:'30px',
+      // textAlign:
+      paddingLeft: '30px',
       fontSize: '18px',
     },
-    backButton:{
-        width: '24px',
-        height: '24px',
-        position: 'absolute',
-        left: '16px',
-        top: '7px'
+    backButton: {
+      width: '24px',
+      height: '24px',
+      position: 'absolute',
+      left: '16px',
+      top: '7px',
     },
-      headerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '100%',
-        zIndex: 1,
-        paddingHorizontal: 16
+    headerContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      width: '100%',
+      zIndex: 1,
+      paddingHorizontal: 16,
     },
     title: {
       color: '#000',
@@ -485,8 +487,8 @@ const styles = {
       fontSize: 18,
       fontWeight: '500',
       lineHeight: 22,
-      // marginBottom: 16, 
-      // width: 187, 
+      // marginBottom: 16,
+      // width: 187,
     },
     descriptionContainer: {
       display: 'flex',
@@ -502,8 +504,8 @@ const styles = {
       fontWeight: '600',
       lineHeight: 22,
       letterSpacing: 0.01,
-      color: '#000000', 
-      marginBottom: 8, 
+      color: '#000000',
+      marginBottom: 8,
     },
     content: {
       fontFamily: 'SFProText-Regular',
@@ -511,137 +513,136 @@ const styles = {
       fontWeight: '400',
       lineHeight: 22,
       letterSpacing: 0.01,
-      color: '#000000', 
-      marginBottom: 16, 
+      color: '#000000',
+      marginBottom: 16,
     },
   }),
   incentivesList: StyleSheet.create({
-       
-      // safeArea: {
-      //   flex: 1, 
-      //   height: '100%',
-      //   width: '100%'
-      // },
+    // safeArea: {
+    //   flex: 1,
+    //   height: '100%',
+    //   width: '100%'
+    // },
     //   headerContainer: {
     //     // flexDirection: 'row',
     //     alignItems: 'center',
     //     // justifyContent: 'flex-start',
     //     width: '100%',
     //   },
-    headerTitle:{
+    headerTitle: {
       // height: 10 + getStatusBarHeight(),
       color: '#000',
       fontFamily: 'Poppins',
       font: 'normal',
       fontWeight: 400,
-      paddingTop:'8px',
-      // textAlign: 
-      paddingLeft:'130px',
+      paddingTop: '8px',
+      // textAlign:
+      paddingLeft: '130px',
       fontSize: '18px',
     },
-    backButton:{
-        width: '24px',
-        height: '24px',
-        position: 'absolute',
-        left: '16px',
-        top: '7px'
+    backButton: {
+      width: '24px',
+      height: '24px',
+      position: 'absolute',
+      left: '16px',
+      top: '7px',
     },
-      headerContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: '100%',
-        zIndex: 1,
-        paddingHorizontal: 16
+    headerContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+      width: '100%',
+      zIndex: 1,
+      paddingHorizontal: 16,
     },
-      listFrame: {
-        display: 'flex',
-        width: '100%',
-        padding: '16px 8px',
-        flexDirection: 'column',
-        // gap: '8px',
-        height: '100%'- getStatusBarHeight(),
-        marginTop: 35 + getStatusBarHeight(),
-      },
+    listFrame: {
+      display: 'flex',
+      width: '100%',
+      padding: '16px 8px',
+      flexDirection: 'column',
+      // gap: '8px',
+      height: '100%' - getStatusBarHeight(),
+      marginTop: 35 + getStatusBarHeight(),
+    },
     //   headerTitle: {
-    //     marginLeft: 36, 
+    //     marginLeft: 36,
     //   },
-      card: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        // // backgroundColor: '#0000000D',
-        // borderRadius: 6,
-        // borderWidth: 0.5,
-        // borderColor: '#0000001A',
-        width: '100%',
-        minHeight: '80px',
-        maxHeight: '20%',
-        marginVertical: '2%',
-        marginHorizontal: '0%',
-        // justifyContent: 'space-between',
-        borderRadius: 6,
-        border: '0.5px solid rgba(0, 0, 0, 0.10)',
-      },
-      image: {
-        borderRadius: '6px',
-        display: 'flex',
-        width: 24,
-        height: 25,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 6,
-        // marginLeft: 10,
-      },
-      imageContainer: {
-        height: '100%',
-        width: '25%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 6,
-        backgroundColor: '#0000000d',
-      },
-      textContainer: {
-        // flex: 1,
-        paddingHorizontal: 8,
-        // justifyContent: 'center',
-      },
-      title: {
-        // fontFamily: 'SFProDisplay-Regular', 
-        // fontSize: 18,
-        // fontWeight: '500',
-        // lineHeight: 24,
-        textAlign: 'left',
-        // alignSelf: 'stretch',
-        color: '#000000',
-        fontFamily: "SF Pro Display",
-        fontSize: '18px',
-        fontWeight: '500',
-        fontStyle: 'normal',
-        // lineHeight: '24px', /* 133.333% */
-      },
-      subtitle: {
-        alignSelf: 'stretch',
-        fontFamily: 'SF Pro Text', 
-        fontSize: 12,
-        fontWeight: '400',
-        fontStyle: 'normal',
-        lineHeight: 16,
-        color: '#000000b3',
-        // textAlign: 'left',
-      },
+    card: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      // // backgroundColor: '#0000000D',
+      // borderRadius: 6,
+      // borderWidth: 0.5,
+      // borderColor: '#0000001A',
+      width: '100%',
+      minHeight: '80px',
+      maxHeight: '20%',
+      marginVertical: '2%',
+      marginHorizontal: '0%',
+      // justifyContent: 'space-between',
+      borderRadius: 6,
+      border: '0.5px solid rgba(0, 0, 0, 0.10)',
+    },
+    image: {
+      borderRadius: '6px',
+      display: 'flex',
+      width: 24,
+      height: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 6,
+      // marginLeft: 10,
+    },
+    imageContainer: {
+      height: '100%',
+      width: '25%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 6,
+      backgroundColor: '#0000000d',
+    },
+    textContainer: {
+      // flex: 1,
+      paddingHorizontal: 8,
+      // justifyContent: 'center',
+    },
+    title: {
+      // fontFamily: 'SFProDisplay-Regular',
+      // fontSize: 18,
+      // fontWeight: '500',
+      // lineHeight: 24,
+      textAlign: 'left',
+      // alignSelf: 'stretch',
+      color: '#000000',
+      fontFamily: 'SF Pro Display',
+      fontSize: '18px',
+      fontWeight: '500',
+      fontStyle: 'normal',
+      // lineHeight: '24px', /* 133.333% */
+    },
+    subtitle: {
+      alignSelf: 'stretch',
+      fontFamily: 'SF Pro Text',
+      fontSize: 12,
+      fontWeight: '400',
+      fontStyle: 'normal',
+      lineHeight: 16,
+      color: '#000000b3',
+      // textAlign: 'left',
+    },
   }),
-  incorrectQuestionScreen: StyleSheet.create ({
+  incorrectQuestionScreen: StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-  },
+    },
   }),
-  incorrectQuiz: StyleSheet.create ({
+  incorrectQuiz: StyleSheet.create({
     button: {
       backgroundColor: 'black',
-  },
-  AnswerBox: {
+    },
+    AnswerBox: {
       width: 361,
       height: 214,
       borderWidth: 3,
@@ -649,63 +650,62 @@ const styles = {
       borderColor: 'rgba(0, 0, 0, 0.05)',
       backgroundColor: 'rgba(0, 0, 0, 0.05)',
       alignItems: 'center',
-      justifyContent: 'center', 
-  },
+      justifyContent: 'center',
+    },
 
-  answerText: {
+    answerText: {
       textAlign: 'center',
       fontSize: 24,
-  },
-  question: {
+    },
+    question: {
       marginBottom: 10,
       fontSize: 18,
-  },
-  container: {
+    },
+    container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-  },
-  correctBox: {
+    },
+    correctBox: {
       borderColor: 'rgba(19, 212, 2, 1)',
-  },
-  wrongBox: {
+    },
+    wrongBox: {
       borderColor: 'rgba(241, 58, 0, 1)',
-  },
-  progressBarContainer: {
+    },
+    progressBarContainer: {
       width: '100%',
       height: 20,
       marginBottom: 30,
-  },
+    },
 
-  correctMessage: {
+    correctMessage: {
       color: 'rgba(98, 218, 103, 1)',
       fontSize: 24,
       textAlign: 'center',
       marginBottom: 30,
-  },
-  wrongMessage: {
+    },
+    wrongMessage: {
       color: 'rgba(255, 72, 15, 1)',
       fontSize: 24,
       textAlign: 'center',
       marginBottom: 20,
-  },
-  customMessage: {
+    },
+    customMessage: {
       color: 'black',
       fontSize: 16,
       position: 'absolute',
-      top: 390, 
+      top: 390,
       width: '100%',
-      textAlign: 'left', 
-
-  },
-  disabledButton: {
+      textAlign: 'left',
+    },
+    disabledButton: {
       backgroundColor: 'black',
-  },
-  disabledButtonText: {
-      color: 'white', 
-  },
+    },
+    disabledButtonText: {
+      color: 'white',
+    },
   }),
-  loadScreen: StyleSheet.create ({
+  loadScreen: StyleSheet.create({
     container: {
       position: 'absolute',
       top: '50%',
@@ -723,7 +723,7 @@ const styles = {
       backgroundColor: 'lightgrey',
     },
   }),
-  loginFacebook: StyleSheet.create ({
+  loginFacebook: StyleSheet.create({
     forgotPassword: {
       width: '100%',
       alignItems: 'flex-end',
@@ -761,16 +761,16 @@ const styles = {
       color: theme.colors.primary,
     },
   }),
-  loginWithGFA: StyleSheet.create ({
+  loginWithGFA: StyleSheet.create({
     button: {
       marginTop: 24,
-  },
-  buttonEnabled: {
-    backgroundColor: 'black',
-  },
-  buttonDisabled: {
-    backgroundColor: 'gray',
-  },
+    },
+    buttonEnabled: {
+      backgroundColor: 'black',
+    },
+    buttonDisabled: {
+      backgroundColor: 'gray',
+    },
     row: {
       flexDirection: 'row',
       marginTop: 4,
@@ -780,7 +780,7 @@ const styles = {
       color: theme.colors.primary,
     },
   }),
-  myRewards: StyleSheet.create ({
+  myRewards: StyleSheet.create({
     safeArea: {
       flex: 1,
     },
@@ -796,7 +796,7 @@ const styles = {
       zIndex: 1,
     },
     backButton: {
-      paddingLeft:'20px'
+      paddingLeft: '20px',
     },
     headerTitle: {
       // alignSelf: 'center',
@@ -837,14 +837,14 @@ const styles = {
       fontSize: 14,
     },
   }),
-  logo: StyleSheet.create ({
+  logo: StyleSheet.create({
     image: {
       width: 139.47,
       height: 139.47,
       marginBottom: 8,
     },
   }),
-  paragraph: StyleSheet.create ({
+  paragraph: StyleSheet.create({
     text: {
       fontSize: 15,
       lineHeight: 21,
@@ -867,27 +867,27 @@ const styles = {
       fontStyle: 'normal',
       fontWeight: 'bold',
       fontweight: 510,
-      lineheight: 22, 
+      lineheight: 22,
     },
     editButton: {
-      paddingVertical: 3,    
-      paddingHorizontal: 8,    
-      justifyContent: 'center', 
-      gap: '2px',                 
-      position: 'absolute',     
-      right: 16.5,              
-      bottom: 7.625,            
-      borderRadius: 14,         
-      borderWidth: 1,           
-      borderColor: '#000',      
-      borderStyle: 'solid' 
+      paddingVertical: 3,
+      paddingHorizontal: 8,
+      justifyContent: 'center',
+      gap: '2px',
+      position: 'absolute',
+      right: 16.5,
+      bottom: 7.625,
+      borderRadius: 14,
+      borderWidth: 1,
+      borderColor: '#000',
+      borderStyle: 'solid',
     },
     editButtonText: {
       color: theme.colors.greet,
       fontSize: 12,
       fontStyle: 'normal',
       fontWeight: 400,
-      lineHeight: 16, 
+      lineHeight: 16,
     },
     container: {
       width: '100%',
@@ -937,7 +937,7 @@ const styles = {
       fontWeight: 400,
       lineHeight: 16,
     },
-    
+
     progressBarContainer: {
       alignItems: 'center',
       width: '100%',
@@ -947,7 +947,7 @@ const styles = {
       height: 8,
       borderRadius: 50,
       justifyContent: 'center',
-      backgroundColor: '#D9D9D9', 
+      backgroundColor: '#D9D9D9',
     },
     progress: {
       height: '100%',
@@ -964,7 +964,7 @@ const styles = {
       alignItems: 'center',
       marginRight: 8,
     },
-    xpTest:{
+    xpTest: {
       fontSize: 12,
       color: '#0A8300',
     },
@@ -972,15 +972,14 @@ const styles = {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-  
     },
-    xpRemaining:{
+    xpRemaining: {
       fontSize: 12,
       color: '#B2BEB5',
     },
     statsContainer: {
       alignItems: 'center',
-      
+
       justifyContent: 'space-around',
       width: '100%',
       paddingVertical: 8,
@@ -995,11 +994,10 @@ const styles = {
       borderWidth: 1,
       borderColor: 'rgba(0, 0, 0, 0.1)',
       overflow: 'hidden',
-  
     },
     weekContainer: {
       width: '100%',
-      flexDirection: 'row', 
+      flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
       paddingHorizontal: 16,
@@ -1014,7 +1012,7 @@ const styles = {
     },
     days: {
       padding: 8,
-      marginBottom: 10
+      marginBottom: 10,
     },
     icon: {
       width: 24,
@@ -1025,11 +1023,11 @@ const styles = {
       paddingVertical: 16,
       paddingHorizontal: 20,
       paddingBottom: 8,
-      flexDirection: 'row', 
+      flexDirection: 'row',
       alignItems: 'center',
     },
-  
-    statBox: { 
+
+    statBox: {
       display: 'flex',
       height: 74,
       paddingVertical: 8,
@@ -1058,8 +1056,8 @@ const styles = {
       fontSize: 20,
       fontStyle: 'normal',
       fontWeight: '500',
-      lineHeight: 28, 
-      textOverflow: 'ellipsis', 
+      lineHeight: 28,
+      textOverflow: 'ellipsis',
       overflow: 'hidden',
     },
     statText: {
@@ -1084,9 +1082,8 @@ const styles = {
       borderColor: 'rgba(0, 0, 0, 0.10)',
       marginVertical: 16,
       width: 250,
-  
     },
-  
+
     buttonText: {
       color: '#2E2D2D',
       fontFamily: theme.colors.greet,
@@ -1096,11 +1093,11 @@ const styles = {
       lineHeight: 16,
     },
   }),
-  quiz: StyleSheet.create ({
-    button: { 
-      backgroundColor: "black",
-  },
-  AnswerBox: {
+  quiz: StyleSheet.create({
+    button: {
+      backgroundColor: 'black',
+    },
+    AnswerBox: {
       width: 361,
       height: 214,
       borderWidth: 3,
@@ -1108,93 +1105,91 @@ const styles = {
       borderColor: 'rgba(0, 0, 0, 0.05)',
       backgroundColor: 'rgba(0, 0, 0, 0.05)',
       alignItems: 'center',
-      justifyContent: 'center', 
-  },
+      justifyContent: 'center',
+    },
 
-  answerText: {
+    answerText: {
       textAlign: 'center',
       fontSize: 24,
-  },
-  question: {
+    },
+    question: {
       marginBottom: 10,
       fontSize: 18,
-  },
-  container: {
+    },
+    container: {
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-  },
-  correctBox: {
+    },
+    correctBox: {
       borderColor: 'rgba(19, 212, 2, 1)',
-  },
-  wrongBox: {
+    },
+    wrongBox: {
       borderColor: 'rgba(241, 58, 0, 1)',
-  },
-  progressBarContainer: {
+    },
+    progressBarContainer: {
       width: '100%',
       height: 20,
       marginBottom: 30,
-  },
+    },
 
-  correctMessage: {
+    correctMessage: {
       color: 'rgba(98, 218, 103, 1)',
       fontSize: 24,
       textAlign: 'center',
       marginBottom: 30,
-  },
-  wrongMessage: {
+    },
+    wrongMessage: {
       color: 'rgba(255, 72, 15, 1)',
       fontSize: 24,
       textAlign: 'center',
       marginBottom: 20,
-  },
-  customMessage: {
+    },
+    customMessage: {
       color: 'black',
       fontSize: 16,
       position: 'absolute',
-      top: 390, 
+      top: 390,
       width: '100%',
-      textAlign: 'left', 
-
-  },
-  disabledButton: {
+      textAlign: 'left',
+    },
+    disabledButton: {
       backgroundColor: 'black',
-  },
-  disabledButtonText: {
-      color: 'white', 
-  },
+    },
+    disabledButtonText: {
+      color: 'white',
+    },
   }),
-  quizEndingScreen: StyleSheet.create ({
+  quizEndingScreen: StyleSheet.create({
     button: {
-      backgroundColor: "black",
+      backgroundColor: 'black',
     },
 
-  iconContainer: {
+    iconContainer: {
       alignItems: 'center',
-      
-  },
-  image: {
+    },
+    image: {
       width: 93.32,
-      height: 93.32, 
-      borderRadius: 46.66, 
-      backgroundColor: 'rgba(217, 217, 217, 1)', 
-  },
-  text: {
+      height: 93.32,
+      borderRadius: 46.66,
+      backgroundColor: 'rgba(217, 217, 217, 1)',
+    },
+    text: {
       fontSize: 24,
       fontWeight: 'bold',
-      marginBottom: 80, 
+      marginBottom: 80,
       alignItems: 'center',
       textAlign: 'center',
-  },
-  score: {
+    },
+    score: {
       fontSize: 26,
       fontWeight: 'bold',
-      marginTop: 22, 
-  },
+      marginTop: 22,
+    },
   }),
-  quizStreakScreen: StyleSheet.create ({
+  quizStreakScreen: StyleSheet.create({
     button: {
-      backgroundColor: "black",
+      backgroundColor: 'black',
     },
     userInfoContainer: {
       flexDirection: 'row',
@@ -1224,30 +1219,30 @@ const styles = {
       marginTop: 5,
     },
   }),
-  redoQuestionsScreen: ({
+  redoQuestionsScreen: {
     button: {
-      backgroundColor: "black",
+      backgroundColor: 'black',
     },
-  container: {
+    container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-  },
-  text: {
+    },
+    text: {
       fontSize: 17,
       fontWeight: 'bold',
       marginBottom: 300,
       textAlign: 'left',
       marginTop: -260,
-  },
+    },
 
-  progressBarContainer: {
+    progressBarContainer: {
       width: '100%',
       height: 20,
       marginBottom: 300,
+    },
   },
-  }),
-  registerScreen: ({
+  registerScreen: {
     row: {
       flexDirection: 'row',
       marginTop: 4,
@@ -1256,12 +1251,12 @@ const styles = {
       fontWeight: 'bold',
       color: theme.colors.primary,
     },
-  }),
-  signIn: StyleSheet.create ({
+  },
+  signIn: StyleSheet.create({
     button: {
-      backgroundColor: "black",
+      backgroundColor: 'black',
       marginTop: 24,
-  },
+    },
     row: {
       flexDirection: 'row',
       marginTop: 4,
@@ -1271,7 +1266,7 @@ const styles = {
       color: theme.colors.primary,
     },
   }),
-  signUpForm: StyleSheet.create ({
+  signUpForm: StyleSheet.create({
     container: {
       flex: 1,
       padding: 16,
@@ -1368,7 +1363,7 @@ const styles = {
       backgroundColor: 'black', // Add this line to apply background color
     },
   }),
-  takeActionScreen: StyleSheet.create ({
+  takeActionScreen: StyleSheet.create({
     container: {
       flex: 1,
       padding: 20,
@@ -1423,8 +1418,8 @@ const styles = {
       alignItems: 'center',
       borderradius: 27,
       gap: 16,
-      bottom:2,
-    },  
+      bottom: 2,
+    },
     Circle: {
       width: '100%',
       height: '100%',
@@ -1486,7 +1481,7 @@ const styles = {
     },
     photoWrapper: {
       position: 'relative',
-      margin: 5,  
+      margin: 5,
     },
     photo: {
       width: 50,
@@ -1523,7 +1518,7 @@ const styles = {
       fontSize: 16,
     },
   }),
-  textInput: StyleSheet.create ({
+  textInput: StyleSheet.create({
     container: {
       width: '100%',
       marginVertical: 7,
@@ -1554,7 +1549,7 @@ const styles = {
       fontStyle: 'normal',
     },
   }),
-  triviaToActionConnect: StyleSheet.create ({
+  triviaToActionConnect: StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
@@ -1592,7 +1587,7 @@ const styles = {
       fontSize: 16,
     },
   }),
-  welcomeScreen: StyleSheet.create ({
+  welcomeScreen: StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
@@ -1613,6 +1608,6 @@ const styles = {
       textAlign: 'center', // Center align the text
     },
   }),
-};
+}
 
-export default styles;
+export default styles
