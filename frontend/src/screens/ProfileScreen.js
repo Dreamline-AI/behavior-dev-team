@@ -1,41 +1,56 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native'
 import Background from '../components/Background'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
-import {UserPic} from '../components/UserPic'
+import { UserPic } from '../components/UserPic'
 import Paragraph from '../components/Paragraph'
-import { Ionicons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import BottomNavigationBar from './BottomNavigationBar.js';
-import Svg, { Path } from 'react-native-svg';
-import styles from "../commonStyles.js"
+import { Ionicons } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
+import { FontAwesome5 } from '@expo/vector-icons'
+import BottomNavigationBar from './BottomNavigationBar.js'
+import Svg, { Path } from 'react-native-svg'
+import styles from '../commonStyles.js'
 
-export default function ProfileScreen ({ route, navigation }){
-  const { userName } = route.params;
-  const progress = 80;
-  const XPCurrent = 2500;
-  const XPNextLevel = 2950;
-  const currentStreak = 15;
-  const bestStreak = 32;
-  const voltcoins = 15;
-  const claimedRewards = 15;
-  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-  const highlightedDays = [0, 1, 3, 4]; 
+export default function ProfileScreen({ route, navigation }) {
+  const { userName } = route.params
+  const progress = 80
+  const XPCurrent = 2500
+  const XPNextLevel = 2950
+  const currentStreak = 15
+  const bestStreak = 32
+  const voltcoins = 15
+  const claimedRewards = 15
+  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+  const highlightedDays = [0, 1, 3, 4]
 
   const ThunderIcon = ({ isActive, day }) => (
-    <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingHorizontal: 7, justifyContent: 'center' }}>
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingHorizontal: 7,
+        justifyContent: 'center',
+      }}
+    >
       <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill='none'
-          width="25px"
-          height="24px"
-        >
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        width="25px"
+        height="24px"
+      >
         <Path
           d="M13.5 2L3.5 14H12.5L11.5 22L21.5 10H12.5L13.5 2Z"
           fill={isActive ? '#FFC700' : '#D9D9D9'}
@@ -45,27 +60,41 @@ export default function ProfileScreen ({ route, navigation }){
           strokeLinejoin="round"
         />
       </svg>
-      <Text style={{ fontWeight: 700, fontSize: 19, color: theme.colors.greet, fontStyle: 'normal', lineHeight: 16, marginTop: 18}}>{day}</Text>
+      <Text
+        style={{
+          fontWeight: 700,
+          fontSize: 19,
+          color: theme.colors.greet,
+          fontStyle: 'normal',
+          lineHeight: 16,
+          marginTop: 18,
+        }}
+      >
+        {day}
+      </Text>
     </View>
-  );
-  
-  const isActive = true;
+  )
+
+  const isActive = true
   const EditClicked = () => {
-    navigation.navigate('EditProfileScreen', {name: userName})
-  } 
-  
+    navigation.navigate('EditProfileScreen', { name: userName })
+  }
+
   return (
     <Background>
       <View style={styles.profileScreen.headerContainer}>
         <BackButton goBack={navigation.goBack} />
         <Header style={styles.profileScreen.header}>Your profile</Header>
-        <TouchableOpacity style={styles.profileScreen.editButton} onPress={EditClicked}>
+        <TouchableOpacity
+          style={styles.profileScreen.editButton}
+          onPress={EditClicked}
+        >
           <Text style={styles.profileScreen.editButtonText}>Edit</Text>
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={styles.profileScreen.container}>
         <View style={styles.profileScreen.profileHeader}>
-          <View style={styles.profileScreen.profilePic}> 
+          <View style={styles.profileScreen.profilePic}>
             <UserPic picSize={100} />
           </View>
           <View style={styles.profileScreen.userNameContainer}>
@@ -74,11 +103,16 @@ export default function ProfileScreen ({ route, navigation }){
         </View>
         <View style={styles.profileScreen.ProgressContainer}>
           <View style={styles.profileScreen.ProgressTitleContainer}>
-            <Text style={styles.profileScreen.ProgressTitle}>Eco Novice</Text> 
+            <Text style={styles.profileScreen.ProgressTitle}>Eco Novice</Text>
           </View>
-          <View style={styles.profileScreen.progressBarContainer}> 
+          <View style={styles.profileScreen.progressBarContainer}>
             <View style={styles.profileScreen.progressBar}>
-              <View style={[styles.profileScreen.progress, { width: `${progress}%` }]}></View>
+              <View
+                style={[
+                  styles.profileScreen.progress,
+                  { width: `${progress}%` },
+                ]}
+              ></View>
             </View>
           </View>
           <View style={styles.profileScreen.ProgressTag}>
@@ -86,8 +120,11 @@ export default function ProfileScreen ({ route, navigation }){
               <Text style={styles.profileScreen.xpTest}> {XPCurrent}XP </Text>
             </View>
             <View style={styles.profileScreen.xpRemainingContainer}>
-              <Text style={styles.profileScreen.xpRemaining}> {XPNextLevel - XPCurrent}XP away from a level-up </Text> 
-            </View> 
+              <Text style={styles.profileScreen.xpRemaining}>
+                {' '}
+                {XPNextLevel - XPCurrent}XP away from a level-up{' '}
+              </Text>
+            </View>
           </View>
         </View>
         <View style={styles.profileScreen.statsContainer}>
@@ -95,9 +132,19 @@ export default function ProfileScreen ({ route, navigation }){
             <View style={styles.profileScreen.weekContainer}>
               <View style={styles.profileScreen.daysContainer}>
                 <View style={styles.profileScreen.days}>
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
                     {days.map((day, index) => (
-                      <ThunderIcon key={index} isActive={highlightedDays.includes(index)} day={day.charAt(0)} />
+                      <ThunderIcon
+                        key={index}
+                        isActive={highlightedDays.includes(index)}
+                        day={day.charAt(0)}
+                      />
                     ))}
                   </View>
                 </View>
@@ -110,7 +157,7 @@ export default function ProfileScreen ({ route, navigation }){
                     height: 1,
                     backgroundColor: 'rgba(0, 0, 0, 0.10)',
                   }}
-              />
+                />
               </View>
             </View>
             <View style={styles.profileScreen.statContainer}>
@@ -127,13 +174,15 @@ export default function ProfileScreen ({ route, navigation }){
                       strokeLinejoin="round"
                     />
                   </Svg>
-                  <Text style={styles.profileScreen.statNumber}>{currentStreak}</Text>
+                  <Text style={styles.profileScreen.statNumber}>
+                    {currentStreak}
+                  </Text>
                 </View>
               </View>
               <View style={styles.profileScreen.statBox}>
                 <Text style={styles.profileScreen.statText}>Best streak</Text>
                 <View style={styles.profileScreen.statRow}>
-                <Svg width={25} height={24} viewBox="0 0 25 24" fill="none">
+                  <Svg width={25} height={24} viewBox="0 0 25 24" fill="none">
                     <Path
                       d="M13.5 2L3.5 14H12.5L11.5 22L21.5 10H12.5L13.5 2Z"
                       fill="#FF480F"
@@ -143,7 +192,9 @@ export default function ProfileScreen ({ route, navigation }){
                       strokeLinejoin="round"
                     />
                   </Svg>
-                  <Text style={styles.profileScreen.statNumber}>{bestStreak}</Text>
+                  <Text style={styles.profileScreen.statNumber}>
+                    {bestStreak}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -157,12 +208,16 @@ export default function ProfileScreen ({ route, navigation }){
                       fill="black"
                     />
                   </Svg>
-                  <Text style={styles.profileScreen.statNumber}>{voltcoins}</Text>
+                  <Text style={styles.profileScreen.statNumber}>
+                    {voltcoins}
+                  </Text>
                 </View>
               </View>
               <View style={styles.profileScreen.statBox}>
                 <TouchableOpacity>
-                  <Text style={styles.profileScreen.statText}>Claimed rewards</Text>
+                  <Text style={styles.profileScreen.statText}>
+                    Claimed rewards
+                  </Text>
                   <View style={styles.profileScreen.statRow}>
                     <Svg width={25} height={24} viewBox="0 0 25 24" fill="none">
                       <Path
@@ -178,7 +233,9 @@ export default function ProfileScreen ({ route, navigation }){
                         strokeLinejoin="round"
                       />
                     </Svg>
-                    <Text style={styles.profileScreen.statNumber}>{claimedRewards}</Text>
+                    <Text style={styles.profileScreen.statNumber}>
+                      {claimedRewards}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -187,13 +244,9 @@ export default function ProfileScreen ({ route, navigation }){
               <Text style={styles.profileScreen.buttonText}>See my impact</Text>
             </TouchableOpacity>
           </View>
-        </View> 
+        </View>
       </ScrollView>
-      <BottomNavigationBar userName={userName}/> 
+      <BottomNavigationBar userName={userName} />
     </Background>
-    
-  );
-};
-
-
-
+  )
+}

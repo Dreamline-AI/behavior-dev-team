@@ -5,20 +5,15 @@ import { theme } from './core/theme'
 const styles = {
   backButton: StyleSheet.create({
     container: {
-      position: 'absolute',
-      top: 25 + getStatusBarHeight(),
-      left: 16,
-      padding: 10,
-      alignItems: 'flex-start',
-      justifyContent: 'flex-start',
-      width: 24 + 2 * 10,
-      height: 24 + 2 * 10,
+      backgroundColor: 'red',
+      width: 50, // Adjust the width as needed
+      height: 50,
     },
-    image: {
+    /* image: {
       width: '100%',
       height: '100%',
       resizeMode: 'contain',
-    },
+    },*/
   }),
 
   background: StyleSheet.create({
@@ -374,10 +369,10 @@ const styles = {
     headerContainer: {
       display: 'flex',
       width: '100%',
-      padding: '8px',
-      justifyContents: 'center',
-      alignItems: 'center',
+      justifyContent: 'start',
+      alignItems: 'start',
       gap: '8px',
+      flexDirection: 'row',
     },
     header: {
       color: theme.colors.greet,
@@ -855,11 +850,9 @@ const styles = {
   profileScreen: StyleSheet.create({
     headerContainer: {
       display: 'flex',
-      width: '100%',
-      padding: '8px',
-      justifyContents: 'center',
+      flexDirection: 'row',
       alignItems: 'center',
-      gap: '8px',
+      justifyContent: 'space-between',
     },
     header: {
       color: theme.colors.greet,
@@ -868,19 +861,23 @@ const styles = {
       fontWeight: 'bold',
       fontweight: 510,
       lineheight: 22,
+      flex: 1,
+      justifyContent: 'center',
     },
     editButton: {
-      paddingVertical: 3,
-      paddingHorizontal: 8,
-      justifyContent: 'center',
-      gap: '2px',
       position: 'absolute',
-      right: 16.5,
-      bottom: 7.625,
+      right: 0,
+      top: 8,
       borderRadius: 14,
       borderWidth: 1,
       borderColor: '#000',
       borderStyle: 'solid',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      width: 'auto',
     },
     editButtonText: {
       color: theme.colors.greet,

@@ -3,6 +3,7 @@ import { TouchableOpacity, Image, View, Text, StyleSheet } from 'react-native'
 import { useNavigation, useNavigationState } from '@react-navigation/native'
 import { getStatusBarHeight } from 'react-native-status-bar-height'
 import chevronLeft from '../assets/chevron-left.png'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import styles from '../commonStyles'
 
@@ -22,16 +23,8 @@ export default function BackButton() {
   }
 
   return (
-    <TouchableOpacity
-      onPress={() => {
-        goBack()
-      }}
-      style={styles.backButton.container}
-    >
-      <Image
-        style={styles.backButton.image}
-        source={require('../assets/chevron-left.png')}
-      />
+    <TouchableOpacity onPress={goBack}>
+      <MaterialCommunityIcons name="chevron-left" size={30} />
     </TouchableOpacity>
   )
 }
