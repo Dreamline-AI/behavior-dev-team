@@ -103,13 +103,12 @@ const styles = {
   }),
   dashboard: StyleSheet.create({
     container: {
-      flexGrow: 1,
-      paddingHorizontal: 30,
-      paddingTop: 10,
-      paddingBottom: 10,
-      alignItems: 'center',
+      width: '100%',
       justifyContent: 'center',
       padding: 1,
+      alignItems: 'center',
+      marginTop: "auto",
+
     },
     header: {
       flexDirection: 'row',
@@ -157,6 +156,12 @@ const styles = {
       fontSize: 18,
       fontWeight: 'bold',
     },
+    dashboardContainer: {
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      width: '100%',
+      paddingHorizontal: 12,
+    },
     dailyChallengeBox: {
       borderWidth: 1,
       borderColor: '#ddd',
@@ -165,7 +170,7 @@ const styles = {
       backgroundColor: 'white',
       marginBottom: 20,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     sectionTitle1: {
       fontSize: 10,
@@ -241,7 +246,7 @@ const styles = {
     incompleteAction: {
       marginBottom: 20,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     blackBox: {
       borderWidth: 1,
@@ -298,7 +303,7 @@ const styles = {
     availableIncentives: {
       marginBottom: 20,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     sectionHeader: {
       flexDirection: 'row',
@@ -331,7 +336,7 @@ const styles = {
     revision: {
       marginBottom: 15,
       alignSelf: 'stretch',
-      maxWidth: 300,
+      maxWidth: 340,
     },
     revisionContainer: {
       flexDirection: 'row',
