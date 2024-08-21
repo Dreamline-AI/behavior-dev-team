@@ -2,16 +2,19 @@ import React, { useEffect } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
 
 export default function WelcomeScreen({ route, navigation }) {
-  const { userFirstName, userLastName } = route.params;
+  const { userFirstName, userLastName } = route.params || {};
 
   useEffect(() => {
+    // console.log('userFirstName in useeffect:', userFirstName);  
+    // console.log('userLastName in useeffect:', userLastName);    
     const timer = setTimeout(() => {
+       
       navigation.reset({
         index: 0,
         routes: [{
           name: 'Dashboard',
           params: {
-            userFirstName: userFirstName,
+            userFirstName: userFirstName, 
             userLastName: userLastName,
           },
         }],
@@ -19,7 +22,7 @@ export default function WelcomeScreen({ route, navigation }) {
     }, 1000); //  delay
 
     return () => clearTimeout(timer); // Cleanup timer
-  }, [navigation]);
+  }, [navigation, userFirstName, userLastName]);
 
   return (
     <View style={styles.container}>

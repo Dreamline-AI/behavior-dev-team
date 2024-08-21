@@ -15,7 +15,7 @@ import BottomNavigationBar from './BottomNavigationBar.js';
 import Svg, { Path } from 'react-native-svg';
 
 export default function ProfileScreen ({ route, navigation }){
-  const { userName } = route.params;
+  const { userName, userFirstName, userLastName } = route.params;
   const progress = 80;
   const XPCurrent = 2500;
   const XPNextLevel = 2950;
@@ -188,7 +188,7 @@ export default function ProfileScreen ({ route, navigation }){
           </View>
         </View> 
       </ScrollView>
-      <BottomNavigationBar userName={userName}/> 
+      <BottomNavigationBar userName={userName} userFirstName={userFirstName} userLastName={userLastName} />
     </Background>
     
   );

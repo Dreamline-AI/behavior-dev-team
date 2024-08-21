@@ -8,7 +8,9 @@ import { useNavigation } from '@react-navigation/native';
 
 
 export default function Dashboard({ route, navigation }) {
-  const { userFirstName, userLastName } = route.params;
+  const { userFirstName, userLastName } = route.params || {};
+  console.log('userFirstName:', userFirstName);
+  console.log('userLastName:', userLastName);
   const userName = `${userFirstName} ${userLastName}`; 
 
   return (
@@ -107,7 +109,7 @@ export default function Dashboard({ route, navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-        <BottomNavigationBar userName={userName} />
+        <BottomNavigationBar userName={userName} userFirstName={userFirstName} userLastName={userLastName} />
       </ScrollView>
     </Background>
   );

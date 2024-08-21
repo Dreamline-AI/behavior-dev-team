@@ -2,13 +2,14 @@ import { useNavigation, useNavigationState } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function BottomNavigationBar({ userName}) {
+export default function BottomNavigationBar({ userName, userFirstName, userLastName}) {
   const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState('Home');
 
   const currentRouteName = useNavigationState(state => state.routes[state.index]?.name);
 
   useEffect(() => {
+    console.log("User First Name and Last Name:", userName);
     switch (currentRouteName) {
       case 'Dashboard':
         setActiveTab('Home');
@@ -32,10 +33,10 @@ export default function BottomNavigationBar({ userName}) {
     setActiveTab(tabName);
     switch (tabName) {
       case 'Home':
-        navigation.navigate('Dashboard');
+        navigation.navigate('Dashboard', { userName : userName, userFirstName : userFirstName, userLastName : userLastName });
         break;
       case 'Profile':
-        navigation.navigate('ProfileScreen', { userName });
+        navigation.navigate('ProfileScreen', { userName : userName, userFirstName : userFirstName, userLastName : userLastName });
         break;
       case 'Rewards':
         navigation.navigate('RewardScreen');

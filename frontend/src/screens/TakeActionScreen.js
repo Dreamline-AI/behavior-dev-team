@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import * as ImagePicker from 'expo-image-picker'
 import { useNavigation } from '@react-navigation/native'
 import { theme } from '../core/theme'
 import BulbIcon from '../assets/BulbIcon.png'
 import Circle from '../assets/Circle.png'
-import CheckIcon from '../assets/check.png' 
+import CheckIcon from '../assets/check.png'
 
 const TakeActionScreen = () => {
   const navigation = useNavigation()
@@ -48,7 +48,7 @@ const TakeActionScreen = () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      allowsMultipleSelection: true, 
+      allowsMultipleSelection: true,
       aspect: [4, 3],
       quality: 1,
     })
@@ -78,90 +78,95 @@ const TakeActionScreen = () => {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <Icon name="chevron-back" size={24} color={theme.colors.text} />
-        </TouchableOpacity>
-        <Text style={styles.header}>Take action</Text>
-      </View>
-      <Text style={styles.subHeader}>Unplug for the day</Text>
-      <Text style={styles.description}>
-        Unplugging your electronics for a day not only reduces your personal
-        energy consumption, leading to savings on your electricity bill, but
-        also decreases the overall demand on the city's power grid, contributing
-        to a more sustainable and efficient energy use across the community
-        (mitigate power outages and lower impact of energy production).
-      </Text>
-      <View style={styles.funFactContainer}>
-        <View style={styles.iconContainer}>
-          <Image source={Circle} style={styles.Circle} />
-          <Image source={BulbIcon} style={styles.BulbIcon} />
-        </View>
-        <Text style={styles.funFactText}>
-          <b>Fun fact:</b> you can save up to $100 per year on your electricity bills
-          by simply unplugging all of your electronics once a month!
-        </Text>
-      </View>
-      <Text style={styles.unplugText}>Unplug these items for 24 hours</Text>
-      {['tv', 'ac', 'washerDryer', 'vacuumCleaner'].map((item) => (
-        <View style={styles.checkboxContainer} key={item}>
-          <TouchableOpacity
-            onPress={() => handleCheckboxChange(item)}
-            style={styles.checkbox}
-          >
-            {checkedItems[item] && (
-              <Image source={CheckIcon} style={styles.checkIcon} /> 
-            )}
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+            <Icon name="chevron-back" size={24} color={theme.colors.text} />
           </TouchableOpacity>
-          <Text style={styles.checkboxLabel}>
-            {item === 'washerDryer'
-              ? 'Washer + Dryer'
-              : item.replace(/([A-Z])/g, ' $1').toUpperCase()}
+          <Text style={styles.header}>Take action</Text>
+        </View>
+        <Text style={styles.subHeader}>Unplug for the day</Text>
+        <Text style={styles.description}>
+          Unplugging your electronics for a day not only reduces your personal
+          energy consumption, leading to savings on your electricity bill, but
+          also decreases the overall demand on the city's power grid, contributing
+          to a more sustainable and efficient energy use across the community
+          (mitigate power outages and lower impact of energy production).
+        </Text>
+        <View style={styles.funFactContainer}>
+          <View style={styles.iconContainer}>
+            <Image source={Circle} style={styles.Circle} />
+            <Image source={BulbIcon} style={styles.BulbIcon} />
+          </View>
+          <Text style={styles.funFactText}>
+            Fun fact: you can save up to $100 per year on your electricity bills
+            by simply unplugging all of your electronics once a month!
           </Text>
         </View>
-      ))}
-      <Text style={styles.photoLabel}>Add photo verification</Text>
-      <View style={styles.photoContainer}>
-        {photos.map((photo, index) => (
-          <View key={index} style={styles.photoWrapper}>
-            <Image source={{ uri: photo }} style={styles.photo} />
+        <Text style={styles.unplugText}>Unplug these items for 24 hours</Text>
+        {['tv', 'ac', 'washerDryer', 'vacuumCleaner'].map((item) => (
+          <View style={styles.checkboxContainer} key={item}>
             <TouchableOpacity
-              style={styles.deleteButton}
-              onPress={() => handleDeletePhoto(index)}
+              onPress={() => handleCheckboxChange(item)}
+              style={styles.checkbox}
             >
-              <Icon name="close" size={16} color="white" />
+              {checkedItems[item] && (
+                <Image source={CheckIcon} style={styles.checkIcon} />
+              )}
             </TouchableOpacity>
-          </View> 
+            <Text style={styles.checkboxLabel}>
+              {item === 'washerDryer'
+                ? 'Washer + Dryer'
+                : item.replace(/([A-Z])/g, ' $1').toUpperCase()}
+            </Text>
+          </View>
         ))}
-        {photos.length < 4 && (
-          <TouchableOpacity
-            onPress={handlePhotoUpload}
-            style={styles.uploadButton}
-          >
-            <Icon name="add" size={30} color="black" />
-          </TouchableOpacity>
-        )}
+        <Text style={styles.photoLabel}>Add photo verification</Text>
+        <View style={styles.photoContainer}>
+          {photos.map((photo, index) => (
+            <View key={index} style={styles.photoWrapper}>
+              <Image source={{ uri: photo }} style={styles.photo} />
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={() => handleDeletePhoto(index)}
+              >
+                <Icon name="close" size={16} color="white" />
+              </TouchableOpacity>
+            </View>
+          ))}
+          {photos.length < 4 && (
+            <TouchableOpacity
+              onPress={handlePhotoUpload}
+              style={styles.uploadButton}
+            >
+              <Icon name="add" size={30} color="black" />
+            </TouchableOpacity>
+          )}
+        </View>
+        <TouchableOpacity
+          onPress={handleSubmit}
+          style={[
+            styles.completeButton,
+            { backgroundColor: isCompleteButtonEnabled ? '#000' : '#ccc' },
+          ]}
+          disabled={!isCompleteButtonEnabled}
+        >
+          <Text style={styles.completeButtonText}>Complete</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={handleSubmit}
-        style={[
-          styles.completeButton,
-          { backgroundColor: isCompleteButtonEnabled ? '#000' : '#ccc' },
-        ]}
-        disabled={!isCompleteButtonEnabled}
-      >
-        <Text style={styles.completeButtonText}>Complete</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  scrollViewContainer: {
+    flexGrow: 1,
     padding: 20,
     backgroundColor: '#FFF',
+  },
+  container: {
+    flex: 1,
   },
   headerContainer: {
     flexDirection: 'row',
@@ -313,4 +318,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default TakeActionScreen;
+export default TakeActionScreen
