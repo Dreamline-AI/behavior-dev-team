@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
+import styles from "../commonStyles"
 
 export default function WelcomeScreen({ route, navigation }) {
   const { userFirstName, userLastName } = route.params || {};
@@ -25,34 +26,14 @@ export default function WelcomeScreen({ route, navigation }) {
   }, [navigation, userFirstName, userLastName]);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.welcomeScreen.container}>
       <Image
         source={require('../assets/welcome.png')} // make sure this path is correct
-        style={styles.image}
+        style={styles.welcomeScreen.image}
       />
-      <Text style={styles.text}>Sustainable living starts here!</Text>
+      <Text style={styles.welcomeScreen.text}>Sustainable living starts here!</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white', // Set background color to white
-  },
-  image: {
-    width: 300,
-    height: 500,
-    resizeMode: 'contain',
-    filter: 'grayscale(100%)', // Apply grayscale effect
-  },
-  text: {
-    marginTop: 10, // Adjust the margin as needed
-    fontSize: 40, // Adjust the font size as needed
-    fontWeight: 'bold', // Make the text bold
-    color: 'black', // Text color
-    textAlign: 'center', // Center align the text
-  },
-});
+

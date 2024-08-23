@@ -11,6 +11,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { signInWithGooglePopup, signInWithFacebookPopup } from '../../firebaseConfig';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import styles from "../commonStyles";
 // import 'react-toastify/dist/ReactToastify.css';
 import Toast from 'react-native-toast-message';
 
@@ -174,49 +176,49 @@ export default function StartScreen({ navigation }) {
         mode="contained"
         disabled={!isEmailValid}
         onPress={onContinuePressed}
-        style={[styles.continueButton, isEmailValid ? styles.continueButtonEnabled : styles.continueButtonDisabled]} // Conditionally apply styles
+        style={[styles.startScreen.continueButton, isEmailValid ? styles.startScreen.continueButtonEnabled : styles.startScreen.continueButtonDisabled]} // Conditionally apply styles
       >
-        <Text style={styles.continueButtonText}>Continue</Text>
+        <Text style={styles.startScreen.continueButtonText}>Continue</Text>
       </Button>
 
-      <View style={styles.separatorContainer}>
-        <View style={styles.line} />
-        <Text style={styles.orText}>or</Text>
-        <View style={styles.line} />
+      <View style={styles.startScreen.separatorContainer}>
+        <View style={styles.startScreen.line} />
+        <Text style={styles.startScreen.orText}>or</Text>
+        <View style={styles.startScreen.line} />
       </View>
 
       <Button
         color="white"
         mode="contained"
         onPress={logGoogleUser}
-        style={[styles.buttonBorder, styles.googleButton]} // Add style for Google button
+        style={[styles.startScreen.buttonBorder, styles.startScreen.googleButton]} // Add style for Google button
         icon={() => (
           <AntDesign
             name="google"
             size={20}
             color="black"
-            style={styles.iconStyle}
+            style={styles.startScreen.iconStyle}
           />
         )}
       >
-        <Text style={styles.buttonText}>Continue with Google</Text>
+        <Text style={styles.startScreen.buttonText}>Continue with Google</Text>
       </Button>
 
       <Button
         color="white"
         mode="contained"
         onPress={logFBUser}
-        style={[styles.buttonBorder, styles.facebookButton]} // Add style for Facebook button
+        style={[styles.startScreen.buttonBorder, styles.startScreen.facebookButton]} // Add style for Facebook button
         icon={() => (
           <MaterialIcon
             name="facebook"
             size={20}
             color="black"
-            style={styles.iconStyle}
+            style={styles.startScreen.iconStyle}
           />
         )}
       >
-        <Text style={styles.buttonText}>Continue with Facebook</Text>
+        <Text style={styles.startScreen.buttonText}>Continue with Facebook</Text>
       </Button>
 
       <Button
@@ -232,90 +234,19 @@ export default function StartScreen({ navigation }) {
             },
           }],
         })}
-        style={[styles.buttonBorder, styles.appleButton]} // Add style for Apple button
+        style={[styles.startScreen.buttonBorder, styles.startScreen.appleButton]} // Add style for Apple button
         icon={() => (
           <MaterialIcon
             name="apple"
             size={20}
             color="black"
-            style={styles.iconStyle}
+            style={styles.startScreen.iconStyle}
           />
         )}
       >
-        <Text style={styles.buttonText}>Continue with Apple</Text>
+        <Text style={styles.startScreen.buttonText}>Continue with Apple</Text>
       </Button>
     </Background>
   )
 }
 
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 54,
-    lineHeight: 20,
-    fontWeight: '500',
-  },
-  separatorContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 20,
-    width: '100%',
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: 'black',
-  },
-  orText: {
-    marginHorizontal: 10,
-    color: 'gray',
-  },
-  buttonBorder: {
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 5,
-  },
-  iconStyle: {
-    marginRight: 10,
-  },
-  buttonText: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  continueButton: {
-    borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginVertical: 10,
-  },
-  continueButtonEnabled: {
-    backgroundColor: 'black',
-  },
-  continueButtonDisabled: {
-    backgroundColor: 'gray',
-  },
-  continueButtonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  googleButton: {
-    backgroundColor: '#ffffff',
-  },
-  facebookButton: {
-    backgroundColor: '#ffffff',
-  },
-  appleButton: {
-    backgroundColor: '#ffffff',
-  },
-  // Ensure the button styles apply to all states
-  button: {
-    backgroundColor: 'black', // Add this line to apply background color
-  },
-});

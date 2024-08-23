@@ -12,6 +12,7 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import * as WebBrowser from 'expo-web-browser'
 import { signInWithGooglePopup } from '../../firebaseConfig'
+import styles from "../commonStyles"
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -77,42 +78,24 @@ export default function LoginGoogle({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <View style={styles.forgotPassword}>
+      <View style={styles.loginGoogle.forgotPassword}>
         <TouchableOpacity
           onPress={() => navigation.navigate('ResetPasswordScreen')}
         >
-          <Text style={styles.forgot}>Forgot your password?</Text>
+          <Text style={styles.loginGoogle.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
       </View>
       <Button mode="contained" onPress={logGoogleUser}>
         Login
       </Button>
-      <View style={styles.row}>
+      <View style={styles.loginGoogle.row}>
         <Text>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
-          <Text style={styles.link}>Sign up</Text>
+          <Text style={styles.loginGoogle.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
     </Background>
   )
 }
 
-const styles = StyleSheet.create({
-  forgotPassword: {
-    width: '100%',
-    alignItems: 'flex-end',
-    marginBottom: 24,
-  },
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  forgot: {
-    fontSize: 13,
-    color: theme.colors.secondary,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-})
+

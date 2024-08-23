@@ -15,6 +15,7 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import { repeatPasswordValidator } from '../helpers/repeatPasswordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 import { zipcodeValidator } from '../helpers/zipcodeValidator'
+import styles from "../commonStyles"
 
 export default function EmailSignUp({ navigation, route }) {
   const { email } = route.params // Get the email from route parameters
@@ -163,7 +164,7 @@ export default function EmailSignUp({ navigation, route }) {
         errorText={zipcode.error}
       />
 
-      <View style={styles.checkboxContainer}>
+      <View style={styles.emailSignUp.checkboxContainer}>
         <Checkbox
           status={isChecked ? 'checked' : 'unchecked'}
           onPress={() => setIsChecked(!isChecked)}
@@ -175,30 +176,10 @@ export default function EmailSignUp({ navigation, route }) {
         color="black"
         mode="contained"
         onPress={onSignUpPressed}
-        style={[ styles.button ]}
+        style={[ styles.emailSignUp.button ]}
       >
         Sign Up
       </Button>
     </Background>
   )
 }
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "black",
-    marginTop: 24,
-},
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-  checkboxContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-})
