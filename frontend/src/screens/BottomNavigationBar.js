@@ -10,7 +10,7 @@ export default function BottomNavigationBar({ userName, userFirstName, userLastN
   const currentRouteName = useNavigationState(state => state.routes[state.index]?.name);
 
   useEffect(() => {
-    console.log("User First Name and Last Name:", userName);
+    // console.log("User First Name and Last Name:", userName);
     switch (currentRouteName) {
       case 'Dashboard':
         setActiveTab('Home');

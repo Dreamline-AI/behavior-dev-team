@@ -9,8 +9,9 @@ import Circle from '../assets/Circle.png'
 import CheckIcon from '../assets/check.png' 
 import styles from "../commonStyles"
 
-const TakeActionScreen = () => {
+  const TakeActionScreen = ({ route }) => {
   const navigation = useNavigation()
+  const { userName, userFirstName, userLastName } = route.params || {};
   const [checkedItems, setCheckedItems] = useState({
     tv: false,
     ac: false,
@@ -54,6 +55,8 @@ const TakeActionScreen = () => {
       quality: 1,
     })
     console.log('result', result)
+    // console.log('userFirstName:', userFirstName);
+    // console.log('userLastName:', userLastName);
 
     if (!result.canceled) {
       const newPhotos = result.assets
@@ -74,8 +77,11 @@ const TakeActionScreen = () => {
   const handleSubmit = () => {
     console.log('Items unplugged:', checkedItems)
     console.log('Photos:', photos)
-    navigation.navigate('Triviatoactionconnect')
-    // Add further submission logic here
+    navigation.navigate('Triviatoactionconnect', {
+      userName,
+      userFirstName,
+      userLastName,
+    });
   }
 
   return (

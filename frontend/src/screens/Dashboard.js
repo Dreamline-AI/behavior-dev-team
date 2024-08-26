@@ -10,8 +10,8 @@ import styles from "../commonStyles"
 
 export default function Dashboard({ route, navigation }) {
   const { userFirstName, userLastName } = route.params || {};
-  console.log('userFirstName:', userFirstName);
-  console.log('userLastName:', userLastName);
+  // console.log('userFirstName:', userFirstName);
+  // console.log('userLastName:', userLastName);
   const userName = `${userFirstName} ${userLastName}`; 
 
   return (
@@ -62,7 +62,7 @@ export default function Dashboard({ route, navigation }) {
                 <Text style={styles.dashboard.unplugText}>Unplug for a day</Text>
                 <TouchableOpacity 
                   style={styles.dashboard.claimButton} 
-                  onPress={() => navigation.navigate('TakeActionScreen')}
+                  onPress={() => navigation.navigate('TakeActionScreen',{userName, userFirstName, userLastName})}
                 >
                   <Text style={styles.dashboard.claimButtonText}>Claim 500 coins</Text>
                 </TouchableOpacity>
