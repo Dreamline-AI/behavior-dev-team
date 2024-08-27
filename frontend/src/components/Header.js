@@ -1,11 +1,17 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Text } from 'react-native-paper'
-import { theme } from '../core/theme';
-import styles from "../commonStyles";
+import { StyleSheet, Text } from 'react-native'
+//import { Text } from 'react-native-paper'
+//import { theme } from '../core/theme'
+//import styles from '../commonStyles'
 
-export default function Header(props) {
-  return <Text style={styles.header.header} {...props} />
+export default function Header({ title }) {
+  return <Text style={styles.headerText}> {title} </Text>
 }
 
-
+const styles = StyleSheet.create({
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    // textAlign: 'center', // Center the text horizontally
+  },
+})

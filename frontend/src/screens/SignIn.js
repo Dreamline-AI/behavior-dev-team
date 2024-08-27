@@ -83,7 +83,7 @@ export default function SignIn({ navigation, route }) {
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
-      <Header>Sign in with email</Header>
+      <Header title="Sign in with email" />
 
       <TextInput
         title="Your password"
