@@ -102,6 +102,24 @@ const styles = {
     },
   }),
   dashboard: StyleSheet.create({
+    image: {
+      borderRadius: '6px',
+      display: 'flex',
+      width: 24,
+      height: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 6,
+      // marginLeft: 10,
+    },
+    imageContainer: {
+      height: '100%',
+      width: '25%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 6,
+      // backgroundColor: '#0000000d',
+    },
     container: {
       width: '100%',
       justifyContent: 'center',
