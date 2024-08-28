@@ -1389,6 +1389,9 @@ const styles = {
       flex: 1,
       padding: 20,
       backgroundColor: '#FFF',
+      maxWidth: 390,
+      width: '100%',
+      alignSelf: 'center'
     },
     headerContainer: {
       flexDirection: 'row',
@@ -1421,15 +1424,15 @@ const styles = {
       marginBottom: 20,
     },
     funFactContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      border: '0.5px solid #000000',
       flexDirection: 'row',
-      alignItems: 'flex-start',
-      borderWidth: 1,
-      borderColor: '#ccc',
+      alignItems: 'center',
       paddingVertical: 8,
       paddingHorizontal: 16,
       marginBottom: 20,
-      borderRadius: 5,
-      backgroundColor: '#F0F0F0',
+      borderRadius: 8,
     },
     iconContainer: {
       position: 'relative',
