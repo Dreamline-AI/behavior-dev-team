@@ -160,7 +160,9 @@ export default function StartScreen({ navigation }) {
 
   return (
     <Background>
-      <Header title="Sign up or Sign in" />
+      <View style={styles.startScreen.header}>
+        <Header title="Sign up or Sign in" />
+      </View>
 
       <TextInput
         title="Email"

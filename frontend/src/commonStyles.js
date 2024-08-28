@@ -16,6 +16,67 @@ const styles = {
     },*/
   }),
 
+  unlockedActionScreen: StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 1,
+    },
+    box: {
+      alignItems: 'center',
+      borderRadius: 6,
+      backgroundColor: '#f4f4f4',
+      borderStyle: 'solid',
+      borderColor: 'black',
+      borderWidth: 0.5,
+      // flex: 1,
+      width: '100%',
+
+      justifyContent: 'center',
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 32,
+      gap: 16,
+      //alignSelf: 'center',
+    },
+    button: {
+      backgroundColor: 'black',
+      flex: 1,
+    },
+    button2: {
+      backgroundColor: 'white',
+      flex: 1,
+    },
+    buttonsContainer: {
+      flexDirection: 'row',
+      width: '100%',
+      paddingHorizontal: 16,
+      paddingVertical: 4,
+      gap: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+
+      flex: 1,
+    },
+    buttonContainer: {
+      // fontSize: 16,
+      //lineHeight: 22,
+      //fontWeight: "500",
+      //fontFamily: FontFamily.poppinsMedium,
+      //color: #edeaea,
+      //textAlign: "center"
+      flex: 1,
+      borderRadius: 6,
+      backgroundColor: '#262525',
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 8,
+      paddingVertical: 10,
+    },
+  }),
+
   revisionsScreen: StyleSheet.create({
     topNav: {
       justifyContent: 'center',
@@ -1229,7 +1290,7 @@ const styles = {
   }),
   quizEndingScreen: StyleSheet.create({
     button: {
-      backgroundColor: 'black',
+      backgroundColor: '#62DA67',
     },
 
     iconContainer: {
@@ -1259,7 +1320,7 @@ const styles = {
       backgroundColor: 'black',
     },
     userInfoContainer: {
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
       marginBottom: 16,
     },
@@ -1327,6 +1388,18 @@ const styles = {
     row: {
       flexDirection: 'row',
       marginTop: 4,
+    },
+    top: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+      paddingVertical: 16,
+      position: 'relative',
+    },
+    backButton: {
+      position: 'absolute',
+      left: 16,
     },
     link: {
       fontWeight: 'bold',
@@ -1428,6 +1501,10 @@ const styles = {
     // Ensure the button styles apply to all states
     button: {
       backgroundColor: 'black', // Add this line to apply background color
+    },
+    header: {
+      textAlign: 'center',
+      alignItems: 'center',
     },
   }),
   takeActionScreen: StyleSheet.create({
