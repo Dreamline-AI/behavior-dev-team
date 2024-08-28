@@ -556,7 +556,7 @@ const styles = {
       fontWeight: 400,
       paddingTop: '8px',
       // textAlign:
-      paddingLeft: '130px',
+      paddingLeft: '80px',
       fontSize: '18px',
     },
     backButton: {
