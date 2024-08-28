@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import styles from "../commonStyles"
 
-const Triviatoactionconnect = ({ navigation }) => {
+  const Triviatoactionconnect = ({ navigation, route }) => {
+    const { userName, userFirstName, userLastName } = route.params;
   return (
     <View style={styles.triviaToActionConnect.container}>
       <View style={styles.triviaToActionConnect.card}>
@@ -11,7 +12,7 @@ const Triviatoactionconnect = ({ navigation }) => {
       </View>
       <TouchableOpacity
         style={styles.triviaToActionConnect.doneButton}
-        onPress={() => navigation.navigate('Dashboard')}
+        onPress={() => navigation.navigate('Dashboard',{userName, userFirstName, userLastName})}
       >
         <Text style={styles.triviaToActionConnect.doneButtonText}>Done</Text>
       </TouchableOpacity>

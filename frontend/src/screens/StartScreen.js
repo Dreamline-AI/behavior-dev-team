@@ -13,6 +13,8 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from "../commonStyles";
+// import 'react-toastify/dist/ReactToastify.css';
+import Toast from 'react-native-toast-message';
 
 export default function StartScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' });

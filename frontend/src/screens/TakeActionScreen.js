@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import * as ImagePicker from 'expo-image-picker'
 import { useNavigation } from '@react-navigation/native'
@@ -9,8 +9,9 @@ import Circle from '../assets/Circle.png'
 import CheckIcon from '../assets/check.png' 
 import styles from "../commonStyles"
 
-const TakeActionScreen = () => {
+  const TakeActionScreen = ({ route }) => {
   const navigation = useNavigation()
+  const { userName, userFirstName, userLastName } = route.params || {};
   const [checkedItems, setCheckedItems] = useState({
     tv: false,
     ac: false,
@@ -49,11 +50,13 @@ const TakeActionScreen = () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      allowsMultipleSelection: true, 
+      allowsMultipleSelection: true,
       aspect: [4, 3],
       quality: 1,
     })
     console.log('result', result)
+    // console.log('userFirstName:', userFirstName);
+    // console.log('userLastName:', userLastName);
 
     if (!result.canceled) {
       const newPhotos = result.assets
@@ -74,8 +77,11 @@ const TakeActionScreen = () => {
   const handleSubmit = () => {
     console.log('Items unplugged:', checkedItems)
     console.log('Photos:', photos)
-    navigation.navigate('Triviatoactionconnect')
-    // Add further submission logic here
+    navigation.navigate('Triviatoactionconnect', {
+      userName,
+      userFirstName,
+      userLastName,
+    });
   }
 
   return (

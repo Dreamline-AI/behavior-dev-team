@@ -14,7 +14,9 @@ import EVSubsidiesIcon from '../assets/incentives/truck.svg';
 import UnlockGrantIcon from '../assets/incentives/lock.svg';
 
 export default function Dashboard({ route, navigation }) {
-  const { userFirstName, userLastName } = route.params;
+  const { userFirstName, userLastName } = route.params || {};
+  // console.log('userFirstName:', userFirstName);
+  // console.log('userLastName:', userLastName);
   const userName = `${userFirstName} ${userLastName}`; 
   const [incentives, setIncentives] = useState([]);
 
@@ -96,7 +98,7 @@ export default function Dashboard({ route, navigation }) {
                 <Text style={styles.dashboard.unplugText}>Unplug for a day</Text>
                 <TouchableOpacity 
                   style={styles.dashboard.claimButton} 
-                  onPress={() => navigation.navigate('TakeActionScreen')}
+                  onPress={() => navigation.navigate('TakeActionScreen',{userName, userFirstName, userLastName})}
                 >
                   <Text style={styles.dashboard.claimButtonText}>Claim 500 coins</Text>
                 </TouchableOpacity>
@@ -135,7 +137,7 @@ export default function Dashboard({ route, navigation }) {
             </View>
           </View>
         </View>
-        <BottomNavigationBar userName={userName} />
+        <BottomNavigationBar userName={userName} userFirstName={userFirstName} userLastName={userLastName} />
       </ScrollView>
     </Background>
   );
