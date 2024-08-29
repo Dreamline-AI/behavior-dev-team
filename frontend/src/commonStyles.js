@@ -225,6 +225,24 @@ const styles = {
     },
   }),
   dashboard: StyleSheet.create({
+    image: {
+      borderRadius: '6px',
+      display: 'flex',
+      width: 24,
+      height: 25,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 6,
+      // marginLeft: 10,
+    },
+    imageContainer: {
+      height: '100%',
+      width: '25%',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 6,
+      // backgroundColor: '#0000000d',
+    },
     container: {
       width: '100%',
       justifyContent: 'center',
@@ -660,7 +678,7 @@ const styles = {
       fontWeight: 400,
       paddingTop: '8px',
       // textAlign:
-      paddingLeft: '130px',
+      paddingLeft: '80px',
       fontSize: '18px',
     },
     backButton: {
@@ -1509,6 +1527,9 @@ const styles = {
       flex: 1,
       padding: 20,
       backgroundColor: '#FFF',
+      maxWidth: 390,
+      width: '100%',
+      alignSelf: 'center'
     },
     headerContainer: {
       flexDirection: 'row',
@@ -1541,15 +1562,15 @@ const styles = {
       marginBottom: 20,
     },
     funFactContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      border: '0.5px solid #000000',
       flexDirection: 'row',
-      alignItems: 'flex-start',
-      borderWidth: 1,
-      borderColor: '#ccc',
+      alignItems: 'center',
       paddingVertical: 8,
       paddingHorizontal: 16,
       marginBottom: 20,
-      borderRadius: 5,
-      backgroundColor: '#F0F0F0',
+      borderRadius: 8,
     },
     iconContainer: {
       position: 'relative',

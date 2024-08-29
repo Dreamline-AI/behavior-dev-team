@@ -22,17 +22,17 @@ import BottomNavigationBar from './BottomNavigationBar.js'
 import Svg, { Path } from 'react-native-svg'
 import styles from '../commonStyles.js'
 
-export default function ProfileScreen({ route, navigation }) {
-  const { userName } = route.params
-  const progress = 80
-  const XPCurrent = 2500
-  const XPNextLevel = 2950
-  const currentStreak = 15
-  const bestStreak = 32
-  const voltcoins = 15
-  const claimedRewards = 15
-  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-  const highlightedDays = [0, 1, 3, 4]
+export default function ProfileScreen ({ route, navigation }){
+  const { userName, userFirstName, userLastName } = route.params;
+  const progress = 80;
+  const XPCurrent = 2500;
+  const XPNextLevel = 2950;
+  const currentStreak = 15;
+  const bestStreak = 32;
+  const voltcoins = 15;
+  const claimedRewards = 15;
+  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+  const highlightedDays = [0, 1, 3, 4]; 
 
   const ThunderIcon = ({ isActive, day }) => (
     <View
@@ -246,7 +246,7 @@ export default function ProfileScreen({ route, navigation }) {
           </View>
         </View>
       </ScrollView>
-      <BottomNavigationBar userName={userName} />
+      <BottomNavigationBar userName={userName} userFirstName={userFirstName} userLastName={userLastName} />
     </Background>
   )
 }
