@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Background from '../components/Background'
+import styles from '../commonStyles'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
@@ -14,53 +15,31 @@ import {
 } from '../../firebaseConfig'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import styles from '../commonStyles'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-const unlockedActionScreen = ({ navigation }) => {
+const UnlockedActionScreen = ({ navigation }) => {
   return (
     <Background>
       <View style={styles.unlockedActionScreen.container}>
         <View style={styles.unlockedActionScreen.box}>
           <MaterialIcons name="celebration" size={80} />
-          <Text> Yay !</Text>
-          <Text>
-            you have unlocked an action! completing it will double your points!
+          <Text>Yay !</Text>
+          <Text style={styles.unlockedActionScreen.text2}>
+            you have unlocked an action! completing it will double your points !
           </Text>
         </View>
         <View style={styles.unlockedActionScreen.buttonsContainer}>
-          <Button
-            mode="outlined"
-            style={[styles.unlockedActionScreen.button2]}
-            onPress={() =>
-              navigation.reset({
-                index: 0,
-                routes: [{ name: 'Dashboard' }],
-              })
-            }
-            labelStyle={{ color: 'black' }}
-          >
-            Do it later
-          </Button>
+          <TouchableOpacity style={styles.unlockedActionScreen.button}>
+            <Text>Do it later</Text>
+          </TouchableOpacity>
 
-          <Button
-            mode="outlined"
-            style={[styles.unlockedActionScreen.button]}
-            onPress={() =>
-              navigation.reset({
-                index: 0,
-                routes: [{ name: 'TakeActionScreen' }],
-              })
-            }
-            labelStyle={{ color: 'white' }}
-          >
-            Take action
-          </Button>
+          <TouchableOpacity style={styles.unlockedActionScreen.button}>
+            <Text>Do it later</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </Background>
   )
 }
 
-export default unlockedActionScreen
+export default UnlockedActionScreen

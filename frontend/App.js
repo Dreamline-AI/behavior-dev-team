@@ -31,7 +31,7 @@ import BottomNavigationBar from './src/screens/BottomNavigationBar'
 import ProfileScreen from './src/screens/ProfileScreen'
 import EditProfileScreen from './src/screens/EditProfileScreen'
 import SignIn from './src/screens/SignIn.js'
-import unlockedActionScreen from './src/screens/unlockedActionScreen.js'
+import UnlockedActionScreen from './src/screens/UnlockedActionScreen.js'
 
 const Stack = createStackNavigator()
 
@@ -93,8 +93,8 @@ export default function App() {
             component={ResetPasswordScreen}
           />
           <Stack.Screen
-            name="unlockedActionScreen"
-            component={unlockedActionScreen}
+            name="UnlockedActionScreen"
+            component={UnlockedActionScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

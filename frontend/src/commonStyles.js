@@ -18,9 +18,9 @@ const styles = {
 
   unlockedActionScreen: StyleSheet.create({
     container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 1,
+      //justifyContent: 'center',
+      //alignItems: 'center',
+      //flex: 1,
     },
     box: {
       alignItems: 'center',
@@ -29,51 +29,48 @@ const styles = {
       borderStyle: 'solid',
       borderColor: 'black',
       borderWidth: 0.5,
-      // flex: 1,
+      //flex: 1,
       width: '100%',
-
-      justifyContent: 'center',
+      //justifyContent: 'center',
       paddingHorizontal: 16,
+      //paddingVertical
       paddingTop: 16,
       paddingBottom: 32,
       gap: 16,
       //alignSelf: 'center',
     },
-    button: {
-      backgroundColor: 'black',
-      flex: 1,
-    },
-    button2: {
-      backgroundColor: 'white',
-      flex: 1,
-    },
+
     buttonsContainer: {
       flexDirection: 'row',
-      width: '100%',
+      //width: '100%',
       paddingHorizontal: 16,
       paddingVertical: 4,
       gap: 16,
-      justifyContent: 'center',
-      alignItems: 'center',
+      alignSelf: 'center',
+      // justifyContent: 'center',
+      //alignItems: 'center',
 
-      flex: 1,
+      // flex: 1,
     },
-    buttonContainer: {
-      // fontSize: 16,
-      //lineHeight: 22,
-      //fontWeight: "500",
+    button: {
+      fontSize: 16,
+      lineHeight: 22,
+      fontWeight: '500',
+      textAlign: 'center',
       //fontFamily: FontFamily.poppinsMedium,
-      //color: #edeaea,
-      //textAlign: "center"
-      flex: 1,
+      color: '#edeaea',
+      // flex: 1,
       borderRadius: 6,
       backgroundColor: '#262525',
-      width: '100%',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
+      //width: '100%',
+      //flexDirection: 'row',
+      //alignItems: 'center',
+      //justifyContent: 'center',
       paddingHorizontal: 8,
       paddingVertical: 10,
+    },
+    text2: {
+      //paddingBottom: 32,
     },
   }),
 

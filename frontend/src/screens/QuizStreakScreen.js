@@ -49,7 +49,7 @@ export default function QuizStreakScreen({ route, navigation }) {
         onPress={() =>
           navigation.reset({
             index: 0,
-            routes: [{ name: 'unlockedActionScreen' }],
+            routes: [{ name: 'UnlockedActionScreen' }],
           })
         }
         labelStyle={{ color: 'white' }}
