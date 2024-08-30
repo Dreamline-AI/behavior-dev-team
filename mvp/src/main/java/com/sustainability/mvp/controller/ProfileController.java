@@ -43,4 +43,10 @@ public class ProfileController {
     public List<Profile> getAllProducts() throws ExecutionException, InterruptedException {
         return profileService.getProfileDetails();
     }
+/** This function updates the changes in the profile and stores in the firebase
+**/
+    @PutMapping("/Profile/{userID}")
+    public String updateProfile(@PathVariable String userID, @RequestBody Profile profile) throws ExecutionException, InterruptedException {
+        return profileService.updateProfile(userID, profile);
+    }
 }
