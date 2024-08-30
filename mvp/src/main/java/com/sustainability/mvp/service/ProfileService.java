@@ -25,6 +25,22 @@ public class ProfileService {
         return collectionApiFuture.get().getUpdateTime().toString();
     }
 
+    public String updateProfile(String userId, Profile profile) throws ExecutionException, InterruptedException {
+        // Updates an existing profile in Firestore using the provided user ID.
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(userId);
+
+        ApiFuture<DocumentSnapshot> future = documentReference.get();
+        DocumentSnapshot document = future.get();
+
+        if (document.exists()) {
+            ApiFuture<WriteResult> collectionApiFuture = documentReference.set(profile);
+            return collectionApiFuture.get().getUpdateTime().toString();
+        } else {
+            throw new UserException("No such user found with ID: " + userId);
+        }
+    }
+
 
     public Profile getProfileDetailsByID(@PathVariable String userid) throws ExecutionException, InterruptedException {
         // Retrieves a profile from Firestore using the provided user ID.
