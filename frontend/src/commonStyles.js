@@ -1384,12 +1384,12 @@ const styles = {
       backgroundColor: 'black', // Add this line to apply background color
     },
   }),
-  takeActionScreen: StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 20,
-      backgroundColor: '#FFF',
-    },
+    takeActionScreen: StyleSheet.create({
+      container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#FFF',
+      },
     headerContainer: {
       flexDirection: 'row',
       alignItems: 'center',
