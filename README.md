@@ -6,7 +6,7 @@ Read [Contributing Guide](CONTRIBUTING.md) before contributing to this project
 
 ### Frontend
 
-The standard is to use `yarn`. Avoid `npm`, unless compelling use-case.
+The standard is to use `yarn`. DO NOT USE `npm`, unless compelling use-case.
 The frontend is in the `./frontend` directory. To run development:
 
 ```cmd
@@ -15,17 +15,13 @@ yarn install
 yarn web
 ```
 
-You can also ```yarn ios``` or ```yarn android```. If you are using `npm`:
+You can also ```yarn ios``` or ```yarn android```. 
 
-```cmd
-cd ./frontend
-npm install
-npm run web
-```
-
-You will need to run the backend for your front end to communicate. See below for Backend Deployment
+Next, you will need to run the backend for your front end to communicate. See below for Backend Deployment
 
 ### Backend
+
+First you need a Google Cloud Service Account Key json file at this path `./src/main/resources/serviceAccountKey.json`
 
 The backend is in the `./mvp` directory and can be deployed locally with these commands:
 
