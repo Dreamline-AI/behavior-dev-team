@@ -15,26 +15,7 @@ import {
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import styles from '../commonStyles'
 // import 'react-toastify/dist/ReactToastify.css';
-import Toast from 'react-native-toast-message'
-import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import Background from '../components/Background'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import LoadScreen from './LoadScreen'
-import { emailValidator } from '../helpers/emailValidator'
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import {
-  signInWithGooglePopup,
-  signInWithFacebookPopup,
-} from '../../firebaseConfig'
-import axios from 'axios'
-import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import styles from '../commonStyles'
 
 export default function StartScreen({ navigation }) {

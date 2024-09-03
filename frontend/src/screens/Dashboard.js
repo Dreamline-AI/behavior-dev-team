@@ -1,18 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Background from '../components/Background';
-import Logo from '../components/Logo';
-import { UserPic } from '../components/UserPic';
-import BottomNavigationBar from './BottomNavigationBar';
-import { useNavigation } from '@react-navigation/native';
-import styles from "../commonStyles"
-import ACUpgradeIcon from '../assets/incentives/wind.svg';
-import SolarPanelIcon from '../assets/incentives/sun.svg';
-import BillDiscountIcon from '../assets/incentives/dollar-sign.svg';
-import WaterConservationIcon from '../assets/incentives/droplet.svg';
-import EVSubsidiesIcon from '../assets/incentives/truck.svg';
-import UnlockGrantIcon from '../assets/incentives/lock.svg';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Image,
   ScrollView,
@@ -27,45 +13,48 @@ import { UserPic } from '../components/UserPic'
 import BottomNavigationBar from './BottomNavigationBar'
 import { useNavigation } from '@react-navigation/native'
 import styles from '../commonStyles'
+import ACUpgradeIcon from '../assets/incentives/wind.svg'
+import SolarPanelIcon from '../assets/incentives/sun.svg'
+import BillDiscountIcon from '../assets/incentives/dollar-sign.svg'
+import WaterConservationIcon from '../assets/incentives/droplet.svg'
+import EVSubsidiesIcon from '../assets/incentives/truck.svg'
+import UnlockGrantIcon from '../assets/incentives/lock.svg'
 
 export default function Dashboard({ route, navigation }) {
-  const { userFirstName, userLastName } = route.params || {};
-  // console.log('userFirstName:', userFirstName);
-  // console.log('userLastName:', userLastName);
-  const userName = `${userFirstName} ${userLastName}`; 
-  const [incentives, setIncentives] = useState([]);
+  const { userFirstName, userLastName } = route.params || {}
+  const userName = `${userFirstName} ${userLastName}`
+  const [incentives, setIncentives] = useState([])
 
   useEffect(() => {
     // Fetch incentives list from backend
     fetch('http://localhost:8080/api/incentives')
-      .then(response => response.json())
-      .then(data => setIncentives(data))
-      .catch(error => console.error('Error fetching incentives:', error));
-  }, []);
+      .then((response) => response.json())
+      .then((data) => setIncentives(data))
+      .catch((error) => console.error('Error fetching incentives:', error))
+  }, [])
 
-      const goToDetail = (incentive) => {
-        navigation.navigate('IncentiveDetailPage', { incentive });
-      };
-      const getImagePath = (type) => {
-        switch (type) {
-          case 'ACUpgradeIcon':
-            return ACUpgradeIcon;
-          case 'SolarPanelIcon':
-            return SolarPanelIcon;
-          case 'BillDiscountIcon':
-            return BillDiscountIcon;
-          case 'WaterConservationIcon':
-            return WaterConservationIcon;
-          case 'EVSubsidiesIcon':
-            return EVSubsidiesIcon;
-          case 'UnlockGrantIcon':
-            return UnlockGrantIcon;
-          default:
-            return null; // or some default icon
-        }
-      };
-  const { userFirstName, userLastName } = route.params
-  const userName = `${userFirstName} ${userLastName}`
+  const goToDetail = (incentive) => {
+    navigation.navigate('IncentiveDetailPage', { incentive })
+  }
+
+  const getImagePath = (type) => {
+    switch (type) {
+      case 'ACUpgradeIcon':
+        return ACUpgradeIcon
+      case 'SolarPanelIcon':
+        return SolarPanelIcon
+      case 'BillDiscountIcon':
+        return BillDiscountIcon
+      case 'WaterConservationIcon':
+        return WaterConservationIcon
+      case 'EVSubsidiesIcon':
+        return EVSubsidiesIcon
+      case 'UnlockGrantIcon':
+        return UnlockGrantIcon
+      default:
+        return null // or some default icon
+    }
+  }
 
   return (
     <Background>
@@ -82,7 +71,7 @@ export default function Dashboard({ route, navigation }) {
               </View>
             </View>
           </View>
-          <Text style={styles.dashboard.streak}>15 </Text>
+          <Text style={styles.dashboard.streak}>15</Text>
           <Image
             source={require('../assets/zap.png')}
             style={styles.dashboard.icon}
@@ -129,13 +118,23 @@ export default function Dashboard({ route, navigation }) {
                 <Text style={styles.dashboard.almostGoneText}>Almost gone</Text>
               </View>
               <View style={styles.dashboard.bottomContainer}>
-                <Text style={styles.dashboard.unplugText}>Unplug for a day</Text>
-                <TouchableOpacity 
-                  style={styles.dashboard.claimButton} 
-                  onPress={() => navigation.navigate('TakeActionScreen',{userName, userFirstName, userLastName})}
                 <Text style={styles.dashboard.unplugText}>
                   Unplug for a day
                 </Text>
+                <TouchableOpacity
+                  style={styles.dashboard.claimButton}
+                  onPress={() =>
+                    navigation.navigate('TakeActionScreen', {
+                      userName,
+                      userFirstName,
+                      userLastName,
+                    })
+                  }
+                >
+                  <Text style={styles.dashboard.unplugText}>
+                    Unplug for a day
+                  </Text>
+                </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.dashboard.claimButton}
                   onPress={() => navigation.navigate('TakeActionScreen')}
@@ -153,60 +152,31 @@ export default function Dashboard({ route, navigation }) {
               <Text style={styles.dashboard.sectionTitle}>
                 Available incentives
               </Text>
-              <TouchableOpacity>
-                <Text style={styles.dashboard.seeAll} onPress={() => navigation.navigate('IncentivesList')}>See all &gt;</Text>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('IncentivesList')}
+              >
+                <Text style={styles.dashboard.seeAll}>See all &gt;</Text>
               </TouchableOpacity>
             </View>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.dashboard.incentivesContainer}>
-            {incentives.map((incentive, index) => (
-            <TouchableOpacity key={index} style={styles.dashboard.incentiveCard} onPress={() => goToDetail(incentive.id)}>
-              <View style={styles.dashboard.imageContainer}>
-                <Image style={styles.dashboard.image} source={getImagePath(incentive.image)} />
-              </View>
-              {/* <Image source={getImagePath(incentive.image)} style={styles.incentiveImage} /> */}
-            </TouchableOpacity>
-            ))}
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
               style={styles.dashboard.incentivesContainer}
             >
-              <TouchableOpacity style={styles.dashboard.incentiveCard}>
-                <Image
-                  source={require('../assets/incentive1.png')}
-                  style={styles.dashboard.incentiveImage}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.dashboard.incentiveCard}>
-                <Image
-                  source={require('../assets/incentive2.png')}
-                  style={styles.dashboard.incentiveImage}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.dashboard.incentiveCard}>
-                <Image
-                  source={require('../assets/incentive3.png')}
-                  style={styles.dashboard.incentiveImage}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.dashboard.incentiveCard}>
-                <Image
-                  source={require('../assets/incentive4.png')}
-                  style={styles.dashboard.incentiveImage}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.dashboard.incentiveCard}>
-                <Image
-                  source={require('../assets/incentive5.png')}
-                  style={styles.dashboard.incentiveImage}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.dashboard.incentiveCard}>
-                <Image
-                  source={require('../assets/incentive6.png')}
-                  style={styles.dashboard.incentiveImage}
-                />
-              </TouchableOpacity>
+              {incentives.map((incentive, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.dashboard.incentiveCard}
+                  onPress={() => goToDetail(incentive)}
+                >
+                  <View style={styles.dashboard.imageContainer}>
+                    <Image
+                      style={styles.dashboard.image}
+                      source={getImagePath(incentive.image)}
+                    />
+                  </View>
+                </TouchableOpacity>
+              ))}
             </ScrollView>
           </View>
 
@@ -228,7 +198,11 @@ export default function Dashboard({ route, navigation }) {
             </View>
           </View>
         </View>
-        <BottomNavigationBar userName={userName} userFirstName={userFirstName} userLastName={userLastName} />
+        <BottomNavigationBar
+          userName={userName}
+          userFirstName={userFirstName}
+          userLastName={userLastName}
+        />
       </ScrollView>
     </Background>
   )

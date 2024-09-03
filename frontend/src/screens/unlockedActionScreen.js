@@ -22,19 +22,33 @@ const UnlockedActionScreen = ({ navigation }) => {
     <Background>
       <View style={styles.unlockedActionScreen.container}>
         <View style={styles.unlockedActionScreen.box}>
-          <MaterialIcons name="celebration" size={80} />
-          <Text>Yay !</Text>
+          <MaterialIcons
+            name="celebration"
+            size={80}
+            style={styles.unlockedActionScreen.icon}
+          />
+          <Text style={styles.unlockedActionScreen.text1}>Yay !</Text>
           <Text style={styles.unlockedActionScreen.text2}>
             you have unlocked an action! completing it will double your points !
           </Text>
         </View>
+
         <View style={styles.unlockedActionScreen.buttonsContainer}>
-          <TouchableOpacity style={styles.unlockedActionScreen.button}>
-            <Text>Do it later</Text>
+          <TouchableOpacity
+            style={styles.unlockedActionScreen.buttonLater}
+            onPress={() => {
+              navigation.navigate('Dashboard')
+            }}
+          >
+            <Text style={styles.unlockedActionScreen.buttonLaterText}>
+              Do it later
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.unlockedActionScreen.button}>
-            <Text>Do it later</Text>
+          <TouchableOpacity style={styles.unlockedActionScreen.buttonAction}>
+            <Text style={styles.unlockedActionScreen.buttonActionText}>
+              Take Action
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
