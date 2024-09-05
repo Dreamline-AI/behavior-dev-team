@@ -27,6 +27,7 @@ import WelcomeScreen from './src/screens/WelcomeScreen.js'
 import LoginFacebook from './src/screens/LoginFacebook'
 import TakeActionScreen from './src/screens/TakeActionScreen.js'
 import Triviatoactionconnect from './src/screens/Triviatoactionconnect'
+import ExitTakingAction from './src/screens/ExitTakingAction.js'
 import BottomNavigationBar from './src/screens/BottomNavigationBar'
 import ProfileScreen from './src/screens/ProfileScreen'
 import EditProfileScreen from './src/screens/EditProfileScreen'
@@ -49,6 +50,7 @@ export default function App() {
             name="Triviatoactionconnect"
             component={Triviatoactionconnect}
           />
+          <Stack.Screen name="ExitTakingAction" component={ExitTakingAction} />
           <Stack.Screen name="TakeActionScreen" component={TakeActionScreen} />
           <Stack.Screen name="SignUpForm" component={SignUpForm} />
           <Stack.Screen name="SignIn" component={SignIn} />

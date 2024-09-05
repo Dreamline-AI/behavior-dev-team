@@ -723,7 +723,7 @@ const styles = {
       fontWeight: 400,
       paddingTop: '8px',
       // textAlign:
-      paddingLeft: '80px',
+      paddingLeft: '130px',
       fontSize: '18px',
     },
     backButton: {
@@ -1595,9 +1595,6 @@ const styles = {
       flex: 1,
       padding: 20,
       backgroundColor: '#FFF',
-      maxWidth: 390,
-      width: '100%',
-      alignSelf: 'center',
     },
     headerContainer: {
       flexDirection: 'row',
@@ -1630,15 +1627,15 @@ const styles = {
       marginBottom: 20,
     },
     funFactContainer: {
-      display: 'flex',
-      justifyContent: 'center',
-      border: '0.5px solid #000000',
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'flex-start',
+      borderWidth: 1,
+      borderColor: '#ccc',
       paddingVertical: 8,
       paddingHorizontal: 16,
       marginBottom: 20,
-      borderRadius: 8,
+      borderRadius: 5,
+      backgroundColor: '#F0F0F0',
     },
     iconContainer: {
       position: 'relative',
@@ -1782,10 +1779,17 @@ const styles = {
   triviaToActionConnect: StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems: 'center',
       padding: 20,
       backgroundColor: '#fff',
+    },
+    content: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      marginTop: '50px',
     },
     card: {
       justifyContent: 'center',
@@ -1796,10 +1800,18 @@ const styles = {
       borderColor: '#ccc',
       backgroundColor: '#f7f7f7',
       marginBottom: 20,
+      width: '90%',
+    },
+    celebrate: {
+      width: 80,
+      height: 80,
+      resizeMode: 'contain',
+      marginBottom: 10,
     },
     coinsText: {
-      fontSize: 24,
+      fontSize: 25,
       fontWeight: 'bold',
+      // marginVertical: 10,
     },
     messageText: {
       fontSize: 18,
@@ -1811,6 +1823,7 @@ const styles = {
       borderRadius: 5,
       alignItems: 'center',
       width: '100%',
+      marginBottom: 30,
     },
     doneButtonText: {
       color: '#fff',
