@@ -9,16 +9,25 @@ export default function QuizEndingScreen({ route, navigation }) {
   const { userName } = route.params || {}
   return (
     <Background>
-      <View style={styles.quizEndingScreen.iconContainer}>
-        <Text style={styles.quizEndingScreen.text}>
-          Congrats on successfully completing this trivia!
-        </Text>
+      <Text style={styles.quizEndingScreen.text}>
+        Congrats on successfully completing this trivia!
+      </Text>
+      <View style={styles.quizEndingScreen.frame}>
         <Image
-          source={require('../assets/slay.png')}
-          style={styles.quizEndingScreen.image}
+          source={require('../assets/Ellipse.png')}
+          style={styles.quizEndingScreen.circle}
+          resizeMode="cover"
         />
-        <Text style={styles.quizEndingScreen.score}>+250</Text>
+        <View style={styles.quizEndingScreen.wrapper}>
+          <Text style={styles.quizEndingScreen.score}>+250</Text>
+        </View>
+        <Image
+          source={require('../assets/Lightning.png')}
+          style={styles.quizEndingScreen.lightning}
+          resizeMode="cover"
+        />
       </View>
+
       <Button
         color="rgba(98, 218, 103, 1)"
         mode="contained"

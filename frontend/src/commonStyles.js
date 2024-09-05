@@ -1349,18 +1349,46 @@ const styles = {
     },
   }),
   quizEndingScreen: StyleSheet.create({
-    button: {
-      backgroundColor: '#62DA67',
+    frame: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 24,
+    },
+    circle: {
+      height: 93,
+      width: 93,
+      zIndex: 0,
+    },
+    score: {
+      fontSize: 26,
+      fontWeight: 'bold',
+      lineHeight: 22,
+      //  textAlign: 'left',
+      // zIndex: 1,
+    },
+    wrapper: {
+      //ejustifyContent: 'center',
+      // alignItems: 'center',
     },
 
-    iconContainer: {
-      alignItems: 'center',
+    lightning: {
+      position: 'absolute',
+      top: 23,
+      //left: 23,
+      width: 48,
+      height: 48,
+      //overflow: "hidden",
+      //zIndex: 2,
     },
-    image: {
-      width: 93.32,
-      height: 93.32,
-      borderRadius: 46.66,
-      backgroundColor: 'rgba(217, 217, 217, 1)',
+    button: {
+      backgroundColor: '#62DA67',
+      borderRadius: 8,
+      // flex: 1,
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 12,
+      paddingVertical: 10,
     },
     text: {
       fontSize: 24,
@@ -1368,11 +1396,6 @@ const styles = {
       marginBottom: 80,
       alignItems: 'center',
       textAlign: 'center',
-    },
-    score: {
-      fontSize: 26,
-      fontWeight: 'bold',
-      marginTop: 22,
     },
   }),
   quizStreakScreen: StyleSheet.create({
