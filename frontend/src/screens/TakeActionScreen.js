@@ -83,13 +83,23 @@ import styles from "../commonStyles"
       userLastName,
     });
   }
+  const handleBackPress = () => {
+    navigation.navigate('ExitTakingAction', {
+      userName,
+      userFirstName,
+      userLastName,
+    });
+  };
 
   return (
     <View style={styles.takeActionScreen.container}>
       <View style={styles.takeActionScreen.headerContainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.takeActionScreen.backButton}>
+      <TouchableOpacity onPress={handleBackPress} style={styles.takeActionScreen.backButton}>
           <Icon name="chevron-back" size={24} color={theme.colors.text} />
         </TouchableOpacity>
+        {/* <TouchableOpacity onPress={() => navigation.goBack()} style={styles.takeActionScreen.backButton}>
+          <Icon name="chevron-back" size={24} color={theme.colors.text} />
+        </TouchableOpacity> */}
         <Text style={styles.takeActionScreen.header}>Take action</Text>
       </View>
       <Text style={styles.takeActionScreen.subHeader}>Unplug for the day</Text>

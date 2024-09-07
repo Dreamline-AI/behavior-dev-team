@@ -1394,12 +1394,12 @@ const styles = {
       backgroundColor: 'black', // Add this line to apply background color
     },
   }),
-  takeActionScreen: StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 20,
-      backgroundColor: '#FFF',
-    },
+    takeActionScreen: StyleSheet.create({
+      container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: '#FFF',
+      },
     headerContainer: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -1583,10 +1583,17 @@ const styles = {
   triviaToActionConnect: StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
+      justifyContent: 'space-between',
       alignItems: 'center',
       padding: 20,
       backgroundColor: '#fff',
+    },
+    content: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      marginTop: '50px',
     },
     card: {
       justifyContent: 'center',
@@ -1597,10 +1604,18 @@ const styles = {
       borderColor: '#ccc',
       backgroundColor: '#f7f7f7',
       marginBottom: 20,
+      width: '90%'
+    },
+    celebrate: {
+      width: 80,
+      height: 80,
+      resizeMode: 'contain',
+      marginBottom: 10,
     },
     coinsText: {
-      fontSize: 24,
+      fontSize: 25,
       fontWeight: 'bold',
+      // marginVertical: 10,
     },
     messageText: {
       fontSize: 18,
@@ -1612,6 +1627,7 @@ const styles = {
       borderRadius: 5,
       alignItems: 'center',
       width: '100%',
+      marginBottom: 30,
     },
     doneButtonText: {
       color: '#fff',

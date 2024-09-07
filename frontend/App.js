@@ -22,12 +22,14 @@ import {
   QuizStreakScreen,
   RedoQuestionsScreen,
   IncorrectQuestionScreen,
-} from './src/screens';
-import SignUpForm from './src/screens/SignUpForm.js';
-import WelcomeScreen from './src/screens/WelcomeScreen.js';
-import LoginFacebook from './src/screens/LoginFacebook';
-import TakeActionScreen from './src/screens/TakeActionScreen.js';
-import Triviatoactionconnect from './src/screens/Triviatoactionconnect';
+} from './src/screens'
+// import LoginWithEmail from './src/screens/LoginWithEmail'
+import SignUpForm from './src/screens/SignUpForm.js'
+import WelcomeScreen from './src/screens/WelcomeScreen.js'
+import LoginFacebook from './src/screens/LoginFacebook'
+import TakeActionScreen from './src/screens/TakeActionScreen.js'
+import Triviatoactionconnect from './src/screens/Triviatoactionconnect'
+import ExitTakingAction from './src/screens/ExitTakingAction.js'
 import BottomNavigationBar from './src/screens/BottomNavigationBar';
 import ProfileScreen from './src/screens/ProfileScreen';
 import EditProfileScreen from './src/screens/EditProfileScreen';
@@ -40,11 +42,13 @@ const AppNavigator = () => {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
+
     <Stack.Navigator
       initialRouteName={isAuthenticated ? 'Dashboard' : 'StartScreen'}
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Triviatoactionconnect" component={Triviatoactionconnect} />
+      <Stack.Screen name="ExitTakingAction" component={ExitTakingAction} />
       <Stack.Screen name="TakeActionScreen" component={TakeActionScreen} />
       <Stack.Screen name="SignUpForm" component={SignUpForm} />
       <Stack.Screen name="SignIn" component={SignIn} />
@@ -71,6 +75,7 @@ const AppNavigator = () => {
     </Stack.Navigator>
   );
 };
+
 
 export default function App() {
   return (
