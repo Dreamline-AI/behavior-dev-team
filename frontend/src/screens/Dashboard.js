@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {useSelector} from 'react-redux'
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import { UserPic } from '../components/UserPic';
@@ -14,9 +15,12 @@ import EVSubsidiesIcon from '../assets/incentives/truck.svg';
 import UnlockGrantIcon from '../assets/incentives/lock.svg';
 
 export default function Dashboard({ route, navigation }) {
-  const { userFirstName, userLastName } = route.params || {};
+  const reduc = useSelector((state) => state.auth);
+  const userFirstName = useSelector((state) => state.auth.user.firstName);
+  const userLastName = useSelector((state) => state.auth.user.lastName);
+  // const { userFirstName, userLastName } = route.params || {};
   // console.log('userFirstName:', userFirstName);
-  // console.log('userLastName:', userLastName);
+  console.log('userLastName:', userLastName, reduc);
   const userName = `${userFirstName} ${userLastName}`; 
   const [incentives, setIncentives] = useState([]);
 

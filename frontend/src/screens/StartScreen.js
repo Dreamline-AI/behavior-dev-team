@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
+import { useDispatch } from 'react-redux'; // Import useDispatch from react-redux
 import Background from '../components/Background';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -10,10 +11,9 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { signInWithGooglePopup, signInWithFacebookPopup } from '../../firebaseConfig';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from "../commonStyles";
-// import 'react-toastify/dist/ReactToastify.css';
 import Toast from 'react-native-toast-message';
 
 export default function StartScreen({ navigation }) {
@@ -40,52 +40,40 @@ export default function StartScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    console.log('Updated Users:', users);
-  }, [users]);
+    setIsEmailValid(!emailValidator(email.value));
+  }, [email.value]);
 
-  useEffect(() => {
-    setIsEmailValid(!emailValidator(email.value))
-  }, [email.value])
-
-  const onLoginPressed = () => {
-    const emailError = emailValidator(email.value)
-    const passwordError = passwordValidator(password.value)
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError })
-      setPassword({ ...password, error: passwordError })
-      return
-    }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
-    })
-  }
   const isExistingUser = (userEmail, source) => {
-    let user = users.filter(b => b.email === userEmail);
-    if (user.length > 0) {
-      if (source === 'continue') {
+    let user = users.find(b => b.email === userEmail);
+    if (user) {
+      // If the user exists, dispatch loginSuccess with user information
+
+      if (source === 'emailsignin') {
         navigation.reset({
           index: 0,
-          routes: [{ name: 'SignIn', params: { user: user[0] } }],
+          routes: [{ name: 'SignIn', params: { user } }],
         });
-      } else if (source === 'auth') {
+      } else if (source === 'gfa') {
         navigation.reset({
           index: 0,
-          routes: [{ name: 'WelcomeScreen',
-          params: {
-            userFirstName: user[0].firstName,
-            userLastName: user[0].lastName,
-          },
+          routes: [{
+            name: 'WelcomeScreen',
+            params: {
+              userEmail: email,
+              userFirstName: user.firstName,
+              userLastName: user.lastName,
+            },
           }],
         });
       }
     } else {
-      if (source === 'continue') {
+      // Handle non-existing user case
+      if (source === 'emailsignin') {
         navigation.reset({
           index: 0,
           routes: [{ name: 'EmailSignUp', params: { email: email.value } }],
         });
-      } else if (source === 'auth') {
+      } else if (source === 'gfa') {
         navigation.reset({
           index: 0,
           routes: [{ name: 'LoginWithGFA', params: { email: userEmail } }],
@@ -100,11 +88,9 @@ export default function StartScreen({ navigation }) {
       setEmail({ ...email, error: emailError });
       return;
     } else {
-      isExistingUser(email.value, 'continue');
+      isExistingUser(email.value, 'emailsignin');
     }
   };
-
-  const [isFirstTimeSignIn, setIsFirstTimeSignIn] = useState(true);
 
   const logGoogleUser = async () => {
     setAuthLoading(true); // Set auth loading to true
@@ -113,7 +99,8 @@ export default function StartScreen({ navigation }) {
       console.log('response-->', response);
 
       if (response?.user?.email) {
-        isExistingUser(response.user.email, 'auth');
+
+        isExistingUser(response.user.email, 'gfa');
       } else {
         toast.error('Google authentication failed. Please try again.');
       }
@@ -132,7 +119,8 @@ export default function StartScreen({ navigation }) {
       console.log('response-->', response);
 
       if (response?.user?.email) {
-        isExistingUser(response.user.email, 'auth');
+
+        isExistingUser(response.user.email, 'gfa');
       } else {
         toast.error('Facebook authentication failed. Please try again.');
       }
@@ -175,8 +163,11 @@ export default function StartScreen({ navigation }) {
         color="white"
         mode="contained"
         disabled={!isEmailValid}
-        onPress={onContinuePressed}
-        style={[styles.startScreen.continueButton, isEmailValid ? styles.startScreen.continueButtonEnabled : styles.startScreen.continueButtonDisabled]} // Conditionally apply styles
+        onPress={onContinuePressed} // Triggers onContinuePressed function
+        style={[
+          styles.startScreen.continueButton,
+          isEmailValid ? styles.startScreen.continueButtonEnabled : styles.startScreen.continueButtonDisabled,
+        ]}
       >
         <Text style={styles.startScreen.continueButtonText}>Continue</Text>
       </Button>
@@ -190,8 +181,11 @@ export default function StartScreen({ navigation }) {
       <Button
         color="white"
         mode="contained"
-        onPress={logGoogleUser}
-        style={[styles.startScreen.buttonBorder, styles.startScreen.googleButton]} // Add style for Google button
+        onPress={logGoogleUser} // Triggers logGoogleUser function
+        style={[
+          styles.startScreen.buttonBorder,
+          styles.startScreen.googleButton,
+        ]}
         icon={() => (
           <AntDesign
             name="google"
@@ -207,8 +201,11 @@ export default function StartScreen({ navigation }) {
       <Button
         color="white"
         mode="contained"
-        onPress={logFBUser}
-        style={[styles.startScreen.buttonBorder, styles.startScreen.facebookButton]} // Add style for Facebook button
+        onPress={logFBUser} // Triggers logFBUser function
+        style={[
+          styles.startScreen.buttonBorder,
+          styles.startScreen.facebookButton,
+        ]}
         icon={() => (
           <MaterialIcon
             name="facebook"
@@ -234,7 +231,10 @@ export default function StartScreen({ navigation }) {
             },
           }],
         })}
-        style={[styles.startScreen.buttonBorder, styles.startScreen.appleButton]} // Add style for Apple button
+        style={[
+          styles.startScreen.buttonBorder,
+          styles.startScreen.appleButton,
+        ]}
         icon={() => (
           <MaterialIcon
             name="apple"
@@ -249,4 +249,3 @@ export default function StartScreen({ navigation }) {
     </Background>
   )
 }
-

@@ -21,8 +21,11 @@ import { FontAwesome5 } from '@expo/vector-icons'
 import BottomNavigationBar from './BottomNavigationBar.js'
 import Svg, { Path } from 'react-native-svg'
 import styles from '../commonStyles.js'
+import { useDispatch } from 'react-redux'
+import { logout } from '../actions/authActions.js'
 
 export default function ProfileScreen ({ route, navigation }){
+  let dispatch = useDispatch();
   const { userName, userFirstName, userLastName } = route.params;
   const progress = 80;
   const XPCurrent = 2500;
@@ -245,6 +248,14 @@ export default function ProfileScreen ({ route, navigation }){
             </TouchableOpacity>
           </View>
         </View>
+        <Button style={styles.profileScreen.logout} onPress= {() => {dispatch(logout()).then(
+          navigation.reset({
+      index: 0,
+      routes: [{ name: 'StartScreen' }],
+    })
+    )}}>
+        <Text style={styles.profileScreen.logoutText}>LogOut</Text>
+        </Button>
       </ScrollView>
       <BottomNavigationBar userName={userName} userFirstName={userFirstName} userLastName={userLastName} />
     </Background>
