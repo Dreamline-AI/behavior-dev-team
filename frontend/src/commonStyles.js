@@ -37,6 +37,7 @@ const styles = {
       paddingBottom: 32,
       gap: 16,
       alignSelf: 'center',
+      flexDirection: 'column',
     },
 
     buttonsContainer: {
@@ -112,10 +113,13 @@ const styles = {
       textAlign: 'center',
     },
     icon: {
-      flex: 1,
+      //flex: 1,
       width: '100%',
       height: 80,
-      overflow: 'hidden',
+      //overflow: 'hidden',
+      //alignItems: 'center',
+      //justifyContent: 'center',
+      textAlign: 'center',
     },
   }),
 
@@ -1369,6 +1373,7 @@ const styles = {
     wrapper: {
       //ejustifyContent: 'center',
       // alignItems: 'center',
+      marginBottom: 324.88,
     },
 
     lightning: {
@@ -1382,13 +1387,17 @@ const styles = {
     },
     button: {
       backgroundColor: '#62DA67',
-      borderRadius: 8,
-      // flex: 1,
-      width: '100%',
+
+      /* borderRadius: 8,
+      width: 336,
       alignItems: 'center',
       justifyContent: 'center',
       paddingHorizontal: 12,
       paddingVertical: 10,
+      marginLeft: -168,
+      bottom: 32,
+      left: '50%',
+      position: 'absolute',*/
     },
     text: {
       fontSize: 24,
@@ -1414,7 +1423,7 @@ const styles = {
     lightningContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
-      marginBottom: 16,
+      marginBottom: 362.24,
     },
     lightningDayContainer: {
       alignItems: 'center',

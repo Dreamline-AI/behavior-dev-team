@@ -34,8 +34,8 @@ export default function QuizEndingScreen({ route, navigation }) {
         onPress={() =>
           navigation.navigate('QuizStreakScreen', { userName: userName })
         }
-        labelStyle={{ color: 'white', textTransform: 'none', fontSize: 16 }}
-        style={[styles.quizEndingScreen.button, { marginTop: '350' }]}
+        labelStyle={{ color: 'white' }}
+        style={styles.quizEndingScreen.button}
         uppercase={false}
       >
         Finish

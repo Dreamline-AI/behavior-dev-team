@@ -1,4 +1,6 @@
 import React from 'react'
+import Toast from 'react-native-toast-message'
+
 import { Provider } from 'react-native-paper'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -100,6 +102,7 @@ export default function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast ref={(ref) => Toast.setRef(ref)} /> {/* Add Toast component */}
     </Provider>
   )
 }

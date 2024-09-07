@@ -13,12 +13,15 @@ export default function QuizStreakScreen({ route, navigation }) {
 
   const daysOfWeek = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
+  // Get the current day of the week
+  const currentDay = new Date().getDay()
+
   return (
     <Background>
       <View style={styles.quizStreakScreen.userInfoContainer}>
         <UserPic name={userName} />
 
-        <View style={{ marginBottom: 24 }}>
+        <View style={{ marginTop: 31.34 }}>
           <Header
             style={styles.quizStreakScreen.header}
             title="You started a streak!"
@@ -35,7 +38,8 @@ export default function QuizStreakScreen({ route, navigation }) {
             <MaterialCommunityIcons
               name="lightning-bolt"
               size={30}
-              color={'rgba(217, 217, 217, 1)'}
+              // Conditional color: yellow for Sunday (index 0), gray for other days
+              color={index === 0 ? '#FFC700' : 'rgba(217, 217, 217, 1)'}
               style={styles.quizStreakScreen.lightningIcon}
             />
             <Text style={styles.quizStreakScreen.dayText}>{day}</Text>
@@ -54,7 +58,7 @@ export default function QuizStreakScreen({ route, navigation }) {
         }
         labelStyle={{ color: 'white' }}
       >
-        Logout
+        Continue
       </Button>
     </Background>
   )

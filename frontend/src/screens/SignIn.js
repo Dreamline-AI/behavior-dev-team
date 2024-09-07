@@ -87,7 +87,12 @@ export default function SignIn({ navigation, route }) {
           goBack={navigation.goBack}
           style={styles.signIn.backButton}
         />
-        <Header title="Sign in with email" />
+
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Header title="Sign in with email" />
+        </View>
       </View>
 
       <TextInput
@@ -105,6 +110,7 @@ export default function SignIn({ navigation, route }) {
         <Checkbox
           status={isChecked ? 'checked' : 'unchecked'}
           onPress={() => setIsChecked(!isChecked)}
+          color="black"
         />
         <Text>Remember Me</Text>
       </View>

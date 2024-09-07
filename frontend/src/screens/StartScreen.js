@@ -14,7 +14,8 @@ import {
 } from '../../firebaseConfig'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import Toast from 'react-native-toast-message'
+//import 'react-toastify/dist/ReactToastify.css'
 // import 'react-toastify/dist/ReactToastify.css';
 import styles from '../commonStyles'
 
