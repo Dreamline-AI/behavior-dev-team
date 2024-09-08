@@ -38,6 +38,7 @@ import ProfileScreen from './src/screens/ProfileScreen'
 import EditProfileScreen from './src/screens/EditProfileScreen'
 import SignIn from './src/screens/SignIn.js'
 import UnlockedActionScreen from './src/screens/UnlockedActionScreen.js'
+import  MyRewards  from './src/screens/MyRewards.js'
 
 const Stack = createStackNavigator();
 
@@ -77,6 +78,7 @@ const AppNavigator = () => {
       <Stack.Screen name="QuizStreakScreen" component={QuizStreakScreen} />
       <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
       <Stack.Screen name="UnlockedActionScreen" component={UnlockedActionScreen} />
+      <Stack.Screen name="RewardScreen" component={MyRewards} />
 
     </Stack.Navigator>
   );
