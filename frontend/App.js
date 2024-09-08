@@ -1,4 +1,6 @@
 import React from 'react';
+import Toast from 'react-native-toast-message'
+
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as ReduxProvider, useSelector } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -22,6 +24,7 @@ import {
   QuizStreakScreen,
   RedoQuestionsScreen,
   IncorrectQuestionScreen,
+  RevisionsScreen,
 } from './src/screens'
 // import LoginWithEmail from './src/screens/LoginWithEmail'
 import SignUpForm from './src/screens/SignUpForm.js'
@@ -30,10 +33,11 @@ import LoginFacebook from './src/screens/LoginFacebook'
 import TakeActionScreen from './src/screens/TakeActionScreen.js'
 import Triviatoactionconnect from './src/screens/Triviatoactionconnect'
 import ExitTakingAction from './src/screens/ExitTakingAction.js'
-import BottomNavigationBar from './src/screens/BottomNavigationBar';
-import ProfileScreen from './src/screens/ProfileScreen';
-import EditProfileScreen from './src/screens/EditProfileScreen';
-import SignIn from './src/screens/SignIn.js';
+import BottomNavigationBar from './src/screens/BottomNavigationBar'
+import ProfileScreen from './src/screens/ProfileScreen'
+import EditProfileScreen from './src/screens/EditProfileScreen'
+import SignIn from './src/screens/SignIn.js'
+import UnlockedActionScreen from './src/screens/UnlockedActionScreen.js'
 
 const Stack = createStackNavigator();
 

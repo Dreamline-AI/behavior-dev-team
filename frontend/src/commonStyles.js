@@ -6,14 +6,186 @@ const styles = {
   backButton: StyleSheet.create({
     container: {
       backgroundColor: 'red',
-      width: 50, // Adjust the width as needed
-      height: 50,
+      //  width: 50, // Adjust the width as needed
+      // height: 50,
     },
     /* image: {
       width: '100%',
       height: '100%',
       resizeMode: 'contain',
     },*/
+  }),
+
+  unlockedActionScreen: StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 1,
+    },
+    box: {
+      alignItems: 'center',
+      borderRadius: 6,
+      backgroundColor: '#f4f4f4',
+      borderStyle: 'solid',
+      borderColor: 'black',
+      borderWidth: 0.5,
+      // flex: 1,
+      width: '100%',
+      justifyContent: 'center',
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 32,
+      gap: 16,
+      alignSelf: 'center',
+      flexDirection: 'column',
+    },
+
+    buttonsContainer: {
+      flexDirection: 'row',
+      width: '100%',
+      paddingHorizontal: 16,
+      paddingVertical: 4,
+      gap: 16,
+      alignSelf: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex: 1,
+    },
+    buttonLater: {
+      flex: 1,
+      borderRadius: 6,
+      backgroundColor: 'white',
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 8,
+      paddingVertical: 10,
+      borderColor: '#000',
+      borderWidth: 1,
+      borderStyle: 'solid',
+    },
+    buttonAction: {
+      flex: 1,
+      borderRadius: 6,
+      backgroundColor: 'black',
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 8,
+      paddingVertical: 10,
+      borderColor: '#000',
+      borderWidth: 1,
+      borderStyle: 'solid',
+    },
+    buttonLaterText: {
+      color: 'black',
+      fontWeight: '500',
+      fontSize: 16,
+      lineHeight: 22,
+      textAlign: 'center',
+    },
+
+    buttonActionText: {
+      color: 'white',
+      fontWeight: '500',
+      fontSize: 16,
+      lineHeight: 22,
+      textAlign: 'center',
+    },
+    text1: {
+      alignSelf: 'stretch',
+      fontSize: 25,
+      lineHeight: 22,
+      fontWeight: '600',
+      //fontFamily: FontFamily.poppinsSemiBold,
+      color: '#000',
+      textAlign: 'center',
+    },
+
+    text2: {
+      alignSelf: 'stretch',
+      color: '#000',
+      fontWeight: '500',
+      fontSize: 16,
+      lineHeight: 22,
+      textAlign: 'center',
+    },
+    icon: {
+      //flex: 1,
+      width: '100%',
+      height: 80,
+      //overflow: 'hidden',
+      //alignItems: 'center',
+      //justifyContent: 'center',
+      textAlign: 'center',
+    },
+  }),
+
+  revisionsScreen: StyleSheet.create({
+    topNav: {
+      justifyContent: 'center',
+      flexDirection: 'row',
+      alignItems: 'center',
+      position: 'relative',
+      justifyContent: 'space-between',
+    },
+    header: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    box: {
+      borderWidth: 1,
+      borderStyle: 'solid',
+      borderRadius: 6,
+      height: 84,
+      width: '100%',
+      //opacity: 0.35,
+      paddingTop: 8,
+      paddingBottom: 8,
+      paddingLeft: 8,
+      paddingRight: 8,
+      marginVertical: 8,
+      //backgroundColor: '#CECECE33',
+      borderColor: '#cecece',
+      backgroundColor: 'rgba(206, 206, 206, 0.2)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    question: {
+      textAlign: 'center',
+      width: '100%',
+      marginBottom: 16,
+      fontSize: 18,
+      lineHeight: 24,
+      fontWeight: '500',
+      //fontFamily: FontFamily.sFProDisplay,
+      color: 'black',
+      width: 358,
+    },
+    title1: {
+      fontSize: 17,
+      letterSpacing: 0.2,
+      alignSelf: 'stretch',
+      textAlign: 'center',
+      //fontFamily: FontFamily.poppinsLight,
+      fontWeight: '300',
+      lineHeight: 25,
+      color: 'black',
+      width: '100%',
+    },
+    title2: {
+      fontSize: 10,
+      letterSpacing: 0.1,
+      textAlign: 'center',
+      color: 'black',
+      width: '100%',
+      lineHeight: 25,
+      fontWeight: '300',
+    },
   }),
 
   background: StyleSheet.create({
@@ -125,8 +297,7 @@ const styles = {
       justifyContent: 'center',
       padding: 1,
       alignItems: 'center',
-      marginTop: "auto",
-
+      marginTop: 'auto',
     },
     header: {
       flexDirection: 'row',
@@ -449,17 +620,17 @@ const styles = {
       fontSize: 21,
       color: theme.colors.greet,
       fontWeight: 'bold',
-      paddingVertical: 12,
+      // paddingVertical: 12,
       //width: '139.47',
       height: 'auto',
       //padding: 32,
-      paddingTop: 32,
-      paddingBottom: 32,
-      paddingHorizontal: 20,
+      //paddingTop: 32,
+      //paddingBottom: 32,
+      //paddingHorizontal: 20,
       // gap: 8,
-      alignSelf: 'center',
-      alignItems: 'center',
-      justifyContent: 'center',
+      //alignSelf: 'center',
+      //alignItems: 'center',
+      //justifyContent: 'center',
       textAlign: 'center',
     },
   }),
@@ -1192,18 +1363,51 @@ const styles = {
     },
   }),
   quizEndingScreen: StyleSheet.create({
-    button: {
-      backgroundColor: 'black',
+    frame: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 24,
+    },
+    circle: {
+      height: 93,
+      width: 93,
+      zIndex: 0,
+    },
+    score: {
+      fontSize: 26,
+      fontWeight: 'bold',
+      lineHeight: 22,
+      //  textAlign: 'left',
+      // zIndex: 1,
+    },
+    wrapper: {
+      //ejustifyContent: 'center',
+      // alignItems: 'center',
+      marginBottom: 324.88,
     },
 
-    iconContainer: {
-      alignItems: 'center',
+    lightning: {
+      position: 'absolute',
+      top: 23,
+      //left: 23,
+      width: 48,
+      height: 48,
+      //overflow: "hidden",
+      //zIndex: 2,
     },
-    image: {
-      width: 93.32,
-      height: 93.32,
-      borderRadius: 46.66,
-      backgroundColor: 'rgba(217, 217, 217, 1)',
+    button: {
+      backgroundColor: '#62DA67',
+
+      /* borderRadius: 8,
+      width: 336,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      marginLeft: -168,
+      bottom: 32,
+      left: '50%',
+      position: 'absolute',*/
     },
     text: {
       fontSize: 24,
@@ -1212,18 +1416,13 @@ const styles = {
       alignItems: 'center',
       textAlign: 'center',
     },
-    score: {
-      fontSize: 26,
-      fontWeight: 'bold',
-      marginTop: 22,
-    },
   }),
   quizStreakScreen: StyleSheet.create({
     button: {
       backgroundColor: 'black',
     },
     userInfoContainer: {
-      flexDirection: 'row',
+      flexDirection: 'column',
       alignItems: 'center',
       marginBottom: 16,
     },
@@ -1234,7 +1433,7 @@ const styles = {
     lightningContainer: {
       flexDirection: 'row',
       justifyContent: 'center',
-      marginBottom: 16,
+      marginBottom: 362.24,
     },
     lightningDayContainer: {
       alignItems: 'center',
@@ -1291,6 +1490,18 @@ const styles = {
     row: {
       flexDirection: 'row',
       marginTop: 4,
+    },
+    top: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+      paddingVertical: 16,
+      position: 'relative',
+    },
+    backButton: {
+      position: 'absolute',
+      left: 16,
     },
     link: {
       fontWeight: 'bold',
@@ -1393,13 +1604,17 @@ const styles = {
     button: {
       backgroundColor: 'black', // Add this line to apply background color
     },
+    header: {
+      textAlign: 'center',
+      alignItems: 'center',
+    },
   }),
-    takeActionScreen: StyleSheet.create({
-      container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#FFF',
-      },
+  takeActionScreen: StyleSheet.create({
+    container: {
+      flex: 1,
+      padding: 20,
+      backgroundColor: '#FFF',
+    },
     headerContainer: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -1604,7 +1819,7 @@ const styles = {
       borderColor: '#ccc',
       backgroundColor: '#f7f7f7',
       marginBottom: 20,
-      width: '90%'
+      width: '90%',
     },
     celebrate: {
       width: 80,
