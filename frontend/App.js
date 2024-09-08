@@ -76,6 +76,8 @@ const AppNavigator = () => {
       <Stack.Screen name="IncorrectQuestionScreen" component={IncorrectQuestionScreen} />
       <Stack.Screen name="QuizStreakScreen" component={QuizStreakScreen} />
       <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+      <Stack.Screen name="UnlockedActionScreen" component={UnlockedActionScreen} />
+
     </Stack.Navigator>
   );
 };
