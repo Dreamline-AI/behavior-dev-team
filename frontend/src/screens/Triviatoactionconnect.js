@@ -3,9 +3,13 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import styles from "../commonStyles"
 import celebrate from '../assets/celebrate.png'
 
+import Background from '../components/Background';
+
+
   const Triviatoactionconnect = ({ navigation, route }) => {
     const { userName, userFirstName, userLastName } = route.params;
   return (
+    <Background>
     <View style={styles.triviaToActionConnect.container}>
       <View style={styles.triviaToActionConnect.content}>
       <View style={styles.triviaToActionConnect.card}>
@@ -21,6 +25,7 @@ import celebrate from '../assets/celebrate.png'
         <Text style={styles.triviaToActionConnect.doneButtonText}>Done</Text>
       </TouchableOpacity>
     </View>
+    </Background>
   );
 };
 
