@@ -2,7 +2,9 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import styles from "../commonStyles"
 import celebrate from '../assets/celebrate.png'
+
 import Background from '../components/Background';
+
 
   const Triviatoactionconnect = ({ navigation, route }) => {
     const { userName, userFirstName, userLastName } = route.params;

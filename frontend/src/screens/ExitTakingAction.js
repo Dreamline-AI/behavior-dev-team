@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Background from '../components/Background';
 
+
 const ExitTakingAction = ({ route }) => {
   const navigation = useNavigation();
   const { userName, userFirstName, userLastName } = route.params || {};
@@ -16,6 +17,7 @@ const ExitTakingAction = ({ route }) => {
     //     </Text>
     //   </View>
     <Background>
+
       <View style={styles.container}>
       <View style={styles.content}>
       <View style={styles.card}>
@@ -30,6 +32,7 @@ const ExitTakingAction = ({ route }) => {
         <Text style={styles.okButtonText}>Ok</Text>
       </TouchableOpacity>
     </View>
+
     </Background>
   );
 };
