@@ -1285,6 +1285,16 @@ const styles = {
       fontWeight: '500',
       lineHeight: 16,
     },
+    logout: {
+      backgroundColor: 'red',
+      borderRadius: '0px',
+    },
+    logoutText: {
+      color: 'white',
+      fontSize: 16,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
   }),
   quiz: StyleSheet.create({
     button: {

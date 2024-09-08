@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
 import { View, Image, StyleSheet, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
 import styles from "../commonStyles"
+import { loginSuccess } from '../actions/authActions';
 
 export default function WelcomeScreen({ route, navigation }) {
-  const { userFirstName, userLastName } = route.params || {};
+  const dispatch = useDispatch(); // Initialize dispatch
+  const { userFirstName, userLastName, userEmail} = route.params || {};
 
   useEffect(() => {
     // console.log('userFirstName in useeffect:', userFirstName);  
     // console.log('userLastName in useeffect:', userLastName);    
     const timer = setTimeout(() => {
+      dispatch(loginSuccess({
+        email: userEmail,
+        firstName: userFirstName,
+        lastName: userLastName,
+      }));
        
       navigation.reset({
         index: 0,
