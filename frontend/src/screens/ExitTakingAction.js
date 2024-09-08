@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Background from '../components/Background';
+
 
 const ExitTakingAction = ({ route }) => {
   const navigation = useNavigation();
@@ -14,6 +16,8 @@ const ExitTakingAction = ({ route }) => {
     //       Come back to complete this action within 7 days and gain +500 points!
     //     </Text>
     //   </View>
+    <Background>
+
       <View style={styles.container}>
       <View style={styles.content}>
       <View style={styles.card}>
@@ -28,6 +32,8 @@ const ExitTakingAction = ({ route }) => {
         <Text style={styles.okButtonText}>Ok</Text>
       </TouchableOpacity>
     </View>
+
+    </Background>
   );
 };
 

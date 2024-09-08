@@ -8,6 +8,7 @@ import BulbIcon from '../assets/BulbIcon.png'
 import Circle from '../assets/Circle.png'
 import CheckIcon from '../assets/check.png' 
 import styles from "../commonStyles"
+import Background from '../components/Background';
 
   const TakeActionScreen = ({ route }) => {
   const navigation = useNavigation()
@@ -92,6 +93,7 @@ import styles from "../commonStyles"
   };
 
   return (
+    <Background>
     <View style={styles.takeActionScreen.container}>
       <View style={styles.takeActionScreen.headerContainer}>
       <TouchableOpacity onPress={handleBackPress} style={styles.takeActionScreen.backButton}>
@@ -171,6 +173,7 @@ import styles from "../commonStyles"
         <Text style={styles.takeActionScreen.completeButtonText}>Complete</Text>
       </TouchableOpacity>
     </View>
+    </Background>
   )
 }
 
