@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
-import { UserPic } from '../components/UserPic'
-import BottomNavigationBar from './BottomNavigationBar'
-import { useNavigation } from '@react-navigation/native'
-import styles from '../commonStyles'
-import ACUpgradeIcon from '../assets/incentives/wind.svg'
-import SolarPanelIcon from '../assets/incentives/sun.svg'
-import BillDiscountIcon from '../assets/incentives/dollar-sign.svg'
-import WaterConservationIcon from '../assets/incentives/droplet.svg'
-import EVSubsidiesIcon from '../assets/incentives/truck.svg'
-import UnlockGrantIcon from '../assets/incentives/lock.svg'
+import React, { useEffect, useState } from 'react';
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {useSelector} from 'react-redux'
+import Background from '../components/Background';
+import Logo from '../components/Logo';
+import { UserPic } from '../components/UserPic';
+import BottomNavigationBar from './BottomNavigationBar';
+import { useNavigation } from '@react-navigation/native';
+import styles from "../commonStyles"
+import ACUpgradeIcon from '../assets/incentives/wind.svg';
+import SolarPanelIcon from '../assets/incentives/sun.svg';
+import BillDiscountIcon from '../assets/incentives/dollar-sign.svg';
+import WaterConservationIcon from '../assets/incentives/droplet.svg';
+import EVSubsidiesIcon from '../assets/incentives/truck.svg';
+import UnlockGrantIcon from '../assets/incentives/lock.svg';
 
 export default function Dashboard({ route, navigation }) {
-  const { userFirstName, userLastName } = route.params || {}
-  const userName = `${userFirstName} ${userLastName}`
-  const [incentives, setIncentives] = useState([])
+  const reduc = useSelector((state) => state.auth);
+  const userFirstName = useSelector((state) => state.auth.user.firstName);
+  const userLastName = useSelector((state) => state.auth.user.lastName);
+  // const { userFirstName, userLastName } = route.params || {};
+  // console.log('userFirstName:', userFirstName);
+  console.log('userLastName:', userLastName, reduc);
+  const userName = `${userFirstName} ${userLastName}`; 
+  const [incentives, setIncentives] = useState([]);
 
   useEffect(() => {
     // Fetch incentives list from backend
@@ -121,7 +120,7 @@ export default function Dashboard({ route, navigation }) {
                 <Text style={styles.dashboard.unplugText}>
                   Unplug for a day
                 </Text>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.dashboard.claimButton}
                   onPress={() =>
                     navigation.navigate('TakeActionScreen', {
@@ -134,7 +133,7 @@ export default function Dashboard({ route, navigation }) {
                   <Text style={styles.dashboard.unplugText}>
                     Unplug for a day
                   </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                   style={styles.dashboard.claimButton}
                   onPress={() => navigation.navigate('TakeActionScreen')}
