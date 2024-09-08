@@ -71,6 +71,7 @@ export default function LoginWithGFA({ navigation, route }) {
             routes: [{
               name: 'WelcomeScreen',
               params: {
+                userEmail: email,
                 userFirstName: firstName.value,
                 userLastName: lastName.value,
               },
@@ -87,6 +88,7 @@ export default function LoginWithGFA({ navigation, route }) {
         routes: [{
           name: 'WelcomeScreen',
           params: {
+            userEmail: email,
             userFirstName: firstName.value,
             userLastName: lastName.value,
           },

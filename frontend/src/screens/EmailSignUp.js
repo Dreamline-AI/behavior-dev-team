@@ -98,10 +98,11 @@ export default function EmailSignUp({ navigation, route }) {
         index: 0,
         routes: [
           {
-            name: 'Dashboard',
+            name: 'WelcomeScreen',
             params: {
               userFirstName: firstName.value,
               userLastName: lastName.value,
+              userEmail: email,
             },
           },
         ],
