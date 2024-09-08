@@ -120,7 +120,7 @@ export default function Dashboard({ route, navigation }) {
                 <Text style={styles.dashboard.unplugText}>
                   Unplug for a day
                 </Text>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.dashboard.claimButton}
                   onPress={() =>
                     navigation.navigate('TakeActionScreen', {
@@ -133,7 +133,7 @@ export default function Dashboard({ route, navigation }) {
                   <Text style={styles.dashboard.unplugText}>
                     Unplug for a day
                   </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                   style={styles.dashboard.claimButton}
                   onPress={() => navigation.navigate('TakeActionScreen')}

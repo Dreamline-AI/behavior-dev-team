@@ -83,6 +83,17 @@ export default function ProfileScreen ({ route, navigation }){
     navigation.navigate('EditProfileScreen', { name: userName })
   }
 
+  const handleLogout = () => {
+    // Dispatch logout action
+    dispatch(logout());
+
+    // Reset navigation to StartScreen
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'StartScreen' }],
+    });
+  };
+
   return (
     <Background>
       <View style={styles.profileScreen.headerContainer}>
@@ -248,12 +259,7 @@ export default function ProfileScreen ({ route, navigation }){
             </TouchableOpacity>
           </View>
         </View>
-        <Button style={styles.profileScreen.logout} onPress= {() => {dispatch(logout()).then(
-          navigation.reset({
-      index: 0,
-      routes: [{ name: 'StartScreen' }],
-    })
-    )}}>
+        <Button style={styles.profileScreen.logout} onPress= {handleLogout}>
         <Text style={styles.profileScreen.logoutText}>LogOut</Text>
         </Button>
       </ScrollView>
