@@ -1045,7 +1045,7 @@ const styles = {
   }),
   profileScreen: StyleSheet.create({
     headerContainer: {
-      display: 'flex',
+      //display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -1056,24 +1056,21 @@ const styles = {
       fontStyle: 'normal',
       fontWeight: 'bold',
       lineHeight: 22,
-      flex: 1,
-      textAlign: 'center',
-      justifyContent: 'center',
+      //flex: 1,
+      // textAlign: 'left',
+      //justifyContent: 'center',
     },
     editButton: {
-      position: 'absolute',
-      right: 0,
-      top: 8,
-      borderRadius: 14,
+      borderRadius: 14, // Half of the button's width/height
       borderWidth: 1,
       borderColor: '#000',
       borderStyle: 'solid',
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      paddingHorizontal: 8,
-      paddingVertical: 3,
-      width: 'auto',
+      paddingHorizontal: 16, // Adjust padding as needed
+      paddingVertical: 8, // Adjust padding as needed
+      width: 30, // Set the width to make it elliptical
+      height: 20, // Set the height to make it elliptical
+      alignItems: 'center', // Center content horizontally
+      justifyContent: 'center', // Center content vertically
     },
     editButtonText: {
       color: theme.colors.greet,
@@ -1081,6 +1078,7 @@ const styles = {
       fontStyle: 'normal',
       fontWeight: 400,
       lineHeight: 16,
+      textAlign: 'center',
     },
     container: {
       width: '100%',
@@ -1315,9 +1313,26 @@ const styles = {
       textAlign: 'center',
       fontSize: 24,
     },
+    questionContainer: {
+      width: '100%',
+      paddingHorizontal: 16,
+
+      flex: 1,
+
+      backgroundColor: '#fff',
+
+      paddingVertical: 10,
+      flexDirection: 'row',
+      alignSelf: 'stretch',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     question: {
-      marginBottom: 10,
       fontSize: 18,
+      letterSpacing: 0.2,
+      lineHeight: 25,
+      textAlign: 'left',
+      flex: 1,
     },
     container: {
       flex: 1,
@@ -1332,22 +1347,21 @@ const styles = {
     },
     topProgressBarContainer: {
       width: '100%',
-      height: 20,
-      marginBottom: 30,
+      // height: 20,
       flexDirection: 'row',
-      alignSelf: 'stretch',
+      // alignSelf: 'stretch',
       backgroundColor: '#fff',
       alignItems: 'center',
+      justifyContent: 'center',
       paddingHorizontal: 16,
       paddingVertical: 0,
       gap: 8,
-      flex: 1,
+      //flex: 1,
     },
     progressBar: {
       flex: 1,
     },
     x: {
-      // flex: 1,
       width: 24,
       height: 24,
       overflow: 'hidden',

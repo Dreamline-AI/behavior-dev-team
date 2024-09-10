@@ -24,18 +24,18 @@ import styles from '../commonStyles.js'
 import { useDispatch } from 'react-redux'
 import { logout } from '../actions/authActions.js'
 
-export default function ProfileScreen ({ route, navigation }){
-  let dispatch = useDispatch();
-  const { userName, userFirstName, userLastName } = route.params;
-  const progress = 80;
-  const XPCurrent = 2500;
-  const XPNextLevel = 2950;
-  const currentStreak = 15;
-  const bestStreak = 32;
-  const voltcoins = 15;
-  const claimedRewards = 15;
-  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-  const highlightedDays = [0, 1, 3, 4]; 
+export default function ProfileScreen({ route, navigation }) {
+  let dispatch = useDispatch()
+  const { userName, userFirstName, userLastName } = route.params
+  const progress = 80
+  const XPCurrent = 2500
+  const XPNextLevel = 2950
+  const currentStreak = 15
+  const bestStreak = 32
+  const voltcoins = 15
+  const claimedRewards = 15
+  const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+  const highlightedDays = [0, 1, 3, 4]
 
   const ThunderIcon = ({ isActive, day }) => (
     <View
@@ -85,20 +85,20 @@ export default function ProfileScreen ({ route, navigation }){
 
   const handleLogout = () => {
     // Dispatch logout action
-    dispatch(logout());
+    dispatch(logout())
 
     // Reset navigation to StartScreen
     navigation.reset({
       index: 0,
       routes: [{ name: 'StartScreen' }],
-    });
-  };
+    })
+  }
 
   return (
     <Background>
       <View style={styles.profileScreen.headerContainer}>
         <BackButton goBack={navigation.goBack} />
-        <Header style={styles.profileScreen.header}>Your profile</Header>
+        <Text style={styles.profileScreen.header}>Your profile</Text>
         <TouchableOpacity
           style={styles.profileScreen.editButton}
           onPress={EditClicked}
@@ -259,11 +259,15 @@ export default function ProfileScreen ({ route, navigation }){
             </TouchableOpacity>
           </View>
         </View>
-        <Button style={styles.profileScreen.logout} onPress= {handleLogout}>
-        <Text style={styles.profileScreen.logoutText}>LogOut</Text>
+        <Button style={styles.profileScreen.logout} onPress={handleLogout}>
+          <Text style={styles.profileScreen.logoutText}>LogOut</Text>
         </Button>
       </ScrollView>
-      <BottomNavigationBar userName={userName} userFirstName={userFirstName} userLastName={userLastName} />
+      <BottomNavigationBar
+        userName={userName}
+        userFirstName={userFirstName}
+        userLastName={userLastName}
+      />
     </Background>
   )
 }

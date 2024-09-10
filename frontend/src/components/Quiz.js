@@ -15,6 +15,7 @@ import IncorrectQuiz from './IncorrectQuiz'
 import styles from '../commonStyles'
 import x from '../assets/x.png'
 import ProgressBar from '../components/ProgressBar'
+import Background from './Background'
 
 const Quiz = ({ navigation, route }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -119,13 +120,12 @@ const Quiz = ({ navigation, route }) => {
           isCorrect={isCorrect}
           setIsCorrect={setIsCorrect}
         />
-        ß
       </View>
     )
   }
 
   return (
-    <View style={styles.quiz.container}>
+    <Background>
       <View style={styles.quiz.topProgressBarContainer}>
         <Image source={x} style={styles.quiz.x} />
         <ProgressBar progress={progress * 100} />
@@ -134,9 +134,11 @@ const Quiz = ({ navigation, route }) => {
       <Animated.View
         style={[{ opacity: selectedOption !== null ? fadeAnim : 1 }]}
       >
-        <Text style={styles.quiz.question}>
-          {data[currentQuestionIndex].question}
-        </Text>
+        <View style={styles.quiz.questionContainer}>
+          <Text style={styles.quiz.question}>
+            {data[currentQuestionIndex].question}
+          </Text>
+        </View>
       </Animated.View>
 
       {data[currentQuestionIndex].options.map((option) => (
@@ -187,7 +189,7 @@ const Quiz = ({ navigation, route }) => {
       >
         Continue
       </Button>
-    </View>
+    </Background>
   )
 }
 
