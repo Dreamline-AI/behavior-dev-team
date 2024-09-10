@@ -28,7 +28,25 @@ const Quiz = ({ navigation, route }) => {
   const [customMessage, setCustomMessage] = useState('')
   const [incorrectIndices, setIncorrectIndices] = useState([])
   const [incorrectQuestions, setIncorrectQuestions] = useState([])
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const [isCorrect, setIsCorrect] = useState(null)
+  const [selectedOption, setSelectedOption] = useState(null)
+  const [quizProgress, setQuizProgress] = useState(data.length)
+  const translateY = useRef(new Animated.Value(0)).current
+  const fadeAnim = useRef(new Animated.Value(1)).current
+  const [showMessage, setShowMessage] = useState(false)
+  const [customMessage, setCustomMessage] = useState('')
+  const [incorrectIndices, setIncorrectIndices] = useState([])
+  const [incorrectQuestions, setIncorrectQuestions] = useState([])
 
+  useEffect(() => {
+    if (route && route.params && route.params.incorrectIndices) {
+      const { incorrectIndices } = route.params
+      setIncorrectQuestions(
+        data.filter((_, index) => incorrectIndices.includes(index))
+      )
+    }
+  }, [route])
   useEffect(() => {
     if (route && route.params && route.params.incorrectIndices) {
       const { incorrectIndices } = route.params
@@ -43,9 +61,35 @@ const Quiz = ({ navigation, route }) => {
       fadeOut()
     }
   }, [selectedOption])
+  useEffect(() => {
+    if (selectedOption !== null) {
+      fadeOut()
+    }
+  }, [selectedOption])
 
   const progress = (currentQuestionIndex + 1) / quizProgress
+  const progress = (currentQuestionIndex + 1) / quizProgress
 
+  const handleNext = () => {
+    if (currentQuestionIndex === data.length - 1) {
+      if (incorrectIndices.length > 0) {
+        navigation.navigate('RedoQuestionsScreen', {
+          incorrectIndices: incorrectIndices,
+          progress: progress,
+        })
+      } else {
+        navigation.navigate('QuizEndingScreen')
+      }
+    } else {
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
+      setSelectedOption(null)
+      setIsCorrect(null)
+      fadeAnim.setValue(1)
+      translateY.setValue(0)
+      setShowMessage(false)
+      setCustomMessage('')
+    }
+  }
   const handleNext = () => {
     if (currentQuestionIndex === data.length - 1) {
       if (incorrectIndices.length > 0) {
@@ -76,12 +120,33 @@ const Quiz = ({ navigation, route }) => {
       }),
     ]).start(() => setShowMessage(true))
   }
+  const fadeOut = () => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start(() => setShowMessage(true))
+  }
 
   const moveCardUp = (selectedOption) => {
     const currentQuestion = data[currentQuestionIndex]
     const correctOption = currentQuestion.options[0]
     let toValue = selectedOption === correctOption ? -80 : -280
+  const moveCardUp = (selectedOption) => {
+    const currentQuestion = data[currentQuestionIndex]
+    const correctOption = currentQuestion.options[0]
+    let toValue = selectedOption === correctOption ? -80 : -280
 
+    Animated.parallel([
+      Animated.timing(translateY, {
+        toValue: toValue,
+        duration: 600,
+        useNativeDriver: true,
+      }),
+    ]).start()
+  }
     Animated.parallel([
       Animated.timing(translateY, {
         toValue: toValue,
@@ -173,7 +238,40 @@ const Quiz = ({ navigation, route }) => {
           </Pressable>
         </Animated.View>
       ))}
+      {data[currentQuestionIndex].options.map((option) => (
+        <Animated.View
+          key={option}
+          style={[
+            {
+              opacity: selectedOption !== option ? fadeAnim : 1,
+              transform:
+                selectedOption === option ? [{ translateY: translateY }] : null,
+            },
+          ]}
+        >
+          <Text
+            style={
+              isCorrect ? styles.quiz.correctMessage : styles.quiz.wrongMessage
+            }
+          >
+            {isCorrect !== null ? (isCorrect ? 'Correct! ' : 'No') : ''}
+          </Text>
+          <Pressable
+            style={[
+              styles.quiz.AnswerBox,
+              selectedOption === option &&
+                (isCorrect ? styles.quiz.correctBox : styles.quiz.wrongBox),
+            ]}
+            onPress={() => handlePressedOption(option)}
+            disabled={selectedOption}
+            key={option}
+          >
+            <Text style={styles.quiz.answerText}>{option}</Text>
+          </Pressable>
+        </Animated.View>
+      ))}
 
+      <Text style={styles.quiz.customMessage}>{customMessage}</Text>
       <Text style={styles.quiz.customMessage}>{customMessage}</Text>
 
       <Button
@@ -193,4 +291,5 @@ const Quiz = ({ navigation, route }) => {
   )
 }
 
+export default Quiz
 export default Quiz
