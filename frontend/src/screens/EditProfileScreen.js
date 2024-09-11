@@ -6,7 +6,8 @@ import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
-import styles from "../commonStyles"
+import styles from '../commonStyles'
+
 
 export default function EditProfileScreen({route, navigation }){
     const { name } = route.params;
@@ -19,58 +20,50 @@ export default function EditProfileScreen({route, navigation }){
         navigation.navigate('ProfileScreen', { userName });
     }
 
-    return(
-        <Background>
-           
-            <View style={styles.editProfileScreen.headerContainer}>
-                <BackButton goBack={navigation.goBack} />
-                <Header style={styles.editProfileScreen.header}> Edit profile </Header>
-            </View>
-            <View style={styles.editProfileScreen.container}>
-                <TextInput
-                    title="Your firstName"
-                    label="Your firstName"
-                    returnKeyType="next"
-                    value={firstName.value}
-                    onChangeText={(text) => setFirstName({ value: text, error: ''})}
-                    error={!!firstName.error}
-                    errorText={firstName.error}
-                />
-                <TextInput
-                    title="Your lastName"
-                    label="Your lastName"
-                    returnKeyType="next"
-                    value={lastName.value}
-                    onChangeText={(text) => setLastName({ value: text, error: ''})}
-                    error={!!lastName.error}
-                    errorText={lastName.error}
-                />
-                <TextInput
-                    title="Your zipcode"
-                    label="Enter zipcode"
-                    returnKeyType="next"
-                    keyboardType="numeric"
-                    maxLength={5}
-                    value={zipcode.value}
-                    onChangeText={(text) => setZipcode({ value: text, error: '' })}
-                    error={!!zipcode.error}
-                    errorText={zipcode.error}
-                />
-            </View>
-            <View style={styles.editProfileScreen.footer}>
-                <Button
-                    color="#D9D9D9"
-                    mode="contained"
-                    onPress={onSaveChangesPressed}
-                    style={styles.editProfileScreen.saveButton}
-                >
-                Save changes
-                </Button>
-            </View>
-        </Background>
-        
-    )
+  return (
+    <Background>
+      <View style={styles.editProfileScreen.headerContainer}>
+        <BackButton goBack={navigation.goBack} />
+        <Header style={styles.editProfileScreen.header}> Edit profile </Header>
+      </View>
+      <View style={styles.editProfileScreen.container}>
+        <TextInput
+          title="Your first name"
+          returnKeyType="next"
+          value={firstName.value}
+          onChangeText={(text) => setFirstName({ value: text, error: '' })}
+          error={!!firstName.error}
+          errorText={firstName.error}
+        />
+        <TextInput
+          title="Your last name"
+          returnKeyType="next"
+          value={lastName.value}
+          onChangeText={(text) => setLastName({ value: text, error: '' })}
+          error={!!lastName.error}
+          errorText={lastName.error}
+        />
+        <TextInput
+          title="Your zipcode"
+          returnKeyType="next"
+          keyboardType="numeric"
+          maxLength={5}
+          value={zipcode.value}
+          onChangeText={(text) => setZipcode({ value: text, error: '' })}
+          error={!!zipcode.error}
+          errorText={zipcode.error}
+        />
+      </View>
+      <View style={styles.editProfileScreen.footer}>
+        <Button
+          color="#D9D9D9"
+          mode="contained"
+          onPress={onSaveChangesPressed}
+          style={styles.editProfileScreen.saveButton}
+        >
+          Save changes
+        </Button>
+      </View>
+    </Background>
+  )
 }
-
-
-

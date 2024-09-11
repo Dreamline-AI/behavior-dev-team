@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Background from '../components/Background'
 import styles from '../commonStyles'
 import Header from '../components/Header'
@@ -16,17 +16,18 @@ import {
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import celebrate from '../assets/celebrate.png'
 
 const UnlockedActionScreen = ({ navigation }) => {
   return (
     <Background>
       <View style={styles.unlockedActionScreen.container}>
         <View style={styles.unlockedActionScreen.box}>
-          <MaterialIcons
-            name="celebration"
-            size={80}
-            style={styles.unlockedActionScreen.icon}
+          <Image
+            source={celebrate}
+            style={styles.triviaToActionConnect.celebrate}
           />
+
           <Text style={styles.unlockedActionScreen.text1}>Yay !</Text>
           <Text style={styles.unlockedActionScreen.text2}>
             you have unlocked an action! completing it will double your points !
@@ -45,7 +46,12 @@ const UnlockedActionScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.unlockedActionScreen.buttonAction}>
+          <TouchableOpacity
+            style={styles.unlockedActionScreen.buttonAction}
+            onPress={() => {
+              navigation.navigate('TakeActionScreen')
+            }}
+          >
             <Text style={styles.unlockedActionScreen.buttonActionText}>
               Take Action
             </Text>
