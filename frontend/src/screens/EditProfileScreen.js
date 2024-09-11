@@ -15,6 +15,8 @@ export default function EditProfileScreen({route, navigation }){
     const [lastName, setLastName] = useState({value : ln.join(' '), error :''})
     const [zipcode, setZipcode] = useState({value : '', error : ''})
     const onSaveChangesPressed = () =>{
+        const userName = firstName.value+" "+lastName.value;
+        navigation.navigate('ProfileScreen', { userName });
     }
 
     return(
