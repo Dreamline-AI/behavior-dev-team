@@ -8,13 +8,17 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import styles from '../commonStyles'
 
-export default function EditProfileScreen({ route, navigation }) {
-  const { name } = route.params
-  const [fn, ...ln] = name.split(' ')
-  const [firstName, setFirstName] = useState({ value: fn, error: '' })
-  const [lastName, setLastName] = useState({ value: ln.join(' '), error: '' })
-  const [zipcode, setZipcode] = useState({ value: '', error: '' })
-  const onSaveChangesPressed = () => {}
+
+export default function EditProfileScreen({route, navigation }){
+    const { name } = route.params;
+    const [fn, ...ln] = name.split(' ');
+    const [firstName, setFirstName] = useState({value : fn, error : ''})
+    const [lastName, setLastName] = useState({value : ln.join(' '), error :''})
+    const [zipcode, setZipcode] = useState({value : '', error : ''})
+    const onSaveChangesPressed = () =>{
+        const userName = firstName.value+" "+lastName.value;
+        navigation.navigate('ProfileScreen', { userName });
+    }
 
   return (
     <Background>
