@@ -1314,18 +1314,17 @@ const styles = {
       fontSize: 24,
     },
     questionContainer: {
+      backgroundColor: 'yellow',
       width: '100%',
       paddingHorizontal: 16,
-
-      flex: 1,
-
-      backgroundColor: '#fff',
-
-      paddingVertical: 10,
+      //flex: 1,
+      // backgroundColor: '#fff',
+      // paddingVertical: 10,
       flexDirection: 'row',
       alignSelf: 'stretch',
       justifyContent: 'center',
       alignItems: 'center',
+      marginTop: 113,
     },
     question: {
       fontSize: 18,
@@ -1357,6 +1356,7 @@ const styles = {
       paddingVertical: 0,
       gap: 8,
       //flex: 1,
+      backgroundColor: 'gray',
     },
     progressBar: {
       flex: 1,
@@ -1383,7 +1383,7 @@ const styles = {
       color: 'black',
       fontSize: 16,
       position: 'absolute',
-      top: 390,
+      //top: 390,
       width: '100%',
       textAlign: 'left',
     },
