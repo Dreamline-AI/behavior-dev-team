@@ -69,6 +69,7 @@ export default function SignIn({ navigation, route }) {
           {
             name: 'WelcomeScreen',
             params: {
+              userEmail:  user.email,
               userFirstName: user.firstName,
               userLastName: user.lastName,
             },
@@ -82,8 +83,18 @@ export default function SignIn({ navigation, route }) {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
-      <Header>Sign in with email</Header>
+      <View style={styles.signIn.top}>
+        <BackButton
+          goBack={navigation.goBack}
+          style={styles.signIn.backButton}
+        />
+
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Header title="Sign in with email" />
+        </View>
+      </View>
 
       <TextInput
         title="Your password"
@@ -100,6 +111,7 @@ export default function SignIn({ navigation, route }) {
         <Checkbox
           status={isChecked ? 'checked' : 'unchecked'}
           onPress={() => setIsChecked(!isChecked)}
+          color="black"
         />
         <Text>Remember Me</Text>
       </View>
