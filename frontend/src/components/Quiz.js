@@ -130,51 +130,71 @@ const Quiz = ({ navigation, route }) => {
         <Image source={x} style={styles.quiz.x} />
         <ProgressBar progress={progress * 100} />
       </View>
+      <View style={styles.quiz.frame}>
+        <View style={styles.quiz.containerQA}>
+          <Animated.View
+            style={[{ opacity: selectedOption !== null ? fadeAnim : 1 }]}
+          >
+            <View style={styles.quiz.questionContainer}>
+              <Text style={styles.quiz.question}>
+                {data[currentQuestionIndex].question}
+              </Text>
+            </View>
+          </Animated.View>
 
-      <Animated.View
-        style={[{ opacity: selectedOption !== null ? fadeAnim : 1 }]}
-      >
-        <View style={styles.quiz.questionContainer}>
-          <Text style={styles.quiz.question}>
-            {data[currentQuestionIndex].question}
-          </Text>
+          {data[currentQuestionIndex].options.map((option) => (
+            <Animated.View
+              key={option}
+              style={[
+                {
+                  opacity: selectedOption !== option ? fadeAnim : 1,
+                  transform:
+                    selectedOption === option
+                      ? [{ translateY: translateY }]
+                      : null,
+                },
+              ]}
+            >
+              <Text
+                style={
+                  isCorrect
+                    ? styles.quiz.correctMessage
+                    : styles.quiz.wrongMessage
+                }
+              >
+                {isCorrect !== null ? (isCorrect ? 'Correct! ' : 'No') : ''}
+              </Text>
+              <View
+                style={[styles.quiz.answerCardParent, styles.imageContainer]}
+              >
+                <Pressable
+                  style={[
+                    styles.quiz.AnswerBox,
+                    selectedOption === option &&
+                      (isCorrect
+                        ? styles.quiz.correctBox
+                        : styles.quiz.wrongBox),
+                  ]}
+                  onPress={() => handlePressedOption(option)}
+                  disabled={selectedOption}
+                  key={option}
+                >
+                  <View style={styles.quiz.imageContainer}>
+                    <View style={styles.quiz.image}>
+                      <Text style={styles.quiz.answerText}>{option}</Text>
+                    </View>
+                  </View>
+                </Pressable>
+              </View>
+              {/*selectedOption !== null && (
+                <View style={styles.quiz.answerBody}>
+                  <Text style={styles.quiz.customMessage}>{customMessage}</Text>
+                </View>
+              )*/}
+            </Animated.View>
+          ))}
         </View>
-      </Animated.View>
-
-      {data[currentQuestionIndex].options.map((option) => (
-        <Animated.View
-          key={option}
-          style={[
-            {
-              opacity: selectedOption !== option ? fadeAnim : 1,
-              transform:
-                selectedOption === option ? [{ translateY: translateY }] : null,
-            },
-          ]}
-        >
-          <Text
-            style={
-              isCorrect ? styles.quiz.correctMessage : styles.quiz.wrongMessage
-            }
-          >
-            {isCorrect !== null ? (isCorrect ? 'Correct! ' : 'No') : ''}
-          </Text>
-          <Pressable
-            style={[
-              styles.quiz.AnswerBox,
-              selectedOption === option &&
-                (isCorrect ? styles.quiz.correctBox : styles.quiz.wrongBox),
-            ]}
-            onPress={() => handlePressedOption(option)}
-            disabled={selectedOption}
-            key={option}
-          >
-            <Text style={styles.quiz.answerText}>{option}</Text>
-          </Pressable>
-        </Animated.View>
-      ))}
-
-      <Text style={styles.quiz.customMessage}>{customMessage}</Text>
+      </View>
 
       {selectedOption !== null && (
         <Button

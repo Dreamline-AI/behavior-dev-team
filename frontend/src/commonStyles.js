@@ -1298,33 +1298,37 @@ const styles = {
     button: {
       backgroundColor: 'black',
     },
-    AnswerBox: {
-      width: 361,
-      height: 214,
-      borderWidth: 3,
-      borderRadius: 6,
-      borderColor: 'rgba(0, 0, 0, 0.05)',
-      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+
+    frame: {
+      width: '100%',
+      // gap: 54,
+      overflow: 'hidden',
+      flex: 1,
+      alignSelf: 'stretch',
+    },
+    containerQA: {
+      flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-    },
-
-    answerText: {
-      textAlign: 'center',
-      fontSize: 24,
-    },
-    questionContainer: {
-      backgroundColor: 'yellow',
+      //backgroundColor: 'green',
       width: '100%',
       paddingHorizontal: 16,
-      //flex: 1,
-      // backgroundColor: '#fff',
-      // paddingVertical: 10,
+      paddingVertical: 0,
+      alignSelf: 'stretch',
+    },
+    questionContainer: {
+      // backgroundColor: 'yellow',
+      width: '100%',
+
+      backgroundColor: '#fff',
+
       flexDirection: 'row',
       alignSelf: 'stretch',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 113,
+      paddingHorizontal: 0,
+      paddingVertical: 10,
+      flex: 1,
     },
     question: {
       fontSize: 18,
@@ -1333,17 +1337,56 @@ const styles = {
       textAlign: 'left',
       flex: 1,
     },
-    container: {
-      flex: 1,
+    answerCardParent: {
+      gap: 24,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'stretch',
+    },
+
+    AnswerBox: {
+      //width: 361,
+      height: 214,
+      borderWidth: 3,
+      borderRadius: 6,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+      backgroundColor: 'rgba(0, 0, 0, 0.05)',
       alignItems: 'center',
       justifyContent: 'center',
+      //backgroundColor: 'blue',
+      overflow: 'hidden',
+      // position: 'relative',
     },
-    correctBox: {
-      borderColor: 'rgba(19, 212, 2, 1)',
+    imageContainer: {
+      overflow: 'hidden',
+      flex: 1,
+      flexDirection: 'row',
+      alignSelf: 'stretch',
     },
-    wrongBox: {
-      borderColor: 'rgba(241, 58, 0, 1)',
+    image: {
+      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+      flex: 1,
+      alignSelf: 'stretch',
+      width: '100%',
     },
+
+    answerText: {
+      textAlign: 'center',
+      fontSize: 24,
+      marginTop: -8,
+      top: '50%',
+      //left: 16,
+      lineHeight: 16,
+      display: 'flex',
+      width: 329,
+      height: 16,
+      // width: '100%',
+      //height: '100%',
+      //position: 'absolute',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
     topProgressBarContainer: {
       width: '100%',
       // height: 20,
@@ -1356,7 +1399,7 @@ const styles = {
       paddingVertical: 0,
       gap: 8,
       //flex: 1,
-      backgroundColor: 'gray',
+      // backgroundColor: 'gray',
     },
     progressBar: {
       flex: 1,
@@ -1382,10 +1425,32 @@ const styles = {
     customMessage: {
       color: 'black',
       fontSize: 16,
-      position: 'absolute',
+      // position: 'absolute',
       //top: 390,
       width: '100%',
       textAlign: 'left',
+      fontSize: 17,
+      letterSpacing: 0.2,
+      lineHeight: 25,
+      fontWeight: '300',
+
+      flex: 1,
+    },
+    answerBody: {
+      backgroundColor: 'white',
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 0,
+      paddingVertical: 10,
+      flex: 1,
+    },
+    correctBox: {
+      borderColor: 'rgba(19, 212, 2, 1)',
+    },
+    wrongBox: {
+      borderColor: 'rgba(241, 58, 0, 1)',
     },
     disabledButton: {
       backgroundColor: 'black',
