@@ -166,7 +166,7 @@ export default function Dashboard({ route, navigation }) {
                 <TouchableOpacity
                   key={index}
                   style={styles.dashboard.incentiveCard}
-                  onPress={() => goToDetail(incentive)}
+                  onPress={() => goToDetail(incentive.id)}
                 >
                   <View style={styles.dashboard.imageContainer}>
                     <Image
