@@ -1,6 +1,6 @@
 # behavior-dev-team
 
-[![MVP Docker Image Build and Publish](https://github.com/Dreamline-AI/behavior-dev-team/actions/workflows/docker-build.yml/badge.svg)](https://github.com/Dreamline-AI/behavior-dev-team/actions/workflows/docker-build.yml)
+[![MVP Docker Image Build and Publish](https://github.com/Dreamline-AI/behavior-dev-team/actions/workflows/docker-build.yml/badge.svg?branch=main)](https://github.com/Dreamline-AI/behavior-dev-team/actions/workflows/docker-build.yml)
 
 Read [Contributing Guide](CONTRIBUTING.md) before contributing to this project
 
