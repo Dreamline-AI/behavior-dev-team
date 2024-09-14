@@ -1301,35 +1301,36 @@ const styles = {
 
     frame: {
       width: '100%',
-      // gap: 54,
-      overflow: 'hidden',
-      flex: 1,
-      alignSelf: 'stretch',
-    },
-    containerQA: {
-      //flex: 0,
-      alignItems: 'center',
-      //justifyContent: 'flex-start',
-      backgroundColor: 'green',
-      width: '100%',
+      gap: 54,
       paddingHorizontal: 16,
-      paddingVertical: 0,
-      //alignSelf: 'stretch',
-      height: 'auto',
+      overflow: 'hidden',
+      alignSelf: 'stretch',
+      flex: 1,
+      borderWidth: 1, // For debugging
+      borderColor: 'red', // For debugging
     },
+    frame2: {
+      height: 400,
+      overflow: 'hidden',
+      width: '100%',
+      flex: 1,
+      paddingHorizontal: 16,
+      borderWidth: 1, // For debugging
+      borderColor: 'blue',
+      //alignSelf: 'stretch',
+    },
+
     questionContainer: {
       // backgroundColor: 'yellow',
-      width: '100%',
-
+      //width: '100%',
       backgroundColor: '#fff',
-
       flexDirection: 'row',
       alignSelf: 'stretch',
       justifyContent: 'center',
       alignItems: 'center',
       paddingHorizontal: 0,
-      paddingVertical: 10,
-      //flex: 1,
+      //paddingVertical: 10,
+      flex: 1,
     },
     question: {
       fontSize: 18,
@@ -1343,6 +1344,8 @@ const styles = {
       justifyContent: 'center',
       alignItems: 'center',
       alignSelf: 'stretch',
+      width: '100%',
+      flex: 1,
     },
 
     AnswerBox: {
@@ -1358,18 +1361,18 @@ const styles = {
       overflow: 'hidden',
       // position: 'relative',
     },
-    imageContainer: {
+    /* imageContainer: {
       overflow: 'hidden',
       flex: 1,
       flexDirection: 'row',
       alignSelf: 'stretch',
-    },
-    image: {
+    },*/
+    /*image: {
       backgroundColor: 'rgba(0, 0, 0, 0.05)',
       flex: 1,
       alignSelf: 'stretch',
       width: '100%',
-    },
+    },*/
 
     answerText: {
       textAlign: 'center',

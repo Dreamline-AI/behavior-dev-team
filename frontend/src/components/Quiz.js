@@ -124,13 +124,17 @@ const Quiz = ({ navigation, route }) => {
     )
   }
 
+  const defaultStyle = selectedOption === null ? styles.quiz.frame : {}
+  const optionPickedStyle = styles.quiz.frame2
+  const frameStyle = selectedOption === null ? defaultStyle : optionPickedStyle
+
   return (
     <Background>
       <View style={styles.quiz.topProgressBarContainer}>
         <Image source={x} style={styles.quiz.x} />
         <ProgressBar progress={progress * 100} />
       </View>
-      <View style={styles.quiz.frame}>
+      <View style={frameStyle}>
         <View style={styles.quiz.containerQA}>
           <Animated.View
             style={[{ opacity: selectedOption !== null ? fadeAnim : 1 }]}
@@ -164,28 +168,24 @@ const Quiz = ({ navigation, route }) => {
               >
                 {isCorrect !== null ? (isCorrect ? 'Correct! ' : 'No') : ''}
               </Text>
-              <View
-                style={[styles.quiz.answerCardParent, styles.imageContainer]}
+
+              <Pressable
+                style={[
+                  styles.quiz.AnswerBox,
+                  selectedOption === option &&
+                    (isCorrect ? styles.quiz.correctBox : styles.quiz.wrongBox),
+                ]}
+                onPress={() => handlePressedOption(option)}
+                disabled={selectedOption}
+                key={option}
               >
-                <Pressable
-                  style={[
-                    styles.quiz.AnswerBox,
-                    selectedOption === option &&
-                      (isCorrect
-                        ? styles.quiz.correctBox
-                        : styles.quiz.wrongBox),
-                  ]}
-                  onPress={() => handlePressedOption(option)}
-                  disabled={selectedOption}
-                  key={option}
-                >
-                  <View style={styles.quiz.imageContainer}>
-                    <View style={styles.quiz.image}>
-                      <Text style={styles.quiz.answerText}>{option}</Text>
-                    </View>
+                <View style={styles.quiz.imageContainer}>
+                  <View style={styles.quiz.image}>
+                    <Text style={styles.quiz.answerText}>{option}</Text>
                   </View>
-                </Pressable>
-              </View>
+                </View>
+              </Pressable>
+
               {selectedOption !== null && (
                 <View style={styles.quiz.answerBody}>
                   <Text style={styles.quiz.customMessage}>{customMessage}</Text>
