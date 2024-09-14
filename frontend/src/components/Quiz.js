@@ -186,11 +186,11 @@ const Quiz = ({ navigation, route }) => {
                   </View>
                 </Pressable>
               </View>
-              {/*selectedOption !== null && (
+              {selectedOption !== null && (
                 <View style={styles.quiz.answerBody}>
                   <Text style={styles.quiz.customMessage}>{customMessage}</Text>
                 </View>
-              )*/}
+              )}
             </Animated.View>
           ))}
         </View>

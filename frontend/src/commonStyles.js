@@ -1307,14 +1307,15 @@ const styles = {
       alignSelf: 'stretch',
     },
     containerQA: {
-      flex: 1,
+      //flex: 0,
       alignItems: 'center',
-      justifyContent: 'center',
-      //backgroundColor: 'green',
+      //justifyContent: 'flex-start',
+      backgroundColor: 'green',
       width: '100%',
       paddingHorizontal: 16,
       paddingVertical: 0,
-      alignSelf: 'stretch',
+      //alignSelf: 'stretch',
+      height: 'auto',
     },
     questionContainer: {
       // backgroundColor: 'yellow',
@@ -1328,7 +1329,7 @@ const styles = {
       alignItems: 'center',
       paddingHorizontal: 0,
       paddingVertical: 10,
-      flex: 1,
+      //flex: 1,
     },
     question: {
       fontSize: 18,
