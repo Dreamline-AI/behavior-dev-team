@@ -1299,38 +1299,94 @@ const styles = {
       backgroundColor: 'black',
     },
 
-    frame: {
-      width: '100%',
-      gap: 54,
-      paddingHorizontal: 16,
+    mainFrame: {
+      //justifyContent: 'flex-end',
+      paddingBottom: 9,
+      gap: 88,
       overflow: 'hidden',
-      alignSelf: 'stretch',
+      width: '100%',
       flex: 1,
-      borderWidth: 1, // For debugging
-      borderColor: 'red', // For debugging
+      // backgroundColor: 'skyblue',
     },
-    frame2: {
-      height: 400,
+    topPartFrame: {
+      flexDirection: 'column', // Stacks child elements vertically
+      height: 48, // Define height for this entire section
+      // width: '100%',
+      //  justifyContent: 'space-between',
+    },
+    topBarContainer: {
+      backgroundColor: '#fff',
+      //flex: 1,
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      gap: 5,
+      height: 24,
+    },
+
+    time: {
+      // flex: 1,
+      width: 33,
+      height: 10,
       overflow: 'hidden',
+    },
+    cellular: {
+      // flex: 1,
+      width: 14,
+      height: 14,
+      overflow: 'hidden',
+    },
+    wifi: {
+      // flex: 1,
+      width: 18,
+      height: 14,
+      overflow: 'hidden',
+    },
+    battery: {
+      // flex: 1,
+      width: 9,
+      height: 14,
+      overflow: 'hidden',
+    },
+    ProgressBarContainer: {
+      flex: 1,
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 16,
+      paddingVertical: 0,
+      // gap: 8,
+      // backgroundColor: 'gray',
+    },
+    x: {
+      width: 24,
+      height: 24,
+      overflow: 'hidden',
+    },
+
+    containerQA: {
+      paddingHorizontal: 16,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'stretch',
       width: '100%',
       flex: 1,
-      paddingHorizontal: 16,
-      borderWidth: 1, // For debugging
-      borderColor: 'blue',
-      //alignSelf: 'stretch',
+      //backgroundColor: 'yellow',
+      //height: 400,
     },
 
     questionContainer: {
-      // backgroundColor: 'yellow',
+      //backgroundColor: 'red',
       //width: '100%',
-      backgroundColor: '#fff',
-      flexDirection: 'row',
-      alignSelf: 'stretch',
-      justifyContent: 'center',
-      alignItems: 'center',
-      paddingHorizontal: 0,
-      //paddingVertical: 10,
-      flex: 1,
+      //backgroundColor: '#fff',
+      //flexDirection: 'row',
+      //  alignSelf: 'stretch',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      // paddingHorizontal: 0,
+      paddingVertical: 10,
+      //flex: 1,
     },
     question: {
       fontSize: 18,
@@ -1340,18 +1396,21 @@ const styles = {
       flex: 1,
     },
     answerCardParent: {
-      gap: 24,
-      justifyContent: 'center',
-      alignItems: 'center',
-      alignSelf: 'stretch',
+      // paddingHorizontal: 16,
+      //justifyContent: 'center',
+      //alignItems: 'center',
+      //alignSelf: 'stretch',
       width: '100%',
-      flex: 1,
+      //flex: 1,
+      //backgroundColor: 'blue',
+      paddingHorizontal: 0, // Ensure no padding is added
+      marginVertical: 0,
     },
 
     AnswerBox: {
-      //width: 361,
+      width: '100%',
       height: 214,
-      borderWidth: 3,
+      borderWidth: 1,
       borderRadius: 6,
       borderColor: 'rgba(0, 0, 0, 0.1)',
       backgroundColor: 'rgba(0, 0, 0, 0.05)',
@@ -1391,27 +1450,10 @@ const styles = {
       alignItems: 'center',
     },
 
-    topProgressBarContainer: {
-      width: '100%',
-      // height: 20,
-      flexDirection: 'row',
-      // alignSelf: 'stretch',
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-      paddingHorizontal: 16,
-      paddingVertical: 0,
-      gap: 8,
-      //flex: 1,
-      // backgroundColor: 'gray',
-    },
     progressBar: {
-      flex: 1,
-    },
-    x: {
-      width: 24,
-      height: 24,
-      overflow: 'hidden',
+      // flex: 1,
+      position: 'absolute',
+      height: 16,
     },
 
     correctMessage: {
@@ -1461,6 +1503,13 @@ const styles = {
     },
     disabledButtonText: {
       color: 'white',
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 16,
+      backgroundColor: '#fff',
     },
   }),
   quizEndingScreen: StyleSheet.create({
