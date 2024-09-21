@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Text,
   View,
   StyleSheet,
-  Animated,
   Pressable,
   Image,
+  TouchableOpacity,
+  Animated,
   Easing,
 } from 'react-native'
 import data from '../helpers/data'
@@ -14,40 +15,53 @@ import * as Progress from 'react-native-progress'
 import IncorrectQuiz from './IncorrectQuiz'
 import styles from '../commonStyles'
 import x from '../assets/x.png'
+import wifi from '../assets/wifi.png'
+import time from '../assets/time.png'
+import battery from '../assets/battery.png'
+import cellular from '../assets/cellular.png'
 import ProgressBar from '../components/ProgressBar'
 import Background from './Background'
 
-const Quiz = ({ navigation, route }) => {
+const Quiz = ({ navigation, route, questions }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [isCorrect, setIsCorrect] = useState(null)
   const [selectedOption, setSelectedOption] = useState(null)
-  const [quizProgress, setQuizProgress] = useState(data.length)
-  const translateY = useRef(new Animated.Value(0)).current
-  const fadeAnim = useRef(new Animated.Value(1)).current
-  const [showMessage, setShowMessage] = useState(false)
-  const [customMessage, setCustomMessage] = useState('')
   const [incorrectIndices, setIncorrectIndices] = useState([])
   const [incorrectQuestions, setIncorrectQuestions] = useState([])
+  const [animation] = useState(new Animated.Value(0))
+  const [customMessage, setCustomMessage] = useState('')
+  const [showMessage, setShowMessage] = useState(false) // Define showMessage state
+  const quizData =
+    questions ||
+    (incorrectQuestions.length > 0 ? incorrectQuestions : data) ||
+    []
+  const quizProgress = quizData.length
 
   useEffect(() => {
-    if (route && route.params && route.params.incorrectIndices) {
+    if (route?.params?.incorrectIndices) {
       const { incorrectIndices } = route.params
       setIncorrectQuestions(
-        data.filter((_, index) => incorrectIndices.includes(index))
+        data.filter((_, index) => incorrectIndices.includes(index)) || []
       )
     }
   }, [route])
 
   useEffect(() => {
     if (selectedOption !== null) {
-      fadeOut()
+      setShowMessage(true)
+      Animated.timing(animation, {
+        toValue: -54, // Move up by 54 units
+        duration: 500,
+        easing: Easing.out(Easing.ease),
+        useNativeDriver: true,
+      }).start()
     }
   }, [selectedOption])
 
-  const progress = (currentQuestionIndex + 1) / quizProgress
+  const progress = (currentQuestionIndex + 1) / (quizProgress || 1)
 
   const handleNext = () => {
-    if (currentQuestionIndex === data.length - 1) {
+    if (currentQuestionIndex === quizData.length - 1) {
       if (incorrectIndices.length > 0) {
         navigation.navigate('RedoQuestionsScreen', {
           incorrectIndices: incorrectIndices,
@@ -60,48 +74,20 @@ const Quiz = ({ navigation, route }) => {
       setCurrentQuestionIndex(currentQuestionIndex + 1)
       setSelectedOption(null)
       setIsCorrect(null)
-      fadeAnim.setValue(1)
-      translateY.setValue(0)
       setShowMessage(false)
-      setCustomMessage('')
+      setCustomMessage('') // Clear custom message
+      animation.setValue(0) // Reset animation value
     }
   }
 
-  const fadeOut = () => {
-    Animated.parallel([
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 200,
-        useNativeDriver: true,
-      }),
-    ]).start(() => setShowMessage(true))
-  }
-
-  const moveCardUp = (selectedOption) => {
-    const currentQuestion = data[currentQuestionIndex]
-    const correctOption = currentQuestion.options[0]
-    let toValue = selectedOption === correctOption ? -80 : -280
-
-    Animated.parallel([
-      Animated.timing(translateY, {
-        toValue: toValue,
-        duration: 600,
-        useNativeDriver: true,
-      }),
-    ]).start()
-  }
-
   const handlePressedOption = (pressedOption) => {
-    const currentQuestion = data[currentQuestionIndex]
+    const currentQuestion = quizData[currentQuestionIndex]
     const isAnswerCorrect = currentQuestion.correct_option === pressedOption
     setIsCorrect(isAnswerCorrect)
     setSelectedOption(pressedOption)
-    moveCardUp(pressedOption)
-    fadeOut()
 
     if (!isAnswerCorrect) {
       setIncorrectIndices([...incorrectIndices, currentQuestionIndex])
-      console.log('Incorrect Indices:', incorrectIndices)
       setCustomMessage(currentQuestion.wrong_message)
     } else {
       setCustomMessage(currentQuestion.correct_message)
@@ -124,73 +110,124 @@ const Quiz = ({ navigation, route }) => {
     )
   }
 
+  const animatedStyle = {
+    transform: [{ translateY: animation }],
+  }
+
   return (
     <Background>
-      <View style={styles.quiz.topProgressBarContainer}>
-        <Image source={x} style={styles.quiz.x} />
-        <ProgressBar progress={progress * 100} />
-      </View>
-
-      <Animated.View
-        style={[{ opacity: selectedOption !== null ? fadeAnim : 1 }]}
-      >
-        <View style={styles.quiz.questionContainer}>
-          <Text style={styles.quiz.question}>
-            {data[currentQuestionIndex].question}
-          </Text>
+      <View style={styles.quiz.mainFrame}>
+        <View style={styles.quiz.topPartFrame}>
+          <View style={styles.quiz.topBarContainer}>
+            <Image source={wifi} style={styles.quiz.wifi} />
+            <Image source={cellular} style={styles.quiz.cellular} />
+            <Image source={battery} style={styles.quiz.battery} />
+            <Image source={time} style={styles.quiz.time} />
+          </View>
+          <View style={styles.quiz.ProgressBarContainer}>
+            <Image source={x} style={styles.quiz.x} />
+            <ProgressBar progress={progress * 100} />
+          </View>
         </View>
-      </Animated.View>
 
-      {data[currentQuestionIndex].options.map((option) => (
-        <Animated.View
-          key={option}
-          style={[
-            {
-              opacity: selectedOption !== option ? fadeAnim : 1,
-              transform:
-                selectedOption === option ? [{ translateY: translateY }] : null,
-            },
-          ]}
-        >
-          <Text
-            style={
-              isCorrect ? styles.quiz.correctMessage : styles.quiz.wrongMessage
+        <View style={styles.quiz.containerQA}>
+          {selectedOption === null && (
+            <View style={styles.quiz.questionContainer}>
+              <Text style={styles.quiz.question}>
+                {quizData[currentQuestionIndex]?.question ||
+                  'No question available'}
+              </Text>
+            </View>
+          )}
+
+          {quizData[currentQuestionIndex]?.options.map((option, index) => {
+            if (selectedOption === null || option === selectedOption) {
+              return (
+                <View key={option} style={styles.quiz.answerCardParent}>
+                  <Animated.View
+                    style={[styles.quiz.answerCardParent, animatedStyle]}
+                  >
+                    <Text
+                      style={
+                        isCorrect
+                          ? styles.quiz.correctMessage
+                          : styles.quiz.wrongMessage
+                      }
+                    >
+                      {isCorrect !== null
+                        ? isCorrect
+                          ? 'Correct! '
+                          : 'No'
+                        : ''}
+                    </Text>
+
+                    {/* Pressable for options */}
+                    {index === 0 && (
+                      <TouchableOpacity
+                        style={[
+                          styles.quiz.AnswerBox,
+                          selectedOption === option &&
+                            (isCorrect
+                              ? styles.quiz.correctBox
+                              : styles.quiz.wrongBox),
+                        ]}
+                        onPress={() => handlePressedOption(option)}
+                        disabled={selectedOption}
+                      >
+                        <View>
+                          <Text style={styles.quiz.answerText}>{option}</Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+
+                    {index === 1 && (
+                      <Pressable
+                        style={[
+                          styles.quiz.AnswerBox,
+                          selectedOption === option &&
+                            (isCorrect
+                              ? styles.quiz.correctBox
+                              : styles.quiz.wrongBox),
+                        ]}
+                        onPress={() => handlePressedOption(option)}
+                        disabled={selectedOption}
+                      >
+                        <View>
+                          <Text style={styles.quiz.answerText}>{option}</Text>
+                        </View>
+                      </Pressable>
+                    )}
+                  </Animated.View>
+
+                  {selectedOption !== null && (
+                    <Animated.View
+                      style={[styles.quiz.answerBody, animatedStyle]}
+                    >
+                      <Text style={styles.quiz.customMessage}>
+                        {customMessage}
+                      </Text>
+                    </Animated.View>
+                  )}
+                </View>
+              )
             }
-          >
-            {isCorrect !== null ? (isCorrect ? 'Correct! ' : 'No') : ''}
-          </Text>
-          <Pressable
-            style={[
-              styles.quiz.AnswerBox,
-              selectedOption === option &&
-                (isCorrect ? styles.quiz.correctBox : styles.quiz.wrongBox),
-            ]}
-            onPress={() => handlePressedOption(option)}
-            disabled={selectedOption}
-            key={option}
-          >
-            <Text style={styles.quiz.answerText}>{option}</Text>
-          </Pressable>
-        </Animated.View>
-      ))}
+            return null
+          })}
+        </View>
 
-      <Text style={styles.quiz.customMessage}>{customMessage}</Text>
-
-      <Button
-        color="black"
-        mode="contained"
-        onPress={handleNext}
-        disabled={!selectedOption}
-        style={[
-          styles.quiz.button,
-          !selectedOption ? styles.quiz.disabledButton : null,
-        ]}
-        labelStyle={!selectedOption ? styles.quiz.disabledButtonText : null}
-      >
-        Continue
-      </Button>
+        {selectedOption !== null && (
+          <Button
+            color="black"
+            mode="contained"
+            onPress={handleNext}
+            style={styles.quiz.button}
+          >
+            Continue
+          </Button>
+        )}
+      </View>
     </Background>
   )
 }
 
-export default Quiz;
+export default Quiz

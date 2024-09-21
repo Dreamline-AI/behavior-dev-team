@@ -1298,34 +1298,95 @@ const styles = {
     button: {
       backgroundColor: 'black',
     },
-    AnswerBox: {
-      width: 361,
-      height: 214,
-      borderWidth: 3,
-      borderRadius: 6,
-      borderColor: 'rgba(0, 0, 0, 0.05)',
-      backgroundColor: 'rgba(0, 0, 0, 0.05)',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
 
-    answerText: {
-      textAlign: 'center',
-      fontSize: 24,
-    },
-    questionContainer: {
+    mainFrame: {
+      //justifyContent: 'flex-end',
+      paddingBottom: 9,
+      gap: 88,
+      overflow: 'hidden',
       width: '100%',
-      paddingHorizontal: 16,
-
       flex: 1,
-
+      // backgroundColor: 'skyblue',
+    },
+    topPartFrame: {
+      flexDirection: 'column', // Stacks child elements vertically
+      height: 48, // Define height for this entire section
+      // width: '100%',
+      //  justifyContent: 'space-between',
+    },
+    topBarContainer: {
       backgroundColor: '#fff',
-
-      paddingVertical: 10,
+      //flex: 1,
+      width: '100%',
       flexDirection: 'row',
-      alignSelf: 'stretch',
+      justifyContent: 'flex-end',
+      gap: 5,
+      height: 24,
+    },
+
+    time: {
+      // flex: 1,
+      width: 33,
+      height: 10,
+      overflow: 'hidden',
+    },
+    cellular: {
+      // flex: 1,
+      width: 14,
+      height: 14,
+      overflow: 'hidden',
+    },
+    wifi: {
+      // flex: 1,
+      width: 18,
+      height: 14,
+      overflow: 'hidden',
+    },
+    battery: {
+      // flex: 1,
+      width: 9,
+      height: 14,
+      overflow: 'hidden',
+    },
+    ProgressBarContainer: {
+      flex: 1,
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 16,
+      paddingVertical: 0,
+      // gap: 8,
+      // backgroundColor: 'gray',
+    },
+    x: {
+      width: 24,
+      height: 24,
+      overflow: 'hidden',
+    },
+
+    containerQA: {
+      paddingHorizontal: 16,
       justifyContent: 'center',
       alignItems: 'center',
+      alignSelf: 'stretch',
+      width: '100%',
+      flex: 1,
+      //backgroundColor: 'yellow',
+      //height: 400,
+    },
+
+    questionContainer: {
+      //backgroundColor: 'red',
+      //width: '100%',
+      //backgroundColor: '#fff',
+      //flexDirection: 'row',
+      //  alignSelf: 'stretch',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      // paddingHorizontal: 0,
+      paddingVertical: 10,
+      //flex: 1,
     },
     question: {
       fontSize: 18,
@@ -1334,37 +1395,65 @@ const styles = {
       textAlign: 'left',
       flex: 1,
     },
-    container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    correctBox: {
-      borderColor: 'rgba(19, 212, 2, 1)',
-    },
-    wrongBox: {
-      borderColor: 'rgba(241, 58, 0, 1)',
-    },
-    topProgressBarContainer: {
+    answerCardParent: {
+      // paddingHorizontal: 16,
+      //justifyContent: 'center',
+      //alignItems: 'center',
+      //alignSelf: 'stretch',
       width: '100%',
-      // height: 20,
-      flexDirection: 'row',
-      // alignSelf: 'stretch',
-      backgroundColor: '#fff',
+      //flex: 1,
+      //backgroundColor: 'blue',
+      paddingHorizontal: 0, // Ensure no padding is added
+      marginVertical: 0,
+    },
+
+    AnswerBox: {
+      width: '100%',
+      height: 214,
+      borderWidth: 1,
+      borderRadius: 6,
+      borderColor: 'rgba(0, 0, 0, 0.1)',
+      backgroundColor: 'rgba(0, 0, 0, 0.05)',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingHorizontal: 16,
-      paddingVertical: 0,
-      gap: 8,
-      //flex: 1,
-    },
-    progressBar: {
-      flex: 1,
-    },
-    x: {
-      width: 24,
-      height: 24,
+      //backgroundColor: 'blue',
       overflow: 'hidden',
+      // position: 'relative',
+    },
+    /* imageContainer: {
+      overflow: 'hidden',
+      flex: 1,
+      flexDirection: 'row',
+      alignSelf: 'stretch',
+    },*/
+    /*image: {
+      backgroundColor: 'rgba(0, 0, 0, 0.05)',
+      flex: 1,
+      alignSelf: 'stretch',
+      width: '100%',
+    },*/
+
+    answerText: {
+      textAlign: 'center',
+      fontSize: 24,
+      marginTop: -8,
+      top: '50%',
+      //left: 16,
+      lineHeight: 16,
+      display: 'flex',
+      width: 329,
+      height: 16,
+      // width: '100%',
+      //height: '100%',
+      //position: 'absolute',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+
+    progressBar: {
+      // flex: 1,
+      position: 'absolute',
+      height: 16,
     },
 
     correctMessage: {
@@ -1382,16 +1471,45 @@ const styles = {
     customMessage: {
       color: 'black',
       fontSize: 16,
-      position: 'absolute',
-      top: 390,
+      // position: 'absolute',
+      //top: 390,
       width: '100%',
       textAlign: 'left',
+      fontSize: 17,
+      letterSpacing: 0.2,
+      lineHeight: 25,
+      fontWeight: '300',
+
+      flex: 1,
+    },
+    answerBody: {
+      backgroundColor: 'white',
+      width: '100%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: 0,
+      paddingVertical: 10,
+      flex: 1,
+    },
+    correctBox: {
+      borderColor: 'rgba(19, 212, 2, 1)',
+    },
+    wrongBox: {
+      borderColor: 'rgba(241, 58, 0, 1)',
     },
     disabledButton: {
       backgroundColor: 'black',
     },
     disabledButtonText: {
       color: 'white',
+    },
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 16,
+      backgroundColor: '#fff',
     },
   }),
   quizEndingScreen: StyleSheet.create({

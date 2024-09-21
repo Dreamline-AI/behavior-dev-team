@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:19006/")
+@CrossOrigin(origins = "http://localhost:19006")
 class IncentiveController {
     @Autowired
     private IncentiveService incentiveService;

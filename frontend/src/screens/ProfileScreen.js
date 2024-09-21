@@ -22,11 +22,18 @@ import BottomNavigationBar from './BottomNavigationBar.js'
 import Svg, { Path } from 'react-native-svg'
 import styles from '../commonStyles.js'
 import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+
 import { logout } from '../actions/authActions.js'
 
 export default function ProfileScreen({ route, navigation }) {
   let dispatch = useDispatch()
-  const { userName, userFirstName, userLastName } = route.params
+  const user = useSelector((state) => state.auth.user)
+  const userFirstName = useSelector((state) => state.auth.user.firstName)
+  const userLastName = useSelector((state) => state.auth.user.lastName)
+  const userName = `${userFirstName} ${userLastName}`
+
+  //const { userName, userFirstName, userLastName } = route.params
   const progress = 80
   const XPCurrent = 2500
   const XPNextLevel = 2950
@@ -112,7 +119,7 @@ export default function ProfileScreen({ route, navigation }) {
             <UserPic picSize={100} />
           </View>
           <View style={styles.profileScreen.userNameContainer}>
-            <Text style={styles.profileScreen.userName}> {userName} </Text>
+            <Text style={styles.profileScreen.userName}> {user.userName} </Text>
           </View>
         </View>
         <View style={styles.profileScreen.ProgressContainer}>
