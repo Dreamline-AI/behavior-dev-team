@@ -31,6 +31,7 @@ export default function ProfileScreen({ route, navigation }) {
   const user = useSelector((state) => state.auth.user)
   const userFirstName = useSelector((state) => state.auth.user.firstName)
   const userLastName = useSelector((state) => state.auth.user.lastName)
+  const userId = useSelector((state) => state.auth.user.userId)
   const userName = `${userFirstName} ${userLastName}`
 
   //const { userName, userFirstName, userLastName } = route.params
