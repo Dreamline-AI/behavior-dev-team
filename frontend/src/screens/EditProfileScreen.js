@@ -12,7 +12,7 @@ import { updateUserInfo } from '../actions/authActions'
 
 export default function EditProfileScreen({ route, navigation }) {
   // Destructure name from route.params with a default empty string
-  const { name = '' } = route.params || {}
+  const { name = '', userId } = route.params || {}
 
   // Ensure that name is a string and split safely
   const [fn, ...ln] = typeof name === 'string' ? name.split(' ') : []
@@ -34,7 +34,32 @@ export default function EditProfileScreen({ route, navigation }) {
 
   const onSaveChangesPressed = () => {
     // Dispatch the action to update user info
-    const userName = `${firstName.value} ${lastName.value}`.trim()
+    const onSaveChangesPressed = async () =>{
+            const profileData = {
+              firstName: firstName.value,
+              lastName: lastName.value,
+              zipcode: zipcode.value
+            };
+        
+            try {
+              const response = await fetch(`http://localhost:8080/api/Profile/${userId}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(profileData),
+              });
+        
+              if (response.ok) {
+                const result = await response.text();
+                console.log(result);
+              } else {
+                console.log('Failed to update profile');
+              }
+            } catch (error) {
+              console.log(`Error: ${error.message}`);
+            }
+      const userName = `${firstName.value} ${lastName.value}`.trim()
 
     dispatch(
       updateUserInfo({
@@ -45,7 +70,8 @@ export default function EditProfileScreen({ route, navigation }) {
       })
     )
 
-    navigation.navigate('ProfileScreen')
+    navigation.navigate('ProfileScreen', { userName, userId })
+    }
   }
 
   return (
