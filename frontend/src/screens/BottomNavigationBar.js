@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import styles from "../commonStyles"
 
-export default function BottomNavigationBar({ userName, userFirstName, userLastName}) {
+export default function BottomNavigationBar({ userName, userFirstName, userLastName, userId}) {
   const navigation = useNavigation();
   const [activeTab, setActiveTab] = useState('Home');
 
@@ -34,10 +34,10 @@ export default function BottomNavigationBar({ userName, userFirstName, userLastN
     setActiveTab(tabName);
     switch (tabName) {
       case 'Home':
-        navigation.navigate('Dashboard', { userName : userName, userFirstName : userFirstName, userLastName : userLastName });
+        navigation.navigate('Dashboard', { userName : userName, userFirstName : userFirstName, userLastName : userLastName, userId : userId });
         break;
       case 'Profile':
-        navigation.navigate('ProfileScreen', { userName : userName, userFirstName : userFirstName, userLastName : userLastName });
+        navigation.navigate('ProfileScreen', { userName : userName, userFirstName : userFirstName, userLastName : userLastName, userId : userId });
         break;
       case 'Rewards':
         navigation.navigate('RewardScreen');
