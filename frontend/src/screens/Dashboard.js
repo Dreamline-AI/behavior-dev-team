@@ -208,6 +208,7 @@ export default function Dashboard({ route, navigation }) {
           userName={userName}
           userFirstName={userFirstName}
           userLastName={userLastName}
+          userId = {userId}
         />
       </ScrollView>
     </Background>
