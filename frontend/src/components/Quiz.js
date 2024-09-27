@@ -2,25 +2,23 @@ import React, { useState, useEffect } from 'react'
 import {
   Text,
   View,
-  StyleSheet,
-  Pressable,
   Image,
-  TouchableOpacity,
   Animated,
   Easing,
+  TouchableOpacity,
 } from 'react-native'
+import ProgressBar from '../components/ProgressBar'
+import CircularProgressBar from './CircularProgressBar'
+import Background from './Background'
 import data from '../helpers/data'
-import Button from '../components/Button'
-import * as Progress from 'react-native-progress'
-import IncorrectQuiz from './IncorrectQuiz'
 import styles from '../commonStyles'
+import Button from '../components/Button'
+import IncorrectQuiz from './IncorrectQuiz'
 import x from '../assets/x.png'
 import wifi from '../assets/wifi.png'
 import time from '../assets/time.png'
 import battery from '../assets/battery.png'
 import cellular from '../assets/cellular.png'
-import ProgressBar from '../components/ProgressBar'
-import Background from './Background'
 
 const Quiz = ({ navigation, route, questions }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
@@ -30,7 +28,8 @@ const Quiz = ({ navigation, route, questions }) => {
   const [incorrectQuestions, setIncorrectQuestions] = useState([])
   const [animation] = useState(new Animated.Value(0))
   const [customMessage, setCustomMessage] = useState('')
-  const [showMessage, setShowMessage] = useState(false) // Define showMessage state
+  const [showMessage, setShowMessage] = useState(false)
+
   const quizData =
     questions ||
     (incorrectQuestions.length > 0 ? incorrectQuestions : data) ||
@@ -50,7 +49,7 @@ const Quiz = ({ navigation, route, questions }) => {
     if (selectedOption !== null) {
       setShowMessage(true)
       Animated.timing(animation, {
-        toValue: -54, // Move up by 54 units
+        toValue: -54,
         duration: 500,
         easing: Easing.out(Easing.ease),
         useNativeDriver: true,
@@ -58,7 +57,8 @@ const Quiz = ({ navigation, route, questions }) => {
     }
   }, [selectedOption])
 
-  const progress = (currentQuestionIndex + 1) / (quizProgress || 1)
+  // Calculate the progress percentage
+  const progress = ((currentQuestionIndex + 1) / (quizProgress || 1)) * 100
 
   const handleNext = () => {
     if (currentQuestionIndex === quizData.length - 1) {
@@ -75,8 +75,8 @@ const Quiz = ({ navigation, route, questions }) => {
       setSelectedOption(null)
       setIsCorrect(null)
       setShowMessage(false)
-      setCustomMessage('') // Clear custom message
-      animation.setValue(0) // Reset animation value
+      setCustomMessage('')
+      animation.setValue(0)
     }
   }
 
@@ -126,23 +126,24 @@ const Quiz = ({ navigation, route, questions }) => {
           </View>
           <View style={styles.quiz.ProgressBarContainer}>
             <Image source={x} style={styles.quiz.x} />
-            <ProgressBar progress={progress * 100} />
+            {/* Pass progress to both ProgressBar and CircularProgressBar */}
+            <ProgressBar progress={progress} />
+            <CircularProgressBar progress={progress} />
           </View>
         </View>
+        <View style={styles.quiz.frame1}>
+          <View style={styles.quiz.containerQA}>
+            {selectedOption === null && (
+              <View style={styles.quiz.questionContainer}>
+                <Text style={styles.quiz.question}>
+                  {quizData[currentQuestionIndex]?.question ||
+                    'No question available'}
+                </Text>
+              </View>
+            )}
 
-        <View style={styles.quiz.containerQA}>
-          {selectedOption === null && (
-            <View style={styles.quiz.questionContainer}>
-              <Text style={styles.quiz.question}>
-                {quizData[currentQuestionIndex]?.question ||
-                  'No question available'}
-              </Text>
-            </View>
-          )}
-
-          {quizData[currentQuestionIndex]?.options.map((option, index) => {
-            if (selectedOption === null || option === selectedOption) {
-              return (
+            {quizData[currentQuestionIndex]?.options.map((option) =>
+              selectedOption === null || option === selectedOption ? (
                 <View key={option} style={styles.quiz.answerCardParent}>
                   <Animated.View
                     style={[styles.quiz.answerCardParent, animatedStyle]}
@@ -161,42 +162,21 @@ const Quiz = ({ navigation, route, questions }) => {
                         : ''}
                     </Text>
 
-                    {/* Pressable for options */}
-                    {index === 0 && (
-                      <TouchableOpacity
-                        style={[
-                          styles.quiz.AnswerBox,
-                          selectedOption === option &&
-                            (isCorrect
-                              ? styles.quiz.correctBox
-                              : styles.quiz.wrongBox),
-                        ]}
-                        onPress={() => handlePressedOption(option)}
-                        disabled={selectedOption}
-                      >
-                        <View>
-                          <Text style={styles.quiz.answerText}>{option}</Text>
-                        </View>
-                      </TouchableOpacity>
-                    )}
-
-                    {index === 1 && (
-                      <Pressable
-                        style={[
-                          styles.quiz.AnswerBox,
-                          selectedOption === option &&
-                            (isCorrect
-                              ? styles.quiz.correctBox
-                              : styles.quiz.wrongBox),
-                        ]}
-                        onPress={() => handlePressedOption(option)}
-                        disabled={selectedOption}
-                      >
-                        <View>
-                          <Text style={styles.quiz.answerText}>{option}</Text>
-                        </View>
-                      </Pressable>
-                    )}
+                    <TouchableOpacity
+                      style={[
+                        styles.quiz.AnswerBox,
+                        selectedOption === option &&
+                          (isCorrect
+                            ? styles.quiz.correctBox
+                            : styles.quiz.wrongBox),
+                      ]}
+                      onPress={() => handlePressedOption(option)}
+                      disabled={selectedOption}
+                    >
+                      <View>
+                        <Text style={styles.quiz.answerText}>{option}</Text>
+                      </View>
+                    </TouchableOpacity>
                   </Animated.View>
 
                   {selectedOption !== null && (
@@ -209,12 +189,16 @@ const Quiz = ({ navigation, route, questions }) => {
                     </Animated.View>
                   )}
                 </View>
-              )
-            }
-            return null
-          })}
+              ) : null
+            )}
+          </View>
+          <View style={styles.quiz.bottomContainer}>
+            <View style={styles.quiz.bottomTop}>
+              <CircularProgressBar progress={progress} />
+            </View>
+            <View style={styles.quiz.bottomBottom}></View>
+          </View>
         </View>
-
         {selectedOption !== null && (
           <Button
             color="black"
