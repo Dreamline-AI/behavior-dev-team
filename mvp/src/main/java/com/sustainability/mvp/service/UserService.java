@@ -14,6 +14,9 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.Query;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import com.sustainability.mvp.entity.Task;
@@ -59,6 +62,35 @@ public class UserService {
         }
         return userList;
     }
+    public User getUserByEmail(String email) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+    
+        // Create a query against the collection for the specific email
+        Query query = dbFirestore.collection(COLLECTION_NAME).whereEqualTo("email", email);
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+    
+        // Retrieve the documents matching the query
+        List<QueryDocumentSnapshot> queryDocuments = querySnapshot.get().getDocuments();
+    
+        // Check if documents were found
+        if (!queryDocuments.isEmpty()) {
+            // Assuming email is unique, get the first document
+            return queryDocuments.get(0).toObject(User.class);
+        } else {
+            return null; 
+        }
+    }
+    
+    public boolean userExists(String email) throws ExecutionException, InterruptedException {
+        // Reuse the existing method to check if a user with the given email exists
+        return getUserByEmail(email) != null;
+    }
+    
+    
+
+    public boolean checkUserExists(String email) throws ExecutionException, InterruptedException {
+        return getUserByEmail(email) != null;
+    }
 
     public User getUserByUserID(String userID) throws ExecutionException, InterruptedException{
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -103,4 +135,3 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 }
-

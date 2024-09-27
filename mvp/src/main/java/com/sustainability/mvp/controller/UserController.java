@@ -40,15 +40,24 @@ public class UserController {
     public User getUserbyUserID(@PathVariable String userID) throws ExecutionException, InterruptedException{
         return userService.getUserByUserID(userID);
     }
+    @PostMapping("/check-user")
+    public boolean checkUserExists(@RequestBody String email) throws ExecutionException, InterruptedException {
+        // Clean the email by removing quotes and trimming whitespace
+        String cleanedEmail = email.replace("\"", "").trim();
+        
+        // Check if the user exists with the cleaned email
+        return userService.userExists(cleanedEmail);
+    }
 
     @PutMapping("/users/{userID}")
     public String updateUserByUserID(@PathVariable String userID, @RequestBody Map<String, Object> updates) throws ExecutionException, InterruptedException{
         return userService.updateUserByUserID(userID, updates);
     }
 
-    @DeleteMapping("/users/{userID}")
+    @DeleteMapping("/users/{userID}") 
     public String deleteUserByUserID(@PathVariable String userID) throws ExecutionException, InterruptedException {
         return userService.deleteUserByUserID(userID);
     }
+    
 
 }

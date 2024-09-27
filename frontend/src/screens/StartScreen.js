@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
-import { useDispatch } from 'react-redux'; // Import useDispatch from react-redux
-import Background from '../components/Background'
-import Header from '../components/Header'
-import Button from '../components/Button'
-import TextInput from '../components/TextInput'
-import LoadScreen from './LoadScreen'
-import { emailValidator } from '../helpers/emailValidator'
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons'
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { toast } from 'react-toastify';
 import {
-  signInWithGooglePopup,
   signInWithFacebookPopup,
-} from '../../firebaseConfig'
-import axios from 'axios'
-import { toast } from 'react-toastify'
-import Toast from 'react-native-toast-message'
+  signInWithGooglePopup,
+} from '../../firebaseConfig';
+import Background from '../components/Background';
+import Button from '../components/Button';
+import Header from '../components/Header';
+import TextInput from '../components/TextInput';
+import { emailValidator } from '../helpers/emailValidator';
+import LoadScreen from './LoadScreen';
 //import 'react-toastify/dist/ReactToastify.css'
-import styles from '../commonStyles'
+import styles from '../commonStyles';
+
 
 export default function StartScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -47,7 +46,53 @@ export default function StartScreen({ navigation }) {
     setIsEmailValid(!emailValidator(email.value));
   }, [email.value]);
 
+  // const isExistingUser = async (userEmail, source) => {
+  //   try {
+  //     // Call backend API to check if the user exists
+  //     const response = await axios.post('http://localhost:8080/api/checkUser', { email: userEmail });
+  
+  //     if (response.data.exists) {
+  //       // If the user exists, proceed with the corresponding navigation
+  //       if (source === 'emailsignin') {
+  //         navigation.reset({
+  //           index: 0,
+  //           routes: [{ name: 'SignIn', params: { user: response.data.user } }],
+  //         });
+  //       } else if (source === 'gfa') {
+  //         navigation.reset({
+  //           index: 0,
+  //           routes: [{
+  //             name: 'WelcomeScreen',
+  //             params: {
+  //               userEmail: userEmail,
+  //               userFirstName: response.data.user.firstName,
+  //               userLastName: response.data.user.lastName,
+  //             },
+  //           }],
+  //         });
+  //       }
+  //     } else {
+  //       // Handle non-existing user case (redirect to sign-up)
+  //       if (source === 'emailsignin') {
+  //         navigation.reset({
+  //           index: 0,
+  //           routes: [{ name: 'EmailSignUp', params: { email: userEmail } }],
+  //         });
+  //       } else if (source === 'gfa') {
+  //         navigation.reset({
+  //           index: 0,
+  //           routes: [{ name: 'LoginWithGFA', params: { email: userEmail } }],
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error checking user existence:', error);
+  //     toast.error('An error occurred while checking user existence. Please try again.');
+  //   }
+  // };
+
   const isExistingUser = (userEmail, source) => {
+
     let user = users.find(b => b.email === userEmail);
     if (user) {
       // If the user exists, dispatch loginSuccess with user information
@@ -86,15 +131,49 @@ export default function StartScreen({ navigation }) {
     }
   }
 
-  const onContinuePressed = () => {
-    const emailError = emailValidator(email.value)
+  const onContinuePressed = async () => {
+    // Validate the email input to ensure it's in the correct format
+    const emailError = emailValidator(email.value);
     if (emailError) {
-      setEmail({ ...email, error: emailError })
-      return
-    } else {
-      isExistingUser(email.value, 'emailsignin');
+      setEmail({ ...email, error: emailError });
+      return;
+    }
+  
+    // Clean the email by trimming whitespace and removing any unnecessary characters
+    const cleanedEmail = email.value.trim().replace(/["']/g, '');
+  
+    try {
+      // Send a POST request to check if the user exists in the backend
+      const response = await axios.post('http://localhost:8080/api/check-user', cleanedEmail, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      // If the user exists, navigate to the Dashboard page with the user details
+      if (response.data === true) {
+        console.log("User exists, navigating to the Dashboard page.");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Dashboard' }], // Pass additional params if needed, e.g., user info
+        });
+      } 
+      // If the user does not exist, navigate to the EmailSignUp page
+      else {
+        console.log("User does not exist, navigating to the Sign-Up page.");
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'EmailSignUp', params: { email: cleanedEmail } }],
+        });
+      }
+    } catch (error) {
+      console.error('Error checking user existence:', error);
+      toast.error('Unable to verify user. Please try again.');
     }
   };
+  
+  
+
 
   const logGoogleUser = async () => {
     setAuthLoading(true) // Set auth loading to true
