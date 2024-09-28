@@ -11,3 +11,8 @@ export const updateUserInfo = (user) => ({
   type: 'UPDATE_USER_INFO',
   payload: user,
 })
+
+export const addVoltCoins = (voltCoins) => ({
+  type: 'ADD_VOLTCOINS',
+  payload: voltCoins,
+})

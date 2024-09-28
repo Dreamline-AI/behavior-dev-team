@@ -8,6 +8,7 @@ const initialState = {
     lastName: '',
     zipCode: '',
     userName: '',
+    voltCoins: 15,
   },
 }
 
@@ -22,6 +23,10 @@ const authReducer = (state = initialState, action) => {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           userName: action.payload.userName || '',
+          voltCoins:
+            action.payload.voltCoins !== undefined
+              ? action.payload.voltCoins
+              : 15,
         },
       }
     case 'LOGOUT':
@@ -41,6 +46,14 @@ const authReducer = (state = initialState, action) => {
         user: {
           ...state.user,
           ...action.payload,
+        },
+      }
+    case 'ADD_VOLTCOINS':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          voltCoins: state.user.voltCoins + action.payload,
         },
       }
     default:
