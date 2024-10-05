@@ -47,8 +47,10 @@ export default function StartScreen({ navigation }) {
     setIsEmailValid(!emailValidator(email.value));
   }, [email.value]);
 
-  const isExistingUser = (userEmail, source) => {
-    let user = users.find(b => b.email === userEmail);
+  const isExistingUser = async(userEmail, source) => {
+    setLoading(true); 
+    const response = await axios.get(`http://localhost:8080/api/users/email?email=${userEmail}`);
+    const user = response.data;
     if (user) {
       // If the user exists, dispatch loginSuccess with user information
 
@@ -63,9 +65,10 @@ export default function StartScreen({ navigation }) {
           routes: [{
             name: 'WelcomeScreen',
             params: {
-              userEmail: email,
+              userEmail: user.email,
               userFirstName: user.firstName,
               userLastName: user.lastName,
+              userId: user.userID
             },
           }],
         });
