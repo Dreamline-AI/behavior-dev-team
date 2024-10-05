@@ -9,6 +9,7 @@ import { theme } from '../core/theme'
 import styles from '../commonStyles'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUserInfo } from '../actions/authActions'
+import axios from 'axios';
 
 export default function EditProfileScreen({ route, navigation }) {
   // Destructure name from route.params with a default empty string
@@ -32,9 +33,8 @@ export default function EditProfileScreen({ route, navigation }) {
     }
   }, [user])
 
-  const onSaveChangesPressed = () => {
-    // Dispatch the action to update user info
-    const onSaveChangesPressed = async () =>{
+  
+  const onSaveChangesPressed = async () =>{
             const profileData = {
               firstName: firstName.value,
               lastName: lastName.value,
@@ -42,23 +42,21 @@ export default function EditProfileScreen({ route, navigation }) {
             };
         
             try {
-              const response = await fetch(`http://localhost:8080/api/Profile/${userId}`, {
-                method: 'PUT',
+              const response = await axios.put(`http://localhost:8080/api/Profile/${userId}`, profileData, {
                 headers: {
                   'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(profileData),
               });
-        
-              if (response.ok) {
-                const result = await response.text();
-                console.log(result);
+            
+              if (response.status === 200) {
+                console.log(response.data);  // You can access the response data directly
               } else {
                 console.log('Failed to update profile');
               }
             } catch (error) {
               console.log(`Error: ${error.message}`);
             }
+            
       const userName = `${firstName.value} ${lastName.value}`.trim()
 
     dispatch(
@@ -71,7 +69,6 @@ export default function EditProfileScreen({ route, navigation }) {
     )
 
     navigation.navigate('ProfileScreen', { userName, userId })
-    }
   }
 
   return (

@@ -16,6 +16,7 @@ export default function WelcomeScreen({ route, navigation }) {
         email: userEmail,
         firstName: userFirstName,
         lastName: userLastName,
+        userId: userId
       }));
        
       navigation.reset({

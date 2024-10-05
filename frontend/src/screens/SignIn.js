@@ -72,6 +72,7 @@ export default function SignIn({ navigation, route }) {
               userEmail:  user.email,
               userFirstName: user.firstName,
               userLastName: user.lastName,
+              userId: user.userId
             },
           },
         ],
