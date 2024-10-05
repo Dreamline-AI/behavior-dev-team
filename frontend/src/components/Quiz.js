@@ -125,7 +125,9 @@ const Quiz = ({ navigation, route, questions }) => {
             <Image source={time} style={styles.quiz.time} />
           </View>
           <View style={styles.quiz.ProgressBarContainer}>
-            <Image source={x} style={styles.quiz.x} />
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image source={x} style={styles.quiz.x} />
+            </TouchableOpacity>
             <ProgressBar progress={progress * 100} />
           </View>
         </View>
