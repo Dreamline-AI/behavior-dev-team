@@ -8,13 +8,10 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+import com.google.cloud.firestore.*;
 import org.springframework.stereotype.Service;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
-import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import com.sustainability.mvp.entity.Task;
 import com.sustainability.mvp.entity.User;
@@ -101,6 +98,20 @@ public class UserService {
         return tasks.stream()
                 .filter(Task::isStatus)
                 .collect(Collectors.toList());
+    }
+    public User getUserByEmail(String email) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        // Query Firestore by email
+        ApiFuture<QuerySnapshot> future = dbFirestore.collection(COLLECTION_NAME)
+                .whereEqualTo("email", email)
+                .get();
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        if (documents.isEmpty()) {
+            throw new UserException("No user found with email: " + email);
+        } else {
+            // Assuming emails are unique and we only get one result
+            return documents.get(0).toObject(User.class);
+        }
     }
 }
 
