@@ -26,68 +26,82 @@ export default function StartScreen({ navigation }) {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true) // Loading state
   const [authLoading, setAuthLoading] = useState(false) // Authentication loading state
-
-  useEffect(() => {
-    axios
-      .get('http://localhost:8080/api/users')
-      .then((response) => {
-        console.log('Data:', response.data)
-        setUsers(response.data)
-      })
-      .catch((error) => {
-        console.error('Error:', error)
-        toast.error('Unable to fetch users. Please try again later.')
-      })
-      .finally(() => {
-        setLoading(false) // Set loading to false after API call is complete
-      })
-  }, [])
+  // useEffect(() => {
+  //   axios
+  //     .get('http://localhost:8080/api/users')
+  //     .then((response) => {
+  //       console.log('Data:', response.data)
+  //       setUsers(response.data)
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error:', error)
+  //       toast.error('Unable to fetch users. Please try again later.')
+  //     })
+  //     .finally(() => {
+  //       setLoading(false) // Set loading to false after API call is complete
+  //     })
+  // }, [])
 
   useEffect(() => {
     setIsEmailValid(!emailValidator(email.value));
   }, [email.value]);
 
-  const isExistingUser = async(userEmail, source) => {
-    setLoading(true); 
-    const response = await axios.get(`http://localhost:8080/api/users/email?email=${userEmail}`);
-    const user = response.data;
-    if (user) {
-      // If the user exists, dispatch loginSuccess with user information
-
-      if (source === 'emailsignin') {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'SignIn', params: { user } }],
-        });
-      } else if (source === 'gfa') {
-        navigation.reset({
-          index: 0,
-          routes: [{
-            name: 'WelcomeScreen',
-            params: {
-              userEmail: user.email,
-              userFirstName: user.firstName,
-              userLastName: user.lastName,
-              userId: user.userID
-            },
-          }],
-        });
+  const isExistingUser = async (userEmail, source) => {
+    try {
+      setLoading(true); 
+      
+     const response = await axios.get(`http://localhost:8080/api/users/email?email=${userEmail}`);
+      const user = response.data;
+      
+      if (user) {
+        if (source === 'emailsignin') {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'SignIn', params: { user } }],
+          });
+        } else if (source === 'gfa') {
+          navigation.reset({
+            index: 0,
+            routes: [{
+              name: 'WelcomeScreen',
+              params: {
+                userEmail: user.email,
+                userFirstName: user.firstName,
+                userLastName: user.lastName,
+                userId: user.userID,
+              },
+            }],
+          });
+        }
       }
-    } else {
-      // Handle non-existing user case
-      if (source === 'emailsignin') {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'EmailSignUp', params: { email: email.value } }],
-        });
-      } else if (source === 'gfa') {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'LoginWithGFA', params: { email: userEmail } }],
-        })
+    } catch (error) {
+      // Check the response status and handle errors accordingly
+      if (error.response) {
+        if (error.response.status === 404) {
+          console.log('User not found.');
+          if (source === 'emailsignin') {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'EmailSignUp', params: { email: userEmail } }],
+            });
+          } else if (source === 'gfa') {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'LoginWithGFA', params: { email: userEmail } }],
+            });
+          }
+        } else if (error.response.status === 500) {
+          console.error('Internal server error occurred.');
+          alert('There was an issue on the server. Please try again later.');
+        }
+      } else {
+        console.error('Error connecting to the server:', error);
+        alert('Unable to connect to the server. Please check your network connection.');
       }
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   const onContinuePressed = () => {
     const emailError = emailValidator(email.value)
@@ -139,7 +153,7 @@ export default function StartScreen({ navigation }) {
     }
   }
 
-  if (loading || authLoading) {
+  if (authLoading) {
     // Show loading indicator while fetching data or authenticating
     return (
       <Background>
