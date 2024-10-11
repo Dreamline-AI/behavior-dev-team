@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("*")
 public class ProfileController {
     @Autowired
     private ProfileService profileService;
