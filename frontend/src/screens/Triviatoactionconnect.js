@@ -7,16 +7,18 @@ import { addVoltCoins } from '../actions/authActions'
 import Background from '../components/Background'
 
 const TriviatoActionConnect = ({ navigation, route }) => {
-  const { userName, userFirstName, userLastName } = route.params
+  const { userID, userName, userFirstName, userLastName } = route.params
   const dispatch = useDispatch()
-  const voltCoins = useSelector((state) => state.auth.user.voltCoins)
-
-  console.log('Initial Volt Coins:', voltCoins)
 
   const handleDonePress = () => {
     const earnedPoints = 500
     dispatch(addVoltCoins(earnedPoints))
-    navigation.navigate('Dashboard', { userName, userFirstName, userLastName })
+    navigation.navigate('Dashboard', {
+      userID,
+      userName,
+      userFirstName,
+      userLastName,
+    })
   }
 
   return (

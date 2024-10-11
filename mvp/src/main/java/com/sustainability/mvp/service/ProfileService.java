@@ -8,6 +8,7 @@ import com.sustainability.mvp.entity.Profile;
 import com.sustainability.mvp.exception.UserException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,6 +27,9 @@ public class ProfileService {
     }
 
 
+
+
+
     public Profile getProfileDetailsByID(@PathVariable String userid) throws ExecutionException, InterruptedException {
         // Retrieves a profile from Firestore using the provided user ID.
         Firestore dbFirestore = FirestoreClient.getFirestore();
@@ -42,6 +46,8 @@ public class ProfileService {
             throw new UserException("No such user found with ID: " + userid);
         }
     }
+
+
     public List<Profile> getProfileDetails() throws ExecutionException, InterruptedException {
         //Retrieves details of all profiles stored in the Firestore collection.
         Firestore dbFirestore = FirestoreClient.getFirestore();

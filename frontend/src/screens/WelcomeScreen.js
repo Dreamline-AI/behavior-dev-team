@@ -1,37 +1,43 @@
-import React, { useEffect } from 'react';
-import { View, Image, StyleSheet, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
-import styles from "../commonStyles"
-import { loginSuccess } from '../actions/authActions';
+import React, { useEffect } from 'react'
+import { View, Image, StyleSheet, Text } from 'react-native'
+import { useDispatch } from 'react-redux'
+import styles from '../commonStyles'
+import { loginSuccess } from '../actions/authActions'
 
 export default function WelcomeScreen({ route, navigation }) {
-  const dispatch = useDispatch(); // Initialize dispatch
-  const { userFirstName, userLastName, userEmail} = route.params || {};
+  const dispatch = useDispatch() // Initialize dispatch
+  const { userFirstName, userLastName, userEmail, userID } = route.params || {}
 
   useEffect(() => {
-    // console.log('userFirstName in useeffect:', userFirstName);  
-    // console.log('userLastName in useeffect:', userLastName);    
+    // console.log('userFirstName in useeffect:', userFirstName);
+    // console.log('userLastName in useeffect:', userLastName);
     const timer = setTimeout(() => {
-      dispatch(loginSuccess({
-        email: userEmail,
-        firstName: userFirstName,
-        lastName: userLastName,
-      }));
-       
+      dispatch(
+        loginSuccess({
+          userID: userID,
+          email: userEmail,
+          firstName: userFirstName,
+          lastName: userLastName,
+        })
+      )
+
       navigation.reset({
         index: 0,
-        routes: [{
-          name: 'Dashboard',
-          params: {
-            userFirstName: userFirstName, 
-            userLastName: userLastName,
+        routes: [
+          {
+            name: 'Dashboard',
+            params: {
+              userID: userID,
+              userFirstName: userFirstName,
+              userLastName: userLastName,
+            },
           },
-        }],
-      });
-    }, 1000); //  delay
+        ],
+      })
+    }, 1000) //  delay
 
-    return () => clearTimeout(timer); // Cleanup timer
-  }, [navigation, userFirstName, userLastName]);
+    return () => clearTimeout(timer) // Cleanup timer
+  }, [navigation, userFirstName, userLastName, userID])
 
   return (
     <View style={styles.welcomeScreen.container}>
@@ -39,9 +45,9 @@ export default function WelcomeScreen({ route, navigation }) {
         source={require('../assets/welcome.png')} // make sure this path is correct
         style={styles.welcomeScreen.image}
       />
-      <Text style={styles.welcomeScreen.text}>Sustainable living starts here!</Text>
+      <Text style={styles.welcomeScreen.text}>
+        Sustainable living starts here!
+      </Text>
     </View>
-  );
+  )
 }
-
-

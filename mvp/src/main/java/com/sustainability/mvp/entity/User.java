@@ -1,17 +1,13 @@
 package com.sustainability.mvp.entity;
 
 public class User {
-    private String UserID;
+    private String userID;
     private String firstName;
     private String lastName;
     private String email;
     private String zipcode;
     private String password;
-
-    private Int voltCoins = 15;
-
-
-
+    private Integer voltCoins = 15;
 
 
     public String getPassword() {
@@ -23,11 +19,11 @@ public class User {
     }
 
     public String getUserID() {
-        return UserID;
+        return userID;
     }
 
     public void setUserID(String userID) {
-        UserID = userID;
+        this.userID = userID;
     }
 
     public String getFirstName() {
@@ -61,9 +57,13 @@ public class User {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
-    public Int getVoltCoins() {
-    return voltCoins;
-}
-    public void setVoltCoins(Int voltCoins) {
+
+    public Integer getVoltCoins() {
+        return voltCoins;
+    }
+
+    public void setVoltCoins(Integer voltCoins) {
         this.voltCoins = voltCoins;
     }
+
+}
