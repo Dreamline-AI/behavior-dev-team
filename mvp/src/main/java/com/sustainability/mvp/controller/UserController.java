@@ -49,11 +49,14 @@ public class UserController {
     }
 
     @PutMapping("/voltCoins/{userID}")
-    public Integer saveVoltCoins(@PathVariable String userID, @RequestBody Integer voltCoins) throws ExecutionException, InterruptedException {
+    public ResponseEntity<Integer> saveVoltCoins(@PathVariable String userID, @RequestBody Integer voltCoins) throws ExecutionException, InterruptedException {
         System.out.println("Received voltCoins for user " + userID + ": " + voltCoins); // Log to verify received data
-        return userService.updateVoltCoins(userID, voltCoins);
 
+        Integer updatedVoltCoins = userService.updateVoltCoins(userID, voltCoins);
+
+        return ResponseEntity.ok(updatedVoltCoins); // Return the updated voltCoins in the response
     }
+
 
     @PutMapping("/users/{userID}")
     public String updateUserByUserID(@PathVariable String userID, @RequestBody Map<String, Object> updates) throws ExecutionException, InterruptedException{
