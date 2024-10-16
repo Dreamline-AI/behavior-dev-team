@@ -32,7 +32,7 @@ export default function ProfileScreen({ route, navigation }) {
   const userLastName = useSelector((state) => state.auth.user.lastName)
   const userName = `${userFirstName} ${userLastName}`
 
-  const [voltCoins, setVoltCoins] = useState(0)
+  const [voltCoins, setVoltCoins] = useState(null)
 
   useEffect(() => {
     const fetchVoltCoins = async () => {
