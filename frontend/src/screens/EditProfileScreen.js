@@ -13,14 +13,14 @@ import axios from 'axios';
 
 export default function EditProfileScreen({ route, navigation }) {
   // Destructure name from route.params with a default empty string
-  const { name = '', userId } = route.params || {}
+  const { name = '', userId} = route.params || {}
 
   // Ensure that name is a string and split safely
   const [fn, ...ln] = typeof name === 'string' ? name.split(' ') : []
 
   const [firstName, setFirstName] = useState({ value: fn, error: '' })
   const [lastName, setLastName] = useState({ value: ln.join(' '), error: '' })
-  const [zipcode, setZipcode] = useState({ value: '', error: '' })
+  const [zipcode, setZipcode] = useState({ value: route.params.zipcode, error: '' })
 
   const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user)
@@ -65,6 +65,7 @@ export default function EditProfileScreen({ route, navigation }) {
         lastName: lastName.value,
         zipCode: zipcode.value,
         userName: userName,
+        zipcode: zipcode
       })
     )
 
