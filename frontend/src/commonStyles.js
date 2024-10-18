@@ -1364,12 +1364,6 @@ const styles = {
       height: 24,
       overflow: 'hidden',
     },
-    frame1: {
-      gap: 54,
-      // marginBottom: 54,
-      flex: 1,
-      flexDirection: 'column',
-    },
 
     containerQA: {
       paddingHorizontal: 16,
@@ -1455,26 +1449,7 @@ const styles = {
       justifyContent: 'center',
       alignItems: 'center',
     },
-    bottomContainer: {
-      // backgroundColor: 'green',
-      // height: 100,
-      flexDirection: 'column',
-      gap: 20,
-    },
-    bottomTop: {
-      //  backgroundColor: 'gray',
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-      height: 55,
-    },
-    bottomBottom: {
-      // backgroundColor: 'blue',
-      height: 5,
-    },
-    circleIcon: {
-      height: 46,
-    },
+
     progressBar: {
       // flex: 1,
       position: 'absolute',

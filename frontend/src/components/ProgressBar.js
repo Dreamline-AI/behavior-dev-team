@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { View, Animated, StyleSheet, Easing } from 'react-native'
-import Svg, { Circle } from 'react-native-svg'
 
-// Linear ProgressBar (Original Version)
 const ProgressBar = ({ progress }) => {
   const animatedWidth = useRef(new Animated.Value(0)).current
 
@@ -33,7 +31,6 @@ const ProgressBar = ({ progress }) => {
 }
 
 const styles = StyleSheet.create({
-  // Linear ProgressBar Styles
   container: {
     height: 8,
     width: '100%',
@@ -47,4 +44,5 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
 })
+
 export default ProgressBar
