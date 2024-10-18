@@ -22,6 +22,7 @@ export default function EmailSignUp({ navigation, route }) {
 
   const [firstName, setFirstName] = useState({ value: '', error: '' })
   const [lastName, setLastName] = useState({ value: '', error: '' })
+  const [userId, setUserId] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [repeatPassword, setRepeatPassword] = useState({ value: '', error: '' })
   const [zipcode, setZipcode] = useState({ value: '', error: '' })
@@ -84,6 +85,7 @@ export default function EmailSignUp({ navigation, route }) {
                   userFirstName: firstName.value,
                   userLastName: lastName.value,
                   userEmail: email,
+                  userId: userID,
                 },
               },
             ],
@@ -103,6 +105,7 @@ export default function EmailSignUp({ navigation, route }) {
               userFirstName: firstName.value,
               userLastName: lastName.value,
               userEmail: email,
+              userId : userId.value
             },
           },
         ],

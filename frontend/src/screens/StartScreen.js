@@ -66,6 +66,8 @@ export default function StartScreen({ navigation }) {
               userEmail: email,
               userFirstName: user.firstName,
               userLastName: user.lastName,
+              userId: user.userID,
+              zipcode: user.zipcode
             },
           }],
         });

@@ -3,6 +3,7 @@ package com.sustainability.mvp.service;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
+import com.sustainability.mvp.entity.User;
 
 import com.sustainability.mvp.entity.Profile;
 import com.sustainability.mvp.exception.UserException;
@@ -10,8 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -61,4 +64,28 @@ public class ProfileService {
 
         return profileList;
     }
+    public String updateProfile(String userId, User profile) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = dbFirestore.collection("users").document(userId);
+        ApiFuture<DocumentSnapshot> future = documentReference.get();
+        DocumentSnapshot document = future.get();
+        if (document.exists()) {
+            Map<String, Object> updates = new HashMap<>();
+
+            if (profile.getFirstName() != null) {
+                updates.put("firstName", profile.getFirstName());
+            }
+            if (profile.getLastName() != null) {
+                updates.put("lastName", profile.getLastName());
+            }
+            if (profile.getZipcode() != null) {
+                updates.put("zipcode", profile.getZipcode());
+            }
+            ApiFuture<WriteResult> collectionApiFuture = documentReference.update(updates);
+            return collectionApiFuture.get().getUpdateTime().toString();
+        } else {
+            throw new UserException("No such user found with ID: " + userId);
+        }
+    }
+    
 }

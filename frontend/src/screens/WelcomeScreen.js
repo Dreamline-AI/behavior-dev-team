@@ -6,7 +6,7 @@ import { loginSuccess } from '../actions/authActions';
 
 export default function WelcomeScreen({ route, navigation }) {
   const dispatch = useDispatch(); // Initialize dispatch
-  const { userFirstName, userLastName, userEmail} = route.params || {};
+  const { userFirstName, userLastName, userEmail, userId, zipcode} = route.params || {};
 
   useEffect(() => {
     // console.log('userFirstName in useeffect:', userFirstName);  
@@ -16,6 +16,8 @@ export default function WelcomeScreen({ route, navigation }) {
         email: userEmail,
         firstName: userFirstName,
         lastName: userLastName,
+        userId: userId,
+        zipcode: zipcode
       }));
        
       navigation.reset({
