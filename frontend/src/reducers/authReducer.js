@@ -3,11 +3,13 @@
 const initialState = {
   isAuthenticated: false,
   user: {
+    userID: '',
     email: '',
     firstName: '',
     lastName: '',
     zipCode: '',
     userName: '',
+    voltCoins: 15,
   },
 }
 
@@ -18,10 +20,15 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         user: {
+          userID: action.payload.userID,
           email: action.payload.email,
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           userName: action.payload.userName || '',
+          voltCoins:
+            action.payload.voltCoins !== undefined
+              ? action.payload.voltCoins
+              : 15,
         },
       }
     case 'LOGOUT':
@@ -42,6 +49,11 @@ const authReducer = (state = initialState, action) => {
           ...state.user,
           ...action.payload,
         },
+      }
+    case 'ADD_VOLTCOINS':
+      return {
+        ...state,
+        user: { ...state.user, voltCoins: action.payload },
       }
     default:
       return state

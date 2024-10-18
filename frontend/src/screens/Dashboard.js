@@ -25,9 +25,7 @@ export default function Dashboard({ route, navigation }) {
   const reduc = useSelector((state) => state.auth)
   const userFirstName = useSelector((state) => state.auth.user.firstName)
   const userLastName = useSelector((state) => state.auth.user.lastName)
-  // const { userFirstName, userLastName } = route.params || {};
-  // console.log('userFirstName:', userFirstName);
-  console.log('userLastName:', userLastName, reduc)
+  console.log(reduc)
   const userName = `${userFirstName} ${userLastName}`
   const [incentives, setIncentives] = useState([])
 
@@ -65,7 +63,6 @@ export default function Dashboard({ route, navigation }) {
   return (
     <Background>
       <ScrollView contentContainerStyle={styles.dashboard.container}>
-        <Logo />
         <View style={styles.dashboard.header}>
           <View style={styles.dashboard.userInfo}>
             <UserPic style={styles.dashboard.userPic} />

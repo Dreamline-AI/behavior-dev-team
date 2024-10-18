@@ -1,34 +1,52 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import styles from "../commonStyles"
+import React from 'react'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import styles from '../commonStyles'
 import celebrate from '../assets/celebrate.png'
+import { addVoltCoins } from '../actions/authActions'
+import Background from '../components/Background'
 
-import Background from '../components/Background';
+const TriviatoActionConnect = ({ navigation, route }) => {
+  const { userID, userName, userFirstName, userLastName } = route.params
+  const dispatch = useDispatch()
 
+  const handleDonePress = () => {
+    const earnedPoints = 500
+    dispatch(addVoltCoins(earnedPoints))
+    navigation.navigate('Dashboard', {
+      userID,
+      userName,
+      userFirstName,
+      userLastName,
+    })
+  }
 
-  const Triviatoactionconnect = ({ navigation, route }) => {
-    const { userName, userFirstName, userLastName } = route.params;
   return (
     <Background>
-    <View style={styles.triviaToActionConnect.container}>
-      <View style={styles.triviaToActionConnect.content}>
-      <View style={styles.triviaToActionConnect.card}>
-      <Image source={celebrate} style={styles.triviaToActionConnect.celebrate} />
-        <Text style={styles.triviaToActionConnect.coinsText}>+500 coins</Text>
-        <Text style={styles.triviaToActionConnect.messageText}>Congrats on completing an action!</Text>
+      <View style={styles.triviaToActionConnect.container}>
+        <View style={styles.triviaToActionConnect.content}>
+          <View style={styles.triviaToActionConnect.card}>
+            <Image
+              source={celebrate}
+              style={styles.triviaToActionConnect.celebrate}
+            />
+            <Text style={styles.triviaToActionConnect.coinsText}>
+              +500 coins
+            </Text>
+            <Text style={styles.triviaToActionConnect.messageText}>
+              Congrats on completing an action!
+            </Text>
+          </View>
+        </View>
+        <TouchableOpacity
+          style={styles.triviaToActionConnect.doneButton}
+          onPress={handleDonePress}
+        >
+          <Text style={styles.triviaToActionConnect.doneButtonText}>Done</Text>
+        </TouchableOpacity>
       </View>
-      </View>
-      <TouchableOpacity
-        style={styles.triviaToActionConnect.doneButton}
-        onPress={() => navigation.navigate('Dashboard',{userName, userFirstName, userLastName})}
-      >
-        <Text style={styles.triviaToActionConnect.doneButtonText}>Done</Text>
-      </TouchableOpacity>
-    </View>
     </Background>
-  );
-};
+  )
+}
 
-
-
-export default Triviatoactionconnect;
+export default TriviatoActionConnect

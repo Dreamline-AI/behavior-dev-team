@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("http://localhost:19006/")
 public class ProfileController {
     @Autowired
     private ProfileService profileService;
@@ -24,6 +25,8 @@ public class ProfileController {
 
         return profileService.saveProfile(profile);
     }
+
+
 
     /**
      * This function retrieves a profile object by specific user ID.

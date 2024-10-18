@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import com.sustainability.mvp.exception.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ import com.sustainability.mvp.service.UserService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("http://localhost:19006/")
+@CrossOrigin(origins = "http://localhost:19006")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -40,6 +42,21 @@ public class UserController {
     public User getUserbyUserID(@PathVariable String userID) throws ExecutionException, InterruptedException{
         return userService.getUserByUserID(userID);
     }
+
+    @GetMapping("/voltCoins/{userID}")
+    public Integer getVoltCoins(@PathVariable String userID) throws ExecutionException, InterruptedException {
+        return userService.getVoltCoins(userID);
+    }
+
+    @PutMapping("/voltCoins/{userID}")
+    public ResponseEntity<Integer> saveVoltCoins(@PathVariable String userID, @RequestBody Integer voltCoins) throws ExecutionException, InterruptedException {
+        System.out.println("Received voltCoins for user " + userID + ": " + voltCoins); // Log to verify received data
+
+        Integer updatedVoltCoins = userService.updateVoltCoins(userID, voltCoins);
+
+        return ResponseEntity.ok(updatedVoltCoins); // Return the updated voltCoins in the response
+    }
+
 
     @PutMapping("/users/{userID}")
     public String updateUserByUserID(@PathVariable String userID, @RequestBody Map<String, Object> updates) throws ExecutionException, InterruptedException{
