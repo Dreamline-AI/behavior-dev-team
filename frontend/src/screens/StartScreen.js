@@ -39,7 +39,7 @@ export default function StartScreen({ navigation }) {
   }, []);
 
   useEffect(() => {
-    console.log('Updated Users:', users);
+    //console.log('Updated Users:', users);
   }, [users]);
 
   useEffect(() => {
@@ -116,12 +116,8 @@ export default function StartScreen({ navigation }) {
         const response = await axios.get(`http://localhost:8080/api/user-info/${userEmail}`);
         const user = response.data;
 
-        // Log the fetched user object
-        console.log('Fetched user:', user);
-
         // Check if the user object is empty or undefined
         if (user && Object.keys(user).length > 0) {
-            // Log the source to ensure it's correct
             console.log('Source:', source);
             
             if (source === 'continue') {
