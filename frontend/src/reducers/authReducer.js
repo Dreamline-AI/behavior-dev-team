@@ -23,7 +23,8 @@ const authReducer = (state = initialState, action) => {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           userName: action.payload.userName || '',
-          userId: action.payload.userId
+          userId: action.payload.userId,
+          zipcode: action.payload.zipcode
         },
       }
     case 'LOGOUT':
