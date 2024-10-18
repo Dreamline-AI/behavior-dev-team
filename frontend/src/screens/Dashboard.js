@@ -25,6 +25,7 @@ export default function Dashboard({ route, navigation }) {
   const reduc = useSelector((state) => state.auth)
   const userFirstName = useSelector((state) => state.auth.user.firstName)
   const userLastName = useSelector((state) => state.auth.user.lastName)
+  const zipcode = useSelector((state) => state.auth.user.zipcode)
   const userId = useSelector((state) => state.auth.user.userId)
   // const { userFirstName, userLastName } = route.params || {};
   // console.log('userFirstName:', userFirstName);
@@ -210,6 +211,7 @@ export default function Dashboard({ route, navigation }) {
           userFirstName={userFirstName}
           userLastName={userLastName}
           userId = {userId}
+          zipcode = {zipcode}
         />
       </ScrollView>
     </Background>
