@@ -32,6 +32,7 @@ export default function ProfileScreen({ route, navigation }) {
   const userFirstName = useSelector((state) => state.auth.user.firstName)
   const userLastName = useSelector((state) => state.auth.user.lastName)
   const userId = route.params.userId
+  const zipcode = route.params.zipcode
   const userName = `${userFirstName} ${userLastName}`
 
   //const { userName, userFirstName, userLastName } = route.params
@@ -88,7 +89,7 @@ export default function ProfileScreen({ route, navigation }) {
 
   const isActive = true
   const EditClicked = () => {
-    navigation.navigate('EditProfileScreen', { name: userName, userId: userId })
+    navigation.navigate('EditProfileScreen', { name: userName, userId: userId, zipcode: zipcode })
   }
 
   const handleLogout = () => {
