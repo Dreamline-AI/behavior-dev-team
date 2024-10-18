@@ -5,11 +5,13 @@ import com.sustainability.mvp.entity.Profile;
 import com.sustainability.mvp.service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.sustainability.mvp.entity.User;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("*")
 public class ProfileController {
     @Autowired
     private ProfileService profileService;
@@ -42,5 +44,9 @@ public class ProfileController {
     @GetMapping("/Profile")
     public List<Profile> getAllProducts() throws ExecutionException, InterruptedException {
         return profileService.getProfileDetails();
+    }
+    @PutMapping("/Profile/{userID}")
+    public String updateProfile(@PathVariable String userID, @RequestBody User profile) throws ExecutionException, InterruptedException {
+        return profileService.updateProfile(userID, profile);
     }
 }

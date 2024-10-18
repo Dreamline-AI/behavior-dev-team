@@ -74,6 +74,7 @@ export default function LoginWithGFA({ navigation, route }) {
                 userEmail: email,
                 userFirstName: firstName.value,
                 userLastName: lastName.value,
+                userId: userID,
               },
             }],
           });

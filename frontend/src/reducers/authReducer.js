@@ -8,6 +8,7 @@ const initialState = {
     lastName: '',
     zipCode: '',
     userName: '',
+    userId: ''
   },
 }
 
@@ -22,6 +23,7 @@ const authReducer = (state = initialState, action) => {
           firstName: action.payload.firstName,
           lastName: action.payload.lastName,
           userName: action.payload.userName || '',
+          userId: action.payload.userId
         },
       }
     case 'LOGOUT':
@@ -33,6 +35,7 @@ const authReducer = (state = initialState, action) => {
           firstName: '',
           lastName: '',
           zipCode: '',
+          userId: ''
         },
       }
     case 'UPDATE_USER_INFO':

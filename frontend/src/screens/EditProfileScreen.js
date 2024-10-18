@@ -9,10 +9,11 @@ import { theme } from '../core/theme'
 import styles from '../commonStyles'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUserInfo } from '../actions/authActions'
+import axios from 'axios';
 
 export default function EditProfileScreen({ route, navigation }) {
   // Destructure name from route.params with a default empty string
-  const { name = '' } = route.params || {}
+  const { name = '', userId } = route.params || {}
 
   // Ensure that name is a string and split safely
   const [fn, ...ln] = typeof name === 'string' ? name.split(' ') : []
@@ -32,9 +33,31 @@ export default function EditProfileScreen({ route, navigation }) {
     }
   }, [user])
 
-  const onSaveChangesPressed = () => {
-    // Dispatch the action to update user info
-    const userName = `${firstName.value} ${lastName.value}`.trim()
+  
+  const onSaveChangesPressed = async () =>{
+            const profileData = {
+              firstName: firstName.value,
+              lastName: lastName.value,
+              zipcode: zipcode.value
+            };
+        
+            try {
+              const response = await axios.put(`http://localhost:8080/api/Profile/${userId}`, profileData, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+            
+              if (response.status === 200) {
+                console.log(response.data);  // You can access the response data directly
+              } else {
+                console.log('Failed to update profile');
+              }
+            } catch (error) {
+              console.log(`Error: ${error.message}`);
+            }
+            
+      const userName = `${firstName.value} ${lastName.value}`.trim()
 
     dispatch(
       updateUserInfo({
@@ -45,7 +68,7 @@ export default function EditProfileScreen({ route, navigation }) {
       })
     )
 
-    navigation.navigate('ProfileScreen')
+    navigation.navigate('ProfileScreen', { userName, userId })
   }
 
   return (
