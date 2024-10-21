@@ -53,10 +53,7 @@ const authReducer = (state = initialState, action) => {
     case 'ADD_VOLTCOINS':
       return {
         ...state,
-        user: {
-          ...state.user,
-          voltCoins: state.user.voltCoins + action.payload,
-        },
+        user: { ...state.user, voltCoins: action.payload },
       }
     default:
       return state

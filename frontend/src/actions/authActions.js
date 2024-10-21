@@ -19,17 +19,24 @@ export const addVoltCoins = (earnedPoints) => {
     const { userID, voltCoins } = getState().auth.user
     const updatedVoltCoins = voltCoins + earnedPoints
 
+    console.log('Current coins:', voltCoins)
+    console.log('Earned points:', earnedPoints)
+    console.log('Updated coins before API call:', updatedVoltCoins)
+
     try {
       const response = await axios.put(
         `http://localhost:8080/api/voltCoins/${userID}`,
-        updatedVoltCoins,
+        earnedPoints,
         {
           headers: {
             'Content-Type': 'application/json',
           },
         }
       )
+
       const newVoltCoins = response.data
+      console.log('Server response for updated voltCoins:', newVoltCoins)
+
       dispatch({
         type: 'ADD_VOLTCOINS',
         payload: newVoltCoins,
