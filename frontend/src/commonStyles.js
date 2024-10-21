@@ -1240,10 +1240,10 @@ const styles = {
       gap: '4px',
     },
     statNumber: {
-      width: 23,
+      width: '100%',
       height: 28,
       color: '#000',
-      fontFamily: theme.colors.greet,
+      // fontFamily: theme.colors.greet,
       fontSize: 20,
       fontStyle: 'normal',
       fontWeight: '500',

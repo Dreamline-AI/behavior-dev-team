@@ -8,6 +8,8 @@ public class User {
     private String zipcode;
     private String password;
 
+    private Int voltCoins = 15;
+
     public String getPassword() {
         return password;
     }
@@ -55,4 +57,9 @@ public class User {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
-}
+    public Int getVoltCoins() {
+        return voltCoins;
+    }
+    public void setVoltCoins(Int voltCoins) {
+        this.voltCoins = voltCoins;
+    }

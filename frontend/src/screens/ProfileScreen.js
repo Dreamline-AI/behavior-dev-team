@@ -29,9 +29,12 @@ import { logout } from '../actions/authActions.js'
 export default function ProfileScreen({ route, navigation }) {
   let dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user)
+  console.log('Current user object:', user) // Add this line
   const userFirstName = useSelector((state) => state.auth.user.firstName)
   const userLastName = useSelector((state) => state.auth.user.lastName)
   const userName = `${userFirstName} ${userLastName}`
+  const voltCoins = useSelector((state) => state.auth.user.voltCoins)
+  console.log('Current voltCoins value:', voltCoins)
 
   //const { userName, userFirstName, userLastName } = route.params
   const progress = 80
@@ -39,7 +42,6 @@ export default function ProfileScreen({ route, navigation }) {
   const XPNextLevel = 2950
   const currentStreak = 15
   const bestStreak = 32
-  const voltcoins = 15
   const claimedRewards = 15
   const days = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
   const highlightedDays = [0, 1, 3, 4]
@@ -230,7 +232,7 @@ export default function ProfileScreen({ route, navigation }) {
                     />
                   </Svg>
                   <Text style={styles.profileScreen.statNumber}>
-                    {voltcoins}
+                    {voltCoins}
                   </Text>
                 </View>
               </View>

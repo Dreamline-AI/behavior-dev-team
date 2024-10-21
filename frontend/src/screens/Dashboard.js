@@ -65,7 +65,7 @@ export default function Dashboard({ route, navigation }) {
   return (
     <Background>
       <ScrollView contentContainerStyle={styles.dashboard.container}>
-        <Logo />
+        {/* <Logo /> */}
         <View style={styles.dashboard.header}>
           <View style={styles.dashboard.userInfo}>
             <UserPic style={styles.dashboard.userPic} />
