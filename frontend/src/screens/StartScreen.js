@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text } from 'react-native'
-import { useDispatch } from 'react-redux'; // Import useDispatch from react-redux
+import { useDispatch } from 'react-redux' // Import useDispatch from react-redux
 import Background from '../components/Background'
 import Header from '../components/Header'
 import Button from '../components/Button'
@@ -44,11 +44,11 @@ export default function StartScreen({ navigation }) {
   }, [])
 
   useEffect(() => {
-    setIsEmailValid(!emailValidator(email.value));
-  }, [email.value]);
+    setIsEmailValid(!emailValidator(email.value))
+  }, [email.value])
 
   const isExistingUser = (userEmail, source) => {
-    let user = users.find(b => b.email === userEmail);
+    let user = users.find((b) => b.email === userEmail)
     if (user) {
       // If the user exists, dispatch loginSuccess with user information
 
@@ -56,19 +56,22 @@ export default function StartScreen({ navigation }) {
         navigation.reset({
           index: 0,
           routes: [{ name: 'SignIn', params: { user } }],
-        });
+        })
       } else if (source === 'gfa') {
         navigation.reset({
           index: 0,
-          routes: [{
-            name: 'WelcomeScreen',
-            params: {
-              userEmail: email,
-              userFirstName: user.firstName,
-              userLastName: user.lastName,
+          routes: [
+            {
+              name: 'WelcomeScreen',
+              params: {
+                userID: user.userID,
+                userEmail: email,
+                userFirstName: user.firstName,
+                userLastName: user.lastName,
+              },
             },
-          }],
-        });
+          ],
+        })
       }
     } else {
       // Handle non-existing user case
@@ -76,7 +79,7 @@ export default function StartScreen({ navigation }) {
         navigation.reset({
           index: 0,
           routes: [{ name: 'EmailSignUp', params: { email: email.value } }],
-        });
+        })
       } else if (source === 'gfa') {
         navigation.reset({
           index: 0,
@@ -92,9 +95,9 @@ export default function StartScreen({ navigation }) {
       setEmail({ ...email, error: emailError })
       return
     } else {
-      isExistingUser(email.value, 'emailsignin');
+      isExistingUser(email.value, 'emailsignin')
     }
-  };
+  }
 
   const logGoogleUser = async () => {
     setAuthLoading(true) // Set auth loading to true
@@ -103,8 +106,7 @@ export default function StartScreen({ navigation }) {
       console.log('response-->', response)
 
       if (response?.user?.email) {
-
-        isExistingUser(response.user.email, 'gfa');
+        isExistingUser(response.user.email, 'gfa')
       } else {
         toast.error('Google authentication failed. Please try again.')
       }
@@ -123,8 +125,7 @@ export default function StartScreen({ navigation }) {
       console.log('response-->', response)
 
       if (response?.user?.email) {
-
-        isExistingUser(response.user.email, 'gfa');
+        isExistingUser(response.user.email, 'gfa')
       } else {
         toast.error('Facebook authentication failed. Please try again.')
       }
@@ -172,7 +173,9 @@ export default function StartScreen({ navigation }) {
         onPress={onContinuePressed} // Triggers onContinuePressed function
         style={[
           styles.startScreen.continueButton,
-          isEmailValid ? styles.startScreen.continueButtonEnabled : styles.startScreen.continueButtonDisabled,
+          isEmailValid
+            ? styles.startScreen.continueButtonEnabled
+            : styles.startScreen.continueButtonDisabled,
         ]}
       >
         <Text style={styles.startScreen.continueButtonText}>Continue</Text>
@@ -229,16 +232,20 @@ export default function StartScreen({ navigation }) {
       <Button
         color="white"
         mode="contained"
-        onPress={() => navigation.reset({
-          index: 0,
-          routes: [{
-            name: 'Dashboard',
-            params: {
-              userFirstName: "test",
-              userLastName: "user",
-            },
-          }],
-        })}
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Dashboard',
+                params: {
+                  userFirstName: 'test',
+                  userLastName: 'user',
+                },
+              },
+            ],
+          })
+        }
         style={[
           styles.startScreen.buttonBorder,
           styles.startScreen.appleButton,

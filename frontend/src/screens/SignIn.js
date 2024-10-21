@@ -69,6 +69,8 @@ export default function SignIn({ navigation, route }) {
           {
             name: 'WelcomeScreen',
             params: {
+              userID: user.userID,
+              userEmail: user.email,
               userEmail:  user.email,
               userFirstName: user.firstName,
               userLastName: user.lastName,

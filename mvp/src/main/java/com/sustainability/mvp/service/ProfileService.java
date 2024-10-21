@@ -8,6 +8,7 @@ import com.sustainability.mvp.entity.Profile;
 import com.sustainability.mvp.exception.UserException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.Iterator;

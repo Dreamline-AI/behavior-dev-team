@@ -16,7 +16,12 @@ const TriviatoActionConnect = ({ navigation, route }) => {
   const handleDonePress = () => {
     const earnedPoints = 500
     dispatch(addVoltCoins(earnedPoints))
-    navigation.navigate('Dashboard', { userName, userFirstName, userLastName })
+    navigation.navigate('Dashboard', {
+      userID,
+      userName,
+      userFirstName,
+      userLastName,
+    })
   }
 
   return (

@@ -10,7 +10,7 @@ public class Profile {
     private Integer rewards;
     private Integer streak;
     private String userID;
-    private Integer voltCoins;
+    private Integer voltCoins = 15;
 
     public String getAvatar() {
         return avatar;

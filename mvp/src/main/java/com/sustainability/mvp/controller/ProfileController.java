@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("http://localhost:19006/")
 public class ProfileController {
     @Autowired
     private ProfileService profileService;

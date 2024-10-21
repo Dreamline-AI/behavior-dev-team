@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+import com.sustainability.mvp.entity.Profile;
 import org.springframework.stereotype.Service;
 
 import com.google.api.core.ApiFuture;
@@ -75,6 +76,53 @@ public class UserService {
         }
     }
 
+
+    public Integer getVoltCoins(String userID) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(userID);
+        ApiFuture<DocumentSnapshot> future = documentReference.get();
+        DocumentSnapshot document = future.get();
+        User user  = null;
+        if (document.exists()) {
+            user = document.toObject(User.class);
+            return user.getVoltCoins(); 
+        } else {
+            throw new UserException("No such user found with ID: " + userID);
+        }
+    }
+    public Integer updateVoltCoins(String userID, Integer voltCoins) throws ExecutionException, InterruptedException {
+        Firestore dbFirestore = FirestoreClient.getFirestore();
+        DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(userID);
+
+        try {
+            ApiFuture<DocumentSnapshot> future = documentReference.get();
+            DocumentSnapshot document = future.get();
+
+            if (document.exists()) {
+                Profile profile = document.toObject(Profile.class);
+                Integer currentVoltCoins = profile.getVoltCoins();
+
+                System.out.println("Current VoltCoins: " + currentVoltCoins);
+                System.out.println("Adding " + voltCoins + " to current voltCoins");
+
+                Integer updatedVoltCoins = currentVoltCoins + voltCoins;
+                profile.setVoltCoins(updatedVoltCoins);
+
+                System.out.println("Updated VoltCoins: " + updatedVoltCoins);
+
+                ApiFuture<WriteResult> updateFuture = documentReference.update("voltCoins", updatedVoltCoins);
+                updateFuture.get();
+                return updatedVoltCoins;
+            } else {
+                System.out.println("No user found with ID: " + userID);
+                throw new UserException("No such user found with ID: " + userID);
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            System.out.println("Error updating voltCoins for user ID: " + userID);
+            throw e;
+        }
+    }
+
     public String updateUserByUserID(String userID, Map<String, Object> updates) throws ExecutionException, InterruptedException{
         Firestore dbFirestore = FirestoreClient.getFirestore();
         DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(userID);
@@ -103,4 +151,3 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 }
-
